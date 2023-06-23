@@ -1,0 +1,154 @@
+[
+  [
+    "com.fsck.k9",
+    "provides various classes and interfaces for managing and accessing email accounts and settings in the K-9 Mail email client application."
+  ],
+  [
+    "com.fsck.k9.account",
+    "provides classes for creating and managing email accounts in the K-9 Mail app."
+  ],
+  [
+    "com.fsck.k9.activity",
+    "contains various classes and interfaces for providing functionality to the K-9 Mail email client application's user interface and activities."
+  ],
+  [
+    "com.fsck.k9.activity.compose",
+    "provides classes and interfaces to manage email composition, recipient and attachment handling, and encryption options in the K-9 Mail Android application."
+  ],
+  [
+    "com.fsck.k9.activity.loader",
+    "provides classes for loading attachment content and metadata in email-related activities."
+  ],
+  [
+    "com.fsck.k9.activity.misc",
+    "contains classes and interfaces related to miscellaneous functionality in the K-9 Mail app's activities."
+  ],
+  [
+    "com.fsck.k9.activity.setup",
+    "contains classes that provide functionality for setting up and managing email accounts in the K-9 email client application."
+  ],
+  [
+    "com.fsck.k9.autocrypt",
+    "provides functionality for Autocrypt email encryption in the K-9 Mail application, including parsing and adding headers, interacting with an OpenPGP API, and calculating hash codes."
+  ],
+  [
+    "com.fsck.k9.cache",
+    "provides classes for caching and managing email provider data, as well as creating and retrieving temporary attachment files/directories."
+  ],
+  [
+    "com.fsck.k9.controller",
+    "provides various classes and interfaces for managing and controlling email messaging in the K-9 Mail Android app."
+  ],
+  [
+    "com.fsck.k9.crypto",
+    "provides classes for cryptography-related functionality in the K9 email client application."
+  ],
+  [
+    "com.fsck.k9.fragment",
+    "provides various classes and interfaces for handling and displaying email messages in the K-9 email client, including sorting, selection, deletion, archiving, downloading attachments, and displaying progress dialogs and confirmation dialogs."
+  ],
+  [
+    "com.fsck.k9.helper",
+    "provides a collection of helper classes and interfaces for various tasks in the K9 email client app."
+  ],
+  [
+    "com.fsck.k9.helper.jsoup",
+    "provides helper classes for the Jsoup library related to node filtering and traversal."
+  ],
+  [
+    "com.fsck.k9.mailstore",
+    "provides classes and interfaces for managing and manipulating email storage, databases, attachments, and local copies of email messages in the K-9 Mail client."
+  ],
+  [
+    "com.fsck.k9.mailstore.migrations",
+    "handles database migrations for the K-9 Mail email client."
+  ],
+  [
+    "com.fsck.k9.mailstore.util",
+    "provides utility classes for managing and manipulating mail-related files and text in a deferred, flowing, and file-backed manner."
+  ],
+  [
+    "com.fsck.k9.message",
+    "provides classes and interfaces for creating and managing email messages in the K-9 Mail app, including encryption, Autocrypt status, and message body construction."
+  ],
+  [
+    "com.fsck.k9.message.extractors",
+    "provides classes for extracting and manipulating text content, attachments, and encryption information from email messages in the K9 email client."
+  ],
+  [
+    "com.fsck.k9.message.html",
+    "provides a set of classes for processing and sanitizing HTML content, parsing and linking URIs, and converting between plain text and HTML formats."
+  ],
+  [
+    "com.fsck.k9.message.quote",
+    "provides classes for inserting and manipulating HTML content and creating quotes in email messages."
+  ],
+  [
+    "com.fsck.k9.message.signature",
+    "provides functionality to remove signatures from both HTML-formatted and plain text email messages."
+  ],
+  [
+    "com.fsck.k9.ui",
+    "provides user interface components for the K9 email client, including an EditText field with line-ending conversion and a contact badge for displaying contact information."
+  ],
+  [
+    "com.fsck.k9.ui.compose",
+    "manages the display and interaction with quoted messages in the Compose Message screen of the K-9 Mail email client application."
+  ],
+  [
+    "com.fsck.k9.ui.crypto",
+    "provides classes and interfaces for managing and executing cryptographic operations on email messages in the K-9 email client."
+  ],
+  [
+    "com.fsck.k9.ui.dialog",
+    "contains UI dialog classes used in the K-9 email client."
+  ],
+  [
+    "com.fsck.k9.ui.message",
+    "contains classes that deal with loading and displaying local email messages in the K-9 email client user interface."
+  ],
+  [
+    "com.fsck.k9.ui.messageview",
+    "provides classes and interfaces for managing and displaying email messages, attachments, and cryptographic functionality in the K-9 email client app's message view interface."
+  ],
+  [
+    "com.fsck.k9.service",
+    "provides a variety of background services and receivers for the K9 Mail email client application."
+  ],
+  [
+    "com.fsck.k9.setup",
+    "handles the setup process of the K9 email client, including suggesting server names based on provided information."
+  ],
+  [
+    "com.fsck.k9.search",
+    "provides classes and interfaces for managing and executing email search queries in the K9 Email Client Android app."
+  ],
+  [
+    "com.fsck.k9.view",
+    "provides a range of classes and interfaces related to managing the user interface of email messages in the K-9 email client app, including layout management, web view handling, recipient selection, client certificate management, and theme styling."
+  ],
+  [
+    "com.fsck.k9.widget.list",
+    "provides classes for managing and displaying a message list widget for the K9 email client in Android."
+  ],
+  [
+    "com.fsck.k9.notification",
+    "handles and manages various types of notifications for email-related events in the K-9 Mail application."
+  ],
+  [
+    "com.fsck.k9.power",
+    "provides classes for managing device idle state changes and checking app whitelisting for battery optimizations."
+  ],
+  [
+    "com.fsck.k9.preferences",
+    "manages and handles preferences and settings for email accounts, identities, folders, and various other aspects of the K9 mail client."
+  ],
+  [
+    "com.fsck.k9.provider",
+    "provides classes and interfaces for interacting with email data stored in the device's content provider in the K-9 email client app through common interfaces."
+  ],
+  [
+    "com.fsck.k9.remotecontrol",
+    "provides functionality for remotely controlling and accessing email accounts in the K9 email client."
+  ]
+]

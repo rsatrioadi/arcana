@@ -1,0 +1,950 @@
+{
+  "com.fsck.k9.mail": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.MessagingException"
+      ],
+      "handles exceptions related to email messaging in a Java program."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.K9MailLib$DebugStatus"
+      ],
+      "provides methods to check if debugging is enabled and if sensitive debugging information is enabled in K9MailLib."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.K9MailLib$DefaultDebugStatus"
+      ],
+      "provides methods for managing the debug status and sensitivity of the K9MailLib mail library."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.Part"
+      ],
+      "provides methods to access and manipulate various properties and contents of an email message part."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mail.Transport"
+      ],
+      "defines the methods required to establish a connection to a mail server and send email messages."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mail.Store"
+      ],
+      "defines a set of methods that allow interactions with a mail store, including retrieving and manipulating email messages, sending email, and checking mail settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.Address"
+      ],
+      "provides methods to handle parsing, encoding, and manipulation of email addresses and personal names."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.Authentication"
+      ],
+      "provides methods to compute and handle authentication for email accounts."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.Body"
+      ],
+      "provides methods to handle different transfer encodings for the body of an email message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.CertificateValidationException"
+      ],
+      "represents an exception that occurs during certificate validation in email communication."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.BoundaryGenerator"
+      ],
+      "generates a unique boundary string for use in email messages."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mail.BodyPart"
+      ],
+      "represents a part of an email message and provides methods for setting and retrieving its encoding, parent, and serverExtra fields."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.TransportUris"
+      ],
+      "provides methods for decoding and creating transport-specific URIs and ServerSettings objects in Java."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.DefaultBodyFactory"
+      ],
+      "creates a mail body object from an input stream and content transfer encoding and content type parameters."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.MessageRetrievalListener"
+      ],
+      "provides callbacks for events related to the retrieval of email messages."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.BodyFactory"
+      ],
+      "provides a method to create a mail body with specified characteristics."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.Pusher"
+      ],
+      "provides methods for managing and controlling push notification services for email communication."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.K9MailLib"
+      ],
+      "provides methods for setting and checking the debug status of the K9MailLib Java class."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.ServerSettings"
+      ],
+      "provides settings for storing and transporting emails and includes methods for creating new instances with updated certificate alias or password and comparing equality between instances."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.K9MailLib$WritableDebugStatus"
+      ],
+      "provides methods to control and modify the debug status of the K9MailLib library."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.TransportProvider"
+      ],
+      "provides a way to get a mail transport object based on the provided store configuration using SMTP and WebDav protocols."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.PushReceiver"
+      ],
+      "provides methods for handling push notifications in an email messaging system."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.mail.NetworkType"
+      ],
+      "provides a mapping between Android ConnectivityManager network types and K-9 Mail network types."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mail.Multipart"
+      ],
+      "provides methods for handling multipart MIME messages in Java."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mail.Message"
+      ],
+      "provides methods to manipulate and retrieve various properties of an email message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.CertificateChainException"
+      ],
+      "represents an exception that occurs when there is an issue with a certificate chain in email messages sent and received by the K-9 Mail app."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mail.Folder"
+      ],
+      "provides a set of methods for manipulating and retrieving emails within a mail folder."
+    ]
+  ],
+  "com.fsck.k9.mail.filter": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.Base64OutputStream"
+      ],
+      "encodes byte data into Base64 format and writes it to an output stream."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.SmtpDataStuffing"
+      ],
+      "provides a method for writing bytes to an output stream with SMTP data stuffing to prevent message delimiter collision."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.LineWrapOutputStream"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.mail.filter.SignSafeOutputStream$State"
+      ],
+      "provides a mechanism for transitioning between different states based on an input parameter in the context of signing and encryption for email filters."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.Hex"
+      ],
+      "encodes an array of bytes into a string of lower-case hexadecimal characters."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.CountingOutputStream"
+      ],
+      "counts the number of bytes written to an output stream."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.Base64"
+      ],
+      "provides methods for encoding and decoding data using the Base64 algorithm, as well as for checking whether a given byte array or byte is part of the Base64 alphabet."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.PeekableInputStream"
+      ],
+      "provides the ability to peek at and potentially reuse upcoming bytes in an input stream while maintaining state information."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.EOLConvertingOutputStream"
+      ],
+      "converts and flushes line endings in an output stream."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.FixedLengthInputStream"
+      ],
+      "provides methods for reading a fixed length of bytes from an input stream, skipping specified number of bytes, and discarding any remaining bytes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.filter.SignSafeOutputStream"
+      ],
+      "provides methods to encode and write bytes to an output stream while ensuring its safe closure."
+    ]
+  ],
+  "com.fsck.k9.mail.helper": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.helper.UrlEncodingHelper"
+      ],
+      "provides methods for encoding and decoding UTF-8 strings for use in URLs."
+    ]
+  ],
+  "com.fsck.k9.mail.internet": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.ListHeaders"
+      ],
+      "extracts list post addresses from an email message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.BinaryTempFileBody"
+      ],
+      "provides methods for handling binary temporary files associated with the content of an email message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.CharsetSupport"
+      ],
+      "supports character encoding operations for email parts and addresses."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.EncoderUtil"
+      ],
+      "provides a method to encode a given text into an encoded word or a sequence of encoded words separated by space."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.JisSupport"
+      ],
+      "provides methods for handling JIS variants and checking character encoding in emails."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MimeHeader"
+      ],
+      "manages and manipulates MimeHeaders in email messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.Iso2022JpToShiftJisInputStream"
+      ],
+      "converts ISO-2022-JP encoded characters to Shift-JIS encoding."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.BinaryTempFileBody$BinaryTempFileBodyInputStream"
+      ],
+      "provides an input stream for a binary temporary file and allows the file to be closed and deleted or closed without deletion."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mail.internet.Viewable$Textual"
+      ],
+      "provides functionality to access the Part associated with a textual message in an email."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MimeMessage$MimeMessageBuilder"
+      ],
+      "builds and constructs a MIME message with various methods for setting the header, body, preamble, epilogue, and body parts of the message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MessageIdGenerator"
+      ],
+      "generates unique message IDs for email messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MessageExtractor"
+      ],
+      "provides methods for extracting text content, viewable parts, attachments, and text parts from email messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MimeBodyPart"
+      ],
+      "manages and manipulates the content and headers of a MIME body part in an email message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.DecoderUtil"
+      ],
+      "can decode a string containing encoded words as defined by RFC 2047."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MimeUtility"
+      ],
+      "provides a set of utilities for working with MIME messages, including decoding and encoding, retrieving MIME types based on file extensions, and parsing header fields."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MimeHeader$Field"
+      ],
+      "represents a MIME header field and provides methods to get and set its value and name."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MimeMessage"
+      ],
+      "represents a MIME email message and provides methods to manipulate its headers, content, recipients, and other properties."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.Viewable$Alternative"
+      ],
+      "provides methods to retrieve viewable content and HTML content from an email message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MimeMessageHelper"
+      ],
+      "provides methods to manipulate and set properties of MIME message parts."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.Viewable$Flowed"
+      ],
+      "provides the functionality to check the value of the `delSp` boolean variable."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.BinaryTempFileMessageBody"
+      ],
+      "manages the encoding of binary message bodies."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.internet.RawDataBody"
+      ],
+      "provides a method to retrieve the encoding type of a raw data body in Java."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.MimeMultipart"
+      ],
+      "handles MIME multipart messages, including setting and retrieving the preamble, epilogue, boundary, and body parts."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.internet.SizeAware"
+      ],
+      "provides a method to retrieve the size of an object in bytes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.TextBody"
+      ],
+      "provides methods for getting, setting, and manipulating the encoding, size, and content of text bodies in emails."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.internet.Viewable$MessageHeader"
+      ],
+      "provides methods to access the message and container part of an email header."
+    ]
+  ],
+  "com.fsck.k9.mail.message": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.message.MessageHeaderParser$MessageHeaderParserContentHandler"
+      ],
+      "parses the header of a MIME message in K-9 mail and provides methods for handling different parts of the header."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.message.MessageHeaderParser"
+      ],
+      "parses the headers of a mail message's part."
+    ]
+  ],
+  "com.fsck.k9.mail.oauth": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.oauth.XOAuth2ChallengeParser"
+      ],
+      "parses challenge requests for OAuth2 authentication and determines if a response should be retried based on the parsed status."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.oauth.OAuth2TokenProvider"
+      ],
+      "provides methods for requesting API authorization, fetching and invalidating OAuth2 tokens for specific usernames, and getting a list of accounts suitable for OAuth 2.0 token provision."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.oauth.OAuth2TokenProvider$OAuth2TokenProviderAuthCallback"
+      ],
+      "defines callback methods for handling the success or failure of OAuth2 authentication."
+    ]
+  ],
+  "com.fsck.k9.mail.power": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.power.TracingPowerManager$TracingWakeLock"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.power.TracingPowerManager"
+      ],
+      "provides a tracing power manager for managing power-related functionalities in email applications."
+    ]
+  ],
+  "com.fsck.k9.mail.ssl": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.ssl.DefaultTrustedSocketFactory"
+      ],
+      "creates SSL/TLS sockets with trusted SSL certificates and provides methods to set client certificate properties and set the hostname for the SSL socket."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.ssl.TrustManagerFactory$SecureX509TrustManager"
+      ],
+      "implements a custom X509TrustManager for SSL/TLS connections in the K9 mail client that checks client and server certificates for validity and manages trusted issuers."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.ssl.LocalKeyStore"
+      ],
+      "provides methods to manage and validate X509 certificates for a given host and port in a local key store."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.ssl.KeyChainKeyManager"
+      ],
+      "manages SSL/TLS key chains for server and client authentication."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.ssl.TrustedSocketFactory"
+      ],
+      "creates SSL/TLS sockets with client certificate alias for a given host and port."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.ssl.TrustManagerFactory"
+      ],
+      "provides a way to obtain an instance of X509TrustManager for a specified host and port."
+    ]
+  ],
+  "com.fsck.k9.mail.store.imap": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.PermanentFlagsResponse"
+      ],
+      "provides methods to parse and retrieve permanent mailbox flags and whether new keyword creation is allowed for an IMAP mailbox."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapMessage"
+      ],
+      "provides methods for managing and manipulating email messages in an IMAP email store."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapStoreSettings"
+      ],
+      "provides settings for connecting to an IMAP email store and allows for the creation of new instances with updated authentication details."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.SearchResponse"
+      ],
+      "provides methods for parsing and retrieving a list of message numbers from IMAP SEARCH responses."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.store.imap.ImapResponseCallback"
+      ],
+      "handles callbacks for when a literal string is found in an IMAP response during parsing."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapResponseParser"
+      ],
+      "parses IMAP responses from a server and returns them as an ImapResponse object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapPushState"
+      ],
+      "represents the state of an IMAP mailbox for push notifications and provides methods for parsing and converting the state to a string representation."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapStoreUriCreator"
+      ],
+      "creates an ImapStore URI using server settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.NamespaceResponse"
+      ],
+      "provides methods for retrieving the prefix and hierarchy delimiter of a mailbox namespace, as well as parsing a list of IMAP responses for the first namespace response."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ResponseCodeExtractor"
+      ],
+      "extracts response codes from IMAP server responses."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapConnection"
+      ],
+      "provides methods for establishing and managing connections to an IMAP server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.SelectOrExamineResponse"
+      ],
+      "provides functionality to parse and determine the open mode of an IMAP mailbox."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapUtility"
+      ],
+      "provides utility methods to work with IMAP servers in email communication."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.store.imap.ImapSettings"
+      ],
+      "provides methods to get and set various IMAP email account settings, such as username, password, connection security, port number, authentication type, and mailbox folder paths."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapResponse"
+      ],
+      "handles and represents responses received from an IMAP server, including tagged and untagged responses, continuation requests, and associated callbacks."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.FetchPartCallback"
+      ],
+      "provides a method for parsing IMAP responses and creating MimeBodyPart objects."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapStore$StoreImapSettings"
+      ],
+      "stores the settings and credentials for accessing an IMAP email server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapFolderPusher"
+      ],
+      "pushes new messages from an IMAP folder to a device in real-time."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapStoreUriDecoder"
+      ],
+      "decodes an ImapStore URI into an object of type `com.fsck.k9.mail.store.imap.ImapStoreSettings`."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.FetchBodyCallback"
+      ],
+      "parses literal message bodies from an IMAP server response and returns placeholder objects."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapPusher"
+      ],
+      "implements functionality for pushing new email messages to a client's mailbox through synchronization and refresh intervals."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapFolderPusher$IdleStopper"
+      ],
+      "manages the idle mode and acceptance of \"done continuation\" commands for an IMAP folder pusher."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.NegativeImapResponseException"
+      ],
+      "throws an exception when an unexpected or negative response is received during an IMAP transaction and provides methods to retrieve information about the response."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.FolderNameCodec"
+      ],
+      "encodes and decodes folder names using a modified UTF-7 charset."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.CapabilityResponse"
+      ],
+      "parses and retrieves the capabilities of an IMAP mail store."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.store.imap.ImapSearcher"
+      ],
+      "provides a method to search for emails in an IMAP mailbox and return a list of IMAP responses."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.AlertResponse"
+      ],
+      "provides a method to extract alert text from an IMAP response."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapList"
+      ],
+      "provides methods to manipulate and retrieve values from an IMAP list."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.store.imap.UntaggedHandler"
+      ],
+      "provides a method for handling asynchronous untagged responses received from an IMAP server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapFolder"
+      ],
+      "provides methods for managing and manipulating email folders stored on an IMAP server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapStore"
+      ],
+      "provides methods to interact with an IMAP email server, such as creating URIs, getting folders, checking settings, and supporting push notifications."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ImapFolderPusher$PushRunnable"
+      ],
+      "handles pushing new email messages to an IMAP folder in an email client's folder pusher and handles exceptions that may occur during that process."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.CopyUidResponse"
+      ],
+      "parses IMAP responses and provides UID mappings for copied messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.imap.ListResponse"
+      ],
+      "provides methods for parsing and accessing information about IMAP mailbox listings."
+    ]
+  ],
+  "com.fsck.k9.mail.store.pop3": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.pop3.Pop3Store$Pop3Capabilities"
+      ],
+      "provides information on the capabilities and features supported by a POP3 email server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.pop3.Pop3Store$Pop3ResponseInputStream"
+      ],
+      "reads bytes from an input stream for a POP3 response."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.pop3.Pop3Store"
+      ],
+      "provides methods to interact with a POP3 email server and manage email folders and settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.pop3.Pop3Store$Pop3Message"
+      ],
+      "handles operations on POP3 email messages including setting and updating flags, marking as deleted, and setting message size."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.pop3.Pop3Store$Pop3Folder"
+      ],
+      "represents a POP3 email folder in a Java email client and provides methods to interact with the server, fetch and delete messages, and manage flags."
+    ]
+  ],
+  "com.fsck.k9.mail.store.webdav": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.DataSet"
+      ],
+      "provides various methods to manipulate and retrieve data related to mailbox messages, URLs and their attributes in a WebDAV store."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavHttpClient"
+      ],
+      "provides functionality for executing HTTP requests and handling gzipped responses in a WebDAV mail store."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavHttpClient$WebDavHttpClientFactory"
+      ],
+      "creates a new instance of the WebDavHttpClient class."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavStoreSettings"
+      ],
+      "provides settings for a WebDav email store, such as retrieving extra settings and creating a new instance with a new password."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavHandler"
+      ],
+      "is a WebDav handler for a Java mail store that parses XML data and populates a Java object with the data."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavStoreUriCreator"
+      ],
+      "creates a WebDAV store URI for a given server setting."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavStoreUriDecoder"
+      ],
+      "decodes a WebDavStore URI into its parts and creates a new instance of `WebDavStoreSettings`."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.HttpGeneric"
+      ],
+      "handles HTTP requests for webdav communication."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavMessage"
+      ],
+      "provides methods for handling email messages stored in a WebDav server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.ParsedMessageEnvelope"
+      ],
+      "provides methods to manipulate and retrieve information about a parsed email message in a WebDAV email store."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavFolder"
+      ],
+      "provides methods to interact with an email folder in a WebDAV email account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavSocketFactory"
+      ],
+      "provides methods for creating and managing SSL sockets for WebDAV connections."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mail.store.webdav.WebDavStore"
+      ],
+      "provides functionality for accessing and managing email messages in a WebDAV email store."
+    ]
+  ],
+  "com.fsck.k9.mail.store": [
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mail.store.RemoteStore"
+      ],
+      "provides methods for managing and creating instances of remote mail stores and decoding and creating store-specific URIs."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mail.store.StoreConfig"
+      ],
+      "defines methods for configuring various email folders and settings for a mail store."
+    ]
+  ]
+}

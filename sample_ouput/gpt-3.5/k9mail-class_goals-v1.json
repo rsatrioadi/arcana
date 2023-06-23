@@ -1,0 +1,3430 @@
+{
+  "com.fsck.k9": [
+    [
+      [
+        "class",
+        "com.fsck.k9.Throttle$MyTimerTask"
+      ],
+      "The class `com.fsck.k9.Throttle$MyTimerTask` is a timer task that schedules the execution of a `HandlerRunnable` object on a `Handler` instance, but can be cancelled if necessary."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Throttle"
+      ],
+      "The purpose of the class `com.fsck.k9.Throttle` is to restrict the frequency at which events can be triggered in a system, by setting a timeout and scheduling callbacks."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.PRNGFixes"
+      ],
+      "The class `com.fsck.k9.PRNGFixes` provides fixes to the pseudo-random number generator to enhance its security."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.BaseAccount"
+      ],
+      "The interface `com.fsck.k9.BaseAccount` defines methods for managing email accounts, including setting and getting the email address, UUID, and description of the account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Throttle$MyTimerTask$HandlerRunnable"
+      ],
+      "The purpose of the class is to run a timer task and call a callback if it has not been canceled."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.K9"
+      ],
+      "The class `com.fsck.k9.K9` is the main class of the K9 email client application for Android, containing various methods for managing settings and preferences of the application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.EmailAddressValidator"
+      ],
+      "The purpose of the class is to provide methods to validate email addresses."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.Account$SortType"
+      ],
+      "The enum `com.fsck.k9.Account$SortType` defines the sorting order options for email accounts in the K-9 Mail app, allowing users to sort their emails by various criteria such as date, subject, or sender."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Globals"
+      ],
+      "The purpose of the class `com.fsck.k9.Globals` is to provide access to the context of the application through its public method `getContext()`."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.FontSizes"
+      ],
+      "The purpose of the `com.fsck.k9.FontSizes` class is to provide methods for setting and retrieving font sizes for various elements in an email client, such as message view, message list, and message compose input."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.NotificationSetting"
+      ],
+      "The `com.fsck.k9.NotificationSetting` class provides methods for reading and modifying notification settings for the K-9 email client, including settings for ringtone, vibration, and LED notifications."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Preferences"
+      ],
+      "The purpose of the `com.fsck.k9.Preferences` class is to manage the email account preferences in the K-9 mail application, including loading, creating, and deleting accounts, as well as setting and getting the default account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Clock"
+      ],
+      "The purpose of `com.fsck.k9.Clock` class is to provide a method to retrieve the current time in milliseconds since January 1, 1970 GMT."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Account"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.K9$ApplicationAware"
+      ],
+      "The interface `com.fsck.k9.K9$ApplicationAware` is used to allow components associated with it to be initialized when the application instance is ready."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Identity"
+      ],
+      "The purpose of the `com.fsck.k9.Identity` class is to represent an email identity in the K-9 Mail app, providing methods to set and retrieve the email address, name, description, signature, and reply-to address."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.Account$DeletePolicy"
+      ],
+      "The enum `com.fsck.k9.Account$DeletePolicy` is used to define different deletion policies that can be applied to email messages in an email account."
+    ]
+  ],
+  "com.fsck.k9.account": [
+    [
+      [
+        "class",
+        "com.fsck.k9.account.AccountCreator"
+      ],
+      "The `AccountCreator` class is used to create and configure email accounts in the K-9 Mail app."
+    ]
+  ],
+  "com.fsck.k9.activity": [
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList$FolderListAdapter"
+      ],
+      "The purpose of the `FolderListAdapter` class is to provide a list adapter for displaying a filtered list of folders in the `FolderList` activity, allowing the user to interact with and select specific folders."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$AccountsHandler"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.Accounts$AccountsHandler` is to handle various UI-related tasks for the accounts activity in the K9 email client app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageCompose"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.MessageCompose` is to handle the user interface and functionality of composing an email message in the K-9 email application, allowing users to select recipients, add attachments, and send or save drafts of their messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageInfoHolder"
+      ],
+      "The `MessageInfoHolder` class is used in the K-9 Mail application to store information about a single email message, such as its unique identifier and whether it has been read or not."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Search"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.Search` is to create a search activity in the K9 email client app, which can be activated or deactivated and checked for its active state."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.ColorPickerDialog$OnColorChangedListener"
+      ],
+      "The interface is used to define a callback function `colorChanged()` which is called when the user selects a color in a color picker dialog, allowing the caller of the dialog to be notified of the color selection."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.K9PreferenceActivity"
+      ],
+      "It is a base class for activities that display settings/preferences for the K-9 Mail app, providing a common implementation for setting the language and theme."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageList$StorageListenerImplementation"
+      ],
+      "The purpose of the class is to listen for changes in the storage state and trigger methods accordingly for the email storage provider used for the current account."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.K9Activity"
+      ],
+      "The abstract class `com.fsck.k9.activity.K9Activity` serves as a base activity class for K-9 Mail app and provides methods for dispatching touchscreen events, setting up a gesture detector, and initializing the activity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.K9ActivityCommon"
+      ],
+      "The class `com.fsck.k9.activity.K9ActivityCommon` is a utility class that provides common functionality and methods used by various activities in the K-9 Mail app, such as getting the current theme's background color, setting up a gesture detector, and setting the app language."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.AccountList"
+      ],
+      "The purpose of the abstract class `com.fsck.k9.activity.AccountList` is to provide the basic functionality and layout for the account list screen in the K-9 email client app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.LauncherShortcuts"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.LauncherShortcuts` is to handle the creation of shortcuts for the K-9 Mail app on Android devices."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$PasswordPromptDialog"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.Accounts$PasswordPromptDialog` is to display a dialog prompt for entering passwords for incoming and outgoing email servers."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$AccountClickListener"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.Accounts$AccountClickListener` is to handle clicks on email accounts and display search results in the message list of the K9 email client app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ColorPickerDialog"
+      ],
+      "The purpose of the `com.fsck.k9.activity.ColorPickerDialog` class is to provide a dialog box that allows users to select a specific color."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ChooseFolder"
+      ],
+      "The purpose of `com.fsck.k9.activity.ChooseFolder` is to allow the user to choose a folder for email messages in the K-9 Mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.EditIdentity"
+      ],
+      "The purpose of the `EditIdentity` class is to allow the user to edit an identity, save its state in case of activity lifecycle changes, and return to the previous activity/screen."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.activity.MessageCompose$Action"
+      ],
+      "The enum `com.fsck.k9.activity.MessageCompose$Action` is used to represent the different actions that can be performed in the MessageCompose activity, and provides a way to retrieve the resource ID for the title of each action."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.UnreadWidgetConfiguration"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.UnreadWidgetConfiguration` is to provide a configuration screen for an unread widget, allowing the user to customize it and save the configuration in SharedPreferences."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.EmailAddressList"
+      ],
+      "The purpose of `com.fsck.k9.activity.EmailAddressList` is to display a list of email addresses associated with a contact and handle actions when an item in the list is clicked."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.K9PreferenceActivity$PreferenceChangeListener"
+      ],
+      "The purpose of the class is to listen for changes in preferences and update their summary and value accordingly in the K9 email client's settings activity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$AccountsAdapter"
+      ],
+      "The purpose of `com.fsck.k9.activity.Accounts$AccountsAdapter` is to provide an adapter for displaying account details in the account list in the K-9 mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.AccountList$AccountsAdapter"
+      ],
+      "The `com.fsck.k9.activity.AccountList$AccountsAdapter` class is used to create a custom view for each account object in the account list in K9 Mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList$FolderClickListener"
+      ],
+      "The purpose of `com.fsck.k9.activity.FolderList$FolderClickListener` is to handle click events on folders in the K-9 Mail app and open the search page for messages in the current folder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts"
+      ],
+      "The purpose of the `com.fsck.k9.activity.Accounts` class is to manage and display email accounts within the K-9 email client application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageLoaderHelper"
+      ],
+      "The purpose of the `MessageLoaderHelper` class is to asynchronously load, decrypt and handle message content in the K-9 email client app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ConfirmationDialog"
+      ],
+      "The purpose of the `com.fsck.k9.activity.ConfirmationDialog` class is to create customized confirmation dialogs for Android activities with specified buttons, actions, and messages."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.AlternateRecipientAdapter$AlternateRecipientListener"
+      ],
+      "The purpose of `com.fsck.k9.activity.AlternateRecipientAdapter$AlternateRecipientListener` interface is to provide callbacks for when an alternate recipient is selected or removed from a list of possible recipients."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList$FolderListHandler"
+      ],
+      "The purpose of the `com.fsck.k9.activity.FolderList$FolderListHandler` class is to handle and manage the list of folders in the email account, and update the UI based on changes in the account."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.K9ListActivity"
+      ],
+      "The purpose of the `com.fsck.k9.activity.K9ListActivity` abstract class is to provide a base class for activities that display a list of items in the K-9 Mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ChooseFolder$ChooseFolderHandler"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.ChooseFolder$ChooseFolderHandler` is to handle messages related to setting the progress bar visibility and selected folder in the ChooseFolder activity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ActivityListener"
+      ],
+      "The purpose of the `com.fsck.k9.activity.ActivityListener` class is to provide a listener for various email-related events and update the user interface accordingly, such as mailbox synchronization status, pending message sending status, and folder status changes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.NotificationDeleteConfirmation"
+      ],
+      "The purpose of the class is to provide functionality for displaying a delete confirmation dialog for notifications in the K-9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ChooseIdentity"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.ChooseIdentity` is to provide functionality and UI for the \"Choose Identity\" screen in the K-9 email client and refresh the view when the activity is resumed."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.UpgradeDatabases"
+      ],
+      "The purpose of the class is to upgrade K9 email databases and launch the original activity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$ImportSelectionDialog"
+      ],
+      "The class `com.fsck.k9.activity.Accounts$ImportSelectionDialog` is a dialog box that allows the user to select email accounts and specific settings to import, and it provides methods to show, restore, and retain the selection state of the items in the dialog."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.AlternateRecipientAdapter"
+      ],
+      "The class is used to provide an adapter for the recipient select view, which displays a list of alternate email recipients with the option to select them as the primary recipient."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.MessageLoaderHelper$MessageLoaderCallbacks"
+      ],
+      "The purpose of the interface `com.fsck.k9.activity.MessageLoaderHelper$MessageLoaderCallbacks` is to provide callbacks for handling message loading and downloading events such as network errors, loading failures, and progress updates."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.K9ActivityCommon$K9ActivityMagic"
+      ],
+      "The purpose of the interface `com.fsck.k9.activity.K9ActivityCommon$K9ActivityMagic` is to provide a way of setting up a gesture detector that listens for swipe gestures and notifies a listener in K-9 Mail app's activity classes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.UpgradeDatabases$UpgradeDatabaseBroadcastReceiver"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.UpgradeDatabases$UpgradeDatabaseBroadcastReceiver` is to handle progress updates and completion notifications for the database upgrade service in the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.AlternateRecipientAdapter$RecipientTokenHolder"
+      ],
+      "The purpose of the class is to hold recipient tokens for the alternate recipient adapter in the K-9 Mail Android app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList"
+      ],
+      "The purpose of the `com.fsck.k9.activity.FolderList` class is to handle the display and functionality of the list of email folders in the K-9 Mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$SimpleDialog"
+      ],
+      "The purpose of the `com.fsck.k9.activity.Accounts$SimpleDialog` class is to provide methods for displaying and managing a simple alert dialog in the K9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageReferenceHelper"
+      ],
+      "The purpose of `com.fsck.k9.activity.MessageReferenceHelper` is to provide methods for converting lists of message reference strings to lists of message references and vice versa."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageReference"
+      ],
+      "The purpose of the `com.fsck.k9.activity.MessageReference` class is to represent a mail message referencing the account, folder, and UID of the message, and to provide methods for manipulating and comparing these references."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ManageIdentities"
+      ],
+      "The purpose of the `com.fsck.k9.activity.ManageIdentities` class is to provide functionality for managing email identities in the K-9 email app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList$FolderListAdapter$FolderListFilter"
+      ],
+      "The purpose of the `FolderListFilter` class is to filter the list of folders based on a user-provided search term."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderListFilter"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.FolderListFilter` is to provide filtering functionality for displaying email folders in the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageList"
+      ],
+      "The purpose of the `MessageList` class is to manage the display of the email message list and handle user interactions, such as selecting, composing, and replying to messages in the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderInfoHolder"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.FolderInfoHolder` is to hold information about local email folders such as their display name, number of unread messages, and system folder status."
+    ]
+  ],
+  "com.fsck.k9.activity.compose": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.PgpEnabledErrorDialog$OnOpenPgpDisableListener"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.RecipientLoader"
+      ],
+      "The class `com.fsck.k9.activity.compose.RecipientLoader` is designed to load recipient data and deliver it to the caller, caching the data if the loader is started."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.PgpInlineDialog"
+      ],
+      "The `com.fsck.k9.activity.compose.PgpInlineDialog` class is a dialog used for PGP encryption and decryption in email composition in the K-9 mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.PgpSignOnlyDialog"
+      ],
+      "The `com.fsck.k9.activity.compose.PgpSignOnlyDialog` class is used to create a dialog for selecting OpenPGP signing options in the K-9 email client."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.AttachmentPresenter$AttachmentMvpView"
+      ],
+      "The purpose of the interface `com.fsck.k9.activity.compose.AttachmentPresenter$AttachmentMvpView` is to provide methods to manipulate the view related to attachments in the email composing screen and perform necessary checks before sending or saving the attachment."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.ComposeCryptoStatus"
+      ],
+      "The purpose of the `com.fsck.k9.activity.compose.ComposeCryptoStatus` class is to provide information about the encryption status of a compose activity in the K-9 email app, including whether encryption and signing are enabled, recipient email addresses, and any errors related to sending encrypted emails."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.IdentityAdapter"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.compose.IdentityAdapter` is to provide an adapter for the list of identities associated with the Compose Activity in the K-9 Mail app."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.RecipientPresenter$RecipientsChangedListener"
+      ],
+      "The interface `com.fsck.k9.activity.compose.RecipientPresenter$RecipientsChangedListener` defines a listener that is notified when there is a change in the recipients of an email being composed in the K9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.PgpEncryptDescriptionDialog"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.compose.PgpEncryptDescriptionDialog` is to display a dialog box with a description of PGP encryption and to create a new instance with a highlighted view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.PgpEnabledErrorDialog"
+      ],
+      "The purpose of the `com.fsck.k9.activity.compose.PgpEnabledErrorDialog` class is to create and display a dialog for PGP encryption enabled error messages in K-9 Mail."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.RecipientAdapter"
+      ],
+      "The class `com.fsck.k9.activity.compose.RecipientAdapter` is used to manage the recipients list and display recipient data in the compose email view."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.PgpSignOnlyDialog$OnOpenPgpSignOnlyChangeListener"
+      ],
+      "The purpose of this interface is to listen for changes in the OpenPGP sign-only option in the email compose activity, and perform some action based on whether the option is enabled or not."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.ComposeCryptoStatus$ComposeCryptoStatusBuilder"
+      ],
+      "The purpose of `com.fsck.k9.activity.compose.ComposeCryptoStatus$ComposeCryptoStatusBuilder` is to provide a builder class for creating instances of `ComposeCryptoStatus`, allowing for flexible and customizable creation of objects with various settings and configurations."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.MessageActions"
+      ],
+      "The `com.fsck.k9.activity.compose.MessageActions` class provides methods for composing, replying to, and forwarding email messages in the K-9 email client."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.PgpInlineDialog$OnOpenPgpInlineChangeListener"
+      ],
+      "The purpose of this interface is to provide a callback for when the user toggles the use of OpenPGP inline encryption in a compose email dialog."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.RecipientMvpView"
+      ],
+      "The `RecipientMvpView` class is responsible for managing and displaying email recipients in the compose screen of the K-9 email client, including autocompletion, error handling, and cryptographic encryption/decryption."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.RecipientPresenter"
+      ],
+      "The purpose of the `com.fsck.k9.activity.compose.RecipientPresenter` class is to handle the recipient-related functionality in the compose activity of the K-9 mail app, including initializing and managing recipient fields, handling encryption and PGP settings, and managing the visibility of CC and BCC fields."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.AttachmentPresenter"
+      ],
+      "The purpose of `com.fsck.k9.activity.compose.AttachmentPresenter` class is to manage attachments in emails being composed in the K-9 Mail app. It provides methods for adding, removing, and loading attachments, as well as checking if it is okay to send or save a draft email with or without attachments."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.AttachmentPresenter$AttachmentsChangedListener"
+      ],
+      "The interface `com.fsck.k9.activity.compose.AttachmentPresenter$AttachmentsChangedListener` is used to listen for changes in attachments added or removed from an email being composed."
+    ]
+  ],
+  "com.fsck.k9.activity.loader": [
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.loader.AttachmentContentLoader"
+      ],
+      "The purpose of the `com.fsck.k9.activity.loader.AttachmentContentLoader` class is to asynchronously load attachment content from a URI and save it to a temporary file."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.loader.AttachmentInfoLoader"
+      ],
+      "The purpose of `com.fsck.k9.activity.loader.AttachmentInfoLoader` is to load attachment metadata in the background for display in the UI."
+    ]
+  ],
+  "com.fsck.k9.activity.misc": [
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideModelLoader"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideModelLoader` is to provide a way to load fallback contact pictures using the Glide library."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideBitmapDecoder"
+      ],
+      "The purpose of this class is to provide a fallback option for loading contact pictures using Glide image loading library in case a valid photo URI is not available, by generating a bitmap with a text and background color."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.ContactPictureLoader"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.misc.ContactPictureLoader` is to load a contact's picture into an ImageView using their address or photoUri."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideParams"
+      ],
+      "The purpose of this class is to provide a unique identifier for a contact's picture using their email address and personal name to load a fallback picture in case the original picture is not available."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.misc.SwipeGestureDetector$OnSwipeGestureListener"
+      ],
+      "The purpose of the interface is to define callbacks for handling swipe gesture events in the K-9 Mail app's gesture detector."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.Attachment"
+      ],
+      "The class `com.fsck.k9.activity.misc.Attachment` is used to represent an email attachment with methods for creating and manipulating attachments."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.misc.ExtendedAsyncTask"
+      ],
+      "The purpose of `com.fsck.k9.activity.misc.ExtendedAsyncTask` is to provide additional functionality for working with `AsyncTask` instances in Android activities, such as re-binding the task to a new activity instance or detaching it from an activity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.SwipeGestureDetector"
+      ],
+      "The `com.fsck.k9.activity.misc.SwipeGestureDetector` class is used for detecting swipe gestures in the K9 email client app and calling listener methods based on the direction of the swipe."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.misc.NonConfigurationInstance"
+      ],
+      "The interface `com.fsck.k9.activity.misc.NonConfigurationInstance` is meant to provide a way to retain non-UI related data across activity restarts due to configuration changes, such as screen rotations, in a memory-efficient way."
+    ]
+  ],
+  "com.fsck.k9.activity.setup": [
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.OpenPgpAppSelectDialog"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.setup.OpenPgpAppSelectDialog` is to handle the selection of an OpenPGP provider package."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.OpenPgpAppSelectDialog$ApgDeprecationDialogFragment"
+      ],
+      "The class is responsible for creating and showing a dialog box warning the user that the third-party app they are using for OpenPGP integration is deprecated and suggesting a replacement."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupOptions"
+      ],
+      "The purpose of the `com.fsck.k9.activity.setup.AccountSetupOptions` class is to provide options for setting up and customizing email accounts."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AuthTypeAdapter"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.setup.AuthTypeAdapter` is to provide an adapter for displaying a list of supported authentication types and managing their positions."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.OpenPgpAppSelectDialog$OpenPgpProviderEntry"
+      ],
+      "The class `OpenPgpProviderEntry` is used in the `OpenPgpAppSelectDialog` to represent an OpenPGP provider and provide a simple name for it."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupAccountType"
+      ],
+      "The `com.fsck.k9.activity.setup.AccountSetupAccountType` class is responsible for allowing users to select the type of email account and setting up the necessary settings for incoming and outgoing mail for a given account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupOutgoing"
+      ],
+      "The `com.fsck.k9.activity.setup.AccountSetupOutgoing` class is responsible for setting up and managing outgoing email server settings for a specific account in the K-9 Mail Android app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSettings"
+      ],
+      "The `AccountSettings` class is used to manage account settings in the K-9 email client, including displaying color pickers, selecting folders, and launching the activity for a specific account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.SpinnerOption"
+      ],
+      "The class `com.fsck.k9.activity.setup.SpinnerOption` represents an option in a spinner and provides a method to set the selected value in the spinner."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.FolderSettings"
+      ],
+      "The class is used to handle folder settings for K9 email accounts, providing methods for saving settings, opening folder settings, and initializing and populating a preferences activity for editing folder settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupCheckSettings"
+      ],
+      "The purpose of the `com.fsck.k9.activity.setup.AccountSetupCheckSettings` class is to provide methods for setting up and checking email account settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupComposition"
+      ],
+      "The purpose of `com.fsck.k9.activity.setup.AccountSetupComposition` is to set up the UI for composing an email message and to allow editing of the settings for a K-9 email account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.ConnectionSecurityAdapter"
+      ],
+      "The purpose of the class com.fsck.k9.activity.setup.ConnectionSecurityAdapter is to create a spinner adapter for connection security settings and provide methods to get the position of a given connection security type and a ConnectionSecurityAdapter object based on the context."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.WelcomeMessage"
+      ],
+      "The class `com.fsck.k9.activity.setup.WelcomeMessage` is responsible for displaying a welcome message during K-9 Mail's setup process and handles user clicks to open new account setup or import existing settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupIncoming"
+      ],
+      "The purpose of the class is to handle the setup and editing of incoming mail account settings in the K-9 email client for Android."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.FontSizeSettings"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.setup.FontSizeSettings` is to allow users to edit and set font size preferences for the K-9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupNames"
+      ],
+      "The class `com.fsck.k9.activity.setup.AccountSetupNames` is responsible for setting up the UI and handling user input to set the names for a given email account in an email app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.SliderPreference"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.setup.SliderPreference` is to provide functionality for a preference item that is represented by a slider, allowing the user to select a value within a specified range."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.ConnectionSecurityHolder"
+      ],
+      "The purpose of the `com.fsck.k9.activity.setup.ConnectionSecurityHolder` class is to hold the security information for an email connection, which is used during email setup."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.Prefs"
+      ],
+      "The purpose of the `com.fsck.k9.activity.setup.Prefs` class is to handle launching the K-9 Mail application's preferences screen using an Intent and contains an `onCreate()` method without description."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.OpenPgpAppSelectDialog$OpenPgpAppSelectFragment"
+      ],
+      "The class is a fragment that implements a dialog for selecting an OpenPGP provider and updates the selected provider when the dialog is dismissed."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AuthTypeHolder"
+      ],
+      "The `com.fsck.k9.activity.setup.AuthTypeHolder` class is used to hold and represent different authentication types and whether they are secure or insecure in the K-9 Mail Android app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupBasics"
+      ],
+      "The purpose of the class `com.fsck.k9.activity.setup.AccountSetupBasics` is to handle the setup of a new email account in the K9 email client, including validating input fields, checking incoming and outgoing email settings, and creating a dialog to display notes from the email provider."
+    ]
+  ],
+  "com.fsck.k9.autocrypt": [
+    [
+      [
+        "class",
+        "com.fsck.k9.autocrypt.AutocryptHeaderParser"
+      ],
+      "The purpose of the class is to parse and process Autocrypt headers in email messages according to the Autocrypt specification."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.autocrypt.AutocryptOperations"
+      ],
+      "The purpose of the class `com.fsck.k9.autocrypt.AutocryptOperations` is to provide operations related to Autocrypt encryption and peer updates in email messages, such as adding Autocrypt headers to messages and checking for the presence of Autocrypt headers."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.autocrypt.AutocryptOpenPgpApiInteractor"
+      ],
+      "The purpose of the `com.fsck.k9.autocrypt.AutocryptOpenPgpApiInteractor` class is to interact with an OpenPGP API and retrieve key material for a given OpenPGP key ID."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.autocrypt.AutocryptHeader"
+      ],
+      "The purpose of the `AutocryptHeader` class in the K-9 Mail app is to represent the Autocrypt header used in email messages for encrypted communication."
+    ]
+  ],
+  "com.fsck.k9.cache": [
+    [
+      [
+        "class",
+        "com.fsck.k9.cache.TemporaryAttachmentStore"
+      ],
+      "The class `com.fsck.k9.cache.TemporaryAttachmentStore` provides methods for retrieving temporary files used for writing email attachments with sanitized filenames in the K-9 email client for Android."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.cache.EmailProviderCacheCursor"
+      ],
+      "The class `com.fsck.k9.cache.EmailProviderCacheCursor` provides a cursor for accessing and manipulating cached email data in K-9 Mail."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.cache.EmailProviderCache"
+      ],
+      "The purpose of the `com.fsck.k9.cache.EmailProviderCache` class is to provide a cache for email provider data, allowing for efficient retrieval and manipulation of email-related information such as message and thread IDs, and hidden messages."
+    ]
+  ],
+  "com.fsck.k9.controller": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.controller.ProgressBodyFactory$ProgressListener"
+      ],
+      "The purpose of the interface `com.fsck.k9.controller.ProgressBodyFactory$ProgressListener` is to provide a way to listen for updates on the progress of a long-running operation."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerPushReceiver"
+      ],
+      "The purpose of the `com.fsck.k9.controller.MessagingControllerPushReceiver` class is to handle push notifications and synchronize email folders with the server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MemorizingMessagingListener"
+      ],
+      "The class is used to keep track of the state and progress of email account syncing and message sending operations in the K9 email client."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.controller.SimpleMessagingListener"
+      ],
+      "The purpose of the abstract class `com.fsck.k9.controller.SimpleMessagingListener` is to provide a set of methods for handling events related to messaging in the K-9 Mail email client, such as mailbox synchronization, message retrieval, and push notifications."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.PendingCommandSerializer"
+      ],
+      "The `com.fsck.k9.controller.PendingCommandSerializer` class is used to serialize and deserialize pending commands into/from JSON strings for storage in a messaging app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingMoveOrCopy"
+      ],
+      "The class is used to create and execute pending move or copy operations for email messages between two folders in an email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingEmptyTrash"
+      ],
+      "The class is used to represent a pending operation to empty the trash folder for a specific email account using the messaging controller in the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingMarkAllAsRead"
+      ],
+      "The purpose of the class `com.fsck.k9.controller.MessagingControllerCommands$PendingMarkAllAsRead` is to provide functionality to mark all messages as read for a specific email account in the messaging controller."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingCommand"
+      ],
+      "The purpose of the abstract class `com.fsck.k9.controller.MessagingControllerCommands$PendingCommand` is to define the structure of a pending command that can be executed on a messaging controller for a specific account."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.controller.MessagingListener"
+      ],
+      "The interface `com.fsck.k9.controller.MessagingListener` defines methods that allow tracking of messaging tasks and events, such as synchronizing emails, listing folders, and sending messages, in the K-9 Mail app."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.controller.MessagingController$MessageActor"
+      ],
+      "The purpose of the interface `com.fsck.k9.controller.MessagingController$MessageActor` in Java is to define a method to perform an action on a list of local messages within a specific local folder of a K-9 email account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingAppend"
+      ],
+      "The class `com.fsck.k9.controller.MessagingControllerCommands$PendingAppend` is used to create and execute the process of appending a pending message to an email folder for a specified email account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingController$Command"
+      ],
+      "The class `com.fsck.k9.controller.MessagingController$Command` is a command object used by the messaging controller in the K9 email client, used to define and execute various email-related tasks."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.UidReverseComparator"
+      ],
+      "The purpose of the class `com.fsck.k9.controller.UidReverseComparator` is to provide a comparator that can be used to sort email messages in reverse order based on their UID."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingController"
+      ],
+      "The purpose of the `com.fsck.k9.controller.MessagingController` class is to manage email messages and their associated metadata, synchronize email between a device and remote servers, and notify listeners of changes in email accounts."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingExpunge"
+      ],
+      "The purpose of the class is to provide methods for creating and executing pending expunge commands on a messaging controller with a specified account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingSetFlag"
+      ],
+      "The purpose of the class is to manage pending message flag settings for a given account and messaging controller."
+    ]
+  ],
+  "com.fsck.k9.crypto": [
+    [
+      [
+        "class",
+        "com.fsck.k9.crypto.MessageCryptoStructureDetector"
+      ],
+      "The purpose of `com.fsck.k9.crypto.MessageCryptoStructureDetector` is to detect the cryptographic structure of email messages, including whether they are encrypted or signed using OpenPGP, multipart encryption formats, or inline PGP encryption."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.crypto.OpenPgpApiHelper"
+      ],
+      "The purpose of the class `com.fsck.k9.crypto.OpenPgpApiHelper` is to provide helper methods for working with OpenPGP encryption in the K-9 Mail app, including building user IDs in the correct format."
+    ]
+  ],
+  "com.fsck.k9.fragment": [
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragment"
+      ],
+      "The purpose of the class `com.fsck.k9.fragment.MessageListFragment` is to display a list of email messages and provide functionality for managing and interacting with those messages, such as sorting, selecting, and performing actions like archiving or deleting."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$SenderComparator"
+      ],
+      "The purpose of the class `com.fsck.k9.fragment.MessageListFragmentComparators$SenderComparator` is to provide a way to compare the sender address of messages displayed in a message list in the K-9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.ProgressDialogFragment"
+      ],
+      "The class `com.fsck.k9.fragment.ProgressDialogFragment` is used to create and display a progress dialog with customizable title and message in an Android app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.AttachmentDownloadDialogFragment"
+      ],
+      "The `com.fsck.k9.fragment.AttachmentDownloadDialogFragment` class is responsible for displaying a progress dialog for downloading email attachments in the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$ArrivalComparator"
+      ],
+      "The class serves as a comparator for messages based on their arrival time, used for sorting messages in the K9 email client's message list."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.fragment.ProgressDialogFragment$CancelListener"
+      ],
+      "The purpose of the interface `com.fsck.k9.fragment.ProgressDialogFragment$CancelListener` is to provide a callback method that will be invoked when the progress dialog is canceled."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragment$MessageListActivityListener"
+      ],
+      "The purpose of this class is to listen to events related to the message list activity in K-9 Mail, such as mailbox synchronization, folder updates, and remote searches, and update the UI accordingly."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListAdapter"
+      ],
+      "The purpose of the class `com.fsck.k9.fragment.MessageListAdapter` is to handle the creation and binding of views for displaying email message information in a list."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$FlaggedComparator"
+      ],
+      "The purpose of this class is to provide a comparator for `Cursor` objects that sorts them based on whether they contain a flagged message or not."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$SubjectComparator"
+      ],
+      "The purpose of the class `com.fsck.k9.fragment.MessageListFragmentComparators$SubjectComparator` is to compare the subjects extracted from two database cursors lexicographically."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$AttachmentComparator"
+      ],
+      "The purpose of the `com.fsck.k9.fragment.MessageListFragmentComparators$AttachmentComparator` class is to compare two message cursors based on whether or not they have attachments."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$UnreadComparator"
+      ],
+      "The class `com.fsck.k9.fragment.MessageListFragmentComparators$UnreadComparator` is used to compare two cursors based on whether the corresponding messages are unread or not in the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListHandler"
+      ],
+      "The purpose of the `com.fsck.k9.fragment.MessageListHandler` class is to handle messages related to the Message list fragment in the K-9 mail application, such as updating the UI, loading folders, and handling user interactions."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.fragment.AttachmentDownloadDialogFragment$AttachmentDownloadCancelListener"
+      ],
+      "The interface is used to define a listener for cancel events during attachment downloads in the `AttachmentDownloadDialogFragment` fragment."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.ConfirmationDialogFragment"
+      ],
+      "The class `com.fsck.k9.fragment.ConfirmationDialogFragment` is designed to create and handle confirmation dialogs for the K-9 Mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageViewHolder"
+      ],
+      "The purpose of the class `com.fsck.k9.fragment.MessageViewHolder` is to hold views and provide a way to handle clicks on specific views within a message view holder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$ComparatorChain"
+      ],
+      "The purpose of the class `com.fsck.k9.fragment.MessageListFragmentComparators$ComparatorChain` is to allow multiple comparators to be chained together for use in sorting lists of messages in the K-9 email client app."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.fragment.ConfirmationDialogFragment$ConfirmationDialogFragmentListener"
+      ],
+      "The purpose of this interface is to provide a way for a Confirmation Dialog Fragment to communicate button click events to its parent Fragment or Activity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$DateComparator"
+      ],
+      "The class `com.fsck.k9.fragment.MessageListFragmentComparators$DateComparator` provides a comparator for sorting database Cursors based on the value of the `DATE_COLUMN` field."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$ReverseIdComparator"
+      ],
+      "The purpose of the class is to provide a comparator for android.database.Cursor objects based on their \"_id\" column values in reverse order."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.fragment.MessageListFragment$MessageListFragmentListener"
+      ],
+      "The purpose of the interface `com.fsck.k9.fragment.MessageListFragment$MessageListFragmentListener` is to provide a listener for events in the message list fragment of an email application, such as updating the menu, navigating between messages, and initiating searches."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragment$ActionModeCallback"
+      ],
+      "The purpose of `com.fsck.k9.fragment.MessageListFragment$ActionModeCallback` is to handle user interactions with the action mode menu in a message list fragment, allowing them to perform various actions on selected messages such as marking them as read or deleting them."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$ReverseComparator"
+      ],
+      "The purpose of this class is to provide a comparator that allows sorting of objects in reverse order."
+    ]
+  ],
+  "com.fsck.k9.helper": [
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MergeCursor"
+      ],
+      "The purpose of `com.fsck.k9.helper.MergeCursor` class is to create a cursor that merges data from multiple cursors based on a comparison criteria."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.EmailHelper"
+      ],
+      "The purpose of `com.fsck.k9.helper.EmailHelper` is to provide a helper method to extract the domain name from an email address."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.IdentityHelper"
+      ],
+      "The purpose of the `com.fsck.k9.helper.IdentityHelper` class is to provide methods for handling email identities, including finding the identity that a message was sent to."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MergeCursorWithUniqueId"
+      ],
+      "The purpose of the class `com.fsck.k9.helper.MergeCursorWithUniqueId` is to merge two cursors, combine their unique IDs, and return a new cursor with an added unique ID column."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.UrlEncodingHelper"
+      ],
+      "The purpose of `com.fsck.k9.helper.UrlEncodingHelper` is to provide methods to encode and decode URL strings using UTF-8 encoding."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MessageHelper"
+      ],
+      "The class `com.fsck.k9.helper.MessageHelper` provides helper methods for getting message information, converting email addresses to a more user-friendly format, and ensuring only one instance of the class is created per context."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.FileHelper"
+      ],
+      "The class `com.fsck.k9.helper.FileHelper` provides various helper methods for working with files and directories, such as moving, renaming, and sanitizing filenames, creating unique files, updating file modification dates, and recursively moving directories."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.K9AlarmManager"
+      ],
+      "The class provides access to the Android alarm manager and a doze mode checker for managing alarms in the K-9 Mail app. It also allows cancellation of PendingIntent associated with the K9AlarmManager instance."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.UnreadWidgetProperties"
+      ],
+      "The class `com.fsck.k9.helper.UnreadWidgetProperties` provides methods to retrieve the properties of an unread email widget, such as the widget ID, folder name, and unread message count."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.SizeFormatter"
+      ],
+      "The purpose of the class `com.fsck.k9.helper.SizeFormatter` is to format file sizes into a human-readable string with appropriate units and precision."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.FileBrowserHelper"
+      ],
+      "The purpose of the `com.fsck.k9.helper.FileBrowserHelper` class is to provide a file browser functionality with a failover mechanism to pick a directory."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ParcelableUtil"
+      ],
+      "The purpose of the `ParcelableUtil` class is to provide methods for converting Parcelable objects to byte arrays and vice versa, for communication or storage purposes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.RetainFragment"
+      ],
+      "The purpose of the class `com.fsck.k9.helper.RetainFragment` is to retain an object across configuration changes in Android apps."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.helper.FileBrowserHelper$FileBrowserFailOverCallback"
+      ],
+      "The interface serves as a callback mechanism for handling path entered by users or cancellation of input text dialog in a file browser."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MailTo"
+      ],
+      "The `com.fsck.k9.helper.MailTo` class is used for parsing and extracting information from mailto URIs, such as email addresses, subject lines, and email bodies, in order to facilitate the creation of email messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.Contacts"
+      ],
+      "The purpose of the `com.fsck.k9.helper.Contacts` class is to provide methods to interact with the user's contacts, such as checking if an email address belongs to one of the contacts, retrieving a contact's picture URI, creating and marking contacts as contacted, etc."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.SimpleTextWatcher"
+      ],
+      "The purpose of the class `com.fsck.k9.helper.SimpleTextWatcher` is to provide methods to listen to changes in an EditText field."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ContactPicture"
+      ],
+      "The purpose of the class `com.fsck.k9.helper.ContactPicture` is to provide a method for loading contact pictures with a customizable fallback default background color."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ClipboardManager"
+      ],
+      "The purpose of the class `com.fsck.k9.helper.ClipboardManager` is to provide a convenient way to interact with the system clipboard in an Android application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MailTo$CaseInsensitiveParamWrapper"
+      ],
+      "The purpose of the class is to provide a case-insensitive wrapper for storing and retrieving query parameters in email \"mailto\" links."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ReplyToParser"
+      ],
+      "The purpose of the class `com.fsck.k9.helper.ReplyToParser` is to parse the email message's reply-to, list-post, from addresses, and account identities to determine the recipients to reply to or reply all to."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ExceptionHelper"
+      ],
+      "The purpose of `com.fsck.k9.helper.ExceptionHelper` is to provide methods for working with Java `Throwable` objects, specifically for retrieving root cause messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.Utility"
+      ],
+      "The `com.fsck.k9.helper.Utility` class provides various utility methods that assist in performing common operations in the K-9 Mail Android application, such as checking for network connectivity, validating input fields, and extracting message identifiers from strings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.Preconditions"
+      ],
+      "The purpose of `com.fsck.k9.helper.Preconditions` is to provide methods for checking preconditions and throwing exceptions if they are not met."
+    ]
+  ],
+  "com.fsck.k9.helper.jsoup": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.helper.jsoup.NodeFilter"
+      ],
+      "The purpose of the `com.fsck.k9.helper.jsoup.NodeFilter` interface is to provide a way to filter nodes during a traversal of a HTML document, by giving filter decisions based on callbacks triggered when nodes are visited."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.jsoup.AdvancedNodeTraversor"
+      ],
+      "The purpose of the `com.fsck.k9.helper.jsoup.AdvancedNodeTraversor` class is to traverse and filter a `Node` and its descendant nodes in a depth-first manner using the JSoup library."
+    ]
+  ],
+  "com.fsck.k9.mailstore": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager$SamsungGalaxySStorageProvider"
+      ],
+      "The class provides a way to retrieve the name and ID of the storage provider specific to Samsung Galaxy S devices in the context of a mailstore in the K-9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager$ExternalStorageProvider"
+      ],
+      "The purpose of `com.fsck.k9.mailstore.StorageManager$ExternalStorageProvider` is to provide methods for managing external storage, including handling of attachments and databases, and checking if external storage is supported and ready for use."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalStore"
+      ],
+      "The purpose of the `com.fsck.k9.mailstore.LocalStore` class is to provide a local mail storage implementation for the K-9 Mail email client, with methods for managing email folders, messages, and attachments, as well as executing SQL commands and checking email settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LockableDatabase$StorageListener"
+      ],
+      "The purpose of the class is to listen for the mounting and unmounting of storage providers and to open or close a dataspace in a lockable database accordingly."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.LockableDatabase$DbCallback"
+      ],
+      "The purpose of the interface is to provide a callback method for performing database operations on a locked SQLiteDatabase and returning relevant data."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.CryptoResultAnnotation"
+      ],
+      "The purpose of the `com.fsck.k9.mailstore.CryptoResultAnnotation` class is to provide information about the result of cryptographic operations on a message, including OpenPGP encryption, decryption, and signature verification."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.AttachmentViewInfo"
+      ],
+      "The class `com.fsck.k9.mailstore.AttachmentViewInfo` is used to store information about an email attachment, including whether the attachment's content is available or not."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.mailstore.DatabasePreviewType"
+      ],
+      "The enum is used to map different preview types of emails to their corresponding values in the database and to facilitate the conversion between preview types and their database values."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.mailstore.LocalFolder$MoreMessages"
+      ],
+      "The enum `com.fsck.k9.mailstore.LocalFolder$MoreMessages` is used for identifying if there are more messages to be loaded in a local email folder in the K-9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalMimeMessage"
+      ],
+      "The class `com.fsck.k9.mailstore.LocalMimeMessage` is used to represent a locally stored MIME message and provide methods to access its content such as retrieving the message part ID, associated LocalMessage object, and account UUID."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager$HtcIncredibleStorageProvider"
+      ],
+      "The purpose of the `com.fsck.k9.mailstore.StorageManager$HtcIncredibleStorageProvider` class is to provide a way to obtain the name and unique id of the local storage provider for the HTC Incredible device."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MessageHelper"
+      ],
+      "The class `com.fsck.k9.mailstore.MessageHelper` provides methods to assist in managing email messages, including checking if all parts are available and creating empty MIME body parts."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StoreSchemaDefinition$RealMigrationsHelper"
+      ],
+      "The class `com.fsck.k9.mailstore.StoreSchemaDefinition$RealMigrationsHelper` provides helper methods for making real migrations in the local email store, including getting the context, local store, storage type, account, and serializing mail flags into a string format."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LockableDatabase"
+      ],
+      "The `LockableDatabase` class provides a mechanism for executing database callbacks in a shared context with locking support, as well as methods for managing the storage provider and deleting the database."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalFolder"
+      ],
+      "The class `com.fsck.k9.mailstore.LocalFolder` represents a local email folder in the K-9 mail client and provides methods for retrieving, managing, and storing email messages in the folder."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.MessageRemovalListener"
+      ],
+      "The interface `com.fsck.k9.mailstore.MessageRemovalListener` allows classes to receive notifications when a message is removed from a mail store."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.TempFileBody"
+      ],
+      "The `TempFileBody` class is used to store the contents of an email message as a temporary file."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MimePartStreamParser$PartBuilder"
+      ],
+      "The `com.fsck.k9.mailstore.MimePartStreamParser$PartBuilder` class is responsible for parsing MIME messages by constructing individual parts and adding them to an email message."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.LockableDatabase$SchemaDefinition"
+      ],
+      "The purpose of the interface `com.fsck.k9.mailstore.LockableDatabase$SchemaDefinition` is to define the database schema for the LockableDatabase class and provide methods to retrieve the current schema version and upgrade the schema."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MessageViewInfoExtractor"
+      ],
+      "The purpose of the `com.fsck.k9.mailstore.MessageViewInfoExtractor` class is to extract information from an email message and annotations related to its encryption status, and return it for display to the user in a view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager$InternalStorageProvider"
+      ],
+      "The class `com.fsck.k9.mailstore.StorageManager$InternalStorageProvider` is used to manage the internal storage of K-9 Mail app, including getting the root directory, retrieving database and attachment directory paths, and initializing the storage provider."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MessageViewInfo"
+      ],
+      "The class `com.fsck.k9.mailstore.MessageViewInfo` is used to store information about an email message for display in a user interface, such as whether the message has been viewed or has an error state."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.AttachmentResolver"
+      ],
+      "The class `com.fsck.k9.mailstore.AttachmentResolver` is used to retrieve and store information about email attachments, including their content IDs and URIs."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.DeferredFileBody"
+      ],
+      "The purpose of the class is to provide a deferred writing mechanism for storing email attachments in memory initially and then writing them to disk when necessary, to optimize memory usage."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.FileBackedBody"
+      ],
+      "The purpose of `com.fsck.k9.mailstore.FileBackedBody` is to provide a way to read and write the contents of a file-backed email message body."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalBodyPart"
+      ],
+      "The class `com.fsck.k9.mailstore.LocalBodyPart` represents a locally stored email body part that contains metadata about the associated account, message, size, and part ID."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mailstore.StorageManager$FixedStorageProviderBase"
+      ],
+      "The purpose of the abstract class `com.fsck.k9.mailstore.StorageManager$FixedStorageProviderBase` is to provide methods that handle initialization and storage of application-specific files for K-9 Mail on Android."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.StorageManager$StorageProvider"
+      ],
+      "The interface `com.fsck.k9.mailstore.StorageManager$StorageProvider` provides a set of methods that can be implemented by different storage providers to initialize, retrieve information and access files from different storage systems for an email client application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalMessage"
+      ],
+      "The `LocalMessage` class is used to represent an email message stored locally in the K-9 Mail app and provides methods for manipulating the message's flags, recipients, and content."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MimePartStreamParser"
+      ],
+      "The class `com.fsck.k9.mailstore.MimePartStreamParser` is used to parse an input stream into a MimeBodyPart object using the MimeStreamParser provided by the Apache james.mime4j library."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.StorageManager$StorageListener"
+      ],
+      "The `com.fsck.k9.mailstore.StorageManager$StorageListener` interface is used to listen for events related to storage providers being mounted and unmounted in order to handle any necessary actions."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.LocalStore$BatchSetSelection"
+      ],
+      "The purpose of the interface `com.fsck.k9.mailstore.LocalStore$BatchSetSelection` is to provide abstraction for batch set operations on an SQLite database in K-9 Mail."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.LocalPart"
+      ],
+      "The `com.fsck.k9.mailstore.LocalPart` interface is used for representing the local part of an email message, and providing methods for retrieving information about the message such as its size, ID, associated account UUID, and the message itself."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.StorageManager` is to provide access to the K-9 Mail database and manage storage providers for email attachments."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mailstore.BinaryAttachmentBody"
+      ],
+      "The purpose of the `BinaryAttachmentBody` class is to handle binary attachments in email messages by providing methods to set the encoding, write the content to an output stream, and retrieve the contents through an input stream."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StoreSchemaDefinition"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.StoreSchemaDefinition` is to define the database schema and handle upgrades for the local mail store used by the K-9 Mail client."
+    ]
+  ],
+  "com.fsck.k9.mailstore.migrations": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo61"
+      ],
+      "The class `com.fsck.k9.mailstore.migrations.MigrationTo61` is used for migrating a K9 Mail database to version 6.1 by removing the \"K9mail-errors\" folder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo44"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo44` is to perform a migration to update the SQLite database schema of an email storage application to version 44 by adding four threading columns to the `messages` table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo54"
+      ],
+      "The purpose of this class is to perform a database migration for the K9 email client app to version 5.4, which involves adding a new column to the \"messages\" table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo42"
+      ],
+      "The purpose of the `com.fsck.k9.mailstore.migrations.MigrationTo42` class is to handle the migration process from version 4.1 to version 4.2 of the K9 email client, specifically to move folder preferences from a local storage to a preferences storage."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo37"
+      ],
+      "The main purpose of this class is to provide a migration to version 37 of the SQLite database used in K-9 Mail application by adding a `content_disposition` column to the `attachments` table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo60"
+      ],
+      "The class is responsible for migrating pending commands from a previous version of the app's database to version 6.0."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo40"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo40` is to migrate the database schema to version 40 by adding a new \"mime_type\" column to the \"messages\" table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo32"
+      ],
+      "The class `com.fsck.k9.mailstore.migrations.MigrationTo32` is responsible for the database migration to version 32 of the K-9 Mail app, including updating the 'deleted' column in the 'messages' table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo52"
+      ],
+      "The class `com.fsck.k9.mailstore.migrations.MigrationTo52` handles the migration process of adding a new column to the \"folders\" table in a SQLite database used by the K-9 Mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo36"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo36` is to handle database migrations to version 36 of the K-9 mail client, which includes adding a new column to the attachments table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo51"
+      ],
+      "The purpose of the `com.fsck.k9.mailstore.migrations.MigrationTo51` class is to handle the migration of messages from an old table structure to a new one, including recreating the MIME structure from message content and attachments."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo35"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo35` is to provide a migration path for updating a SQLite database to version 35 by updating the flag of a message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo45"
+      ],
+      "The class `com.fsck.k9.mailstore.migrations.MigrationTo45` is used to perform migrations of the SQLite database used by K-9 Mail to version 45."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo33"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo33` is to provide a database migration that adds a preview column to the messages table in an SQLite database."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo43"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo43` is to provide a migration to version 43 of the K-9 Mail application's mailstore, including updating and moving outdated folders."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo46"
+      ],
+      "The purpose of `com.fsck.k9.mailstore.migrations.MigrationTo46` is to perform the necessary database migration operations to upgrade the K-9 Mail app's database schema from version 45 to version 46."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo39"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo39` is to migrate the database schema of the K-9 mail client to version 39."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo51$MimeStructureState"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo51$MimeStructureState` is to represent the state of a MIME structure during a migration process in the email client K-9."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.migrations.MigrationsHelper"
+      ],
+      "The purpose of the `com.fsck.k9.mailstore.migrations.MigrationsHelper` interface is to provide helper methods and access to objects necessary for migrating K-9 mail data."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo48"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo48` is to migrate the database schema of K-9 Mail app to version 48 by updating the threads table and creating a trigger."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo53"
+      ],
+      "The class `com.fsck.k9.mailstore.migrations.MigrationTo53` is a migration class that is used to update the SQLite database schema for K9-Mail to version 53, including removing null values from the \"empty\" column in the \"messages\" table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo50"
+      ],
+      "The purpose of `com.fsck.k9.mailstore.migrations.MigrationTo50` is to perform a specific migration task in the version 5.0 of the K-9 email client's mailstore database."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo41"
+      ],
+      "The class `com.fsck.k9.mailstore.migrations.MigrationTo41` is responsible for performing database migrations and updating folder metadata in an SQLite database for use in K-9 Mail version 4.1."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo49"
+      ],
+      "The class `com.fsck.k9.mailstore.migrations.MigrationTo49` is responsible for performing a database migration to version 49 of the K-9 mail client, which includes creating a composite index on the messages table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.Migrations"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.Migrations` is to provide methods for upgrading the K-9 Mail database."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo47"
+      ],
+      "The purpose of `com.fsck.k9.mailstore.migrations.MigrationTo47` is to perform a database migration for K-9 Mail application, specifically migrating the database schema to version 47."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo31"
+      ],
+      "The purpose of the `com.fsck.k9.mailstore.migrations.MigrationTo31` class is to perform a migration to version 31 of the SQLite database used by the K-9 Mail email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo30"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo30` is to handle the migration of the mail store database schema from version 29 to version 30 by adding a \"deleted\" column to the \"messages\" table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo34"
+      ],
+      "The purpose of the class `com.fsck.k9.mailstore.migrations.MigrationTo34` is to migrate an SQLite database by adding a new column called \"flagged_count\" to the \"folders\" table with a default value of 0."
+    ]
+  ],
+  "com.fsck.k9.mailstore.util": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.util.DeferredFileOutputStream"
+      ],
+      "The class `com.fsck.k9.mailstore.util.DeferredFileOutputStream` is used to write data to an OutputStream that is stored either in memory or in a file, and allows access to the data in both cases."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.util.FileFactory"
+      ],
+      "The purpose of the `com.fsck.k9.mailstore.util.FileFactory` interface is to provide a way for creating new files in a file system."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.util.FlowedMessageUtils"
+      ],
+      "The purpose of `com.fsck.k9.mailstore.util.FlowedMessageUtils` is to encode and decode text messages in accordance with RFC 2646 and check character specifications to ensure the message is formatted correctly."
+    ]
+  ],
+  "com.fsck.k9.message": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.IdentityHeaderBuilder"
+      ],
+      "The `com.fsck.k9.message.IdentityHeaderBuilder` class generates metadata about a draft email message, including information about the sender's identity, message format, quoted text mode, and signature."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.message.MessageBuilder$Callback"
+      ],
+      "The interface `com.fsck.k9.message.MessageBuilder$Callback` is used to handle events during the building of an email message, such as successful completion, cancellation, exceptions, and the return of a pending intent."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.SimpleMessageBuilder"
+      ],
+      "The purpose of `com.fsck.k9.message.SimpleMessageBuilder` class is to create and build simple email messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.AutocryptStatusInteractor$RecipientAutocryptStatus"
+      ],
+      "The class `com.fsck.k9.message.AutocryptStatusInteractor$RecipientAutocryptStatus` is used to represent the Autocrypt status of a recipient in the K-9 Mail application, with this specific method checking if there is a pending intent for the recipient's status notification."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.PgpMessageBuilder"
+      ],
+      "The purpose of the `com.fsck.k9.message.PgpMessageBuilder` Java class is to provide methods for building PGP messages, setting encryption status and choosing the OpenPGP API used for encryption and decryption operations."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.ComposePgpEnableByDefaultDecider"
+      ],
+      "The purpose of the class `com.fsck.k9.message.ComposePgpEnableByDefaultDecider` is to determine whether a message should be encrypted by default."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.ComposePgpInlineDecider"
+      ],
+      "The purpose of the `ComposePgpInlineDecider` class is to determine if a given email message should be replied to with PGP inline encryption based on the presence of PGP inline parts in the message."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.message.AutocryptStatusInteractor$RecipientAutocryptStatusType"
+      ],
+      "The enum defines different types of Autocrypt status for a recipient and provides methods to check if encryption is possible, if the status is mutual, and if it has been confirmed."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.message.IdentityField"
+      ],
+      "The enum `com.fsck.k9.message.IdentityField` is used to represent fields in email headers that contain unique identifiers for message tracking or identification."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.TextBodyBuilder"
+      ],
+      "The purpose of `com.fsck.k9.message.TextBodyBuilder` is to build a message body for an email, including options for adding quoted text, signatures, and HTML formatting."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.AutocryptStatusInteractor"
+      ],
+      "The purpose of the class `com.fsck.k9.message.AutocryptStatusInteractor` is to provide an interface for retrieving the Autocrypt status of recipients from an OpenPGP API."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.IdentityHeaderParser"
+      ],
+      "The purpose of `com.fsck.k9.message.IdentityHeaderParser` is to parse an identity string into a map of values for each field."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.message.MessageBuilder"
+      ],
+      "The purpose of the abstract class `com.fsck.k9.message.MessageBuilder` is to provide a way to construct email messages with various options and settings, such as recipients, subject, and quoted text, in the K-9 email client for Android."
+    ]
+  ],
+  "com.fsck.k9.message.extractors": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.MessagePreviewCreator"
+      ],
+      "The purpose of the class `com.fsck.k9.message.extractors.MessagePreviewCreator` is to create a preview of a given email message, extracting its text if it is not encrypted."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.EncryptionDetector"
+      ],
+      "The purpose of `com.fsck.k9.message.extractors.EncryptionDetector` is to detect whether an email message is encrypted with PGP/MIME or S/MIME or contains inline PGP encrypted text."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.AttachmentCounter"
+      ],
+      "The purpose of the class is to count the number of attachments in a given email message, excluding encrypted messages, and provide a way to create new instances of the class with a different `EncryptionDetector` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.AttachmentInfoExtractor"
+      ],
+      "The `AttachmentInfoExtractor` class is used to extract information about email attachments, including their URI, size, and content availability, for use in a database or to be displayed in a view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.PreviewTextExtractor"
+      ],
+      "The purpose of the `com.fsck.k9.message.extractors.PreviewTextExtractor` class is to extract a plain text preview from a mail `Part` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.TextPartFinder"
+      ],
+      "The purpose of the `com.fsck.k9.message.extractors.TextPartFinder` class is to locate and extract the first text part from an email part."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.BodyTextExtractor"
+      ],
+      "The purpose of the `com.fsck.k9.message.extractors.BodyTextExtractor` class is to extract the body text from message parts in a desired message format while handling conversion between HTML and plain text if needed."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.PreviewResult"
+      ],
+      "The purpose of the class `com.fsck.k9.message.extractors.PreviewResult` in the K-9 mail client is to provide a way to extract and handle different types of preview content from email messages, including text, encrypted content, and errors."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.MessageFulltextCreator"
+      ],
+      "The class is responsible for creating the fulltext of a message by extracting its plain text, but only if the message is not encrypted."
+    ]
+  ],
+  "com.fsck.k9.message.html": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlProcessor"
+      ],
+      "The class `com.fsck.k9.message.html.HtmlProcessor` is responsible for processing HTML content by removing formatting and sanitizing the content for display."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.UriLinkifier"
+      ],
+      "The class `com.fsck.k9.message.html.UriLinkifier` is used to convert URIs within a given string of text into clickable links."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.message.html.UriParser"
+      ],
+      "The `com.fsck.k9.message.html.UriParser` interface is used for parsing and linkifying scheme specific URIs found in a given string. It provides a method to linkify a URI starting from a specified position and write the result to a given buffer."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HeadCleaner"
+      ],
+      "The purpose of the `HeadCleaner` class is to provide a method for cleaning the `<head>` section of an HTML document by copying safe nodes from a dirty document to a cleaned document."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HttpUriParser"
+      ],
+      "The purpose of the class `com.fsck.k9.message.html.HttpUriParser` is to parse HTTP/HTTPS/RTSP URIs and add HTML anchor tags to them for display in an email message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlConverter"
+      ],
+      "The purpose of the class `com.fsck.k9.message.html.HtmlConverter` is to convert plain text to HTML, HTML to plain text, and convert emojis in HTML strings to corresponding image tags."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.EthereumUriParser"
+      ],
+      "The class `com.fsck.k9.message.html.EthereumUriParser` is responsible for parsing Ethereum URIs in a text and converting them into clickable HTML links."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.BitcoinUriParser"
+      ],
+      "The purpose of the class `com.fsck.k9.message.html.BitcoinUriParser` is to parse Bitcoin URIs within a text and replace them with HTML hyperlinks."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlSanitizer"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HeadCleaner$CleaningVisitor"
+      ],
+      "The purpose of the `com.fsck.k9.message.html.HeadCleaner$CleaningVisitor` class is to visit and clean HTML nodes, ensuring that only safe elements and their attributes are preserved while ignoring unsafe elements and their sub-elements."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlConverter$ListTagHandler"
+      ],
+      "The class `com.fsck.k9.message.html.HtmlConverter$ListTagHandler` handles the parsing of list tags in HTML and converts them into a formatted text representation."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlConverter$HtmlToTextTagHandler"
+      ],
+      "The `com.fsck.k9.message.html.HtmlConverter$HtmlToTextTagHandler` class is used to convert HTML tags to their corresponding plain text format in Java."
+    ]
+  ],
+  "com.fsck.k9.message.quote": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.quote.InsertableHtmlContent"
+      ],
+      "The purpose of the class is to provide functionality for inserting and manipulating HTML content in email messages, specifically for quoting and inserting user content."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.quote.TextQuoteCreator"
+      ],
+      "The class `com.fsck.k9.message.quote.TextQuoteCreator` adds quoting markup to a text message based on the provided quote style and prefix."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.quote.HtmlQuoteCreator"
+      ],
+      "The `com.fsck.k9.message.quote.HtmlQuoteCreator` class provides functionality to add quoting markup to a HTML message based on a specified quote style."
+    ]
+  ],
+  "com.fsck.k9.message.signature": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.signature.HtmlSignatureRemover"
+      ],
+      "The purpose of the class `com.fsck.k9.message.signature.HtmlSignatureRemover` is to provide a method that can remove the signature from an HTML email."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.signature.HtmlSignatureRemover$StripSignatureFilter"
+      ],
+      "The purpose of the class `com.fsck.k9.message.signature.HtmlSignatureRemover$StripSignatureFilter` is to remove HTML email signatures from email messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.signature.TextSignatureRemover"
+      ],
+      "The purpose of the `com.fsck.k9.message.signature.TextSignatureRemover` class is to remove signatures from text content that matches a specific pattern."
+    ]
+  ],
+  "com.fsck.k9.ui": [
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.EolConvertingEditText"
+      ],
+      "The purpose of the class `com.fsck.k9.ui.EolConvertingEditText` is to provide an EditText view that automatically converts line endings between \"\\r\\n\" and \"\\n\" based on the platform."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.ContactBadge"
+      ],
+      "The purpose of `com.fsck.k9.ui.ContactBadge` is to provide functionality for displaying and interacting with contact information in an Android user interface, including assigning contacts based on email addresses and showing QuickContact windows."
+    ]
+  ],
+  "com.fsck.k9.ui.compose": [
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.compose.QuotedMessagePresenter"
+      ],
+      "The purpose of the `com.fsck.k9.ui.compose.QuotedMessagePresenter` class is to handle the display and processing of quoted messages in the message composition screen of K-9 Mail."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.compose.QuotedMessageMvpView"
+      ],
+      "The purpose of `com.fsck.k9.ui.compose.QuotedMessageMvpView` is to display quoted text in a compose email view and allow users to interact with and modify that text."
+    ]
+  ],
+  "com.fsck.k9.ui.crypto": [
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.crypto.MessageCryptoAnnotations"
+      ],
+      "This class manages cryptographic annotations for an email message in the K-9 Mail application, which can include information on encryption or signature properties for specific parts of the message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.crypto.MessageCryptoHelper"
+      ],
+      "The class `com.fsck.k9.ui.crypto.MessageCryptoHelper` provides methods for handling cryptography operations on email messages, including encryption and decryption."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.crypto.MessageCryptoCallback"
+      ],
+      "The purpose of `com.fsck.k9.ui.crypto.MessageCryptoCallback` is to provide a callback for reporting the progress and completion of cryptographic operations performed on a message."
+    ]
+  ],
+  "com.fsck.k9.ui.dialog": [],
+  "com.fsck.k9.ui.message": [
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.message.LocalMessageExtractorLoader"
+      ],
+      "The purpose of the class `com.fsck.k9.ui.message.LocalMessageExtractorLoader` is to extract message view information for the UI by loading a message and its annotations."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.message.LocalMessageLoader"
+      ],
+      "The purpose of the `com.fsck.k9.ui.message.LocalMessageLoader` class is to provide a loader for loading local email messages from the database in the background."
+    ]
+  ],
+  "com.fsck.k9.ui.messageview": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.AttachmentViewCallback"
+      ],
+      "The `AttachmentViewCallback` interface handles user actions related to attachment viewing and saving in a message view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageViewFragment"
+      ],
+      "The `com.fsck.k9.ui.messageview.MessageViewFragment` class is responsible for displaying a single email message in the K9 email client and providing user actions such as replying, forwarding, deleting, and moving the message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.AttachmentController"
+      ],
+      "The `AttachmentController` class is responsible for handling email attachments in K-9 Mail, allowing users to view and save attachments locally."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.MessageCryptoPresenter$MessageCryptoMvpView"
+      ],
+      "The interface provides methods for the message crypto presenter view to restart cryptographic processing, display messages, start pending intents, show a dialog for configuring message encryption, and show a dialog with information about the cryptographic status of a message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageTopView"
+      ],
+      "The `com.fsck.k9.ui.messageview.MessageTopView` Java class is responsible for displaying the header and top portion of an email message view in the K-9 email client, handling loading of pictures and attachments, and displaying cryptographic information and warnings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageContainerView$SavedState"
+      ],
+      "The purpose of the `com.fsck.k9.ui.messageview.MessageContainerView$SavedState` class is to save the state of visible attachments and displayed pictures in a parcel."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.CryptoInfoDialog$OnClickShowCryptoKeyListener"
+      ],
+      "The interface `com.fsck.k9.ui.messageview.CryptoInfoDialog$OnClickShowCryptoKeyListener` defines the methods for handling click events on crypto keys in the message view, including displaying security warnings and displaying the keys themselves."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.MessageViewFragment$MessageViewFragmentListener"
+      ],
+      "The purpose of the interface `com.fsck.k9.ui.messageview.MessageViewFragment$MessageViewFragmentListener` is to define public methods for handling actions and updating the UI in the message view fragment of the K-9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.LockedAttachmentView"
+      ],
+      "The purpose of the class `com.fsck.k9.ui.messageview.LockedAttachmentView` is to display a locked message attachment view in K-9 mail and allow the user to switch to an unlocked view upon clicking the \"locked button\"."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.OnCryptoClickListener"
+      ],
+      "The purpose of the interface `com.fsck.k9.ui.messageview.OnCryptoClickListener` is to handle click events on the crypto-related UI elements in K-9 Mail."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.AttachmentController$IntentAndResolvedActivitiesCount"
+      ],
+      "The class is used to hold information about an intent associated with an email attachment, including its MIME type, whether there are resolved activities associated with it, and whether its data scheme is \"file\"."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.MessageContainerView$OnRenderingFinishedListener"
+      ],
+      "The purpose of the interface is to provide a callback method `onLoadFinished()` that can be implemented by the listener to receive a notification when the loading of a message's content is complete."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageContainerView"
+      ],
+      "The purpose of the `com.fsck.k9.ui.messageview.MessageContainerView` class is to display the contents of an email message, including attachments and HTML content, and allow for interaction with the message such as enabling/disabling buttons and zooming in/out."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.CryptoInfoDialog"
+      ],
+      "The class `CryptoInfoDialog` displays information about the cryptographic status of a message and handles user interaction for the same."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.AttachmentView"
+      ],
+      "The `com.fsck.k9.ui.messageview.AttachmentView` class is used to display attachment information and provide functionality for viewing and downloading attachments in the K-9 Mail app's message view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageCryptoPresenter"
+      ],
+      "The purpose of `com.fsck.k9.ui.messageview.MessageCryptoPresenter` is to handle the display and processing of message encryption and decryption related actions for the K-9 email client's message view."
+    ]
+  ],
+  "com.fsck.k9.service": [
+    [
+      [
+        "class",
+        "com.fsck.k9.service.RemoteControlReceiver"
+      ],
+      "The purpose of the `com.fsck.k9.service.RemoteControlReceiver` class is to receive and process incoming intents for remote control of the K-9 Mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.RemoteControlService"
+      ],
+      "The RemoteControlService class is responsible for starting and performing actions based on the Intent received such as changing account settings or rescheduling mail polling."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.ShutdownReceiver"
+      ],
+      "The purpose of the class `com.fsck.k9.service.ShutdownReceiver` is to release resources and prevent scheduled intents from waking up K-9 when the system is shutting down."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.PollService"
+      ],
+      "The `PollService` class is used by the K-9 Mail app to periodically check for new email messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.SleepService"
+      ],
+      "The `com.fsck.k9.service.SleepService` class is responsible for creating and controlling sleep intervals as well as optionally acquiring wakelocks to ensure that the device does not go to sleep during the sleep interval."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.MailService"
+      ],
+      "The purpose of the class `com.fsck.k9.service.MailService` is to provide email synchronization and push notification services for the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.StorageGoneReceiver"
+      ],
+      "The purpose of the `com.fsck.k9.service.StorageGoneReceiver` class is to handle the actions to be taken when storage is ejected or unmounted in the K-9 Mail app."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.service.CoreService"
+      ],
+      "The abstract class `com.fsck.k9.service.CoreService` provides a framework for managing the lifecycle and execution of tasks in a background service for the K9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.CoreReceiver"
+      ],
+      "The `CoreReceiver` class is used to receive and handle `Intent` objects for the K-9 Mail Android app and manage wake locks."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.PushService"
+      ],
+      "The purpose of the `com.fsck.k9.service.PushService` class is to handle the background running of the K-9 Mail email client on Android to receive push notifications for incoming emails."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.StorageReceiver"
+      ],
+      "The purpose of the class `com.fsck.k9.service.StorageReceiver` is to handle storage mount events and notify the `StorageManager` instance to handle the mounted storage."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.PollService$Listener"
+      ],
+      "The class `com.fsck.k9.service.PollService$Listener` is used to interact with the `PollService` in order to check email accounts, release wake locks, and store information about new messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.DatabaseUpgradeService"
+      ],
+      "The purpose of `com.fsck.k9.service.DatabaseUpgradeService` is to upgrade the mail database in K-9 Mail through a background process."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.BootReceiver"
+      ],
+      "The purpose of the `com.fsck.k9.service.BootReceiver` class is to receive various system broadcast intents, schedule alarms, and cancel previously set alarms."
+    ]
+  ],
+  "com.fsck.k9.setup": [
+    [
+      [
+        "class",
+        "com.fsck.k9.setup.ServerNameSuggester"
+      ],
+      "The purpose of the `com.fsck.k9.setup.ServerNameSuggester` class in Java is to suggest a server name based on the server type and domain name."
+    ]
+  ],
+  "com.fsck.k9.search": [
+    [
+      [
+        "class",
+        "com.fsck.k9.search.SearchAccount"
+      ],
+      "The `com.fsck.k9.search.SearchAccount` class is used to represent a search account in the K-9 email client, which allows users to search for specific emails within their email accounts."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.search.SearchSpecification"
+      ],
+      "The `com.fsck.k9.search.SearchSpecification` interface defines the specifications for a search including the conditions, name, and accounts to be searched."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.search.LocalSearch"
+      ],
+      "The class `com.fsck.k9.search.LocalSearch` provides methods to perform local email searches in the K-9 email application with various search conditions and settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.search.ConditionsTreeNode"
+      ],
+      "The `ConditionsTreeNode` class is used to represent an expression tree for handling search conditions in the K-9 email client app for Android."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.search.SqlQueryBuilder"
+      ],
+      "The purpose of `com.fsck.k9.search.SqlQueryBuilder` is to provide methods for building SQL queries for searching emails in the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.search.SearchSpecification$SearchCondition"
+      ],
+      "The purpose of `com.fsck.k9.search.SearchSpecification$SearchCondition` is to represent a search condition with attributes, fields, and values, and provide methods to clone, write to a parcel, generate a human-readable string, and check for equality."
+    ]
+  ],
+  "com.fsck.k9.view": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.MessageHeader$OnLayoutChangedListener"
+      ],
+      "The purpose of this interface is to provide a way to listen for changes in the layout of a message header in Java."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.HighlightDialogFragment"
+      ],
+      "The purpose of the class `com.fsck.k9.view.HighlightDialogFragment` is to create a dialog fragment that highlights a view in the background and can be dismissed."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.CryptoModeSelector$CryptoStatusSelectedListener"
+      ],
+      "The purpose of the `CryptoStatusSelectedListener` interface is to provide a listener for detecting when a user selects a new crypto state in the crypto mode selector."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ViewSwitcher"
+      ],
+      "The `ViewSwitcher` class is used to switch between two views in an Android app while also providing animation options and callbacks for when the switch is complete."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.NonLockingScrollView"
+      ],
+      "The purpose of the `NonLockingScrollView` class is to provide a custom implementation of the `ScrollView` that allows for interception of touch events and prevents scrolling of certain child views."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.view.MessageCryptoDisplayStatus"
+      ],
+      "The enum is used to represent the different possible states of a message's encryption and digital signature status, and to provide convenient methods to check these states."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageWebView"
+      ],
+      "The purpose of the class `com.fsck.k9.view.MessageWebView` is to provide a WebView to display HTML content with inline attachments and configure it to display messages using user preferences. It also has methods to simulate the shift key being pressed and to block or allow network data."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageHeader"
+      ],
+      "The purpose of the class `com.fsck.k9.view.MessageHeader` is to display the header information of an email message, handle click and long click events on various views, and update the display status of the message's cryptographic information."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ClientCertificateSpinner"
+      ],
+      "The purpose of the class `com.fsck.k9.view.ClientCertificateSpinner` is to allow selection and management of client certificates for secure communication in K-9 Mail, a free and open-source email client for Android."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.view.K9WebViewClient"
+      ],
+      "The purpose of the abstract class `com.fsck.k9.view.K9WebViewClient` is to provide a base class for creating WebViewClients within the K9 email client that can handle web page loading and URL loading in a customized way."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.MessageWebView$OnPageFinishedListener"
+      ],
+      "The interface `com.fsck.k9.view.MessageWebView$OnPageFinishedListener` provides a way to listen for when a web page has finished loading in a `MessageWebView` object."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.ClientCertificateSpinner$OnClientCertificateChangedListener"
+      ],
+      "The interface is used as a listener for changes to the selected client certificate in a spinner, allowing for actions to be taken when a different certificate is selected."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageTitleView"
+      ],
+      "The purpose of the class `com.fsck.k9.view.MessageTitleView` is to display the title of an email message, including the subject line, in the message header."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.K9WebViewClient$LollipopWebViewClient"
+      ],
+      "The purpose of the class `com.fsck.k9.view.K9WebViewClient$LollipopWebViewClient` is to provide support for intercepting network requests made by a WebView on devices running Android Lollipop or higher."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.K9WebViewClient$PreLollipopWebViewClient"
+      ],
+      "The purpose of the `com.fsck.k9.view.K9WebViewClient$PreLollipopWebViewClient` class is to act as a web view client for Android devices running on pre-Lollipop versions, specifically by handling web resource requests."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.RecipientSelectView$Recipient"
+      ],
+      "The class `com.fsck.k9.view.RecipientSelectView$Recipient` represents a recipient of an email message and provides methods to retrieve and manipulate recipient information, including display name, email address, and cryptographic status."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.FoldableLinearLayout"
+      ],
+      "The purpose of the class is to provide a container view that allows child views to be added and folded (hidden)."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.RecipientSelectView$TokenListener"
+      ],
+      "The interface is used to handle events when a token in a recipient selection view is changed."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ToolableViewAnimator"
+      ],
+      "The `com.fsck.k9.view.ToolableViewAnimator` class is a view animator that allows for the display of multiple child views, allowing the user to switch between them."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.ViewSwitcher$OnSwitchCompleteListener"
+      ],
+      "The purpose of the interface `com.fsck.k9.view.ViewSwitcher$OnSwitchCompleteListener` is to provide a callback for when a view switch has completed, providing the index of the newly displayed child view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.NonLockingScrollView$HierarchyTreeChangeListener"
+      ],
+      "The class `com.fsck.k9.view.NonLockingScrollView$HierarchyTreeChangeListener` provides functionality to listen for changes in the hierarchy tree of a scroll view and performs actions accordingly, such as updating the list of child views needing all touches if they are webviews."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageCryptoStatusView"
+      ],
+      "The purpose of the `com.fsck.k9.view.MessageCryptoStatusView` class is to display the encryption/decryption status of a message by updating the color and icon displayed on the view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.FoldableLinearLayout$SavedState"
+      ],
+      "The purpose of the class `com.fsck.k9.view.FoldableLinearLayout$SavedState` is to save and restore the state of the FoldableLinearLayout in a Parcel. Specifically, it saves whether it is folded or not."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.LinearViewAnimator"
+      ],
+      "The purpose of `com.fsck.k9.view.LinearViewAnimator` is to provide animations for adding, removing, and transitioning between child views in a linear layout."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageHeader$SavedState"
+      ],
+      "The class `com.fsck.k9.view.MessageHeader$SavedState` is likely used to save the state of a MessageHeader view instance and allow recreation of that state later, for example during orientation changes or other configuration changes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ThemeUtils"
+      ],
+      "The purpose of the class `com.fsck.k9.view.ThemeUtils` is to provide methods for retrieving styled colors from a specified theme or the current theme associated with a specified attribute in Android."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.RecipientSelectView"
+      ],
+      "The purpose of `com.fsck.k9.view.RecipientSelectView` is to provide a view for selecting email recipients, including autocomplete suggestions and advanced cryptographic capabilities."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.CryptoModeSelector"
+      ],
+      "The interface `com.fsck.k9.view.CryptoModeSelector` is used to interact with a user interface to select and set the cryptographic status."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ColorChip"
+      ],
+      "The class is used to display a clickable colored chip in the K-9 mail application."
+    ]
+  ],
+  "com.fsck.k9.widget.list": [
+    [
+      [
+        "class",
+        "com.fsck.k9.widget.list.MessageListWidgetProvider"
+      ],
+      "The purpose of the class `com.fsck.k9.widget.list.MessageListWidgetProvider` is to provide functionality for updating and managing a message list widget on the home screen of an Android device."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.widget.list.MessageListWidgetService"
+      ],
+      "The purpose of the class com.fsck.k9.widget.list.MessageListWidgetService is to provide an implementation of RemoteViewsService to display a list of messages in the form of a widget."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.widget.list.MessageListRemoteViewFactory"
+      ],
+      "The purpose of the class `com.fsck.k9.widget.list.MessageListRemoteViewFactory` is to provide a factory for creating RemoteViews objects for a message list widget."
+    ]
+  ],
+  "com.fsck.k9.notification": [
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.CertificateErrorNotifications"
+      ],
+      "The class `com.fsck.k9.notification.CertificateErrorNotifications` handles displaying and clearing certificate error notifications for email accounts in the K9 Email app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.SendFailedNotifications"
+      ],
+      "The purpose of the `com.fsck.k9.notification.SendFailedNotifications` class is to handle the display and clearing of notifications for failed email send attempts."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationContentCreator"
+      ],
+      "The purpose of `com.fsck.k9.notification.NotificationContentCreator` is to create notification message content objects from email messages and accounts."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationIds"
+      ],
+      "The purpose of the class `com.fsck.k9.notification.NotificationIds` is to generate unique notification IDs for different types of email notifications in the K-9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationController"
+      ],
+      "The purpose of the `NotificationController` class is to handle notifications related to email operations in K-9 Mail, such as displaying notifications for new emails, sending emails, and handling authentication or certificate errors."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.DeviceNotifications"
+      ],
+      "The purpose of the class `com.fsck.k9.notification.DeviceNotifications` is to handle the creation and management of notifications for new email messages received by a user's account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationData"
+      ],
+      "The purpose of the `com.fsck.k9.notification.NotificationData` class is to manage and provide information on notifications for email messages in the K9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NewMailNotifications"
+      ],
+      "The purpose of the `com.fsck.k9.notification.NewMailNotifications` class is to handle the creation, removal, and clearing of new mail notifications for a given email account, as well as updating the summary notification for the account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.WearNotifications"
+      ],
+      "The purpose of the `com.fsck.k9.notification.WearNotifications` class is to handle notifications for wearable devices and build stacked notifications for email accounts in the K9 email client app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.AuthenticationErrorNotifications"
+      ],
+      "The class `com.fsck.k9.notification.AuthenticationErrorNotifications` is responsible for showing and clearing notifications for authentication errors on email accounts' incoming or outgoing servers."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.SyncNotifications"
+      ],
+      "The purpose of the class `com.fsck.k9.notification.SyncNotifications` is to manage and display notifications related to email syncing and sending for the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.RemoveNotificationResult"
+      ],
+      "The class is responsible for providing information on the removal of a notification and whether it should be recreated."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationActionCreator"
+      ],
+      "The class `com.fsck.k9.notification.NotificationActionCreator` contains methods to create pending intents for various actions related to K-9 email notifications, such as marking messages as read, deleting messages, archiving messages, and opening specific folders."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.LockScreenNotification"
+      ],
+      "The purpose of `com.fsck.k9.notification.LockScreenNotification` is to provide methods for configuring and creating lock screen notifications for the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationGroupKeys"
+      ],
+      "The purpose of the class `com.fsck.k9.notification.NotificationGroupKeys` is to generate group keys for notifications related to a specific account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationActionService"
+      ],
+      "The purpose of `com.fsck.k9.notification.NotificationActionService` is to handle various notification actions for the K-9 Mail app, such as marking messages as read or archiving them."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.AddNotificationResult"
+      ],
+      "The `com.fsck.k9.notification.AddNotificationResult` class is responsible for handling the creation and management of notifications in the K-9 Mail Android app, including replacing, cancelling, and retrieving information about existing notifications."
+    ]
+  ],
+  "com.fsck.k9.power": [
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.power.DeviceIdleManager"
+      ],
+      "The purpose of the abstract class `com.fsck.k9.power.DeviceIdleManager` is to manage the device idle state and register a broadcast receiver to listen for any changes in the idle state."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.power.DozeChecker"
+      ],
+      "The purpose of the class `com.fsck.k9.power.DozeChecker` is to check whether the device is in idle mode and whether the app is whitelisted to ignore battery optimizations."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.power.DeviceIdleReceiver"
+      ],
+      "The purpose of the class `com.fsck.k9.power.DeviceIdleReceiver` is to receive notifications when the device enters or exits idle mode and reset the K-9 Mail service accordingly."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.power.DeviceIdleManager$RealDeviceIdleManager"
+      ],
+      "The purpose of the `com.fsck.k9.power.DeviceIdleManager$RealDeviceIdleManager` class is to manage the device idle state and register/unregister the `DeviceIdleReceiver` for the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.power.DeviceIdleManager$NoOpDeviceIdleManager"
+      ],
+      "The `NoOpDeviceIdleManager` class is a no-operation implementation of the `DeviceIdleManager` class, used for cases when the device does not support idle mode."
+    ]
+  ],
+  "com.fsck.k9.preferences": [
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.FolderSettings"
+      ],
+      "The purpose of the `com.fsck.k9.preferences.FolderSettings` class is to provide methods for converting and upgrading folder settings in the K-9 Mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$DirectorySetting"
+      ],
+      "The purpose of `com.fsck.k9.preferences.GlobalSettings$DirectorySetting` is to provide a way to store and validate directory paths in K-9 Mail's global settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV12"
+      ],
+      "The class is responsible for upgrading the global settings of the K-9 Mail app to version 12 by changing the notificationHideSubject based on the keyguardPrivacy setting."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$BooleanSetting"
+      ],
+      "The class is likely a part of a preferences/settings system in the K9 email client for Android, and specifically handles boolean preferences by providing a method to convert a string representation of a boolean value into a Boolean object."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.preferences.Settings$PseudoEnumSetting"
+      ],
+      "The abstract class `com.fsck.k9.preferences.Settings$PseudoEnumSetting` is a template for creating settings that act like enums but are not actual enums, allowing for more flexibility in customization of preferences."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.SettingsExporter"
+      ],
+      "The purpose of the class `com.fsck.k9.preferences.SettingsExporter` is to export the settings of an Android app, including global settings and settings for specified accounts, to a file on external storage or a specified URI."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$LanguageSetting"
+      ],
+      "The purpose of the class `com.fsck.k9.preferences.GlobalSettings$LanguageSetting` is to provide a way to manage language settings in the K-9 Mail email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$EnumSetting"
+      ],
+      "The class `com.fsck.k9.preferences.Settings$EnumSetting` is likely used to store and manage preferences for a specific setting that is represented as an Enum type object in the K-9 email client for Android."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.CheckBoxListPreference"
+      ],
+      "The class `com.fsck.k9.preferences.CheckBoxListPreference` is a custom preference class that allows the user to select multiple options from a list using checkboxes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings"
+      ],
+      "The `com.fsck.k9.preferences.Settings` class manages the conversion and upgrading of settings for the email client K-9 Mail."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$TimeSetting"
+      ],
+      "The purpose of the class `com.fsck.k9.preferences.GlobalSettings$TimeSetting` is to handle time-setting preferences in the K9 email application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.SettingsImporter$ImportedServerSettings"
+      ],
+      "The `com.fsck.k9.preferences.SettingsImporter$ImportedServerSettings` class is used to store and retrieve settings for an imported mail server, including any extra settings that may be present."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$ColorSetting"
+      ],
+      "The class `com.fsck.k9.preferences.Settings$ColorSetting` is used to handle color settings and conversions between different representations of colors in K-9 Mail's preferences."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$RingtoneSetting"
+      ],
+      "The class `com.fsck.k9.preferences.AccountSettings$RingtoneSetting` represents a setting for the ringtone of an email account in the K-9 Mail app. Its `fromString` method is used to convert a string representation of the setting into an actual instance of the `RingtoneSetting` class."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$DeletePolicySetting"
+      ],
+      "The class `com.fsck.k9.preferences.AccountSettings$DeletePolicySetting` is designed to manage and validate the delete policy settings for email accounts in the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$IntegerRangeSetting"
+      ],
+      "The class `com.fsck.k9.preferences.Settings$IntegerRangeSetting` is used to store integer values within a specified range and provides a method for converting a string to an integer within that range."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$WebFontSizeSetting"
+      ],
+      "The class represents a setting for the web font size in the K9 email client and provides a method for parsing and validating a String representation of the setting."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$SubThemeSetting"
+      ],
+      "The class `com.fsck.k9.preferences.GlobalSettings$SubThemeSetting` is used to manage sub-theme settings for the K9 email application, including converting string representations of sub-theme settings to K9 Theme objects and vice versa."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings"
+      ],
+      "The class `com.fsck.k9.preferences.GlobalSettings` is used to manage and convert settings from various formats in the K-9 Mail email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$StringResourceSetting"
+      ],
+      "`com.fsck.k9.preferences.AccountSettings$StringResourceSetting` is a class that maps string values to their corresponding resource values and provides a method to get the string value if it exists."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$IntegerResourceSetting"
+      ],
+      "The purpose of the `com.fsck.k9.preferences.AccountSettings$IntegerResourceSetting` class is to provide functionality for converting a string to an integer value for a specific account setting."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV31"
+      ],
+      "The purpose of this class is to upgrade font size preferences in the passed settings map to a new format and convert old size preferences into new size preferences using its public methods."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$StorageProviderSetting"
+      ],
+      "The purpose of the class `com.fsck.k9.preferences.AccountSettings$StorageProviderSetting` is to manage and provide access to storage providers for email accounts in the K-9 email app."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.preferences.Settings$SettingsUpgrader"
+      ],
+      "The `com.fsck.k9.preferences.Settings$SettingsUpgrader` interface is used to upgrade a settings map and returns a set of removed setting names."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.StorageEditor"
+      ],
+      "The purpose of the `com.fsck.k9.preferences.StorageEditor` class is to provide a way to edit and modify preferences in a key-value storage system, allowing for the addition, removal, and modification of values associated with specific keys."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV24"
+      ],
+      "The purpose of the class `com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV24` is to upgrade the preferences settings for the K-9 email client, specifically setting the \"messageViewTheme\" to \"USE_GLOBAL\"."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.SettingsImporter"
+      ],
+      "The purpose of `com.fsck.k9.preferences.SettingsImporter` is to provide methods for importing settings and account configurations for the K-9 Mail app in Android."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.IdentitySettings$SignatureSetting"
+      ],
+      "The purpose of the `SignatureSetting` class is to provide methods for managing the signature setting of an email identity, including retrieving the default value and converting a string value."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.preferences.Settings$SettingsDescription"
+      ],
+      "The purpose of the abstract class `com.fsck.k9.preferences.Settings$SettingsDescription` is to provide a description of a setting's default value, its internal and human-readable string representations, and methods to convert between them."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.IdentitySettings"
+      ],
+      "The purpose of the class `com.fsck.k9.preferences.IdentitySettings` is to provide methods for upgrading and converting settings for an email identity in the K-9 Mail email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.IdentitySettings$OptionalEmailAddressSetting"
+      ],
+      "The purpose of the class is to provide methods for handling email addresses in identity settings, including validation and conversion of input values."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Storage"
+      ],
+      "The purpose of the class `com.fsck.k9.preferences.Storage` is to provide methods for storing and retrieving key-value pairs in SharedPreferences in an Android application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.TimePickerPreference"
+      ],
+      "The class `com.fsck.k9.preferences.TimePickerPreference` provides a way to display and set time preferences in an Android app and allows for persistence and validation of time values."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$StringSetting"
+      ],
+      "The class represents a string setting in the K-9 Mail email client preferences and provides a method to convert a string value to a `String` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$FontSizeSetting"
+      ],
+      "The purpose of the `com.fsck.k9.preferences.Settings$FontSizeSetting` class is to handle font size settings and provide a method to parse font size strings and return their integer values."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$ThemeSetting"
+      ],
+      "The class `com.fsck.k9.preferences.GlobalSettings$ThemeSetting` is responsible for converting between a string representation of a K9 theme and the corresponding enum value, as well as providing a readable string format for the theme setting."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings"
+      ],
+      "The class `com.fsck.k9.preferences.AccountSettings` is used to manage and manipulate email account settings in the K-9 Mail app, including upgrading and converting these settings."
+    ]
+  ],
+  "com.fsck.k9.provider": [
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.AttachmentProvider"
+      ],
+      "The purpose of the `com.fsck.k9.provider.AttachmentProvider` is to provide an interface for accessing and manipulating email attachments stored locally by the K-9 Mail application in an Android device."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$MessagesQueryHandler"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.MessageProvider$MessagesQueryHandler` is to handle queries for retrieving message data from the message provider in a mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$AccountNumberExtractor"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.MessageProvider$AccountNumberExtractor` is to extract the account number integer value from a `MessageInfoHolder` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$CountExtractor"
+      ],
+      "The class `com.fsck.k9.provider.MessageProvider$CountExtractor` is designed to extract the count of messages from a message provider as a Java Integer object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$DeleteUriExtractor"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.MessageProvider$DeleteUriExtractor` is to extract the URI for deleting a specified message in K-9 Mail."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.EmailProvider"
+      ],
+      "The purpose of the `com.fsck.k9.provider.EmailProvider` class is to provide access to the email provider database and handle queries, updates, and deletions of email messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$AccountColorExtractor"
+      ],
+      "The class `com.fsck.k9.provider.MessageProvider$AccountColorExtractor` is responsible for extracting the account color of a message for use in displaying it in the user interface."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$HasAttachmentsExtractor"
+      ],
+      "The class is used to extract whether a message has attachments or not from a `MessageInfoHolder` object in the K-9 Mail application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$MessageInfoHolderRetrieverListener"
+      ],
+      "The class is responsible for retrieving and providing information about message holders and local messages in the K-9 email client application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.DecryptedFileProvider"
+      ],
+      "The class provides a content provider for temporary decrypted files that can be accessed by other apps, with methods to create, delete, and trim these files, and to decode encoded files."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$ThrottlingQueryHandler"
+      ],
+      "The purpose of `com.fsck.k9.provider.MessageProvider$ThrottlingQueryHandler` is to provide a query handler that returns a cursor for a given URI and ensures that the cursor is closed after a certain time period to prevent memory leaks."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$SubjectExtractor"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.MessageProvider$SubjectExtractor` is to extract the subject of an email message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$PreviewExtractor"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.MessageProvider$PreviewExtractor` is to extract the preview of a message for display purposes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$IncrementExtractor"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.MessageProvider$IncrementExtractor` is to extract an incremented count of the number of messages from a `MessageInfoHolder` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$HasStarExtractor"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.MessageProvider$HasStarExtractor` is to extract the \"has starred\" field from a `MessageInfoHolder` object in the K-9 Mail app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$ReverseDateComparator"
+      ],
+      "The purpose of the class is to compare `MessageInfoHolder` objects based on their `compareDate` attribute in reverse order."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.AttachmentTempFileProvider"
+      ],
+      "`com.fsck.k9.provider.AttachmentTempFileProvider` is used to manage temporary files created for email attachments in the K9 email client on Android devices."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider"
+      ],
+      "The class provides an interface to interact with the K-9 Mail content provider, allowing messages to be queried, inserted, updated, and deleted."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.provider.MessageProvider$QueryHandler"
+      ],
+      "The purpose of the interface `com.fsck.k9.provider.MessageProvider$QueryHandler` is to define a contract for classes responsible for handling queries on a specific Uri path, and to provide a method `query` that performs the query and returns the resulting data."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.provider.MessageProvider$FieldExtractor"
+      ],
+      "The purpose of the interface is to provide a way to extract a specific field from an object of a given type."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.EmailProvider$SpecialColumnsCursor"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.EmailProvider$SpecialColumnsCursor` is to provide a custom cursor for retrieving columns from the K9 email client's content provider, including special columns that require additional handling."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$AccountsQueryHandler"
+      ],
+      "The class `com.fsck.k9.provider.MessageProvider$AccountsQueryHandler` provides methods to retrieve data for all email accounts configured in the app and returns a cursor containing specified fields in the projection."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$AccountExtractor"
+      ],
+      "The purpose of the `com.fsck.k9.provider.MessageProvider$AccountExtractor` class is to extract the account description of a message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$SenderAddressExtractor"
+      ],
+      "The `com.fsck.k9.provider.MessageProvider$SenderAddressExtractor` class extracts the sender email address from a `MessageInfoHolder` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$UnreadQueryHandler"
+      ],
+      "The purpose of the `com.fsck.k9.provider.MessageProvider$UnreadQueryHandler` class is to handle unread message queries for a specific email account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$IdExtractor"
+      ],
+      "The class `com.fsck.k9.provider.MessageProvider$IdExtractor` is used to extract the database ID of a message from the message info holder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.AttachmentTempFileProvider$AttachmentTempFileProviderCleanupReceiver"
+      ],
+      "The class is responsible for cleaning up temporary attachment files in the K-9 Mail application and unregistering the related receiver."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$SenderExtractor"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.MessageProvider$SenderExtractor` is to extract the sender information from a `MessageInfoHolder` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$MonitoredCursor"
+      ],
+      "The purpose of the `com.fsck.k9.provider.MessageProvider$MonitoredCursor` class is to provide a monitored cursor that allows efficient access to email messages stored in a content provider in the K9 email application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.UnreadWidgetProvider"
+      ],
+      "The `com.fsck.k9.provider.UnreadWidgetProvider` class is responsible for updating and managing unread email widgets in the K-9 mail client app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$SendDateExtractor"
+      ],
+      "The purpose of the class `com.fsck.k9.provider.MessageProvider$SendDateExtractor` is to extract and return the date and time when a message was sent."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$UriExtractor"
+      ],
+      "The purpose of the `com.fsck.k9.provider.MessageProvider$UriExtractor` class is to provide a method for extracting the URI field from a `MessageInfoHolder` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.EmailProvider$IdTrickeryCursor"
+      ],
+      "The purpose of this class is to provide a cursor that can map \"_id\" column names to \"id\" column names, allowing it to work with database tables that have different column naming conventions."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.DecryptedFileProvider$DecryptedFileProviderCleanupReceiver"
+      ],
+      "The purpose of the class is to delete temporary files created by `DecryptedFileProvider` and unregister the `FileCleanupReceiver` when the device screen is turned off."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$UnreadExtractor"
+      ],
+      "The class is used to extract the unread status of a message in the `MessageInfoHolder` object."
+    ]
+  ],
+  "com.fsck.k9.remotecontrol": [
+    [
+      [
+        "class",
+        "com.fsck.k9.remotecontrol.AccountReceiver"
+      ],
+      "The purpose of the `com.fsck.k9.remotecontrol.AccountReceiver` class is to handle broadcast intents and retrieve a list of accounts in K-9 Mail and pass them to a designated receptor."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.remotecontrol.K9AccountReceptor"
+      ],
+      "The interface provides a method to retrieve the UUIDs and descriptions of all accounts associated with an instance of K9 email client. It is likely used for remote access and control of K9 email client."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.remotecontrol.K9RemoteControl"
+      ],
+      "The class `com.fsck.k9.remotecontrol.K9RemoteControl` allows remote control of the K9 Mail app by setting actions and broadcasting intents with specific permissions and fetching accounts from the app."
+    ]
+  ]
+}

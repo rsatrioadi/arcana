@@ -1,0 +1,154 @@
+[
+  [
+    "com.fsck.k9",
+    "The `com.fsck.k9` package contains classes and interfaces that are used to manage email accounts and settings, restrict event triggers, enhance security of the pseudo-random number generator, validate email addresses, and provide access to context and font size settings in the K-9 email client application for Android."
+  ],
+  [
+    "com.fsck.k9.account",
+    "The `com.fsck.k9.account` package is used to handle the creation and configuration of email accounts in the K-9 Mail app."
+  ],
+  [
+    "com.fsck.k9.activity",
+    "The `com.fsck.k9.activity` package contains classes and interfaces that provide the user interface and functionality for various activities and screens in the K-9 Mail app, including composing and managing email messages, displaying account and folder information, and creating and managing settings and preferences."
+  ],
+  [
+    "com.fsck.k9.activity.compose",
+    "The `com.fsck.k9.activity.compose` package contains classes and interfaces that handle email composition functionality in the K-9 mail app, including recipient management, attachment handling, and PGP encryption and signing."
+  ],
+  [
+    "com.fsck.k9.activity.loader",
+    "The purpose of the `com.fsck.k9.activity.loader` package is to provide classes for loading attachment content and metadata asynchronously in the K-9 Mail app."
+  ],
+  [
+    "com.fsck.k9.activity.misc",
+    "The `com.fsck.k9.activity.misc` package contains miscellaneous classes and interfaces used in the K-9 Mail app, ranging from contact picture loading to gesture detection and non-UI data retention."
+  ],
+  [
+    "com.fsck.k9.activity.setup",
+    "The `com.fsck.k9.activity.setup` package provides classes for setting up and customizing email accounts, including handling security settings, authentication types, OpenPGP provider selection, folder settings, and font preferences."
+  ],
+  [
+    "com.fsck.k9.autocrypt",
+    "The `com.fsck.k9.autocrypt` package contains classes related to Autocrypt implementation in the K-9 Mail app, including parsing Autocrypt headers, providing Autocrypt operations, interacting with an OpenPGP API, and representing the Autocrypt header."
+  ],
+  [
+    "com.fsck.k9.cache",
+    "The package `com.fsck.k9.cache` provides classes for cache management and efficient retrieval and manipulation of email-related information in the K-9 email client for Android."
+  ],
+  [
+    "com.fsck.k9.controller",
+    "The `com.fsck.k9.controller` package contains classes and interfaces that manage email messages and perform various tasks related to email account synchronization, notification handling, and message sending/receiving in the K9 email client."
+  ],
+  [
+    "com.fsck.k9.crypto",
+    "The overall purpose of the package `com.fsck.k9.crypto` is to provide cryptographic functionalities for the K-9 Mail app, including detection of cryptographic structures in email messages and helper methods for working with OpenPGP encryption."
+  ],
+  [
+    "com.fsck.k9.fragment",
+    "The `com.fsck.k9.fragment` package contains classes and interfaces related to displaying and managing email messages in the K-9 Mail app, including fragment classes for displaying lists of messages, comparators for sorting and managing messages, and dialogs for displaying progress updates and confirmation prompts."
+  ],
+  [
+    "com.fsck.k9.helper",
+    "The `com.fsck.k9.helper` package provides a collection of helper classes and interfaces for common tasks and operations in the K-9 Mail Android application, such as working with emails, contacts, files, and system resources."
+  ],
+  [
+    "com.fsck.k9.helper.jsoup",
+    "The purpose of the `com.fsck.k9.helper.jsoup` package is to provide helper classes and interfaces for traversing and filtering HTML documents using the JSoup library."
+  ],
+  [
+    "com.fsck.k9.mailstore",
+    "The Java package `com.fsck.k9.mailstore` provides classes and interfaces for managing email storage, including local storage implementation, attachments, and database operations, in the K-9 Mail email client."
+  ],
+  [
+    "com.fsck.k9.mailstore.migrations",
+    "The `com.fsck.k9.mailstore.migrations` package contains classes and interfaces for migrating the SQLite database schema used by K-9 Mail email client to newer versions by adding, removing, or updating columns and tables."
+  ],
+  [
+    "com.fsck.k9.mailstore.util",
+    "The `com.fsck.k9.mailstore.util` package provides utility classes related to managing and manipulating email messages, including creating files, efficiently storing data, and encoding and decoding text messages in accordance with RFC 2646."
+  ],
+  [
+    "com.fsck.k9.message",
+    "The `com.fsck.k9.message` package provides classes and interfaces for constructing and manipulating email messages in the K-9 Mail application for Android, including message builders, Autocrypt status handlers, and identity parsers."
+  ],
+  [
+    "com.fsck.k9.message.extractors",
+    "The purpose of the package `com.fsck.k9.message.extractors` is to extract and manipulate different types of content from email messages, including text, attachments, and encryption, in the K-9 mail client."
+  ],
+  [
+    "com.fsck.k9.message.html",
+    "The `com.fsck.k9.message.html` package provides classes for processing, linkifying, sanitizing, and converting HTML content into plain text or displayable HTML format for email messages."
+  ],
+  [
+    "com.fsck.k9.message.quote",
+    "The package `com.fsck.k9.message.quote` provides functionality for quoting and manipulating HTML and text content in email messages."
+  ],
+  [
+    "com.fsck.k9.message.signature",
+    "The `com.fsck.k9.message.signature` package provides classes for removing email signatures from both HTML and text messages."
+  ],
+  [
+    "com.fsck.k9.ui",
+    "The package `com.fsck.k9.ui` contains classes that provide user interface functionality for the K-9 email client, including an EditText view for converting line endings and a class for displaying and interacting with contact information."
+  ],
+  [
+    "com.fsck.k9.ui.compose",
+    "The `com.fsck.k9.ui.compose` package is responsible for handling the display and processing of quoted messages in the message composition screen of the K-9 Mail application."
+  ],
+  [
+    "com.fsck.k9.ui.crypto",
+    "The `com.fsck.k9.ui.crypto` package provides classes and an interface for managing cryptographic operations on email messages in the K-9 Mail application, including adding annotations for encryption and signatures, performing encryption and decryption, and reporting the progress and completion of these operations."
+  ],
+  [
+    "com.fsck.k9.ui.dialog",
+    "The package `com.fsck.k9.ui.dialog` contains classes for creating dialog boxes in the user interface of the K-9 email client."
+  ],
+  [
+    "com.fsck.k9.ui.message",
+    "The package `com.fsck.k9.ui.message` provides classes for displaying and loading email messages in the K-9 Mail Android app."
+  ],
+  [
+    "com.fsck.k9.ui.messageview",
+    "The overall purpose of the `com.fsck.k9.ui.messageview` package is to provide classes and interfaces for displaying and interacting with email messages, including handling attachments, cryptographic processing, and user actions such as replying and forwarding."
+  ],
+  [
+    "com.fsck.k9.service",
+    "The `com.fsck.k9.service` package contains classes responsible for providing email synchronization, push notification, background service management, and handling various system broadcast intents for the K-9 Mail Android app."
+  ],
+  [
+    "com.fsck.k9.setup",
+    "The purpose of the `com.fsck.k9.setup` package in Java is to provide classes related to setting up and configuring a server, including suggesting server names based on server type and domain name."
+  ],
+  [
+    "com.fsck.k9.search",
+    "The `com.fsck.k9.search` package provides classes and interfaces for searching emails in the K-9 email client app for Android, allowing users to specify search conditions, accounts to be searched, and build SQL queries for searching emails."
+  ],
+  [
+    "com.fsck.k9.view",
+    "The package `com.fsck.k9.view` provides a collection of view classes and interfaces for displaying and interacting with email messages and cryptographic information in the K-9 mail application for Android."
+  ],
+  [
+    "com.fsck.k9.widget.list",
+    "The purpose of the package `com.fsck.k9.widget.list` is to provide functionality for displaying a list of messages in the form of a widget on the home screen of an Android device."
+  ],
+  [
+    "com.fsck.k9.notification",
+    "The package `com.fsck.k9.notification` provides classes to handle the creation, management, and display of notifications related to email operations in the K-9 Mail Android app, including new mail, sending, syncing, certificate and authentication errors, and wearable devices."
+  ],
+  [
+    "com.fsck.k9.power",
+    "The package `com.fsck.k9.power` is for managing the device idle state and battery optimizations in the K-9 Mail app."
+  ],
+  [
+    "com.fsck.k9.preferences",
+    "The package `com.fsck.k9.preferences` contains classes for managing and manipulating preferences and settings related to the K-9 Mail email client application."
+  ],
+  [
+    "com.fsck.k9.provider",
+    "The purpose of the package `com.fsck.k9.provider` is to provide classes and interfaces to interact with the K-9 Mail content provider and manage email messages, attachments, and temporary files in the K9 email client on Android devices."
+  ],
+  [
+    "com.fsck.k9.remotecontrol",
+    "The overall purpose of the package `com.fsck.k9.remotecontrol` is to enable remote access and control of K9 Mail app accounts and functionality."
+  ]
+]

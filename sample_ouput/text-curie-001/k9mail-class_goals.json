@@ -1,0 +1,3430 @@
+{
+  "com.fsck.k9": [
+    [
+      [
+        "class",
+        "com.fsck.k9.Throttle$MyTimerTask"
+      ],
+      " posts a handler runnable to the handler servlet's post method. This handler runnable will be executed by the servlet once per second. If you wish to cancel the timer, you can call the `cancel()` method."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Throttle"
+      ],
+      " keeps track of how long a task has been running, and if it reaches its timeout value it will automatically cancel the task."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.PRNGFixes"
+      ],
+      " applies various fixes to the system to improve its cryptographic security."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.BaseAccount"
+      ],
+      " allows a user to manage their account information. This includes updating the email address, description, and UUID."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Throttle$MyTimerTask$HandlerRunnable"
+      ],
+      " starts a timer and uses the run() method of the callback object to call a method."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.K9"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.EmailAddressValidator"
+      ],
+      " validates email addresses."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.Account$SortType"
+      ],
+      " contains a list of possible values and allows users to see what type of sort the account has."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Globals"
+      ],
+      " tries to find a context object that is specific to the class and returns it if found."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.FontSizes"
+      ],
+      " provides information on the fonts in the user's application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.NotificationSetting"
+      ],
+      " allows the user to change the ringtone, vibrate pattern, LED color, and ringtone URI for their notification setting."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Preferences"
+      ],
+      " allows the user to manage preferences for their k9 mail server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Clock"
+      ],
+      " displays the current time in milliseconds."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Account"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.K9$ApplicationAware"
+      ],
+      " allows a class to be aware of a given application instance."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.Identity"
+      ],
+      " holds the various pieces of information about an identity, such as the name, description, email, and signature."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.Account$DeletePolicy"
+      ],
+      " provides a convenient way to get the preference string representation of the DeletePolicy setting as an Integer."
+    ]
+  ],
+  "com.fsck.k9.account": [
+    [
+      [
+        "class",
+        "com.fsck.k9.account.AccountCreator"
+      ],
+      " retrieves the default delete policy and default port for the specified type of mailbox."
+    ]
+  ],
+  "com.fsck.k9.activity": [
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList$FolderListAdapter"
+      ],
+      " manages a filtered folder list."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$AccountsHandler"
+      ],
+      " handles user interaction with the account refresh menu, updates the account size, and prints out account descriptions."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageCompose"
+      ],
+      " contains all of the methods for starting, managing, and sending a message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageInfoHolder"
+      ],
+      " holds information about messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Search"
+      ],
+      " allows you to disable and start the search activity."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.ColorPickerDialog$OnColorChangedListener"
+      ],
+      " calls a listener when the dialog's selected color changes."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.K9PreferenceActivity"
+      ],
+      " sets the language of the activity, sets the theme, and then calls the super method."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageList$StorageListenerImplementation"
+      ],
+      " provides the implementation code to be run when the user's account is removed from the storage."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.K9Activity"
+      ],
+      " dispatches touch events, sets up gesture detectors, and initialize itself."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.K9ActivityCommon"
+      ],
+      " controls the look and feel of the activity using a theme and provides methods to listen for gestures and motion events."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.AccountList"
+      ],
+      " keeps track of all the accounts that are in the system and it allows the user to select an account from the list."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.LauncherShortcuts"
+      ],
+      " sets up an Intent object and calls the `finish()` method if it's not supposed to be handling any shortcut creation or manipulation."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$PasswordPromptDialog"
+      ],
+      " updates the text of a CharSequence object with the values provided."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$AccountClickListener"
+      ],
+      " receives clicks on accounts in the Activity's \"actionDisplaySearch\" view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ColorPickerDialog"
+      ],
+      " allows the user to select a color."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ChooseFolder"
+      ],
+      " configures the search field in the menu, so users can search for folders on the device."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.EditIdentity"
+      ],
+      " saves data related to the current identity of the user in a data bundle."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.activity.MessageCompose$Action"
+      ],
+      " defines the various possible actions that a Message Compose component could take."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.UnreadWidgetConfiguration"
+      ],
+      " processes requests related to the UnreadWidgetConfiguration class."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.EmailAddressList"
+      ],
+      " fetches the email addresses from the underlying view and sets it as the intent extra value for the Intent object when one of the ListView'sitemClick events occurs."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.K9PreferenceActivity$PreferenceChangeListener"
+      ],
+      " listens for changes to a preference in an Android application and updates the preference summary field accordingly."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$AccountsAdapter"
+      ],
+      " returns a view for the given account number and view group."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.AccountList$AccountsAdapter"
+      ],
+      " returns a view of one account for each position in the list."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList$FolderClickListener"
+      ],
+      " listens for user clicks on folders in the list, and then calls the method `actionDisplaySearch(android.view.View, String, boolean, boolean)` of the class `com.fsck.k9.activity.MessageList`."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts"
+      ],
+      " allows the user to manage their accounts in an app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageLoaderHelper"
+      ],
+      " ensures that all loading processes are cancelled, then clears the decode loader state so that the next time it is called, it starts from scratch."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ConfirmationDialog"
+      ],
+      " creates a customized confirmation dialog from an existing AlertDialog."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.AlternateRecipientAdapter$AlternateRecipientListener"
+      ],
+      " listens for changes to the recipient selection, and updates the adapter accordingly."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList$FolderListHandler"
+      ],
+      " updates the size of a folder on the user's account, updates the user's account on-screen with the current working account information, and updates the progress bar in the action bar based on the boolean value `progress`."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.K9ListActivity"
+      ],
+      " sets up a GestureDetector object to listen for gestures made on the ListActivity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ChooseFolder$ChooseFolderHandler"
+      ],
+      " displays a list in a view telling the user which folders they have chosen, and updates the list as the user interacts with it. The class also toasts the user periodically with messages letting them know how far along the task of choosing a folder is. Finally, the class sets the selected folder to the given position on the filesystem."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ActivityListener"
+      ],
+      " listens for notifications about account status changes, then sends a message to the account's owner about the status of the pending messages task."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.NotificationDeleteConfirmation"
+      ],
+      " displays an AlertDialog with the messages to delete and then creates an Intent to send to the application as a result of a call to `deleteConfirm` on an associated Notification object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ChooseIdentity"
+      ],
+      " assigns a chosen identity to the activity doing the clicking, so that the user can select an identity from the list."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.UpgradeDatabases"
+      ],
+      " checks to see if the user's databases have been upgraded, and if so, it launches the original Activity instead of displaying this one."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$ImportSelectionDialog"
+      ],
+      " displays a dialog for the user to choose which accounts to import into the app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.AlternateRecipientAdapter"
+      ],
+      " helps to bind the views in the recipient select view to the correct recipient data."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.MessageLoaderHelper$MessageLoaderCallbacks"
+      ],
+      " provides callbacks for when various things happen with the message loader, like when data has loaded, an error has occurred, or the loading has finished."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.K9ActivityCommon$K9ActivityMagic"
+      ],
+      " allows you to listen for touchscreen gestures."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.UpgradeDatabases$UpgradeDatabaseBroadcastReceiver"
+      ],
+      " checks the action attribute of the intent object and if it matches one of the supported actions (listed in the method's parameter), it will do a few things."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.AlternateRecipientAdapter$RecipientTokenHolder"
+      ],
+      " helps hold a token for a recipient."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList"
+      ],
+      " provides a set of methods that are called when the user selects a menu item from the main screen of the activity. These methods correspond to the numbered functions in the code example above."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.Accounts$SimpleDialog"
+      ],
+      " restores an activity to its original state, and then either retains the dialog so that it can be dismissed if necessary, or shows it and determines which button on the dialog should execute a \"okay\" button action."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageReferenceHelper"
+      ],
+      " parses through a list of messages looking for a MessageReference object, and if it finds one, it returns the MessageReference object's toIdentityString."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageReference"
+      ],
+      " encapsulates a message reference, which is an object that describes a particular message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.ManageIdentities"
+      ],
+      " allows users to manage their identities by selecting from a list of identities. If a selected identity is a removable identity, the class disables the currently displayed identity and gives a toast notification with the string `No removable identity`"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderList$FolderListAdapter$FolderListFilter"
+      ],
+      " provides a means of filtering the folders in a list."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderListFilter"
+      ],
+      " invalidates the field `mOriginalValues`."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.MessageList"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.FolderInfoHolder"
+      ],
+      " helps you compare folder names and return a number to indicate how similar the two names are."
+    ]
+  ],
+  "com.fsck.k9.activity.compose": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.PgpEnabledErrorDialog$OnOpenPgpDisableListener"
+      ],
+      " allows the listener to disable the compose activity when the user open the PGP dialog."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.RecipientLoader"
+      ],
+      " helps load recipients for a contact or recipient list."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.PgpInlineDialog"
+      ],
+      " creates a new instance of the `com.fsck.k9.activity.compose.PgpInlineDialog` class, sets the `FirstTime` field to either `1` or `0`, and displays a dialog box asking the user to confirm that they want to start an encrypted message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.PgpSignOnlyDialog"
+      ],
+      " creates a dialog with two buttons, one to disable PGP signing and one to keep it enabled."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.AttachmentPresenter$AttachmentMvpView"
+      ],
+      " provides a UI for attaching and managing attachments."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.ComposeCryptoStatus"
+      ],
+      " checks the status of a recipient's cryptographic provider and returns a SendErrorState object if there is an error."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.IdentityAdapter"
+      ],
+      " helps manage the list of identities in an activity."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.RecipientPresenter$RecipientsChangedListener"
+      ],
+      " listens for changes to the recipients list of the Activity presenter."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.PgpEncryptDescriptionDialog"
+      ],
+      " creates a dialog that asks the user to encrypt a file."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.PgpEnabledErrorDialog"
+      ],
+      " creates a new instance of the `com.fsck.k9.activity.compose.PgpEnabledErrorDialog` class, sets the booleanargument isGotItDialog to true, and sets the intargument showcaseView to the value of the View ID of the dialog fragment that the user is asked to highlight in."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.RecipientAdapter"
+      ],
+      " allows the user to view and compose a recipient list."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.PgpSignOnlyDialog$OnOpenPgpSignOnlyChangeListener"
+      ],
+      " enables or disables the ability to change a signature only."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.ComposeCryptoStatus$ComposeCryptoStatusBuilder"
+      ],
+      " provides methods for configuring the CryptoMode and CryptoProviderState of the composed status builder, and for setting the recipients list and openPGP key id for the status builder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.MessageActions"
+      ],
+      " provides an interface for composing a new message as a reply to a given message reference."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.PgpInlineDialog$OnOpenPgpInlineChangeListener"
+      ],
+      " listens for changes in the \"enabled\" property of an object that implements the interface."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.RecipientMvpView"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.RecipientPresenter"
+      ],
+      " contains methods to manage the recipient list, such as `onPrepareOptionsMenu`, `initFromSendOrViewIntent`, `onSwitchAccount`, `initFromReplyToMessage`, `checkRecipientsOkForSending`, `onCryptoModeChanged`, `onNonRecipientFieldFocused`, `shouldSaveRemotely`, `builderSetProperties`, `initFromTrustIdAction`, `onActivityResult`, and `onMenuSetEnableEncryption`."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.compose.AttachmentPresenter"
+      ],
+      " helps organize and deal with attachments on an activity."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.compose.AttachmentPresenter$AttachmentsChangedListener"
+      ],
+      " listens for changes to attachments being added or removed from the presentation."
+    ]
+  ],
+  "com.fsck.k9.activity.loader": [
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.loader.AttachmentContentLoader"
+      ],
+      " loads an attachment from the given source file and stores it in the given cache folder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.loader.AttachmentInfoLoader"
+      ],
+      " downloads the attachment and loads it into memory."
+    ]
+  ],
+  "com.fsck.k9.activity.misc": [
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideModelLoader"
+      ],
+      " gets a model for the pictures and uses its `loadData` method to load the pictures into an implicit data structure."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideBitmapDecoder"
+      ],
+      " tries to decode a bitmap from a ContactPictureLoader instance's FallbackGlideParams object, decoding it to a Resource object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.ContactPictureLoader"
+      ],
+      " loads contact pictures of recipients in the given mail view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideParams"
+      ],
+      " provides a fallback glide picture if the given contact address and personal data don't match any of the stored glide pictures."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.misc.SwipeGestureDetector$OnSwipeGestureListener"
+      ],
+      " listens for gestures in either the right-to-left or left-to-right direction, and processes them as appropriate."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.Attachment"
+      ],
+      " creates a new attachment with the same local URI, loaded state, content type, name, and size as the original attachment."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.activity.misc.ExtendedAsyncTask"
+      ],
+      " allows you to create AsyncTask instances that are attached to specific activities, and it also allows you to remove AsyncTask instances from activities if you want."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.misc.SwipeGestureDetector"
+      ],
+      " checks to see if the MotionEvent that was passed in is null or not, and if not, it attempts to grab the last MotionEvent that was fired that the detector was animating to. If that MotionEvent is null or not available, it then looks for the last OnDownEvent and uses that. After that, it calculates the X and Y movement of the MotionEvent that was passed in, and compares it to the minimum distance that it requires for a swipe to be recognized."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.activity.misc.NonConfigurationInstance"
+      ],
+      " restores an Activity instance that had been restarted due to a configuration change."
+    ]
+  ],
+  "com.fsck.k9.activity.setup": [
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.OpenPgpAppSelectDialog"
+      ],
+      " allows the user to select a package for which the activity setup dialog should be displayed."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.OpenPgpAppSelectDialog$ApgDeprecationDialogFragment"
+      ],
+      " displays a dialog warning the user about the deprecation of the openPGP app."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupOptions"
+      ],
+      " sets up the views for an account setup options activity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AuthTypeAdapter"
+      ],
+      " converts between the auth types supported by the activity and the types the user's system supports."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.OpenPgpAppSelectDialog$OpenPgpProviderEntry"
+      ],
+      " provides a simple name for an object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupAccountType"
+      ],
+      " sets the Account activation settings for an activity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupOutgoing"
+      ],
+      " updates the visibility of the `mRequireLoginSettingsView` node based on the ```isChecked``` value."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSettings"
+      ],
+      " setups an Activity to handle the result of an account selection."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.SpinnerOption"
+      ],
+      " provides a way to display a spinner (a widget that can be used to select one of several options) and lets you set its value using the setSpinnerOptionValue() method."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.FolderSettings"
+      ],
+      " saves the current folder settings and sets them up for a given account and folder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupCheckSettings"
+      ],
+      " configures the UI for the account setup check."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupComposition"
+      ],
+      " sets up the views for an account setup composition, handles the results of calling the save() method on the preference object, and then sets the Intent to the appropriate Activity to handle the user's input."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.ConnectionSecurityAdapter"
+      ],
+      " enables you to configure the connection security for an activity."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.WelcomeMessage"
+      ],
+      " sets up the WelcomeMessage view, sets some TextViews to show the conversion to HTML, and sets up a couple of listeners so that the user can navigate to the next screen and import their settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupIncoming"
+      ],
+      " enables the user to enter their account details into the Activity, and then uses various methods to save and restart push notifications if required."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.FontSizeSettings"
+      ],
+      " helps the user set the messaging text field's font size."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupNames"
+      ],
+      " displays an input field where the user can enter the account description, and a Done button if they're finished."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.SliderPreference"
+      ],
+      " allows the user to set the value of the slider to be the maximum or minimum possible value."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.ConnectionSecurityHolder"
+      ],
+      " returns the string representation of the ``connectionSecurity`` field of the ``ConnectionSecurityHolder`` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.Prefs"
+      ],
+      " allows you to create and start an activity using an Intent."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.OpenPgpAppSelectDialog$OpenPgpAppSelectFragment"
+      ],
+      " creates a dialog, and allows the user to select one or more packages for the OpenPGP app to be installed from."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AuthTypeHolder"
+      ],
+      " returns the name of the authType as a string and sets the `insecure` boolean property of the `AuthTypeHolder` instance to the given value."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.activity.setup.AccountSetupBasics"
+      ],
+      " prepares the user interface for an account setup."
+    ]
+  ],
+  "com.fsck.k9.autocrypt": [
+    [
+      [
+        "class",
+        "com.fsck.k9.autocrypt.AutocryptHeaderParser"
+      ],
+      " parses the Autocrypt header."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.autocrypt.AutocryptOperations"
+      ],
+      " implements the Autocrypt header functionality in android.content.Intent objects."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.autocrypt.AutocryptOpenPgpApiInteractor"
+      ],
+      " allows you to interact with the AutocryptOpenPgpApi class."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.autocrypt.AutocryptHeader"
+      ],
+      " calculates the hash code for the AutocryptHeader object, compares it against other AutocryptHeader objects, and verifies if the values of the keys, addresses, and parameters are equal."
+    ]
+  ],
+  "com.fsck.k9.cache": [
+    [
+      [
+        "class",
+        "com.fsck.k9.cache.TemporaryAttachmentStore"
+      ],
+      " stores files for temporary usage."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.cache.EmailProviderCacheCursor"
+      ],
+      " keeps a list of email addresses and their corresponding thread IDs. When an user requests a particular email address, the class looks it up in the cache and provides the corresponding thread ID."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.cache.EmailProviderCache"
+      ],
+      " provides an interface for storage and retrieval of thread and message information, as well as an interface for querying whether a message is hidden."
+    ]
+  ],
+  "com.fsck.k9.controller": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.controller.ProgressBodyFactory$ProgressListener"
+      ],
+      " listens for changes to the progress bar, and updates the view accordingly."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerPushReceiver"
+      ],
+      " sends push messages to the controller's notification user if there is a problem with the certificate."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MemorizingMessagingListener"
+      ],
+      " listens for messages and updates the various properties associated with the Memory object as the messages are processed."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.controller.SimpleMessagingListener"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.PendingCommandSerializer"
+      ],
+      " deserializes a pending command from JSON data into a MessagingControllerCommands.PendingCommand object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingMoveOrCopy"
+      ],
+      " allows you to create a new instance of the `com.fsck.k9.controller.MessagingControllerCommands.PendingMoveOrCopy` class with the source and destination folders, and set the 'isCopy' property to true."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingEmptyTrash"
+      ],
+      " contains methods that allow a user to create a new instance of the class `com.fsck.k9.controller.MessagingControllerCommands.PendingEmptyTrash` and to call the `processPendingEmptyTrash` method on the `MessagingController` object to process a message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingMarkAllAsRead"
+      ],
+      " creates and executes pending mark all as read commands."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingCommand"
+      ],
+      " stores a list of commands that are currently being processed by the messaging controller, and it provides a method to execute any of those commands against an account."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.controller.MessagingListener"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.controller.MessagingController$MessageActor"
+      ],
+      " allows an application to manage messages in a messageFolder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingAppend"
+      ],
+      " manages commands that are pending for appending to the messaging controller."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingController$Command"
+      ],
+      " compares the frequencies of the two commands."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.UidReverseComparator"
+      ],
+      " compares two ids in reverse order."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingController"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingExpunge"
+      ],
+      " provides a mechanism for managing commands related to the pending expunge operation."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.controller.MessagingControllerCommands$PendingSetFlag"
+      ],
+      " manages pending set flags for a given messaging controller."
+    ]
+  ],
+  "com.fsck.k9.crypto": [
+    [
+      [
+        "class",
+        "com.fsck.k9.crypto.MessageCryptoStructureDetector"
+      ],
+      " looks for encrypted or signed parts of aMail structure and returns them."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.crypto.OpenPgpApiHelper"
+      ],
+      " adds an extra layer of security to the OpenPGP communication by validating the identity of the sender and recipient of messages before sending them."
+    ]
+  ],
+  "com.fsck.k9.fragment": [
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragment"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$SenderComparator"
+      ],
+      " compares the sender addresses of two cursors and returns a value based on that compare."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.ProgressDialogFragment"
+      ],
+      " provides a way to capture and cancel progress updates while the dialog is being displayed."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.AttachmentDownloadDialogFragment"
+      ],
+      " creates a dialog and sets its properties."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$ArrivalComparator"
+      ],
+      " compares the given date values in two cursors and returns a value indicating the difference between them."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.fragment.ProgressDialogFragment$CancelListener"
+      ],
+      " allows the calling application to know when the user has canceled the operation."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragment$MessageListActivityListener"
+      ],
+      " keeps track of the status of the messages in a mailbox, and updates the user on the current status."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListAdapter"
+      ],
+      " converts a cursor into a view, so that it can be displayed in a layout."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$FlaggedComparator"
+      ],
+      " compares two cursors to see if they have a flag set in the 'FLAGGED_COLUMN' column, and if they do, it returns the negative of the value of the flag in the other cursor."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$SubjectComparator"
+      ],
+      " compares the strings in the Subject column of the two cursors."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$AttachmentComparator"
+      ],
+      " compares the number of attachments of two cursors and returns a value that indicates how many more attachments the second cursor has."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$UnreadComparator"
+      ],
+      " compares two cursors and returns the difference in the number of rows read by each."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListHandler"
+      ],
+      " processes messages from the Android operating system and sends them to the fragment's message handler."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.fragment.AttachmentDownloadDialogFragment$AttachmentDownloadCancelListener"
+      ],
+      " handles the cancelation of the progress of the current attachment download."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.ConfirmationDialogFragment"
+      ],
+      " allows you to create a confirmation dialog, and provides methods to manage the dialog's buttons and listener, as well as to create a new instance of the dialog when it is needed."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageViewHolder"
+      ],
+      " manages the checkbox position on a fragment."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$ComparatorChain"
+      ],
+      " creates a chain of comparators that compare two objects."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.fragment.ConfirmationDialogFragment$ConfirmationDialogFragmentListener"
+      ],
+      " allows the listener to be notified of various events that happen with the confirmation dialog."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$DateComparator"
+      ],
+      " compares two dates to see if they are the same."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$ReverseIdComparator"
+      ],
+      " compares the _id field values of two cursors and if they are not equal, then the _id field value for the first cursor is compared to the _id field value for the second cursor."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.fragment.MessageListFragment$MessageListFragmentListener"
+      ],
+      " provides an interface for listening to messages in the fragment, and four public methods (updateMenu, setUnreadCount, setMessageListTitle, onForward, and startSearch) that are used to get messages from the MessageQueue and pass them on to the other methods in the listener."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragment$ActionModeCallback"
+      ],
+      " provides callbacks that are invoked when different actionmode events occur."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.fragment.MessageListFragmentComparators$ReverseComparator"
+      ],
+      " compares two objects in reverse order."
+    ]
+  ],
+  "com.fsck.k9.helper": [
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MergeCursor"
+      ],
+      " helps you move and access data in a cursor."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.EmailHelper"
+      ],
+      " searches for an @ symbol in the email address and returns the string that is after the @ symbol and up to the last character in the email address."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.IdentityHelper"
+      ],
+      " helps you find the identity of the sender of a message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MergeCursorWithUniqueId"
+      ],
+      " helps to manage and access cursor data."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.UrlEncodingHelper"
+      ],
+      " helps conversions between UTF-8 and other encodings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MessageHelper"
+      ],
+      " helps to find the display name of an account in the K9's contacts database, and to construct a \"friendly\" name for the address if it is found."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.FileHelper"
+      ],
+      " helps manage files."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.K9AlarmManager"
+      ],
+      " helps to cancel a pending intent or set an alarm."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.UnreadWidgetProperties"
+      ],
+      " provides information about the unread widget properties for an account on a device."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.SizeFormatter"
+      ],
+      " formats a size as a String in bytes, kB, MB or GB with a single digit of precision."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.FileBrowserHelper"
+      ],
+      " provides a helper class to show file browsers for files that reside in an external storage location."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ParcelableUtil"
+      ],
+      " helps to convert between Parcelable objects and byte arrays."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.RetainFragment"
+      ],
+      " helps retain fragments after an activity is destroyed."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.helper.FileBrowserHelper$FileBrowserFailOverCallback"
+      ],
+      " provides a mechanism for the caller to be notified about any failures that occur while the FileBrowserHelper is browsing the files."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MailTo"
+      ],
+      " helps to parse and send emails."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.Contacts"
+      ],
+      " looks up a contact in the Android contacts database based on an email address."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.SimpleTextWatcher"
+      ],
+      " watches for changes to the text in an Editable object and updates the corresponding fields in a holder class."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ContactPicture"
+      ],
+      " provides a way to load a contact picture as a background."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ClipboardManager"
+      ],
+      " allows you to copy text from a label to the system clipboard."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.MailTo$CaseInsensitiveParamWrapper"
+      ],
+      " provides a way to add query parameters onto a URI without having to worry about case."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ReplyToParser"
+      ],
+      " parses a message's recipient list and returns the corresponding address as a reply to address."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.ExceptionHelper"
+      ],
+      " tries to find the exception's cause and if it is not null, it goes onto find the localized message for that exception."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.Utility"
+      ],
+      " provides helpful utilities for checking the device's connectivity and field validations."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.Preconditions"
+      ],
+      " checks the given object for nullity."
+    ]
+  ],
+  "com.fsck.k9.helper.jsoup": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.helper.jsoup.NodeFilter"
+      ],
+      " helps you specify the filter decision for a node and depth."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.helper.jsoup.AdvancedNodeTraversor"
+      ],
+      " starts a depth-first traversal of the root node, and then every node that is a descendant of the root node. After it finishes traversing the entire tree, it compares the results of the head and tail filters and if either of them returns `STOP`, then the operation has ended and the returned value is `ENDED`."
+    ]
+  ],
+  "com.fsck.k9.mailstore": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager$SamsungGalaxySStorageProvider"
+      ],
+      " provides access to the Android label and internal ID for the Samsung Galaxy S storage provider."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager$ExternalStorageProvider"
+      ],
+      " looks for the attachment directory that has the given unique identifier and returns the path to it."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalStore"
+      ],
+      " allows for the storage and retrieval of messages locally on a machine."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LockableDatabase$StorageListener"
+      ],
+      " listens for a Mount event to happen on a provided Timber storage provider, and if the event happens, it calls various methods to open and configure the lockable database."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.LockableDatabase$DbCallback"
+      ],
+      " provides a way to call a callback function when the database is locked."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.CryptoResultAnnotation"
+      ],
+      " encapsulates the results of a cryptographic operation."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.AttachmentViewInfo"
+      ],
+      " tells the attachment view that the content is now available and then checks to see if the content is available for reading."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.mailstore.DatabasePreviewType"
+      ],
+      " holds a list of public methods that allow an object to find a counterpart for a given previewType in the list of database preview types. The public methods that the enum provides are:                                                                         \n- `fromPreviewType(com.fsck.k9.message.extractors.PreviewResult$PreviewType)`: tries to find a counterpart for the given previewType in the list of database preview types. If the previewType is found, the method returns the database preview type represented by that preview type. If the preview type is not found, the method throws an assertion error.\n- `getDatabaseValue()`:"
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.mailstore.LocalFolder$MoreMessages"
+      ],
+      " provides a list of values from the `com.fsck.k9.mailstore.LocalFolder.MoreMessages` enum associated with the given `databaseName`."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalMimeMessage"
+      ],
+      " provides access to the part ID, message, and account identifier for a given local MIME message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager$HtcIncredibleStorageProvider"
+      ],
+      " provides access to a storage provider on the Samsungga Galaxy device."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MessageHelper"
+      ],
+      " helps deal with incomplete messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StoreSchemaDefinition$RealMigrationsHelper"
+      ],
+      " provides helper methods for working with migration data."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LockableDatabase"
+      ],
+      " helps you to lock and access a database so that other threads can't physically access it while you are using it."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalFolder"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.MessageRemovalListener"
+      ],
+      " listens to when a message is removed from the mail store."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.TempFileBody"
+      ],
+      " helps to read the contents of a (.k9) file."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MimePartStreamParser$PartBuilder"
+      ],
+      " parses a MIME multipart file and converts the parts into a Message object."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.LockableDatabase$SchemaDefinition"
+      ],
+      " helps manage schema definitions for a database."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MessageViewInfoExtractor"
+      ],
+      " extracts the Message contents and corresponding Cryptography information as needed for displaying the message in a user interface."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager$InternalStorageProvider"
+      ],
+      " provides access to the app's internal storage on an Android device."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MessageViewInfo"
+      ],
+      " creates a ViewInfo object representing a message with a flag indicating whether the message is incomplete."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.AttachmentResolver"
+      ],
+      " helps you to find the attachment URI for a given content id."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.DeferredFileBody"
+      ],
+      " stores data in a file until it either reaches its limit or someone try to read the data."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.FileBackedBody"
+      ],
+      " helps to create, read, and write email bodies."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalBodyPart"
+      ],
+      " saves the account UUID and message object of each email message body part into a LocalBodyPart buffer, and then it returns the LocalBodyPart buffer's part ID."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mailstore.StorageManager$FixedStorageProviderBase"
+      ],
+      " sets up the storage hierarchy for the application and manages the fixed storage providers."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.StorageManager$StorageProvider"
+      ],
+      " provides access to methods to manage storage for files and attachments."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.LocalMessage"
+      ],
+      " stores a local message in a database, manages the properties of the local message, and provides methods for getting information about the local message, creating or retrieving messages based on the local message, and sending or receiving messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.MimePartStreamParser"
+      ],
+      " lets you parse a MIME Part from a file."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.StorageManager$StorageListener"
+      ],
+      " allows the calling code to be notified whenever a storage is mounted or unmounted."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.LocalStore$BatchSetSelection"
+      ],
+      " provides methods for querying and selecting messages from the LocalStore."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.LocalPart"
+      ],
+      " exports methods that allow you to access specific information about a local part of the mailstore."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StorageManager"
+      ],
+      " enables synchronization between an application and a storage manager. This is done by adding and removing listener instances, and by mounting or unmounting the storage provider."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.mailstore.BinaryAttachmentBody"
+      ],
+      " sets the encoding of the binary attachment body to the given encoding and writes the contents of the input stream to the output stream."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.StoreSchemaDefinition"
+      ],
+      " stores the schema used by the LocalStore in a SQLiteDatabase. If something goes wrong during an upgrade attempt, the class will log the error and perform a reset of the database."
+    ]
+  ],
+  "com.fsck.k9.mailstore.migrations": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo61"
+      ],
+      " migrates a user mailbox from using a database file called \"K9mail-errors.\""
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo44"
+      ],
+      " updates the `messages` table to include columns for the `thread_root`, `thread_parent`, and `normalized_subject_hash`."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo54"
+      ],
+      " adds a column to the messages table in the SQLite database that stores the preview type for messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo42"
+      ],
+      " allows you to move folders from one Mailstore to another Mailstore."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo37"
+      ],
+      " adds a column to the \"attachments\" table in a SQLite database that will store information about how the attachments should be treated."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo60"
+      ],
+      " migrates pending commands from a given SQLite database to a new table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo40"
+      ],
+      " adds a column in the messages table that stores the MIME type of the messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo32"
+      ],
+      " updates the deleted column from the messages table in the database with the same flag value as specified in the parameters."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo52"
+      ],
+      " adds a new column to the \"Folders\" table in the SQLiteDatabase that stores the number of messages that are in a particular folder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo36"
+      ],
+      " adds a text column to the attachments table, which will store the unique content ID for each attachment."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo51"
+      ],
+      " takes an SQLiteDatabase object and a helper class that helps with migrating logs and data from a previous version of the mailstore to the current one."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo35"
+      ],
+      " updates a table flag field with a replacement value."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo45"
+      ],
+      " updates the threading indexes on the database."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo33"
+      ],
+      " adds a new column to the table `messages` called `preview`."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo43"
+      ],
+      " tries to fix a problem with an email folder's structure."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo46"
+      ],
+      " adds columns to the database that stores migrations."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo39"
+      ],
+      " deletes all the headers that do not have an associated message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo51$MimeStructureState"
+      ],
+      " applies the values in a ContentValues object to a State structure, and then uses the nextMultipartChild() method to look up the next multipart ancestor and update its fields."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.migrations.MigrationsHelper"
+      ],
+      " provides access to the local store and storage for migrations files."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo48"
+      ],
+      " updates the root index for threads in the database to match the root index of the new row in the newly created row ID column."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo53"
+      ],
+      " updates a column in the messages table to have a value of zero if the column is not null."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo50"
+      ],
+      " adds a notify class column to the table folders."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo41"
+      ],
+      " adds columns to the folders table that hold information about the class that the folder is integrated with. Its public method, db41UpdateFolderMetadata, is used to update the metadata for folders in a given SQLite database."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo49"
+      ],
+      " creates a new index on the `messages` table to track composite messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.Migrations"
+      ],
+      " helps upgrade a database."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo47"
+      ],
+      " creates a new table called `threads` in the SQLite database, and then it updates the `messages` table to uses this table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo31"
+      ],
+      " deletes the msg_folder_id_deleted_date Index and then creates a new msg_folder_id_deleted_date Index."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo30"
+      ],
+      " migrates a database from the version 3 format to the version 4 format."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.migrations.MigrationTo34"
+      ],
+      " adds an integer column called \"flagged_count\" to the folder table, with a default value of 0."
+    ]
+  ],
+  "com.fsck.k9.mailstore.util": [
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.util.DeferredFileOutputStream"
+      ],
+      " produces an output stream that can be used to write data to a deferred file."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.mailstore.util.FileFactory"
+      ],
+      " provides a way to create files."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.mailstore.util.FlowedMessageUtils"
+      ],
+      " encodes a text using the \"standard\" encoding."
+    ]
+  ],
+  "com.fsck.k9.message": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.IdentityHeaderBuilder"
+      ],
+      " allows you to set various property values on an IdentityHeaderBuilder object that will be used when building a draft email message."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.message.MessageBuilder$Callback"
+      ],
+      " provides callbacks for when the message builder process is complete or an exception occurs."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.SimpleMessageBuilder"
+      ],
+      " constructs a SimpleMessage object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.AutocryptStatusInteractor$RecipientAutocryptStatus"
+      ],
+      " checks to see if there is an intent pending with this recipientAutocryptStatus."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.PgpMessageBuilder"
+      ],
+      " builds a message using the current activity result (e.g. an MMS Messaging Activity result)."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.ComposePgpEnableByDefaultDecider"
+      ],
+      " makes a decision about whether to encrypt a specific message by default."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.ComposePgpInlineDecider"
+      ],
+      " determines whether a particular message has inline PGP features."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.message.AutocryptStatusInteractor$RecipientAutocryptStatusType"
+      ],
+      " contains information about how recipients can be verified as being able to encrypt messages."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.message.IdentityField"
+      ],
+      " allows you to easily access the integer values for the IdentityFields that should be used in your application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.TextBodyBuilder"
+      ],
+      " constructs and mails a text body that includes the entered text, any quoted text, and a signature."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.AutocryptStatusInteractor"
+      ],
+      " interacts with the Intent notification and tries to get the AutocryptStatus type for the Intent result. Based on that, it can provide information back to the user or show an error."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.IdentityHeaderParser"
+      ],
+      " parses an identity string and returns the value of certain attributes in that identity."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.message.MessageBuilder"
+      ],
+      " sets the subject, cc, requestReadReceipt, bcc, signature, and signatureChanged fields of the message."
+    ]
+  ],
+  "com.fsck.k9.message.extractors": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.MessagePreviewCreator"
+      ],
+      " extracts the text from a message and returns a PreviewResult."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.EncryptionDetector"
+      ],
+      " provides a means to test whether a given message is encrypted using PGP or SMIME."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.AttachmentCounter"
+      ],
+      " allows you to count the number of attachments present in the received message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.AttachmentInfoExtractor"
+      ],
+      " extracts attachment information from emails."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.PreviewTextExtractor"
+      ],
+      " extracts the preview text from a part."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.TextPartFinder"
+      ],
+      " looks up a text part in a mail and returns it."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.BodyTextExtractor"
+      ],
+      " takes a MessagePart and a SimpleMessageFormat and it extracts the body text from both of them."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.PreviewResult"
+      ],
+      " helps you get the text content from a preview text field in a Java application, and optionally encrypts that content for protection."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.extractors.MessageFulltextCreator"
+      ],
+      " create and manage MessageFulltextCreator objects configured with a TextPartFinder and EncryptionDetector."
+    ]
+  ],
+  "com.fsck.k9.message.html": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlProcessor"
+      ],
+      " takes the document object and sets its outputSettings valve to 'prettyPrint' with a false value for the 'indentAmount' setting. This returns the HTML representation of the document."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.UriLinkifier"
+      ],
+      " replaces all occurrences of a string that is matched against a supported URI scheme with the corresponding URI."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.message.html.UriParser"
+      ],
+      " parses text and extracts URI schemes from it."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HeadCleaner"
+      ],
+      " cleans up the head of a Document by copying all of the text nodes in the Document's head to the Document's head in clean Document."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HttpUriParser"
+      ],
+      " converts a text string into a URL."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlConverter"
+      ],
+      " converts HTML into plain text."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.EthereumUriParser"
+      ],
+      " parses a url and formats it into a string with a list of links."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.BitcoinUriParser"
+      ],
+      " looks for a bitcoin URI in the text and converts it to a link."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlSanitizer"
+      ],
+      " cleans the document of any potentially naughty characters."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HeadCleaner$CleaningVisitor"
+      ],
+      " visits each node in the source document for tags that are both taggable and which have a parent in the DataNode graph. If an element is found that meets these criteria, it is then treated as a destination for further processing."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlConverter$ListTagHandler"
+      ],
+      " handles the \"ul\" and \"li\" list tags, and they both behave the same way- if the tag name is \"ul\", then it will append \"\u2022\" to the text if it is a list item, and if the tag name is \"li\", then it will just append the text."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.html.HtmlConverter$HtmlToTextTagHandler"
+      ],
+      " converts HTML tags into text equivalents."
+    ]
+  ],
+  "com.fsck.k9.message.quote": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.quote.InsertableHtmlContent"
+      ],
+      " replaces all the content in the given content buffer with the specified content."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.quote.TextQuoteCreator"
+      ],
+      " takes a message, and sets quotes around it, using a style specified by the user."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.quote.HtmlQuoteCreator"
+      ],
+      " takes a message and replaces all of the text with a series of quotation marks."
+    ]
+  ],
+  "com.fsck.k9.message.signature": [
+    [
+      [
+        "class",
+        "com.fsck.k9.message.signature.HtmlSignatureRemover"
+      ],
+      " strips the signature from the content passed in."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.signature.HtmlSignatureRemover$StripSignatureFilter"
+      ],
+      " removes strip signatures from nodes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.message.signature.TextSignatureRemover"
+      ],
+      " removes the dash from the content string and replaces it with a space, if it exists."
+    ]
+  ],
+  "com.fsck.k9.ui": [
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.EolConvertingEditText"
+      ],
+      " converts all line-endings in the text to \\n."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.ContactBadge"
+      ],
+      " looks up the contact's email address and picture from either the ContactsContract.Intents.Insert Intent or from the contact's URI, based on whether the contact is found or not."
+    ]
+  ],
+  "com.fsck.k9.ui.compose": [
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.compose.QuotedMessagePresenter"
+      ],
+      " builds a user interface with the quoted message and then decides which option to choose based on the original MessageFormat of the message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.compose.QuotedMessageMvpView"
+      ],
+      " provides a way for users to view and edit quoted text in a view."
+    ]
+  ],
+  "com.fsck.k9.ui.crypto": [
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.crypto.MessageCryptoAnnotations"
+      ],
+      " facilitates the identification and retrieval of annotations for parts of messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.crypto.MessageCryptoHelper"
+      ],
+      " helps to process the user interaction result intent from a message."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.crypto.MessageCryptoCallback"
+      ],
+      " allows the caller to keep track of the progress of the encryption process and update the appropriate fields in the `MessageCryptoCallback` object."
+    ]
+  ],
+  "com.fsck.k9.ui.dialog": [],
+  "com.fsck.k9.ui.message": [
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.message.LocalMessageExtractorLoader"
+      ],
+      " helps to extract the message view information for a given message from the local message store."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.message.LocalMessageLoader"
+      ],
+      " compares two MessageReference objects to determine if they are the same, and if they are, it then uses a try/catch statement to load the message from the database."
+    ]
+  ],
+  "com.fsck.k9.ui.messageview": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.AttachmentViewCallback"
+      ],
+      " provides a callback for when the user clicks on an attachment view."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageViewFragment"
+      ],
+      "(no description)"
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.AttachmentController"
+      ],
+      " controls the download and viewing of attachments."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.MessageCryptoPresenter$MessageCryptoMvpView"
+      ],
+      " provides a way for the UI to display the message overview for the crypto view and control various crypto settings for the message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageTopView"
+      ],
+      " shows a message view for a given account and determines whether or not to load pictures from the account's mail store."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageContainerView$SavedState"
+      ],
+      " saves the current state of the message container view to a parcel."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.CryptoInfoDialog$OnClickShowCryptoKeyListener"
+      ],
+      " allows other objects to be notified when the \"Show Security Key\" button is clicked, as well as reloading the cryptotechnology key if it is currently shown."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.MessageViewFragment$MessageViewFragmentListener"
+      ],
+      " allows the fragment's listener to be notified when the user replies to a message, updates the decryptionResultForReply field, or shows the message title."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.LockedAttachmentView"
+      ],
+      " displays a button to the user that triggers the `showUnlockedView()` method if the user clicks on the button with the ID of `locked_button`. The class also sets the `attachment view's information` to the passed in `AttachmentViewInfo` object. Lastly, the class sets a callback function to be called when the `attachment view' is updated."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.OnCryptoClickListener"
+      ],
+      " allows the calling program to receive a notification when the user clicks on a message in the Crypto dialog."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.AttachmentController$IntentAndResolvedActivitiesCount"
+      ],
+      " contains methods to get the Intent associated with the attachments of a message, get the mime type of the Intent, and check to see if there are any unresolved activities in the attachment controller's activity list."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.ui.messageview.MessageContainerView$OnRenderingFinishedListener"
+      ],
+      " listens for when the loading process has finished."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageContainerView"
+      ],
+      " allows the user to attach files to messages."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.CryptoInfoDialog"
+      ],
+      " displays the Crypto Info dialog when the user selects a message in the message list."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.AttachmentView"
+      ],
+      " enables buttons on the message view, sets the attachment property of the `AttachmentViewInfo` object to the given attachment, and disables the buttons."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.ui.messageview.MessageCryptoPresenter"
+      ],
+      " restores the state of the messageCryptoMvpView (if it was modified by a previous request) and then it restarts the messageCryptoProcessing."
+    ]
+  ],
+  "com.fsck.k9.service": [
+    [
+      [
+        "class",
+        "com.fsck.k9.service.RemoteControlReceiver"
+      ],
+      " receives Intents from the K9RemoteControl service and uses them to determine if the WakeLockId should be set."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.RemoteControlService"
+      ],
+      " starts the service using the Intent object that was provided."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.ShutdownReceiver"
+      ],
+      " handles the ACTION_SHUTDOWN Intent and calls the appropriate methods based on whether the Intent is a shutdown action or not."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.PollService"
+      ],
+      " allows for polling of registered devices."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.SleepService"
+      ],
+      " starts a service that will do something when the user presses the alarm button."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.MailService"
+      ],
+      " keeps track of when the user has asked the mail service not to poll or push cards, and it will cancel the polling or syncing if the user asks it to again."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.StorageGoneReceiver"
+      ],
+      " checks if the given intent has an action indicating a media event has occurred (e.g. ACTION_MEDIA_EJECT or ACTION_MEDIA_UNMOUNTED). If so, the appropriate code is run."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.service.CoreService"
+      ],
+      " handles all the logistics associated with starting the core service in a controlled manner."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.CoreReceiver"
+      ],
+      " waits for a certain wakeLock to be released, then it either captures the released wake lock or releases the given wake lock."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.PushService"
+      ],
+      " manages the execution of the service by calling the startService() and stopService() methods."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.StorageReceiver"
+      ],
+      " receives the Intent from the Operating System and it checks to see if the Intent has a URI. If the Intent does have a URI, it attempts to read the contents of that URI."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.PollService$Listener"
+      ],
+      " listens for mail to be sent from the poll service, and if it detects that the mail has been sent, it releases the context."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.DatabaseUpgradeService"
+      ],
+      " helps to manage database upgrades."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.service.BootReceiver"
+      ],
+      " schedules and cancels intents."
+    ]
+  ],
+  "com.fsck.k9.setup": [
+    [
+      [
+        "class",
+        "com.fsck.k9.setup.ServerNameSuggester"
+      ],
+      " suggests a name for a given server type."
+    ]
+  ],
+  "com.fsck.k9.search": [
+    [
+      [
+        "class",
+        "com.fsck.k9.search.SearchAccount"
+      ],
+      " provides methods to manage and control the search account object."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.search.SearchSpecification"
+      ],
+      " allows you to get information about a search that was invoked."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.search.LocalSearch"
+      ],
+      " saves a search as a property on an object, and allows you to traverse the tree of conditions and compare conditions values to determine if a search should be conducted on a particular account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.search.ConditionsTreeNode"
+      ],
+      " gives a textual description of the contents of a node in a tree structure. It also provides methods to write data to a parcel object and to \"AND\" two conditions."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.search.SqlQueryBuilder"
+      ],
+      " helps you construct a SQL WHERE clause."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.search.SearchSpecification$SearchCondition"
+      ],
+      " saves the hash code of a SearchCondition object, cloned it, and then wrote it to a Parcel object."
+    ]
+  ],
+  "com.fsck.k9.view": [
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.MessageHeader$OnLayoutChangedListener"
+      ],
+      " listens for changes to the layout of a message header and calls a public method if needed."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.HighlightDialogFragment"
+      ],
+      " builds and displays a highlighting view which is used to highlight parts of an android view."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.CryptoModeSelector$CryptoStatusSelectedListener"
+      ],
+      " provides an interface for listening to changes in the ``CryptoModeSelectorState`` object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ViewSwitcher"
+      ],
+      " controls the animations that are used while the ViewSwitcher is visible."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.NonLockingScrollView"
+      ],
+      " determines the appropriate action to take based on the MotionEvent that's being received."
+    ],
+    [
+      [
+        "enum",
+        "com.fsck.k9.view.MessageCryptoDisplayStatus"
+      ],
+      " tests whether a particular result is an encrypted signed message or not."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageWebView"
+      ],
+      " displays a message on the screen.\n\n\n\nThis class is used to display a message on the screen."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageHeader"
+      ],
+      " sets the visibility and enabled state of the \"crypto status icon\" on the message header."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ClientCertificateSpinner"
+      ],
+      " allows users to set aliases for certificates, gets lists of available private keys with the specified alias, and listens for updates on the client certificate status."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.view.K9WebViewClient"
+      ],
+      " provides a way to create a new instance of a K9WebViewClient object based on the given attachmentResolver."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.MessageWebView$OnPageFinishedListener"
+      ],
+      " fires the `com.fsck.k9.view.MessageWebView$OnPageFinishedCallback` when the webview has finished displaying the currently displayed page."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.ClientCertificateSpinner$OnClientCertificateChangedListener"
+      ],
+      " allows an object to be notified whenever a client certificate changes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageTitleView"
+      ],
+      " displays the subject line of a message in its header."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.K9WebViewClient$LollipopWebViewClient"
+      ],
+      " determines if a request should be intercepted and handled."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.K9WebViewClient$PreLollipopWebViewClient"
+      ],
+      " checks to see if a given URL can be intercepted and responses returned accordingly."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.RecipientSelectView$Recipient"
+      ],
+      " allows the user to select a recipient from a list, and it also manages their crypto status."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.FoldableLinearLayout"
+      ],
+      " allows you to add child views to a foldableContainer view."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.RecipientSelectView$TokenListener"
+      ],
+      " listens for changes to the token that is being sent by the server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ToolableViewAnimator"
+      ],
+      " manages the animation of a view, displaying it either as a child or as a separate view."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.ViewSwitcher$OnSwitchCompleteListener"
+      ],
+      " keeps track of which child view has been displayed the longest, and updates the interface's displayedChild attribute accordingly."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.NonLockingScrollView$HierarchyTreeChangeListener"
+      ],
+      " listens for changes to the hierarchy of child views in the currently focused part of the hierarchy tree, and depending on the type of change, it either removes or adds child views."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageCryptoStatusView"
+      ],
+      " sets the visibility of MessageCryptoDisplayStatus icons based on the statusDotsRes attribute."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.FoldableLinearLayout$SavedState"
+      ],
+      " stores the current state of the foldable linear layout so it can be written to a parcel."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.LinearViewAnimator"
+      ],
+      " sets up and displays animations for views in an Android application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.MessageHeader$SavedState"
+      ],
+      " saves the current state of the message header fields that are pointed to by this.additionalHeadersVisible."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ThemeUtils"
+      ],
+      " provides convenient access to the styled color for an attribute of a given context."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.RecipientSelectView"
+      ],
+      " lets the user select recipients from a drop-down list box, and then shows an alternate recipient if the selected recipient isn't the current recipient."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.view.CryptoModeSelector"
+      ],
+      " allows you to assign a listener to receive cryptostatus notifications, and then sets the current CryptoModeSelectorState to the specified status."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.view.ColorChip"
+      ],
+      " returns a drawable that can be used to draw the screen background with any color."
+    ]
+  ],
+  "com.fsck.k9.widget.list": [
+    [
+      [
+        "class",
+        "com.fsck.k9.widget.list.MessageListWidgetProvider"
+      ],
+      " allows the app to interact with the AppWidgetManager APIs to update the list of messages on a widget."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.widget.list.MessageListWidgetService"
+      ],
+      " returns a RemoteViewsFactory instance that can be used to retrieve views for a message list widget."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.widget.list.MessageListRemoteViewFactory"
+      ],
+      " creates a new RemoteViews object that has a layout named \"message_list_widget_loading\", sets the text view's text to \"context.getString(R.string.mail_list_widget_loading)\", and sets view visibility to \"View.VISIBLE\"."
+    ]
+  ],
+  "com.fsck.k9.notification": [
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.CertificateErrorNotifications"
+      ],
+      " provides a way to cancel or show certificate error notifications."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.SendFailedNotifications"
+      ],
+      " helps keep track of notifications that have failed to be sent, and makes them visible and active."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationContentCreator"
+      ],
+      " creates a new NotificationContent object that contains the details of the message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationIds"
+      ],
+      " returns the notification ids for various types of notifications that a given account might receive."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationController"
+      ],
+      " provides an interface for managing the notifications for an account in Android."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.DeviceNotifications"
+      ],
+      " builds notifications and provides methods to create new notifications."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationData"
+      ],
+      " keeps track of all the notifications that have been added, and it also keeps track of how many messages have been read. It also allows you to manage your notifications by removing them, as well as adding new ones."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NewMailNotifications"
+      ],
+      " creates, saves, and cancels notifications for an account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.WearNotifications"
+      ],
+      " adds summary actions to notifications and builds a stacked notification containing information about a given account and notification holder."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.AuthenticationErrorNotifications"
+      ],
+      " shows notifications for authentication errors."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.SyncNotifications"
+      ],
+      " allows the user to see notifications about their mail being fetched or sent."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.RemoveNotificationResult"
+      ],
+      " keeps track of whether there is a notification for an object and if not, it will create the notification."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationActionCreator"
+      ],
+      " provides the ability to create actions that will be sent to the notification service when a message is read, marked as spam, or responded to."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.LockScreenNotification"
+      ],
+      " sets the visibility of the notification to one of the supported values."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationGroupKeys"
+      ],
+      " allows you to find the key (prefix) of the notification group belonging to the given account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.NotificationActionService"
+      ],
+      " creates and returns an intent with the ACTION_DELETE action, and sets the accountUuid and messageReferences extras to the values that were provided."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.notification.AddNotificationResult"
+      ],
+      " creates a new AddNotificationResult object, based on the provided notification holder."
+    ]
+  ],
+  "com.fsck.k9.power": [
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.power.DeviceIdleManager"
+      ],
+      " registers and unregisters a receiver for the device idle state changes."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.power.DozeChecker"
+      ],
+      " checks to see if the device is in idle mode and if the app is whitelisted."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.power.DeviceIdleReceiver"
+      ],
+      " monitors the device for when it goes into idle mode so it can reset the mail service's action."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.power.DeviceIdleManager$RealDeviceIdleManager"
+      ],
+      " manages the receivers for idle devices."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.power.DeviceIdleManager$NoOpDeviceIdleManager"
+      ],
+      " is a wrapper around the Java method `java.util.concurrent. advertisers.NoOpAdvertiser`."
+    ]
+  ],
+  "com.fsck.k9.preferences": [
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.FolderSettings"
+      ],
+      " stores preferences for the folder system."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$DirectorySetting"
+      ],
+      " checks to see if the value passed in is a file path. If it is, it returns the value and doesn't do anything else. If the value is not a file path, then it throws an exception."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV12"
+      ],
+      " updates the keyguard privacy setting to be ALWAYS_SHOW_SUBJECT."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$BooleanSetting"
+      ],
+      " compares the value entered to the boolean field and returns the same value if it is equal, or if the value is not a boolean, it tries to convert it to a boolean and if that fails, it throws an exception."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.preferences.Settings$PseudoEnumSetting"
+      ],
+      " provides a way to turn an enum into a string representation."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.SettingsExporter"
+      ],
+      " exports the preferences of an app to a file."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$LanguageSetting"
+      ],
+      " overrides a previously set language setting with a higher precedence and if the value provided is not in the override mapping, it throws an exception."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$EnumSetting"
+      ],
+      " tries to parse an enum value and return an appropriate instance of an Enum class if the value can be autodetected, otherwise it throws an exception."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.CheckBoxListPreference"
+      ],
+      " allows you to manipulate the checkboxes list in a preference."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings"
+      ],
+      " writes preference settings to an internal representation, and then later updates those same preferences if any settings have been upgraded since the last time the class was run."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$TimeSetting"
+      ],
+      " tries to match the given value against the validation expression that is defined in the class. If the values don't match, an exception is thrown."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.SettingsImporter$ImportedServerSettings"
+      ],
+      " allows you to import the extra settings for a server in a particular instance."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$ColorSetting"
+      ],
+      " parses integer values and returns the corresponding hexadecimal representation."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$RingtoneSetting"
+      ],
+      " converts a String value into a Java string."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$DeletePolicySetting"
+      ],
+      " takes the input string and looks for a key named `deletePolicy` in the map. If the key exists, the value of the key is returned; otherwise, an exception is thrown."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$IntegerRangeSetting"
+      ],
+      " tries to parse an integer value into an integer, and if it can determine that the integer value starts at and ends at the given range, it returns the integer value."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$WebFontSizeSetting"
+      ],
+      " takes a string value and converts it into an integer value."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$SubThemeSetting"
+      ],
+      " takes a theme name and returns a SubThemeSetting object for that theme."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings"
+      ],
+      " allows the user to easily convert a map of strings to a map of objects, and then upgrade preferences using a given set of upgrade settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$StringResourceSetting"
+      ],
+      " looks for a key called `value` in the mapping attribute of the setting, and if it doesn't find it, it creates a new key called `value` and sets the value to the provided string."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$IntegerResourceSetting"
+      ],
+      " tries to convert a value into an integer."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV31"
+      ],
+      " converts old preferences values into new values, and then upgrades the GlobalSettings so that the new preference values take effect."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings$StorageProviderSetting"
+      ],
+      " tries to find a stored provider with a given string value, and if it is found, it returns the value; otherwise, an exception is thrown."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.preferences.Settings$SettingsUpgrader"
+      ],
+      " upgrades the settings to match the current state of the system."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.StorageEditor"
+      ],
+      " allows you to store values in Shared Preferences files."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV24"
+      ],
+      " replaces the default theme with the desired theme."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.SettingsImporter"
+      ],
+      " imports files with global settings and account configurations into the Java application."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.IdentitySettings$SignatureSetting"
+      ],
+      " provides default values for the `R.string.default_signature` resource."
+    ],
+    [
+      [
+        "abstract class",
+        "com.fsck.k9.preferences.Settings$SettingsDescription"
+      ],
+      " provides a way to store various settings for the application, and return their default values or convert them to another format."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.IdentitySettings"
+      ],
+      " allows you to update or reconfigure your identity settings."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.IdentitySettings$OptionalEmailAddressSetting"
+      ],
+      " takes a value and formats it into a pretty format."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Storage"
+      ],
+      " allows you to store preferences in a file."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.TimePickerPreference"
+      ],
+      " persists the selected time in a String, and then every time the time changes, it calls a ChangeListener to update the preferences."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$StringSetting"
+      ],
+      " allows users to input a string value into the class and the class will return the string value as is, without reformatting it."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.Settings$FontSizeSetting"
+      ],
+      " translates an integer value into a font size."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.GlobalSettings$ThemeSetting"
+      ],
+      " provides a way to display the ordinal number for a given theme setting in a human-readable format."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.preferences.AccountSettings"
+      ],
+      " lets you configure preferences for your account."
+    ]
+  ],
+  "com.fsck.k9.provider": [
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.AttachmentProvider"
+      ],
+      " manages attachments for a given account."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$MessagesQueryHandler"
+      ],
+      " provides a cursor that can be used to fetch messages from a message provider."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$AccountNumberExtractor"
+      ],
+      " returns the account number for a message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$CountExtractor"
+      ],
+      " extracts the \"count\" field from the given T object and returns it as a property."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$DeleteUriExtractor"
+      ],
+      " extracts the record associated with a message, and then constructs a URL to delete the message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.EmailProvider"
+      ],
+      " provides methods for querying and deleting email addresses from a Google Cloud server."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$AccountColorExtractor"
+      ],
+      " extracts the color of an account specified in a message's \"chip color\" field."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$HasAttachmentsExtractor"
+      ],
+      " extracts attachments from a message."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$MessageInfoHolderRetrieverListener"
+      ],
+      " retrieves messages from the MessageInfoHolderRetriever listener and logs any Java exceptions that may occur."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.DecryptedFileProvider"
+      ],
+      " decrypts a file and then returns the decrypted file's Uri."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$ThrottlingQueryHandler"
+      ],
+      " helps the user query the throttling query handler for a path."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$SubjectExtractor"
+      ],
+      " extracts the topic of a message from the source."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$PreviewExtractor"
+      ],
+      " extracts the \"Preview\" field from the MessageInfoHolder object that is passed in as a parameter."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$IncrementExtractor"
+      ],
+      " uses a field to increment a value."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$HasStarExtractor"
+      ],
+      " looks for a flag in a MessageInfoHolder object that indicates a message has been flagged as important."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$ReverseDateComparator"
+      ],
+      " compares two dates to see if they match."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.AttachmentTempFileProvider"
+      ],
+      " looks for files that have been modified more than a certain amount of time, and if they are not deleted then it will print out a message indicating that the file will not be deleted."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider"
+      ],
+      " provides access to message providers so that the application can query for messages."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.provider.MessageProvider$QueryHandler"
+      ],
+      " provides a way for objects to make queries against otherobjects."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.provider.MessageProvider$FieldExtractor"
+      ],
+      " extract the field value from the source object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.EmailProvider$SpecialColumnsCursor"
+      ],
+      " provides a way to look up special column values in a data set that correspond to column indices in a mapping table."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$AccountsQueryHandler"
+      ],
+      " queries the given projection and returns the results in a String[] array."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$AccountExtractor"
+      ],
+      " extracts the description of the account that the message belongs to from the message itself."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$SenderAddressExtractor"
+      ],
+      " extracts the sender address from the given message information holder object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$UnreadQueryHandler"
+      ],
+      " provides an interface to query an account's \"unread\" stat."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$IdExtractor"
+      ],
+      " extracts the database id from the message object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.AttachmentTempFileProvider$AttachmentTempFileProviderCleanupReceiver"
+      ],
+      " uses the `com.fsck.k9.provider.AttachmentTempFileProvider$AttachmentTempFileProviderCleanupReceiver` class to clean up old temporary files."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$SenderExtractor"
+      ],
+      " extracts the string sender field from a MessageInfoHolder object and returns it."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$MonitoredCursor"
+      ],
+      " allows for the monitoring of a cursor in a database and provides various methods to control the cursor's state and behavior."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.UnreadWidgetProvider"
+      ],
+      " maintains the user's unread widget library, updates the widget's configuration, and triggers an update to the unread count."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$SendDateExtractor"
+      ],
+      " extracts the content of the \"sentDate\" field of the \"message\" object in the source object."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$UriExtractor"
+      ],
+      " looks through the MessageInfoHolder object and finds the URI field."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.EmailProvider$IdTrickeryCursor"
+      ],
+      " looks for the row containing the given column name in the cursor and returns the index of that row."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.DecryptedFileProvider$DecryptedFileProviderCleanupReceiver"
+      ],
+      " handles the Intent Screens Off action."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.provider.MessageProvider$UnreadExtractor"
+      ],
+      " retrieves the field `messageInfoHolder.readStatus` which indicates whether or not the message information source has been read."
+    ]
+  ],
+  "com.fsck.k9.remotecontrol": [
+    [
+      [
+        "class",
+        "com.fsck.k9.remotecontrol.AccountReceiver"
+      ],
+      " receives information about an account from the system and stores it in a method called `receptor.accounts`."
+    ],
+    [
+      [
+        "interface",
+        "com.fsck.k9.remotecontrol.K9AccountReceptor"
+      ],
+      " allows you to check if a given account exists on a remote controller."
+    ],
+    [
+      [
+        "class",
+        "com.fsck.k9.remotecontrol.K9RemoteControl"
+      ],
+      " sets the broadcast Intent to the K9RemoteControl class with the desired action."
+    ]
+  ]
+}

@@ -1,0 +1,6454 @@
+# package `com.fsck.k9`
+
+This package  controls the execution of a task once per second by posting a handler runnable to the handler servlet's post method.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.Throttle$MyTimerTask`
+
+This class  posts a handler runnable to the handler servlet's post method. This handler runnable will be executed by the servlet once per second. If you wish to cancel the timer, you can call the `cancel()` method.
+
+This class contains the following public method(s):
+
+- `run()`  posts a handler runnable to the handler servlet's post method. This handler runnable will be executed by the servlet once per second.
+- `cancel()`  sets the `mCanceled` flag to `true`, which means that the timer task is canceled.
+
+## class `com.fsck.k9.Throttle`
+
+This class  keeps track of how long a task has been running, and if it reaches its timeout value it will automatically cancel the task.
+
+This class contains the following public method(s):
+
+- `cancelScheduledCallback()`  cancels the scheduled callback for the given task.
+- `onEvent()`  updates the timeout value for the current Throttle instance.
+
+## class `com.fsck.k9.PRNGFixes`
+
+This class  applies various fixes to the system to improve its cryptographic security.
+
+This class contains the following public method(s):
+
+- `apply()`  applies all the fixes to the system. The first call applies the OpenSSL fix, and the second installs the Linux PRNG SecureRandom fix.
+
+## interface `com.fsck.k9.BaseAccount`
+
+This interface  allows a user to manage their account information. This includes updating the email address, description, and UUID.
+
+This class contains the following public method(s):
+
+- `setEmail(java.lang.String)`  sets the email address associated with the account.
+- `getEmail()`  gets the email address of the account.
+- `getUuid()`  returns the UUID of an account.
+- `getDescription()`  returns the description for the BaseAccount interface.
+- `setDescription(java.lang.String)`  sets the description field of the BaseAccount object to the specified string.
+
+## class `com.fsck.k9.Throttle$MyTimerTask$HandlerRunnable`
+
+This class  starts a timer and uses the run() method of the callback object to call a method.
+
+This class contains the following public method(s):
+
+- `run()`  starts the timer and then calls the run() method of the callback object.
+
+## class `com.fsck.k9.K9`
+
+This class (no description)
+
+This class contains the following public method(s):
+
+- `messageListSenderAboveSubject()`  determines whether the given message list sender is above the given subject in the message list.
+- `setDebug(boolean)`  sets the flag debug of the `K9` object to the given value. Additionally, it calls the `updateLoggingStatus()` method to update the logging status.
+- `setContactNameColor(int)`  sets the color of the contact name in the contact list.
+- `setConfirmDeleteStarred(boolean)`  sets the ConfirmDeleteStarred flag on the K9 instance to confirm that when a starred item is deleted, the user should be asked whether they want to also delete the starred item's comments.
+- `setBackgroundOps(com.fsck.k9.K9$BACKGROUND_OPS)`  replaces the current backgroundOps object with a newly created one that contains the specified backgroundOps object.
+- `setNotificationDuringQuietTimeEnabled(boolean)`  sets a boolean value in the instance variable `com.fsck.k9.K9.mNotificationDuringQuietTimeEnabled` to match the value passed in as a parameter.
+- `getSplitViewMode()`  returns a value that indicates what kind of split view mode is currently in use for this K9 instance.
+- `setAnimations(boolean)`  sets the animations parameter of the `K9` object to the value of the boolean parameter.
+- `setDatabasesUpToDate(boolean)`  updates the `com.fsck.k9.K9.sDatabasesUpToDate` flag which indicates whether or not the currently-running databases are up to date with the most recent schema.
+- `setGesturesEnabled(boolean)`  sets the `com.fsck.k9.K9.mGesturesEnabled` property to the given boolean value.
+- `useBackgroundAsUnreadIndicator()`  toggles whether or not the "background" color (ie. the color underneath the list of items) is used as an indicator that an item is unread.
+- `isColorizeMissingContactPictures()`  determines whether or not the flag sColorizeMissingContactPictures is set. If it is, the method will colorize the missing contact pictures in the database.
+- `setMessageViewReturnToList(boolean)`  sets the flag on the object called `mMessageViewReturnToList` to indicate whether the message view should return to the list after displaying it.
+- `getOpenPgpSupportSignOnly()`  returns whether or not the class implements the OpenPGP support sign only function.
+- `setPgpInlineDialogCounter(int)`  sets the "sPgpInlineDialogCounter" property of the "K9" class to the given "pgpInlineDialogCounter".
+- `registerApplicationAware(com.fsck.k9.K9$ApplicationAware)`  registers a "component" as being notified when the K9 instance is ready. A component could be, for example, an ApplicationAware object.
+- `setNotificationQuickDeleteBehaviour(com.fsck.k9.K9$NotificationQuickDelete)`  sets the notification quick delete behaviour for the given K9 instance.
+- `setHideUserAgent(boolean)`  changes the K9's user agent to a specific value.
+- `setMessageViewArchiveActionVisible(boolean)`  sets the visible attribute of the `sMessageViewArchiveActionVisible` instance variable to the given boolean value.
+- `setLockScreenNotificationVisibility(com.fsck.k9.K9$LockScreenNotificationVisibility)`  sets the visibility of lock screen notifications to the given value.
+- `setMessageListPreviewLines(int)`  changes the number of lines in the MessageListPreview widget.
+- `setQuietTimeStarts(java.lang.String)`  sets the 'quietTimeStarts' value for the 'com.fsck.k9.K9' object to the given string.
+- `messageViewShowNext()`  returns a boolean value determining whether or not the messageView control will show the next message in the text field it is attached to.
+- `setHideTimeZone(boolean)`  sets the hideTimeZone property of the K9 object to a boolean value indicating whether or not the time zone should be hidden.
+- `isMessageViewCopyActionVisible()`  checks whether the SendMessageViewCopyAction visible flag is set on the given instance of the K9 messaging class.
+- `showCorrespondentNames()`  determines whether the class K9 has a method called "mShowCorrespondentNames". If it does, the method returns true. Otherwise, the method returns false.
+- `getPgpSignOnlyDialogCounter()`  returns the counter of the number of times the dialog box to sign a PGP message has been displayed.
+- `save(com.fsck.k9.preferences.StorageEditor)` (no description)
+- `getQuietTimeEnabled()`  checks the "mQuietTimeEnabled" configuration setting and returns a value that indicates whether this setting is enabled or not.
+- `setSplitViewMode(com.fsck.k9.K9$SplitViewMode)`  sets theSplitViewMode property of the K9 object to the passed in mode.
+- `getSortType()`  gets the sorting type for an account.
+- `setMessageViewFixedWidthFont(boolean)`  sets the `com.fsck.k9.K9.mMessageViewFixedWidthFont` property to a boolean value (`true` or `false`) indicating whether the `mMessageViewFixedWidthFont` is going to be in a fixed or proportional width font.
+- `setQuietTimeEnabled(boolean)`  sets the `com.fsck.k9.K9.mQuietTimeEnabled` field to the given value.
+- `getK9ThemeResourceId(com.fsck.k9.K9$Theme)`  returns the resource ID of the theme associated with the given K9 theme object.
+- `getK9ThemeResourceId()`  returns the ID of the K9 theme resource.
+- `setMessageViewCopyActionVisible(boolean)`  sets the visibility of the message view copy action to be true.
+- `getK9Language()`  returns the name of the K9 language.
+- `getK9MessageViewTheme()`  returns a theme for the message view for the K9 application.
+- `showContactName()`  returns a boolean indicating whether or not the method mShowContactName in the class com.fsck.k9.K9 should be called.
+- `gesturesEnabled()`  returns a boolean indicating whether the K9 application supports gestures.
+- `setShowContactName(boolean)`  sets the showContactName property of the K9 class to whether or not to show the contact's full name in the contact list.
+- `wrapFolderNames()`  returns a boolean value that states whether or not the folder names that it is called on should be wrapped in double-quotes ( " ).
+- `setMessageListSenderAboveSubject(boolean)`  sets the message list sender variable to the boolean value that is passed as a parameter.
+- `getLockScreenNotificationVisibility()`  returns the visibility of lock screen notifications on the device.
+- `getFontSizes()`  returns the list of font sizes that are available for use with this class.
+- `isNotificationDuringQuietTimeEnabled()`  determines whether the K9 instance is enabled for notifications during quiet time.
+- `measureAccounts()`  measures the size of the K9 account database.
+- `useFixedMessageViewTheme()`  returns whether a given K9 instance should use a fixed message view theme.
+- `setSortAscending(com.fsck.k9.Account$SortType,boolean)`  sets the sort type for an account to ascending and also updates the sort Ascending flag associated with the object.
+- `getBackgroundOps()`  returns a list of com.fsck.k9.K9.backgroundOps objects.
+- `setColorizeMissingContactPictures(boolean)`  enables or disables the feature that marks contact pictures as red if they're missing from the contact.
+- `confirmSpam()`  confirms whether or not the spam message is spam.
+- `areDatabasesUpToDate()`  checks to see if all databases are up to date with the schema. If they are, it returns true; otherwise, it returns false.
+- `isThreadedViewEnabled()`  checks to see if the view is thread-safe. If it is not, it sets the value of the `sThreadedViewEnabled` field to true.
+- `setWrapFolderNames(boolean)`  sets the K9 instance's "mWrapFolderNames" property to the value of the "state" argument.
+- `getK9ComposerTheme()`  looks up the "com.fsck.k9.K9.theme" property from the "com.fsck.k9.K9" class and returns either the global composer theme if it exists, or the composer theme for the current project.
+- `setMessageListCheckboxes(boolean)`  sets the boolean value of the "mMessageListCheckboxes" property to the value of the "checkboxes" argument.
+- `onCreate()` (no description)
+- `getQuietTimeStarts()`  returns a string that contains the starting times of the quiet times for this instance of the K9 class.
+- `showContactPicture()`  returns whether the class contains a method that allows you to show a picture of the contact on the UI.
+- `messageListCheckboxes()`  checks if the given object has a property named `mMessageListCheckboxes`.
+- `setAutofitWidth(boolean)`  sets the autofitWidth property of the `com.fsck.k9.K9` instance to the given value.
+- `getQuietTimeEnds()`  returns a String that indicates the end of the quiet time for the corresponding node.
+- `setMessageViewShowNext(boolean)`  changes the value of the ` com.fsck.k9.K9.mMessageViewShowNext ` static field, which tells K9 how it should display the ` next ` button on the message view.
+- `setChangeContactNameColor(boolean)`  sets the color of the changeContactName field in the K9 object to the given value.
+- `setConfirmDeleteFromNotification(boolean)`  sets the property `com.fsck.k9.K9.mConfirmDeleteFromNotification` to `confirm` if the user confirms the deletion of the notification from the notification tray.
+- `confirmDeleteStarred()`  returns a boolean value that indicates whether or not the starred items in the K9 database are definitely deleted.
+- `setNotificationHideSubject(com.fsck.k9.K9$NotificationHideSubject)`  sets the notification hide subject for the given notification mode.
+- `setUseFixedMessageViewTheme(boolean)`  sets the useFixedMessageViewTheme boolean to indicate whether or not the message view will use the fixed message theme.
+- `autofitWidth()`  returns a boolean value that indicate if the given width should be autofit (fit to the window automatically).
+- `hideUserAgent()`  hides the user agent from the user's browser.
+- `setMessageViewDeleteActionVisible(boolean)`  determines whether or not the delete action for the message view is visible.
+- `checkCachedDatabaseVersion()`  checks to see if the last known database version is up to date, and if so, sets the value of `com.fsck.k9.K9.databasesUpToDate` to `false`.
+- `isHideSpecialAccounts()`  checks if the flag mHideSpecialAccounts is set to true. If it is, then this means that this class is designed to hide special accounts and it can be used in place of the regular account class.
+- `setConfirmMarkAllRead(boolean)`  sets the flag confirmMarkAllRead to true if the user wants all read objects marked as confirmed.
+- `confirmDelete()`  returns a boolean flag that confirms whether the object in question can be deleted.
+- `isMessageViewArchiveActionVisible()`  checks to see if the `com.fsck.k9.K9.sMessageViewArchiveActionVisible` property is set to `true`.
+- `getContactNameColor()`  gets the color of the contact name in the K9 application.
+- `getK9Theme()`  returns the theme object for the K9 class.
+- `setStartIntegratedInbox(boolean)`  sets the "mStartIntegratedInbox" variable to the value of the "startIntegratedInbox" variable.
+- `countSearchMessages()`  counts the number of search messages in the given text corpus.
+- `setMessageViewMoveActionVisible(boolean)`  sets the flag visible for the message view move action.
+- `isDebug()`  returns a boolean value that indicates whether the class in question is in the debug mode.
+- `getNotificationHideSubject()`  returns a value that is used to hide the subject of the notification from the user.
+- `setQuietTimeEnds(java.lang.String)`  sets the `com.fsck.k9.K9.mQuietTimeEnds` variable to the value of the `quietTimeEnds` string.
+- `getPgpInlineDialogCounter()`  returns the number of inline dialogs in a PGP session.
+- `setBackgroundOps(java.lang.String)`  sets the background Ops for the K9 object to the given String value.
+- `setConfirmSpam(boolean)`  sets the `mConfirmSpam` field of the `K9` class to the value of `confirm`.
+- `setServicesEnabled(android.content.Context)`  returns a boolean value indicating whether the Compose activity and the boot receiver should be enabled or disabled.
+- `setHideSpecialAccounts(boolean)`  sets the "mHideSpecialAccounts" property of the class to the value of the "hideSpecialAccounts" parameter.
+- `isSortAscending(com.fsck.k9.Account$SortType)`  compare the sortType parameter against the object variable mSortAscending. If they are not the same, then the sortType is set to be the default ascending sort type.
+- `loadPrefs(com.fsck.k9.Preferences)` (no description)
+- `setMessageListStars(boolean)`  sets the "message list stars" flag for a K9 object.
+- `setOpenPgpSupportSignOnly(boolean)`  sets the flag "sOpenPgpSupportSignOnly" to the value "supportSignOnly" in the instance of the class "com.fsck.k9.K9".
+- `getNotificationQuickDeleteBehaviour()`  returns the behaviour of a notification quick delete button.
+- `showAnimations()`  returns a boolean stating whether or not animations are enabled on this object.
+- `setUseVolumeKeysForListNavigation(boolean)`  tells the K9 object whether or not it should use the Volume keys to navigate the List view.
+- `getK9MessageViewThemeSetting()`  returns the theme setting for the message view component of the K9 package.
+- `setAttachmentDefaultPath(java.lang.String)`  sets the default attachment path for files contained within the `com.fsck.k9.K9` class.
+- `setPgpSignOnlyDialogCounter(int)`  sets the "sPgpSignOnlyDialogCounter" global variable to the value of the "pgpSignOnlyDialogCounter" global variable.
+- `setThreadedViewEnabled(boolean)`  sets the enabled state of the "sThreadedViewEnabled" property of the "K9" class to the value passed as parameter "enable".
+- `isMessageViewMoveActionVisible()`  checks if the K9 message view move action is visible.
+- `confirmDiscardMessage()`  confirms if the garbage collector should start discarding messages.
+- `setOpenPgpProvider(java.lang.String)`  sets the openPGP provider for the K9 class.
+- `isMessageViewSpamActionVisible()`  checks to see if a certain action is visible in the message view.
+- `useVolumeKeysForNavigationEnabled()`  determines whether we want to use volume keys as navigation methods.
+- `isOpenPgpProviderConfigured()`  checks to see if the OpenPGP provider is configured.
+- `useVolumeKeysForListNavigationEnabled()`  toggles the use of volume keys for list navigation.
+- `setK9MessageViewThemeSetting(com.fsck.k9.K9$Theme)`  sets the message view theme of a particular K9 object to the provided theme.
+- `messageListPreviewLines()`  returns the number of lines in the K9 message list.
+- `setShowContactPicture(boolean)`  sets a boolean value to indicate whether or not the contact picture should be displayed.
+- `setMessageViewSpamActionVisible(boolean)`  sets the flag to true if the user wants to see the spam action notification in the message view.
+- `getOpenPgpProvider()`  returns the value of the `com.fsck.k9.K9.sOpenPgpProvider` property.
+- `setMeasureAccounts(boolean)`  sets the measureAccounts flag to the value of the parameter measureAccounts.
+- `confirmDeleteFromNotification()`  confirms that the object specified in the method argument is to be deleted from the notification system.
+- `setConfirmDelete(boolean)`  sets a boolean value (`mConfirmDelete`) to the K9 object to indicate whether the user should be prompted before deleting a given item.
+- `messageViewFixedWidthFont()`  returns a boolean value that indicates whether the message view uses a fixed-width font.
+- `isMessageViewDeleteActionVisible()`  checks whether the "message view delete action" is visible on the user interface.
+- `messageListStars()`  returns a boolean telling whether or not the K9 message list has "stars" (i.e. messages with a "positive" rating).
+- `changeContactNameColor()`  changes the name color in the contact list.
+- `startIntegratedInbox()`  starts the integrated mailbox service.
+- `setSortType(com.fsck.k9.Account$SortType)`  sets the sort type for an account object.
+- `setK9ComposerThemeSetting(com.fsck.k9.K9$Theme)`  sets the K9 composer theme to the given compTheme.
+- `hideTimeZone()`  hides the time zone of the current instance.
+- `getK9ComposerThemeSetting()`  returns the current K9 Composer Theme.
+- `setConfirmDiscardMessage(boolean)`  sets the 'confirmDiscardMessage' property to the specified value.
+- `getAttachmentDefaultPath()`  returns the default path for attachments associated with this K9 instance.
+- `saveSettingsAsync()`  writes the current settings for the application into a file on the user's SD card.
+- `setCountSearchMessages(boolean)`  sets the K9 instance's "mCountSearchMessages" property to the value representing the number of messages that the K9 instance should include in its search results.
+- `isQuietTime()`  checks to see if the current time is between the quiet time start and end values, and returns true if that is the case.
+- `setK9Language(java.lang.String)`  sets the language for the K9 class to the given string.
+- `setUseBackgroundAsUnreadIndicator(boolean)`  sets the boolean flag "enabled" on the #sUseBackgroundAsUnreadIndicator instance field. This field holds the flag indicating whether or not the background indicator should be used when this object is rendered in an MRU list.
+- `setUseVolumeKeysForNavigation(boolean)`  sets the "mUseVolumeKeysForNavigation" property to "volume" value.
+- `setShowCorrespondentNames(boolean)`  enables or disables the display of Correspondent names in K9 results.
+- `setK9Theme(com.fsck.k9.K9$Theme)`  sets the theme of the K9 application instance to the passed in theme.
+- `messageViewReturnToList()`  returns the `com.fsck.k9.K9.mMessageViewReturnToList` property to its previous value.
+- `confirmMarkAllRead()`  confirms that all the files in the directory have been read.
+
+## class `com.fsck.k9.EmailAddressValidator`
+
+This class  validates email addresses.
+
+This class contains the following public method(s):
+
+- `fixText(java.lang.CharSequence)`  attempts to fix the text in invalidText to "".
+- `isValid(java.lang.CharSequence)`  checks to see if the given text string is a valid email address.
+- `isValidAddressOnly(java.lang.CharSequence)`  checks to see if the given text matches the EmailAddressPattern object's matcher. If it does, then the text is considered valid.
+
+## enum `com.fsck.k9.Account$SortType`
+
+This enum  contains a list of possible values and allows users to see what type of sort the account has.
+
+This class contains the following public method(s):
+
+- `isDefaultAscending()`  checks if the enum value is the default value (which is ascending).
+- `getToast(boolean)`  returns the appropriate toast for the Account's SortType.
+
+## class `com.fsck.k9.Globals`
+
+This class  tries to find a context object that is specific to the class and returns it if found.
+
+This class contains the following public method(s):
+
+- `getContext()`  looks for a context object that is specific to this class and returns it if found.
+
+## class `com.fsck.k9.FontSizes`
+
+This class  provides information on the fonts in the user's application.
+
+This class contains the following public method(s):
+
+- `getMessageViewContentAsPercent()`  returns the percentage of the total message view content that is text.
+- `getMessageViewDate()`  returns the date on which the message view was last updated.
+- `getFolderStatus()`  returns the status of a folder.
+- `setMessageViewContentAsPercent(int)`  sets the "messageViewContentPercent" field of the "messageView" object to the given percentage of the given "size" field.
+- `getMessageViewBCC()`  returns the value of the bean named `messageViewBCC`.
+- `setMessageViewSubject(int)`  assigns a given subject to a particular message view.
+- `setMessageListPreview(int)`  sets the message list preview for the FontSizes class to the value stored in the messageListPreview variable.
+- `getMessageViewAdditionalHeaders()`  returns the additional headers attached to the message view.
+- `getMessageListDate()`  returns the date of the most recent message in the message list.
+- `getMessageViewCC()`  returns the content view controller class for the message view.
+- `setMessageListDate(int)`  sets the date on which the message list was last updated.
+- `setMessageViewTo(int)`  sets the message view to the specified number.
+- `getMessageComposeInput()`  returns the input used to compose a message.
+- `getMessageViewSubject()`  returns the message view subject as an int.
+- `setMessageListSender(int)`  sets a new message list sender for the FontSizes class.
+- `getMessageViewSender()`  returns the instance of the messageViewSender class that is responsible for displaying notifications about changes to fonts in the user's application.
+- `load(com.fsck.k9.preferences.Storage)`  loads the preferences for the specified account from the storage class, then sets the various properties for the message list.
+- `setAccountDescription(int)`  sets the account description for the given account number.
+- `setAccountName(int)`  assigns a new account name to the given integer account name.
+- `setMessageViewSender(int)`  assigns a new messageViewSender to this FontSizes object. This method is used internally by the FontSizes class to handle message views.
+- `setMessageListSubject(int)`  sets the message list subject for the given message list to the given value.
+- `getMessageListPreview()`  returns a preview of all the messages in the list.
+- `getMessageListSender()`  returns the sender of the messages in the message list.
+- `setMessageViewBCC(int)`  sets the message view in the application client configuration to be the specified value.
+- `setViewTextSize(android.widget.TextView,int)`  sets the text size of a TextView to the size specified in fontSize.
+- `setMessageViewAdditionalHeaders(int)`  sets the additional headers for the given message view.
+- `setFolderName(int)`  sets the folderName for the FontSizes class instance to the value passed as a parameter.
+- `getMessageViewTo()`  returns the view object for the message view.
+- `getAccountDescription()`  returns the description for the given account.
+- `getMessageListSubject()`  returns the value of the `messageListSubject` variable of the `com.fsck.k9.FontSizes` Java class.
+- `setMessageComposeInput(int)`  sets the input messageComposeInput for the `MessageCompose` instance.
+- `setMessageViewDate(int)`  sets the date on which the message view was last modified.
+- `save(com.fsck.k9.preferences.StorageEditor)`  saves the current preferences for the font sizes for the account specified by the parameter "accountName" and the folder specified by the parameter "folderName". It also saves the subject of the most recent message in the message list, the sender, the date of the message, and the preview of the message. Finally, it sets the account name, account description, folder name, folder status, message list subject, message list sender, message list date, message list preview, message compose input, and message content percentage to the values specified in the editor parameter.
+- `getAccountName()`  returns the name of the account for which this FontSizes object corresponds.
+- `getFolderName()`  returns the name of the folder where the font sizes file is located.
+- `setMessageViewCC(int)`  sets the CC (Creative Commons) license of a message view in the instance of the FontSizes class.
+- `setFolderStatus(int)`  sets the status of a folder (in this case, an integer value) to the specified value.
+
+## class `com.fsck.k9.NotificationSetting`
+
+This class  allows the user to change the ringtone, vibrate pattern, LED color, and ringtone URI for their notification setting.
+
+This class contains the following public method(s):
+
+- `isRingEnabled()`  checks whether the ringtone is enabled.
+- `isVibrateEnabled()`  returns a boolean indicating whether the notification setting can vibrate.
+- `isLedEnabled()`  tests to see if the `ledEnabled` field is set to `true`. If it is, the method returns `true`. Otherwise, the method returns `false`.
+- `setLed(boolean)`  sets the LED on the notification setting to the value that was passed in.
+- `setVibratePattern(int)`  sets the vibrate pattern for the notification setting.
+- `getVibrateTimes()`  returns the current vibrate times.
+- `setRingEnabled(boolean)`  sets the "ringEnabled" attribute of the "NotificationSetting" object to either "true" or "false" depending on whether or not the user desires to disable ringtones without losing their ability to select them.
+- `getLedColor()`  returns the color of the LED on the notification setting.
+- `getRingtone()`  returns the ringtone URI.
+- `setVibrate(boolean)`  sets the vibrate flag to the value of vibrate.
+- `getVibration(int,int)`  creates an array of longs with the specified vibration pattern, and then copies each element of the array into a new array of the same length, where the first element of the new array is set to 0. This method returns the resulting array.
+- `getVibration()`  fetches a vibration pattern from the `com.fsck.k9.NotificationSetting` instance, and then uses that pattern to generate a set of vibrations with a specified number of repeats.
+- `setVibrateTimes(int)`  sets the vibrate time for the notification setting.
+- `getVibratePattern()`  returns the vibrate pattern for the notification setting.
+- `setLedColor(int)`  sets the color of the LED on the notification setting.
+- `setRingtone(java.lang.String)`  sets the "ringtone" for the current "notification setting" to a URI that you provide.
+
+## class `com.fsck.k9.Preferences`
+
+This class  allows the user to manage preferences for their k9 mail server.
+
+This class contains the following public method(s):
+
+- `setDefaultAccount(com.fsck.k9.Account)`  sets the account to be the default for all preferences.
+- `getAvailableAccounts()`  looks through the various accounts on the system, and if either the account is enabled and available, or the account is registered, it will add that account to the list of registered accounts.
+- `loadAccounts()`  loads all accounts from the local storage, checks if any of the  accounts has a different account number than -1 (to indicate the root account), and if not, it adds the new account to the end of the list.
+- `getAccounts()`  looks for accounts that are registered and returns them as a list.
+- `newAccount()`  creates a new account by getting the UUID of the desired account, and then adding it to the accounts list and the accountsInOrder list.
+- `getAccount(java.lang.String)`  looks up an account with the given uuid.
+- `getPreferences(android.content.Context)`  gets the current application context, checks to see if there is a Preferences object present, and creates one if necessary.
+- `deleteAccount(com.fsck.k9.Account)`  removes an account from the prefs database and the k9 mailstore.
+- `getStorage()`  returns the storage area for the Preferences class.
+- `getDefaultAccount()`  returns the first account in the list of available Accounts as the default account.
+
+## class `com.fsck.k9.Clock`
+
+This class  displays the current time in milliseconds.
+
+This class contains the following public method(s):
+
+- `getTime()`  returns the current time in milliseconds.
+
+## class `com.fsck.k9.Account`
+
+This class (no description)
+
+This class contains the following public method(s):
+
+- `getLocalStore()`  returns the instance of the local storage of the application.
+- `addCertificate(com.fsck.k9.activity.setup.AccountSetupCheckSettings$CheckDirection,java.security.cert.X509Certificate)`  adds a certificate to the local keystore.
+- `setDisplayCount(int)`  sets the displayCount variable to the value of displayCount, or the number of data fields that should be visible on the account summary page.
+- `isReplyAfterQuote()`  checks to see if the current object (which is an instance of the `com.fsck.k9.Account` class) has a replyAfterQuote property. If it does, then it returns true.
+- `getIdentities()`  returns a list of Identities objects.
+- `setSignatureBeforeQuotedText(boolean)`  sets the "isSignatureBeforeQuotedText" flag to "mIsSignatureBeforeQuotedText" if it exists, and sets it to "false" otherwise.
+- `setIdleRefreshMinutes(int)`  sets the idle refresh minutes for the account.
+- `goToUnreadMessageSearch()`  searches for messages that have not been read yet by the user.
+- `setSortType(com.fsck.k9.Account$SortType)`  sets the sort type for an account.
+- `setFolderTargetMode(com.fsck.k9.Account$FolderMode)`  sets the target mode for the given folder.
+- `getStoreUri()`  returns the store URI for the account.
+- `getMaxPushFolders()`  returns the maximum number of folders that the account can have pushed to it.
+- `setEnabled(boolean)`  updates the `enabled` field of an account object to `true` or `false`.
+- `setExpungePolicy(com.fsck.k9.Account$Expunge)`  sets the expunge policy for an account.
+- `limitToDisplayableFolders(com.fsck.k9.search.LocalSearch)`  limits the search to folders that are displayable using the current folder display mode.
+- `hasDraftsFolder()`  checks if the account has a drafts folder set. If the account does have a drafts folder set, this method returns true; otherwise, it returns false.
+- `setArchiveFolderName(java.lang.String)`  sets the archive folder name for an account.
+- `getSearchableFolders()`  returns a list of the folders that the given account is searchable in.
+- `isSortAscending(com.fsck.k9.Account$SortType)`  checks to see if the sort type is the default sortsort type and if it is, set the sort ascending flag.
+- `setInboxFolderName(java.lang.String)`  sets the name of the mailbox folder which is associated with this account.
+- `setTransportUri(java.lang.String)`  updates the transportUri attribute of the `com.fsck.k9.Account` object.
+- `getFolderSyncMode()`  returns the current folder sync mode for the given account.
+- `setNotifyContactsMailOnly(boolean)`  determines if the Account should send notifications only to contacts in the contacts list rather than to all contacts.
+- `setSyncRemoteDeletions(boolean)`  sets the flag syncRemoteDeletions to true, so that any changes to this object (such as deleting or updating objects) will be synchronized with the server.
+- `setFolderPushMode(com.fsck.k9.Account$FolderMode)`  sets the folder push mode for an account.
+- `getAlwaysBcc()`  returns the value of the alwaysBcc field of the Account class.
+- `setDraftsFolderName(java.lang.String)`  sets the draft folder name to the given string.
+- `setSubscribedFoldersOnly(boolean)`  sets the subscribedFoldersOnly property of the `Account` object to true if the user has subscribed to a folder, and false otherwise.
+- `setMessageFormat(com.fsck.k9.Account$MessageFormat)`  sets the format of messages that will be output by this account.
+- `getLastSelectedFolderName()`  retrieves the last folder name selected by the user.
+- `getQuotePrefix()`  returns the prefix that is used to uniquely identify quotes in an account.
+- `getStats(android.content.Context)`  gets the stats for a given account. It first checks to see if the account is available, and if not it returns null. It then creates a new com.fsck.k9.AccountStats object and sets the following properties:
+
+-unreadMessageCount: The number of unread messages in the account
+-flaggedMessageCount: The number of flagged messages in the account
+
+Next, it uses a content resolver to find the URI for the account's stats provider. The stats provider's URI is appended with a path element that includes the account's UUID. Finally, it creates a java.lang.StringBuilder object to hold the search query and sets it as the last argument.
+
+Using this query, the getStats method will call the conditions tree node's getWhereClause method and pass it the conditions object, the query builder, and the arguments it received. The getWhereClause method will create a java.lang.String selection
+- `getSpamFolderName()`  returns the name of the spam folder.
+- `syncRemoteDeletions()`  synchronizes the deletion of objects with a remote server.
+- `save(com.fsck.k9.Preferences)` (no description)
+- `useCompression(com.fsck.k9.mail.NetworkType)`  checks whether the given network type supports compression, and, if so, it sets the `useCompression` flag to true.
+- `setSpamFolderName(java.lang.String)`  sets the Spam Folder Name for the current account as specified in the argument name.
+- `setAutomaticCheckIntervalMinutes(int)`  sets the automatic check interval minutes to the given value.
+- `setGoToUnreadMessageSearch(boolean)`  sets the "goToUnreadMessageSearch" property to the given boolean value.
+- `setShowPictures(com.fsck.k9.Account$ShowPictures)`  sets the showPictures property of the accounts object to the showPictures arguement that was given to the method.
+- `setQuotePrefix(java.lang.String)`  sets the quote prefix for the account object.
+- `hashCode()`  calculates the hash code of the account UID.
+- `getRemoteSearchNumResults()`  returns the number of results obtained when performing a remote search on the account.
+- `setFolderDisplayMode(com.fsck.k9.Account$FolderMode)`  tells the Account object's folder display mode.
+- `isRemoteSearchFullText()`  checks to see if the account is using remote search.
+- `isSearchByDateCapable()`  checks to see if the store URI starts with "imap".
+- `getAccountNumber()`  returns the account number for the current account.
+- `isPushPollOnConnect()`  determines whether or not a push poll is currently enabled on the client.
+- `getOutboxFolderName()`  returns the name of the folder where the account's outbox is located.
+- `getFolderPushMode()`  returns the current folder push mode set for the given account.
+- `setSentFolderName(java.lang.String)`  sets the named sent folder in the account's Sent folder.
+- `setChipColor(int)`  sets the chip color of an account.
+- `getLatestOldMessageSeenTime()`  returns the latest time at which an old message was seen.
+- `findIdentity(com.fsck.k9.mail.Address)`  looks through all of the identities in the `identities` list and compares the email address of the identity to the email address of `addr`. If they match, then the identity is returned. Otherwise, the method returns null.
+- `setEmail(java.lang.String)`  updates the email field in the "identities" collection with the given value.
+- `setSortAscending(com.fsck.k9.Account$SortType,boolean)`  updates the sort ascending flag for the given account sort type.
+- `getName()`  gets the name of the first account in the identities array.
+- `generateColorChip(boolean,boolean)`  allows you to generate a color chip that is either flagged Read or Unread depending on the state of the messageRead flag.
+- `isAnIdentity(com.fsck.k9.mail.Address)`  checks if the given Address object is an instance of the Identity class. If it is, it returns true.
+- `getFolderUnreadCount(android.content.Context,java.lang.String)`  reads the unread message count for a folder from the database.
+- `getEmail()`  retrieves the email address of the account's identity (0 in this example) as a String.
+- `subscribedFoldersOnly()`  returns a boolean value confirming whether or not the caller is subscribed to the folder specified in the parameter.
+- `hasArchiveFolder()`  checks if the account has a folder named "archive" set. If it does, then the method returns true.
+- `setFolderNotifyNewMailMode(com.fsck.k9.Account$FolderMode)` sets the folderNotifyNewMailMode field of the `Account` object to the desired value.
+- `setReplyAfterQuote(boolean)`  tells the class whether or not to reply to the quote after it. If the replyAfterQuote flag is set to true, then the class will reply to the quote after it; if the flag is false, then the class will not reply to the quote.
+- `setLastSelectedFolderName(java.lang.String)`  sets the current selected folder name to the given folder name.
+- `getAutomaticCheckIntervalMinutes()`  returns the number of minutes that the account's automatic check will run every day.
+- `getSignatureUse()`  checks to see if the account's signature is in use.
+- `setRingNotified(boolean)`  sets the ringNotified flag on this instance of the `Account` class to indicate whether or not the user's account has been notified of an incoming call.
+- `getMessageFormat()`  returns the message format for the given account.
+- `isNotifyNewMail()`  synchronizes the state of whether or not the account should be notified of new mail.
+- `setStripSignature(boolean)`  sets the stripSignature flag on this Account object to indicate if the account should be stripped of all signatures.
+- `setMarkMessageAsReadOnView(boolean)`  sets the "markMessageAsReadOnView" flag to the current value. This flag is used by the "readmessage" command to know whether or not to read the message from the account.
+- `isDefaultQuotedTextShown()`  checks to see if the text in the default quoted text box is shown as is.
+- `getEarliestPollDate()`  takes the maximum polled message age, subtracts 28 (the age at which a user is allowed to have a poll), and looks at which month the age falls into. If it's within the first 28 months of the calendar year, then the method adds the age to the calendar's date represented by now. If it's not within the first 28 months of the calendar year, then the method looks at the age and compares it to different age ranges, and assigns the appropriate month and year to now accordingly.
+- `setRemoteSearchFullText(boolean)`  sets the "remoteSearchFullText" field to the value passed in.
+- `generateAccountNumber(com.fsck.k9.Preferences)`  obtains a list of account numbers from the preferences object and uses the findNewAccountNumber method to generate a new account number for the given list.
+- `setMessageReadReceipt(boolean)`  sets the "messageReadReceipt" flag to "true" if the receipt has been read.
+- `setCompression(com.fsck.k9.mail.NetworkType,boolean)`  sets the compression mode for the given network type.
+- `setDefaultQuotedTextShown(boolean)`  sets the default value of the `shown` enum property to be `true`.
+- `isStripSignature()`  checks to see if the signature of an object is a strip signature. A strip signature is a signature that is made up of only the most Significant bits (MSBs) of the object's bytes.
+- `setQuoteStyle(com.fsck.k9.Account$QuoteStyle)`  sets the QuoteStyle property of the account instance to the specified value.
+- `isAnIdentity(com.fsck.k9.mail.Address[])`  checks if the given array of addresses corresponds to an existing identity in the system. If it does, it returns true; otherwise, it returns false.
+- `isEnabled()`  checks to see if the account is enabled.
+- `setSearchableFolders(com.fsck.k9.Account$Searchable)`  sets the searchable folders for the given Account object.
+- `isSignatureBeforeQuotedText()`  checks to see if the signature is before the quoted text in the string.
+- `isNotifyContactsMailOnly()`  checks if the `notifyContactsMailOnly` property of the `Account` instance is set to `true`. If it is, the method returns `true`. Otherwise, it returns `false`.
+- `getFolderNotifyNewMailMode()`  checks what folder notify new mail mode should be set to for the given account.
+- `setName(java.lang.String)`  sets the name of the accounts identity in the list of identities in the `identities` field of the `K9` object.
+- `setIdentities(java.util.List)`  creates a new list of identities and sets it as the current identities list for this account.
+- `allowRemoteSearch()`  allows the calling application to remotely search the account.
+- `setSignatureUse(boolean)`  tells the identities field in the account class which signature format to use.
+- `getRemoteStore()`  locates the remote store used by this account.
+- `hasTrashFolder()`  checks to see if the trash folder named "trash" is set on the account. If it is, the method returns true.
+- `deleteCertificate(java.lang.String,int,com.fsck.k9.activity.setup.AccountSetupCheckSettings$CheckDirection)`  checks to see if the account's host/port has changed, and if so, it tries to delete any certificate that may be stored for the old host/port.
+- `getLocalStorageProviderId()`  returns the identifier of the local storage provider that the current instance of the `com.fsck.k9.Account` class is using.
+- `setAutoExpandFolderName(java.lang.String)`  sets the "autoExpandFolderName" property to the given value.
+- `hasSpamFolder()`  checks if the account has a spam folder set which is indicated by the value of the static variable `com.fsck.k9.K9.FOLDER_NONE`. If the value of `com.fsck.k9.K9.FOLDER_NONE` is not `K9.FOLDER_NONE`, then the account has a spam folder set.
+- `setMaximumAutoDownloadMessageSize(int)`  sets the maximum size of the automatic downloads for the given account.
+- `getQuoteStyle()`  returns the style for Quote objects.
+- `getSignature()`  returns the signature of the logged in user in the `identities` list.
+- `getInboxFolderName()`  returns the name of the folder that holds the inbox for the account.
+- `setRemoteSearchNumResults(int)`  sets the "numResults" field of the `Account` object to the given value.
+- `excludeSpecialFolders(com.fsck.k9.search.LocalSearch)`  removes the specified folders from the search results. For example, if the method is invoked as follows:
+
+search.setIncludeSpecialFolders(true);
+
+then all folders will be included in the search results. However, if the method is invoked as follows:
+
+search.excludeSpecialFolders(getOutboxFolderName());
+
+then the Outbox folder will not be included in the search results.
+- `setPushPollOnConnect(boolean)`  sets the "pushPollOnConnect" boolean property of the `Account` object to the given value.
+- `getTrashFolderName()`  returns the name of the trash folder.
+- `toString()`  returns a string representation of the given account object.
+- `getArchiveFolderName()`  returns the name of the folder where the archives for this account are stored.
+- `getDescription()`  returns a string that describes the account.
+- `getAutoExpandFolderName()`  returns the name of the autoexpand folder with the given account name.
+- `setMaximumPolledMessageAge(int)`  sets the maximum age for messages that the account will regularly poll on.
+- `setLocalStorageProviderId(java.lang.String)`  sets the local storage provider id to the given id.
+- `hasSentFolder()`  checks to see if the account has a sent folder set. If so, the method returns true. If not, the method returns false.
+- `getMaximumAutoDownloadMessageSize()`  tells us the maximum size of an AutoDownload message that can be sent from a K9 account.
+- `getSortType()`  returns the sort type of the account.
+- `setDescription(java.lang.String)`  sets the description property on the `Account` object to the given string.
+- `getChipColor()`  returns the color of the chip in the account.
+- `getDeletePolicy()`  gets the delete policy for an account.
+- `isMarkMessageAsReadOnView()`  determines whether a message on the view that the user is currently viewing is marked as read. This is useful for determining whether the user should continue viewing the message.
+- `setDeletePolicy(com.fsck.k9.Account$DeletePolicy)`  sets the delete policy for an account.
+- `isRingNotified()`  checks to see if the account has sent a new mail notification. If so, then it returns true.
+- `getDisplayCount()`  returns the number of display objects in the given account.
+- `isAlwaysShowCcBcc()`  determines whether or not the "alwaysShowCcBcc" flag on the Account instance should always be set to true.
+- `getDraftsFolderName()`  returns the name of the folder on the filesystem where the drafts are stored.
+- `getExpungePolicy()`  returns the expunge policy for a given account.
+- `getShowPictures()`  returns a synchronized instance of the `com.fsck.k9.Account.ShowPictures` variable.
+- `setCryptoKey(long)`  sets the cryptographic key identifier for the specified account.
+- `isSpecialFolder(java.lang.String)`  checks to see if the given folderName is one of a set of allowed folders.
+- `setNotifySelfNewMail(boolean)`  sets the value of the `notifySelfNewMail` property to the specified boolean value.
+- `move(com.fsck.k9.Preferences,boolean)`  splits the string "accountUuids" into an array of "uuids" and then works with the preferences storage to set the "accountUuids" entry to the new uuids array.
+- `getNotificationSetting()`  fetches the current notification setting for the account.
+- `getSentFolderName()`  returns the name of the folder that the account's sent items are stored in.
+- `setNotifyNewMail(boolean)`  sets the notification flag for the account.
+- `setFolderSyncMode(com.fsck.k9.Account$FolderMode)`  sets the folder synchronization mode for an account. The current folder synchronization mode can be either 'none' or 'preserve'. If the current folder synchronization mode is 'none', then the mode will be set to 'preserve'. If the current folder synchronization mode is 'preserve', then the mode will be set to 'none'.
+- `setAlwaysBcc(java.lang.String)`  sets the "alwaysBcc" field in the account object to the given string.
+- `setShowOngoing(boolean)`  sets a flag that determines whether ongoing tasks (such as restoring a backup) should be shown to the user or not.
+- `setAlwaysShowCcBcc(boolean)`  sets a flag that determines whether or not the �cc� (carbon copy) button on the account management page should always be shown.
+- `getIdleRefreshMinutes()`  returns the idle refresh minutes for the account.
+- `isNotifySelfNewMail()`  checks to see if a notification for a new mail is needed and, if not, it notifies the caller of this.
+- `setAllowRemoteSearch(boolean)`  sets the allowRemoteSearch flag on the account object.
+- `isShowOngoing()`  checks to see if an ongoing subscription for the given account exists. If so, it updates a flag that indicates that the subscription is still active.
+- `getCryptoKey()`  returns the private key associated with the given account.
+- `setStoreUri(java.lang.String)`  updates the storeUri property of the `com.fsck.k9.Account` object to the value of the given string.
+- `getFolderTargetMode()`  returns the folderMode for this account.
+- `getTransportUri()`  returns the transport URI for the account.
+- `setSignature(java.lang.String)`  synchronously sets the signature of the passed in String object for the identity at index 0 in the identities list.
+- `getFolderDisplayMode()`  returns the mode in which files and folders are displayed in the account's properties.
+- `equals(java.lang.Object)`  compares the accountUuid values of two objects to see if they are the same.
+- `setLatestOldMessageSeenTime(long)`  sets the latestOldMessageSeenTime field to the current time as a long value.
+- `excludeUnwantedFolders(com.fsck.k9.search.LocalSearch)`  excludes folders from the LocalSearch instance that match a condition. In this case, the folders that are excluded are the Trash, Spam, and Outbox folders. The Inbox folder is always included, no matter what the special folders are set to.
+- `getIdentity(int)`  takes the given int i and checks to see if it is among the list of identities currently stored in the class. If it is not found, it returns a newly created Identity object using the given index. If it is found, it returns the current identity object at the given index.
+- `getMaximumPolledMessageAge()`  returns the max age of a message that has been polled.
+- `isAvailable(android.content.Context)`  checks if the StorageProvider that is connected to the current context is available. If it is not available, it checks if the local storage provider is available for the given id.
+- `getUuid()`  returns the library's UUID for the given account.
+- `setTrashFolderName(java.lang.String)`  sets the trash folder name for the account.
+- `setMaxPushFolders(int)`  sets the maximum number of folders allowed for an account.
+- `isMessageReadReceiptAlways()`  determines whether or not the receipt has been read for a message.
+
+## interface `com.fsck.k9.K9$ApplicationAware`
+
+This interface  allows a class to be aware of a given application instance.
+
+This class contains the following public method(s):
+
+- `initializeComponent(android.app.Application)`  initializes the given application instance.
+
+## class `com.fsck.k9.Identity`
+
+This class  holds the various pieces of information about an identity, such as the name, description, email, and signature.
+
+This class contains the following public method(s):
+
+- `getDescription()`  returns the description of the object.
+- `setSignature(java.lang.String)`  updates the signature field of the Identity object.
+- `setEmail(java.lang.String)`  sets the "email" field of the "Identity" object to the specified value.
+- `getSignatureUse()`  checks to see if the object's signature Use field is set to true.
+- `getSignature()`  gets the signature of the current object.
+- `getName()`  returns the name of the class.
+- `setDescription(java.lang.String)`  updates the "description" field of an Identity object.
+- `setReplyTo(java.lang.String)`  updates the 'replyTo' property of the 'Identity' object to the given 'strage'.
+- `getReplyTo()`  retrieves the replyTo string for the current identity.
+- `setName(java.lang.String)`  sets the idenity's name to the provided string.
+- `toString()`  concatenates the elements of the object (account, description, name, email, replyTo, and signature) and returns a string consisting of these elements.
+- `getEmail()`  returns the email address of the object.
+- `setSignatureUse(boolean)`  sets the signatureUse flag of this identity object to the given boolean value.
+
+## enum `com.fsck.k9.Account$DeletePolicy`
+
+This enum  provides a convenient way to get the preference string representation of the DeletePolicy setting as an Integer.
+
+This class contains the following public method(s):
+
+- `preferenceString()`  returns the preference string representation of the DeletePolicy setting as an Integer.
+- `fromInt(int)`  looks up the DeletePolicy enum constant that corresponds to the given initial setting value.
+
+
+# package `com.fsck.k9.account`
+
+This package  provides classes that create and manage accounts for email.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.account.AccountCreator`
+
+This class  retrieves the default delete policy and default port for the specified type of mailbox.
+
+This class contains the following public method(s):
+
+- `getDefaultDeletePolicy(com.fsck.k9.mail.ServerSettings.Type)`  returns the default delete policy for the specified type of mailbox.
+- `getDefaultPort(com.fsck.k9.mail.ConnectionSecurity,com.fsck.k9.mail.ServerSettings.Type)`  tries to find the default port for the given security type for the given store type.
+
+
+# package `com.fsck.k9.activity`
+
+This package (no description)
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.activity.FolderList$FolderListAdapter`
+
+This class  manages a filtered folder list.
+
+This class contains the following public method(s):
+
+- `getFilter()`  returns the filter object that is currently applied to the list of folders.
+- `getCount()`  returns the number of folders in the Table.
+- `getFolder(java.lang.String)`  grabs the item at the given index in the folder list and checks to see if it's a folder information holder. If it is, it returns the holder. If it's not, it returns null.
+- `isEnabled(int)`  checks if the given item is enabled in the system.
+- `getItemView(int,android.view.View,android.view.ViewGroup)` (no description)
+- `getView(int,android.view.View,android.view.ViewGroup)`  gets a view instance for the given position in the list, in either the current item or the next item, according to the position of the list at the time it is called.
+- `areAllItemsEnabled()`  checks whether all the items in the list are enabled.
+- `isItemSelectable(int)`  checks to see if the given position in the list of folders is within the viewing range of the user.
+- `getFolderIndex(java.lang.String)`  returns the index of the given folder name in the filtered folders list.
+- `setFilter(android.widget.Filter)`  sets the filter that will be used for the list of files in the folder.
+- `getItem(int)`  returns the particular folder at the given position in the filtered folder list.
+- `getItemId(int)`  gets the ID of the folder at the given position in the filtered folder list.
+- `getItem(long)`  retrieves the content of the given position in the FolderList data structure.
+- `hasStableIds()`  checks if the given folder list adapter object has all of its folders with stable ids.
+
+## class `com.fsck.k9.activity.Accounts$AccountsHandler`
+
+This class  handles user interaction with the account refresh menu, updates the account size, and prints out account descriptions.
+
+This class contains the following public method(s):
+
+- `progress(boolean)`  updates the refresh menu if the progress code is set to `true`.
+- `dataChanged()`  calls the `notifyDataSetChanged()` method of the `mAdapter` object, if it is not null.
+- `accountSizeChanged(com.fsck.k9.Account,long,long)`  updates the size of the given account by the new value provided.
+- `refreshTitle()`  refreshes the title of the main view (shown when the user clicks on the link to view an account).
+- `progress(int)`  updates the progressbar on the UI thread.
+- `workingAccount(com.fsck.k9.Account,int)`  retrieves the description of the given account, and prints it to the console as a toast.
+
+## class `com.fsck.k9.activity.MessageCompose`
+
+This class  contains all of the methods for starting, managing, and sending a message.
+
+This class contains the following public method(s):
+
+- `showContactPicker(int)`  sends a Intent to the contacts:contactPickerIntent() method to start the contact picker.
+- `onOptionsItemSelected(android.view.MenuItem)`  processes the menu item that was selected. It determines what action to take based on the menu item's id.
+- `onRecipientsChanged()`  checks to see if any recipients have been changed since the last time the message was saved. If so, it sets `changesMadeSinceLastSave` to true.
+- `onMessageBuildCancel()`  sets the progress bar to be indeterminate.
+- `saveDraftEventually()`  keeps a record of all the changes made to a message since it was last saved.
+- `onClick(android.view.View)`  displays a dialog box asking the user to choose an identity.
+- `onPrepareOptionsMenu(android.view.Menu)`  prepares the options menu for a Activity.
+- `onAttachmentRemoved()`  keeps track of what changes have been made to the message since the last time it was saved. If, at any point, the difference between the current state of the message and the state it was in when the last save was done becomes greater than a certain threshold, then it assumes that the message has been detached from the fixture and it updates the "changesMadeSinceLastSave" field to false.
+- `onCreate(android.os.Bundle)` (no description)
+- `onProgressCancel(com.fsck.k9.fragment.ProgressDialogFragment)`  cancels the progress dialog for the attachment that the fragment is displaying.
+- `onOpenPgpClickDisable()`  disables the CryptoPgp widget on the recipient's screen when the user opens the message composition dialog box.
+- `performSendAfterChecks()`  sets the progress bar to indeterminate, downloads the message, and sets the changesMadeSinceLastSave flag to false.
+- `onAttachmentAdded()`  keeps track of the changes that have been made to the message since it was last saved.
+- `onRetainNonConfigurationInstance()`  detaches the main message composition callback if it's present, in order to prevent the main message composition from getting messed up if the instance of MessageCompose gets garbage collected.
+- `loadLocalMessageForDisplay(com.fsck.k9.mailstore.MessageViewInfo,com.fsck.k9.activity.MessageCompose$Action)`  checks to see if we've already processed the source message since this can be done when switching from HTML to text replies. If that happens, we only want to update the UI with quoted text (which picks the appropriate part).
+- `onFocusChange(android.view.View,boolean)`  checks the Id of the View object that has focus and, depending on whether it is the `message_content` or `subject` view, it invokes the appropriate methods if the View is being used to display a message to a recipient. If the View has focus, then the recipientPresenter.onNonRecipientFieldFocused() method is invoked.
+- `updateMessageFormat()`  updates the message format for the current account.
+- `onCreateOptionsMenu(android.view.Menu)`  checks whether the user has a Drafts folder set to -NONE-, and if not, disables the 'Save' menu option.
+- `onOpenPgpSignOnlyChange(boolean)`  tells the recipient presenter to disabled crypto-pgp signing when the user opens the message.
+- `onMessageBuildSuccess(com.fsck.k9.mail.internet.MimeMessage,boolean)`  updates the `changesMadeSinceLastSave` field to reflect the changes that have been made to the draft MimeMessage since the last save. The `currentMessageBuilder` field is also set to be null if the `action` is `com.fsck.k9.activity.MessageCompose.Action.EDIT_DRAFT`, in which case a relatedMessageReference is used to grab the UID of the message being edited. If the `action` is `com.fsck.k9.activity.MessageCompose.Action.SEND`, then a new `com.fsck.k9.activity.compose.SaveMessageTask` is created and the `execute()` method is called. If the `finishedAfterDraftSaved` field is True, then the `finish()` method is called; otherwise, the `setProgressBarIndeterminateVisibility()` method is called to disable the progress bar.
+- `onDestroy()`  calls the ` recipientPresenter ` class' ` onActivityDestroy ` method if it exists.
+- `launchUserInteractionPendingIntent(android.app.PendingIntent,int)`  tries to start the pending intent sender for the given requestCode to deliver the message to the recipient presenter.
+- `onCreateDialog(int)` (no description)
+- `onPause()`  checks if the user is currently pausing the Activity or if the Activity is currently in a sub-activity and if so it returns.
+- `onMessageBuildException(com.fsck.k9.mail.MessagingException)`  prints a message to the Timber log and pops up a toast indicating that the message couldn't be sent.
+- `onBackPressed()`  tries to prepare the activity to finish, if it's not already done.
+- `loadQuotedTextForEdit()`  starts loading the message referenced by the given relatedMessageReference. If there is no referenced message, this method throws an exception.
+- `onProgressCancel(com.fsck.k9.fragment.AttachmentDownloadDialogFragment)`  cancels the progress dialog for the attachment being downloaded.
+- `onMessageBuildReturnPendingIntent(android.app.PendingIntent,int)`  starts an intent sender for the result of the message that the ``onMessageBuild`` method was called for.
+- `onOpenPgpInlineChange(boolean)`  checks if a flag has been set in the recipient presenter that indicates that the recipient should expect inline PGP messages. If this flag is enabled, the onCryptoPgpInlineChanged() method is called.
+
+## class `com.fsck.k9.activity.MessageInfoHolder`
+
+This class  holds information about messages.
+
+This class contains the following public method(s):
+
+- `equals(java.lang.Object)`  compares two MessageInfoHolder instances to see if they are equal. If they are not equal, then the method returns false. If they are equal, the method returns the message contents of the other instance as equal to the contents of the current instance.
+- `hashCode()`  uses the hash function to compute an integer hash of the class's elements. This integer hash can be useful for finding the location of data within a large data structure.
+
+## class `com.fsck.k9.activity.Search`
+
+This class  allows you to disable and start the search activity.
+
+This class contains the following public method(s):
+
+- `onStop()`  disables the activity.
+- `onStart()`  sets the `Active` flag to `true` so that the search activity can be started.
+- `isActive()`  checks to see if the Search object is currently active.
+- `setActive(boolean)`  sets the value of the `isActive` property of the `Search` object to the specified boolean value.
+
+## interface `com.fsck.k9.activity.ColorPickerDialog$OnColorChangedListener`
+
+This interface  calls a listener when the dialog's selected color changes.
+
+This class contains the following public method(s):
+
+- `colorChanged(int)`  call the `OnColorChanged` listener that was attached to the dialog when it was created. The `OnColorChanged` listener is supposed to be called when the dialog's selected color changes.
+
+## abstract class `com.fsck.k9.activity.K9PreferenceActivity`
+
+This abstract class  sets the language of the activity, sets the theme, and then calls the super method.
+
+This class contains the following public method(s):
+
+- `onCreate(android.os.Bundle)`  sets the language of the activity, sets the theme, and then calls the super method.
+
+## class `com.fsck.k9.activity.MessageList$StorageListenerImplementation`
+
+This class  provides the implementation code to be run when the user's account is removed from the storage.
+
+This class contains the following public method(s):
+
+- `onUnmount(java.lang.String)`  checks to see if the user's account is still valid and if it is, it runs a thread to do the UI work.
+- `onMount(java.lang.String)`  override the `onMount` method of the `com.fsck.k9.activity.MessageList$StorageListenerImplementation` class, so that it will call a specific implementation code of the `onMount` method based on the `providerId` parameter that is passed in.
+
+## abstract class `com.fsck.k9.activity.K9Activity`
+
+This abstract class  dispatches touch events, sets up gesture detectors, and initialize itself.
+
+This class contains the following public method(s):
+
+- `dispatchTouchEvent(android.view.MotionEvent)`  pre-dispatches the touch event to the K9 activity's base class.
+- `setupGestureDetector(com.fsck.k9.activity.misc.SwipeGestureDetector$OnSwipeGestureListener)`  sets up a listener on the gesture detector so that when a swipe gesture is detected, the appropriate Android action will be taken.
+- `onCreate(android.os.Bundle)`  creates a new instance of the `K9Activity` class, using the `com.fsck.k9.activity.K9ActivityCommon` class as a base. Then, it calls the `super.onCreate` method of the `K9Activity` class to initialize it.
+
+## class `com.fsck.k9.activity.K9ActivityCommon`
+
+This class  controls the look and feel of the activity using a theme and provides methods to listen for gestures and motion events.
+
+This class contains the following public method(s):
+
+- `getThemeBackgroundColor()`  gets the color of the current theme's background and returns it as an integer value.
+- `newInstance(android.app.Activity)`  creates a new instance of K9ActivityCommon bound to the activity passed as an argument.
+- `setupGestureDetector(com.fsck.k9.activity.misc.SwipeGestureDetector$OnSwipeGestureListener)`  registers a listener on the activity for when a left to right or right to left swipe is detected.
+- `preDispatchTouchEvent(android.view.MotionEvent)`  checks to see if there is a gesture detector present and if so, it will call the onTouchEvent method on the gesture detector.
+- `setLanguage(android.content.Context,java.lang.String)`  sets the language of the current Activity to be the given string (in this case, en_US).
+
+## abstract class `com.fsck.k9.activity.AccountList`
+
+This abstract class  keeps track of all the accounts that are in the system and it allows the user to select an account from the list.
+
+This class contains the following public method(s):
+
+- `onResume()`  reloads the list of accounts when this activity is resumed.
+- `onItemClick(android.widget.AdapterView,android.view.View,int,long)`  gets the BaseAccount object for the given position from the AdapterView and then calls the onAccountSelected() method, passing the BaseAccount object as an argument.
+- `populateListView(java.util.List)`  creates an instance of the `com.fsck.k9.activity.AccountList` class, fills it in with the given array of `com.fsck.k9.BaseAccount` objects, and attaches it to the UI component `ListView`.
+- `onCreate(android.os.Bundle)`  sets up the main listview of the AccountList Activity and registers an OnItemClickListener to it.
+
+## class `com.fsck.k9.activity.LauncherShortcuts`
+
+This class  sets up an Intent object and calls the `finish()` method if it's not supposed to be handling any shortcut creation or manipulation.
+
+This class contains the following public method(s):
+
+- `onCreate(android.os.Bundle)`  sets up an Intent object (which is used to track all the actions the Activity takes) and then calls the `finish()` method if it's not supposed to be handling any shortcut creation or manipulation.
+
+## class `com.fsck.k9.activity.Accounts$PasswordPromptDialog`
+
+This class  updates the text of a CharSequence object with the values provided.
+
+This class contains the following public method(s):
+
+- `onTextChanged(java.lang.CharSequence,int,int,int)`  updates the text of the given CharSequence object with the given values. The before, start, and count parameters represent where in the text the new text should start, where it should start counting from, and how many times it should be updated.
+- `afterTextChanged(android.text.Editable)`  takes the current text of the password fields in the dialog, and checks to see if either the incoming or outgoing server password fields are required. If either field is required, then the "OK" button is disabled and the enabled flag for the other password field is set.
+- `restore(android.app.Activity)`  restores the state of the activity to what it was before it was interrupted.
+- `show(com.fsck.k9.activity.Accounts)`  renders a dialog box that prompts the user for a password.
+- `retain()`  retains any entered passwords and checkbox state from the previous dialog, and if there was an incoming password view and outgoing password view, it also retains their text. Finally, it checks to see if any of the views need to be retained, and if not, it dismisses the dialog.
+- `beforeTextChanged(java.lang.CharSequence,int,int,int)`  looks for a character at position start in the text string s, then increments count and keeps looking for characters until a character is found at position after.
+
+## class `com.fsck.k9.activity.Accounts$AccountClickListener`
+
+This class  receives clicks on accounts in the Activity's "actionDisplaySearch" view.
+
+This class contains the following public method(s):
+
+- `onClick(android.view.View)`  will display the "actionDisplaySearch" activity.
+
+## class `com.fsck.k9.activity.ColorPickerDialog`
+
+This class  allows the user to select a color.
+
+This class contains the following public method(s):
+
+- `setColor(int)`  sets the color the color picker should highlight as the selected color.
+
+## class `com.fsck.k9.activity.ChooseFolder`
+
+This class  configures the search field in the menu, so users can search for folders on the device.
+
+This class contains the following public method(s):
+
+- `onOptionsItemSelected(android.view.MenuItem)`  calls the `onRefresh()` method, if it exists, if the given menu item is for a list of folders; otherwise, it calls the `super.onOptionsItemSelected()` method.
+- `onCreateOptionsMenu(android.view.Menu)`  calls the method `configureFolderSearchView(menu)` which will configure the search field in the menu.
+- `onCreate(android.os.Bundle)`  gets the account UUID for the calling app, and gets the current folder for the calling app. It then sets up an adapter to display a list of folders for the account, and sets up an onItemClickListener to handle folder clicks.
+
+## class `com.fsck.k9.activity.EditIdentity`
+
+This class  saves data related to the current identity of the user in a data bundle.
+
+This class contains the following public method(s):
+
+- `onCreate(android.os.Bundle)`  saves the current identity, account, description, name, email, reply-to, and signature data for later use.
+- `onSaveInstanceState(android.os.Bundle)`  saves the current identity of the activity in a data bundle.
+- `onBackPressed()`  saves the current identity of the user on the device.
+
+## enum `com.fsck.k9.activity.MessageCompose$Action`
+
+This enum  defines the various possible actions that a Message Compose component could take.
+
+This class contains the following public method(s):
+
+- `getTitleResource()`  returns the resource string of the MessageCompose$Action enum definition.
+
+## class `com.fsck.k9.activity.UnreadWidgetConfiguration`
+
+This class  processes requests related to the UnreadWidgetConfiguration class.
+
+This class contains the following public method(s):
+
+- `onActivityResult(int,int,android.content.Intent)`  processes requests related to the UnreadWidgetConfiguration class. Specifically, this method handles requests to choose an account or a folder.
+- `getWidgetProperties(android.content.Context,int)`  gets the properties for a given appwidgetid from SharedPreferences.
+- `deleteWidgetConfiguration(android.content.Context,int)`  removes the configuration for the given widget from the shared preferences editor.
+- `onOptionsItemSelected(android.view.MenuItem)`  allows the user to select whether they want the display of the widget to be updated (done option) or not (default option).
+- `onCreate(android.os.Bundle)`  retrieves the widget ID from an Intent and uses that to get the preferences for the UnreadWidgetConfiguration class. If the user has not selected an account yet, this method sets the title of the activity to be "Select an account".
+- `onCreateOptionsMenu(android.view.Menu)`  calls the `super.onCreateOptionsMenu` method, and then uses the `getMenuInflater`. Once it has retrieved the `R.menu.unread_widget_option` menu item from the `menu` resource, it will use the `inflate` method to create the `UnreadWidgetConfiguration` menu item, which will be visible on the `widgets` menu.
+
+## class `com.fsck.k9.activity.EmailAddressList`
+
+This class  fetches the email addresses from the underlying view and sets it as the intent extra value for the Intent object when one of the ListView'sitemClick events occurs.
+
+This class contains the following public method(s):
+
+- `onItemClick(android.widget.AdapterView,android.view.View,int,long)`  gets the email address from the underlying View and sets it as the intent extra value for the Intent object.
+- `onCreate(android.os.Bundle)`  creates a ListView with an ArrayAdapter, sets the listeners for one of itsItemClick events, and sets the title for the ListView'sitem.
+
+## class `com.fsck.k9.activity.K9PreferenceActivity$PreferenceChangeListener`
+
+This class  listens for changes to a preference in an Android application and updates the preference summary field accordingly.
+
+This class contains the following public method(s):
+
+- `onPreferenceChange(android.preference.Preference,java.lang.Object)`  updates the preference summary field with the new preference value.
+
+## class `com.fsck.k9.activity.Accounts$AccountsAdapter`
+
+This class  returns a view for the given account number and view group.
+
+This class contains the following public method(s):
+
+- `getView(int,android.view.View,android.view.ViewGroup)` (no description)
+
+## class `com.fsck.k9.activity.AccountList$AccountsAdapter`
+
+This class  returns a view of one account for each position in the list.
+
+This class contains the following public method(s):
+
+- `getView(int,android.view.View,android.view.ViewGroup)`  gets the individual account information for the given position in the list and then sets it all the views specified in the method call.
+
+## class `com.fsck.k9.activity.FolderList$FolderClickListener`
+
+This class  listens for user clicks on folders in the list, and then calls the method `actionDisplaySearch(android.view.View, String, boolean, boolean)` of the class `com.fsck.k9.activity.MessageList`.
+
+This class contains the following public method(s):
+
+- `onClick(android.view.View)`  calls the method `actionDisplaySearch(android.view.View, String, boolean, boolean)` of the class `com.fsck.k9.activity.MessageList` which is defined as follows:
+
+```java
+public void actionDisplaySearch(android.view.View view, String searchString, boolean showResults, boolean hideIcon) {
+    // Called when the user clicks on a folder in the list
+    }
+```
+
+This method will search for text contained in the clicked folder in the list and display any results in the text field in the UI.
+
+## class `com.fsck.k9.activity.Accounts`
+
+This class  allows the user to manage their accounts in an app.
+
+This class contains the following public method(s):
+
+- `onItemLongClick(android.widget.AdapterView,android.view.View,int,long)`  checks whether the user has clicked on the long item at position position in the adapter view, and if so, it returns true.
+- `onPrepareDialog(int,android.app.Dialog)`  displays a dialog box. The dialog box can have one of three specific buttons: "remove account", "clear account", or "create account".
+- `onExport(boolean,com.fsck.k9.Account)`  exports all of the globals and account                                                                                                                                                                                                
+- `onCreateDialog(int)` (no description)
+- `onCreate(android.os.Bundle)`  initializes the user interface, sets the title for the view, and handles activity restarts.
+- `listAccounts(android.content.Context)`  starts an activity that will list all the accounts in the given context.
+- `onResume()`  will call refresh() and then call the methods defined in the `com.fsck.k9.controller.MessagingController` and `com.fsck.k9.mailstore.StorageManager` classes.
+- `onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu.ContextMenuInfo)`  will get the current account location from the account instance and set the visibility of the menu item for the top or bottom account location.
+- `onItemClick(android.widget.AdapterView,android.view.View,int,long)`  opens the specified account in the app.
+- `onCreateOptionsMenu(android.view.Menu)`  creates a menu and retrieves an item from that menu to be put as the "refresh" menu item, in order to keep the activity's list of accounts refreshed.
+- `onPause()`  removes all listeners from the activity.
+- `importSettings(android.content.Context)`  imports the settings for an Accounts activity from a previous activity.
+- `setProgress(boolean)`  updates the progress bar in the user interface. If the progress is true, the bar will be filled with solid green color; if false, the bar will be filled with solid red color.
+- `onContextItemSelected(android.view.MenuItem)`  uses the MenuItem to determine which ContextItem is being selected, and if it is an account, it sets the mSelectedContextAccount field to the corresponding realAccount instance.
+- `onExport(android.content.Intent)`  takes the Intent object that was passed in as an argument and extracts the URI for the exported files. It then uses a method called startExport to actually start exporting the files.
+- `onRetainNonConfigurationInstance()`  saves a reference to a dialog or an AsyncTask that is currently being displayed, in case the user chooses to terminate the application.
+- `createUnreadSearch(android.content.Context,com.fsck.k9.BaseAccount)`  creates a new search with the given search title and filter set to "1" which means unread.
+- `onSaveInstanceState(android.os.Bundle)`  saves the state of the bundle object in outState and sets the values of some keys in outState to the values of their corresponding fields in the mSelectedContextAccount object.
+- `onOptionsItemSelected(android.view.MenuItem)`  gets the identifier for the selected menu item and invokes the appropriate functionality based on the selected menu item identifier.
+
+## class `com.fsck.k9.activity.MessageLoaderHelper`
+
+This class  ensures that all loading processes are cancelled, then clears the decode loader state so that the next time it is called, it starts from scratch.
+
+This class contains the following public method(s):
+
+- `asyncRestartMessageCryptoProcessing()`  calls the cancelAndClearCryptoOperation() method, cancelAndClearDecodeLoader() method, and then if the K9cryptoprovider is configured, it calls the startOrResumeCryptoOperation() method. If the K9cryptoprovider is not configured, then it calls the startOrResumeDecodeMessage() method.
+- `onDestroyChangingConfigurations()`  cancels any pending asynchronous callbacks, and then clears the decode loader state so that the next time it is called, it will start from scratch.
+- `onDestroy()`  cancels all loading processes, prevents future callbacks, and destroys all loading state.
+- `asyncStartOrResumeLoadingMessage(com.fsck.k9.activity.MessageReference,android.os.Parcelable)`  calls a local method named `startOrResumeLocalMessageLoader`.
+- `asyncReloadMessage()`  starts the local message loader if it wasn't already running, then it enters the method body.
+- `downloadCompleteMessage()`  starts downloading the message body from the server.
+- `onActivityResult(int,int,android.content.Intent)`  calls `messageCryptoHelper.onActivityResult` with the appropriate parameters.
+
+## class `com.fsck.k9.activity.ConfirmationDialog`
+
+This class  creates a customized confirmation dialog from an existing AlertDialog.
+
+This class contains the following public method(s):
+
+- `create(android.app.Activity,int,int,java.lang.String,int,int,java.lang.Runnable)`  creates a customized confirmation dialog from an existing AlertDialog.
+- `create(android.app.Activity,int,int,java.lang.String,int,int,java.lang.Runnable,java.lang.Runnable)`  creates a customized confirmation dialog for an Activity.
+- `create(android.app.Activity,int,int,int,int,int,java.lang.Runnable)`  creates a customized confirmation dialog. The dialog id is the unique identifier for the dialog, the title is the text to show in the dialog title, the message is the text to show in the dialog body, and the confirmButton and cancelButton are the textbox and button identifiers respectively. The action is the action to take if the user clicks the confirmButton or cancelButton.
+
+## interface `com.fsck.k9.activity.AlternateRecipientAdapter$AlternateRecipientListener`
+
+This interface  listens for changes to the recipient selection, and updates the adapter accordingly.
+
+This class contains the following public method(s):
+
+- `onRecipientChange(com.fsck.k9.view.RecipientSelectView$Recipient,com.fsck.k9.view.RecipientSelectView$Recipient)`  notifies the listener when the current or alternate recipient for the selection view changes.
+- `onRecipientRemove(com.fsck.k9.view.RecipientSelectView$Recipient)`  listens for changes to the recipient selection in the recipient select view and updates the alternate recipient adapter accordingly.
+
+## class `com.fsck.k9.activity.FolderList$FolderListHandler`
+
+This class  updates the size of a folder on the user's account, updates the user's account on-screen with the current working account information, and updates the progress bar in the action bar based on the boolean value `progress`.
+
+This class contains the following public method(s):
+
+- `accountSizeChanged(long,long)`  updates the size of a folder on the user's account.
+- `workingAccount(int)`  updates the user's account on-screen with the current working account information.
+- `progress(boolean)`  updates the progress bar in the action bar based on the boolean value `progress`.
+- `dataChanged()`  calls the notified method on the `mAdapter` object.
+- `newFolders(java.util.List)`  clears the list of folders in the adapter, adds all the folders in the new list to the list of folders in the adapter, and sets the filtered folder list to be the new list of folders.
+- `folderLoading(java.lang.String,boolean)`  grabs the folder information from the Adapter and checks to see if the folder is currently being loaded. If it is, it sets the loading state to "true".
+- `refreshTitle()`  refreshes the title of the bar at the top of the screen that lists all of the folders in the current account.
+
+## abstract class `com.fsck.k9.activity.K9ListActivity`
+
+This abstract class  sets up a GestureDetector object to listen for gestures made on the ListActivity.
+
+This class contains the following public method(s):
+
+- `setupGestureDetector(com.fsck.k9.activity.misc.SwipeGestureDetector$OnSwipeGestureListener)`  sets up a GestureDetector object to listen for gestures made on the ListActivity.
+- `onCreate(android.os.Bundle)`  creates an instance of the com.fsck.k9.activity.K9ActivityCommon class and then calls the super method on the K9ListActivity instance.
+- `onResume()`  reloads the contents of the list activity so that it is up to date.
+- `onKeyUp(int,android.view.KeyEvent)`  checks to see if the user has enabled the use of volume keys for list navigation, and if so, it sets a flag to let the activity know that the volume key was pressed.
+- `onKeyDown(int,android.view.KeyEvent)`  handles the particular key event, which is either the 'KEYCODE_VOLUME_UP' or 'KEYCODE_VOLUME_DOWN' key events, and works accordingly based on the relevant user preferences as set in the `K9`.useVolumeKeysForListNavigationEnabled` boolean flag.
+- `dispatchTouchEvent(android.view.MotionEvent)`  executes the `preDispatchTouchEvent` method of the parent activity instance, before the event is even dispatched to the child activities. This prevents child activities from reacting to the event prematurely, and allows the parent activity to control the overall flow of events.
+
+## class `com.fsck.k9.activity.ChooseFolder$ChooseFolderHandler`
+
+This class  displays a list in a view telling the user which folders they have chosen, and updates the list as the user interacts with it. The class also toasts the user periodically with messages letting them know how far along the task of choosing a folder is. Finally, the class sets the selected folder to the given position on the filesystem.
+
+This class contains the following public method(s):
+
+- `handleMessage(android.os.Message)`  updates the list in the view to show the selected folder.
+- `progress(boolean)`  toasts the user with a message telling them how far along the task of choosing a folder is.
+- `setSelectedFolder(int)`  sets the selected folder to the given position on the filesystem.
+
+## class `com.fsck.k9.activity.ActivityListener`
+
+This class  listens for notifications about account status changes, then sends a message to the account's owner about the status of the pending messages task.
+
+This class contains the following public method(s):
+
+- `searchStats(com.fsck.k9.AccountStats)`  sends a notification to the ActivityListener that the account stats have been retrieved.
+- `synchronizeMailboxFailed(com.fsck.k9.Account,java.lang.String,java.lang.String)`  tries to get the user's account and header folder name from the lock, checks if they have any messages in their mailbox, and then sets the user's account and header folder name to null. Additionally, this method updates the user's state so they know what's going on.
+- `synchronizeMailboxStarted(com.fsck.k9.Account,java.lang.String)`  loads the account description and folder name from the account, then sets the account and folder objects to be equal so that they can continue with their respective tasks. Finally, it sets a flag to indicate that the task of loading the account's description and folder name has been completed.
+- `sendPendingMessagesCompleted(com.fsck.k9.Account)`  sends a message to the account's owner informing them that all pending messages have been completed.
+- `pendingCommandStarted(com.fsck.k9.Account,java.lang.String)`  listens for any commands that have been started by the account associated with the ActivityListener instance. Once it hears of a new command being started, it updates the processingCommandTitle field to indicate the title of the new command. Additionally, it sends a message to the user informing them of the status of the current command.
+- `sendPendingMessagesFailed(com.fsck.k9.Account)`  sends a message to the account's pending messages queue, but if the account is not available then the message is not sent.
+- `getFolderTotal()`  returns the total number of folders in this activity.
+- `pendingCommandCompleted(com.fsck.k9.Account,java.lang.String)`  notifies the caller of the status of the command that was just completed.
+- `pendingCommandsProcessing(com.fsck.k9.Account)`  updates the `processingAccountDescription` field of the account object based on the `description` field of the account. It also updates the `folderCompleted` and `folderTotal` fields to indicate how much work is left to be done. Finally, it calls the `informUserOfStatus()` method to inform the user of the status of the commands.
+- `getFolderCompleted()`  checks if the activity has completed, and if so, it returns the integer `folderCompleted`.
+- `synchronizeMailboxHeadersProgress(com.fsck.k9.Account,java.lang.String,int,int)`  watches the folders and counts how many have been completed and how many are left to be completed. This information is then passed to the informUserOfStatus() method, which tells the user what is happening.
+- `synchronizeMailboxHeadersFinished(com.fsck.k9.Account,java.lang.String,int,int)`  updates the variables of the `com.fsck.k9.activity.ActivityListener` object with information about who has finished syncing their mailbox headers.
+- `folderStatusChanged(com.fsck.k9.Account,java.lang.String,int)`  notifies the user about the status of the folder the account is attached to.
+- `synchronizeMailboxFinished(com.fsck.k9.Account,java.lang.String,int,int)`  updates the fields `loadingAccountDescription` and `loadingFolderName` with the account and folder the synchronization is running in, respectively.
+- `synchronizeMailboxHeadersStarted(com.fsck.k9.Account,java.lang.String)`  logs into the Mailbox server to get the account description and then sets the folder name as the header folder name for the account.
+- `systemStatusChanged()`  updates the user on the system status.
+- `onPause(android.content.Context)`  unregisters the receiver for the `tickReceiver` activity.
+- `sendPendingMessagesStarted(com.fsck.k9.Account)`  sends a message to the designated account (identified by the `account` parameter) informing them about the progress of the pending messages task.
+- `informUserOfStatus()`  informs the user of the current status of the activity.
+- `synchronizeMailboxProgress(com.fsck.k9.Account,java.lang.String,int,int)`  calls multiple methods to provide updates to the user on the status of the mail progress. For example, it updates the folder Completed and Total fields, as well as informs the user about the status of the mail.
+- `getOperation(android.content.Context)`  checks to see if there are any pending operations (loading account, sending account, or processing account description), and if so, it returns the operation currently in progress.
+- `onResume(android.content.Context)`  registers a listener to be called every time the time changes.
+- `pendingCommandsFinished(com.fsck.k9.Account)`  keeps track of the pending commands for the given account, and upon completion prints out a message to the user.
+
+## class `com.fsck.k9.activity.NotificationDeleteConfirmation`
+
+This class  displays an AlertDialog with the messages to delete and then creates an Intent to send to the application as a result of a call to `deleteConfirm` on an associated Notification object.
+
+This class contains the following public method(s):
+
+- `onPrepareDialog(int,android.app.Dialog)`  displays an AlertDialog with the messages to delete.
+- `onCreateDialog(int)`  creates a dialog box to confirm the deletion of a notification.
+- `getIntent(android.content.Context,java.util.List)`  creates an Intent to sent to the application as a result of a call to `deleteConfirm` on an associated Notification object. The Intent includes some extra data that specifies the account uid of the user who made the call, as well as a list of references to notifications that will also be deleted.
+- `getIntent(android.content.Context,com.fsck.k9.activity.MessageReference)`  returns the Intent of the NotificationDeleteConfirmation activity, which is associated with the MessageReference passed in.
+- `onCreate(android.os.Bundle)`  sets the Android system's theme according to the preference set by the K9 activity's theme. It then extracts any extras desired by the particular Activity and displays the Dialog using the appropriate theme.
+
+## class `com.fsck.k9.activity.ChooseIdentity`
+
+This class  assigns a chosen identity to the activity doing the clicking, so that the user can select an identity from the list.
+
+This class contains the following public method(s):
+
+- `onCreate(android.os.Bundle)`  grabs the account identifier from the intent, uses the Preferences class to get the appropriate account on the device, then sets up listeners so that when the user clicks an item in the list, the chosen identity is passed to the activity doing the clicking.
+- `onResume()`  refreshes the View that is displaying the list of identities.
+
+## class `com.fsck.k9.activity.UpgradeDatabases`
+
+This class  checks to see if the user's databases have been upgraded, and if so, it launches the original Activity instead of displaying this one.
+
+This class contains the following public method(s):
+
+- `onCreate(android.os.Bundle)`  checks if the user's databases have been upgraded and, if so, it launches the original Activity instead of displaying this one.
+- `actionUpgradeDatabases(android.content.Context,android.content.Intent)`  starts the UpgradeDatabases activity if it is needed, and sets the Intent that will be used to start the activity after the upgrade is complete.
+- `onResume()`  checks to see if the upgrade was completed while the activity was paused, and if so, it launches the original activity.
+- `onPause()`  unregisters the receiver of the "database upgrade service" when the activity is paused.
+
+## class `com.fsck.k9.activity.Accounts$ImportSelectionDialog`
+
+This class  displays a dialog for the user to choose which accounts to import into the app.
+
+This class contains the following public method(s):
+
+- `restore(android.app.Activity)`  restores an Activity from the previous state.
+- `show(com.fsck.k9.activity.Accounts)`  displays the import selection dialog for the given `activity` object.
+- `show(com.fsck.k9.activity.Accounts,android.util.SparseBooleanArray)`  imports all the account descriptions from the mImportContents list into the contents list.
+- `retain()`  stores the selection state of each list item in the object mDialog. After this method is executed, mDialog is null and therefore the selection state of all list items in mDialog can be displayed in the object mSelection. Finally, this method returns true if the selection state of all list items in mSelection is desired, and false otherwise.
+
+## class `com.fsck.k9.activity.AlternateRecipientAdapter`
+
+This class  helps to bind the views in the recipient select view to the correct recipient data.
+
+This class contains the following public method(s):
+
+- `getItemId(int)`  returns the unique integer ID for the given position in the recipient list.
+- `getCount()`  returns the number of fixed list items in the recipients list.
+- `bindItemView(android.view.View,com.fsck.k9.view.RecipientSelectView$Recipient)`  sets the text of the 'itemAddressLabel' and the 'itemAddress' fields of the recipient's record in the 'recipientSelectView' to the appropriate values based on the 'address' field of the recipient.
+- `setCurrentRecipient(com.fsck.k9.view.RecipientSelectView$Recipient)`  sets the current recipient for the recipient select View to the given recipient.
+- `getItem(int)`  looks at the position passed in as an argument and returns the corresponding recipient from the list of recipients stored in the activity's recipient object.
+- `bindHeaderView(android.view.View,com.fsck.k9.view.RecipientSelectView$Recipient)`  sets the header views for the recipient select view to show the name or unknown name of the recipient, and it sets the hide header label and/or address label depending on whether the address label is empty or not
+- `isEnabled(int)`  checks to see if the provided position is in the `Alternate Recipient Adapter` header view. If it is, it returns `true`. If not, it returns `false`.
+- `setShowAdvancedInfo(boolean)`  sets the showAdvancedInfo flag on this object to the current value of the showAdvancedInfo property.
+- `getView(int,android.view.View,android.view.ViewGroup)`  returns the view for the given position, which might be a header view or an item view for the recipient list.
+- `setAlternateRecipientInfo(java.util.List)`  sets the list of recipients that will be presented in the ListView control on the AlternateRecipientAdapter screen. The indexOfCurrentRecipient variable is used to find the currently selected recipient in the list and if it is not the first recipient then the value of currentRecipient is set to the value of recipients at the indexOfCurrentRecipient position. Finally, the recipients list is removed from the variable currentRecipient and the notifyDataSetChanged method is called to notify the data set that a change has occurred.
+- `newView(android.view.ViewGroup)`  creates a new View object and sets the "tag" of that object to the "holder" object.
+
+## interface `com.fsck.k9.activity.MessageLoaderHelper$MessageLoaderCallbacks`
+
+This interface  provides callbacks for when various things happen with the message loader, like when data has loaded, an error has occurred, or the loading has finished.
+
+This class contains the following public method(s):
+
+- `onDownloadErrorNetworkError()`  will be called when an error happens while trying to download the message.
+- `onMessageDataLoadFinished(com.fsck.k9.mailstore.LocalMessage)`  will be called when the data for a message has finished loading.
+- `onMessageDataLoadFailed()`  executes any associated callbacks when a message load fails.
+- `onMessageViewInfoLoadFailed(com.fsck.k9.mailstore.MessageViewInfo)`  fires when the loading of the message view info for a given message fails.
+- `startIntentSenderForMessageLoaderHelper(android.content.IntentSender,int,android.content.Intent,int,int,int)`  starts a message listener for the given IntentSender object that will be used to handle incoming Intent messages. The parameter requestCode identifies the intent for which this listener is set up; fillIntent is the Intent object that will be used to launch the activity specified by the Intent parameter, flagsMask and flagValues are additional flags that describe the Intent, and extraFlags indicates any extra options (if any) that apply to this particular Intent.
+- `onDownloadErrorMessageNotFound()`  provides a callback function which is invoked when an error message is not found while downloading the activity.
+- `onMessageViewInfoLoadFinished(com.fsck.k9.mailstore.MessageViewInfo)`  gets the latest MessageViewInfo object that was loaded from the mailstore, and prints it to the console.
+- `setLoadingProgress(int,int)`  sets the loading progress for a MessageLoader.
+
+## interface `com.fsck.k9.activity.K9ActivityCommon$K9ActivityMagic`
+
+This interface  allows you to listen for touchscreen gestures.
+
+This class contains the following public method(s):
+
+- `setupGestureDetector(com.fsck.k9.activity.misc.SwipeGestureDetector$OnSwipeGestureListener)`  creates an instance of the `SwipeGestureDetector` class and then sets up a listener for the `OnSwipeGestureListener` interface. This interface is implemented by the class `SwipeGestureDetector.OnSwipeGestureListener` and expects one parameter, which is a reference to the instance of the `OnSwipeGestureListener` interface.
+
+## class `com.fsck.k9.activity.UpgradeDatabases$UpgradeDatabaseBroadcastReceiver`
+
+This class  checks the action attribute of the intent object and if it matches one of the supported actions (listed in the method's parameter), it will do a few things.
+
+This class contains the following public method(s):
+
+- `onReceive(android.content.Context,android.content.Intent)`  checks the action attribute of the intent object to see what it is, and if it matches one of the supported actions (listed in the method's parameter), it will do a few things. First, it will get the user's account information from the preferences file, and if it exists, it will update the upgrade text field in the phone home window with the latest information. Finally, it will launch the original activityassociated with this intent instead of processing the intent.
+
+## class `com.fsck.k9.activity.AlternateRecipientAdapter$RecipientTokenHolder`
+
+This class  helps hold a token for a recipient.
+
+This class contains the following public method(s):
+
+- `setShowAsHeader(boolean)`  determines whether the “Show as Header” toggle shown in the activity’s header should be enabled or not.
+
+## class `com.fsck.k9.activity.FolderList`
+
+This class  provides a set of methods that are called when the user selects a menu item from the main screen of the activity. These methods correspond to the numbered functions in the code example above.
+
+This class contains the following public method(s):
+
+- `onOptionsItemSelected(android.view.MenuItem)`  determines the appropriate action to be taken based on the menu item the user selected. For menu items that correspond to the numbered functions in the code example above, the method will call the corresponding function. If the user selects a menu item not in the list of functionality, or if the user selects a menu item not corresponding to a function, the method will default to calling the super class's implementation of onOptionsItemSelected.
+- `onCreateOptionsMenu(android.view.Menu)`  retrieves the menu options from the menu and sets up a search view for the user to find their mail.
+- `onKeyDown(int,android.view.KeyEvent)`  retrieves the state of the keyCode specified in the event, and depending on the code, either sets the display mode of the activity to a predefined value or returns true.
+- `onNewIntent(android.content.Intent)`  sets the Intent object's "internal" intent to the new one. It also resets the mUnreadMessageCount and initializes the activity view.
+- `onResume()`  refreshes the folder list in the background and refreshes the messages for any folder that is currently open. This guarantees that the user's read status and unread message count are always up to date.
+- `onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu.ContextMenuInfo)`  gets the ContextMenuInfo object for the given View and ContextMenu, and then uses the AdapterView.AdapterContextMenuInfo class to get the MenuInflater object and inflate the ContextMenu for the given View.
+- `onCreate(android.os.Bundle)`  loads the changelog for the current activity and creates a dialog if it's the first time the activity has been run.
+- `onSearchRequested()`  checks if the user has asked to search for something on the current device, and if they have, it starts the search.
+- `actionHandleAccountIntent(android.content.Context,com.fsck.k9.Account,boolean)`  tries to act on the intent of the account activity by invoking the corresponding action handle.
+- `onContextItemSelected(android.view.MenuItem)`  checks for a menu item with the given id, and if it exists, it calls a method called `onClearFolder` which clears the folder the given account is logged in to for that user.
+- `onRetainNonConfigurationInstance()`  ensures that we always have a reference to the active adapter, and if the adapter is no longer found, we initialize a new one.
+- `actionHandleAccount(android.content.Context,com.fsck.k9.Account)`  starts an activity to handle the account's interactions with the folder list.
+- `onPause()`  removes the listener for the "onPause" event from the "com.fsck.k9.controller.MessagingController" instance.
+
+## class `com.fsck.k9.activity.Accounts$SimpleDialog`
+
+This class  restores an activity to its original state, and then either retains the dialog so that it can be dismissed if necessary, or shows it and determines which button on the dialog should execute a "okay" button action.
+
+This class contains the following public method(s):
+
+- `restore(android.app.Activity)`  restores the activity to its original state.
+- `retain()`  determines if the dialog has been discarded (mDialog isn't null) and, if so, dismisses it. If it hasn't been discarded, it returns true, and the dialog object is put away.
+- `show(com.fsck.k9.activity.Accounts)`  generates a message to display in an Alert dialog, sets the dialog title, and determines which button on the dialog will call a method to display the "okay" button.
+
+## class `com.fsck.k9.activity.MessageReferenceHelper`
+
+This class  parses through a list of messages looking for a MessageReference object, and if it finds one, it returns the MessageReference object's toIdentityString.
+
+This class contains the following public method(s):
+
+- `toMessageReferenceList(java.util.List)`  takes a list of strings and searches through each string looking for a MessageReference object. If it finds a MessageReference object, it populated the the List with that object. Otherwise, it will create a Timber.log.Timber with a warning message about the invalid message reference.
+- `toMessageReferenceStringList(java.util.List)`  takes a list of MessageReference objects and extracts the identifier (toIdentityString) of each one. It then adds the identifiers of the messages to a list.
+
+## class `com.fsck.k9.activity.MessageReference`
+
+This class  encapsulates a message reference, which is an object that describes a particular message.
+
+This class contains the following public method(s):
+
+- `toIdentityString()`  takes the user-supplied identity version number, the string separator, the user-supplied identity, and the user-supplied unit ID, encodes them using Base64, and returns the resulting string.
+- `withModifiedUid(java.lang.String)`  returns a new MessageReference object that has the given accountUuid, folderName, and newUid. The newUid is the Uuid of the new message. The flag tells the object whether the message is new or has been modified.
+- `equals(java.lang.String,java.lang.String,java.lang.String)`  checks to see if the three arguments are equal.
+- `equals(java.lang.Object)`  checks to see if the object being compared is of the correct type (it must be a MessageReference object); if not, then the method returns false. It then checks to see if the object being compared has the same unique identifier (accountUuid), folder name, and user id as the other object. If they do, the method returns true.
+- `hashCode()`  multiplies the values of the given fields together, and then hashCode()es them to get a value.
+- `withModifiedFlag(com.fsck.k9.mail.Flag)`  returns a new MessageReference object that has the new Flag attached to it.
+- `getAccountUuid()`  returns the unique identifier for the account specified by the parameter.
+- `getUid()`  translates a user identifier (uid) into a string.
+- `parse(java.lang.String)`  parses the string given as an argument and looks for identifying information such as the account's UUID, the folder name, and the user's ID. If there is not enough data to return a meaningful result, this method will return null.
+- `getFlag()`  returns the flag for the object referenced by `flag`.
+- `toString()`  creates a string representation of the object by parsing the object's fields and putting them into a string.
+- `getFolderName()`  returns the name of the folder the given MessageReference object is located in.
+
+## class `com.fsck.k9.activity.ManageIdentities`
+
+This class  allows users to manage their identities by selecting from a list of identities. If a selected identity is a removable identity, the class disables the currently displayed identity and gives a toast notification with the string `No removable identity`
+
+This class contains the following public method(s):
+
+- `onContextItemSelected(android.view.MenuItem)`  gets the currently selected identity from the identity list in the adapter context menu, and if the selected identity is one that is removable, then it disables the currently displayed identity and displays a toast notification with the string `No removable identity`
+- `onResume()`  refreshes the views of the manage identities Activity.
+- `onCreateOptionsMenu(android.view.Menu)`  calls the `super` method to get a reference to the parent menu, and then it inflate the menu. This method will return `true` if the user chooses to navigate to the `manage identities` menu item.
+- `onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu.ContextMenuInfo)`  sets the header title of a context menu item to "Manage Identities".
+- `onOptionsItemSelected(android.view.MenuItem)`  returns whether the user selected a menu item categorized as `Manage Identities`. If the user selected a menu item of that type, it sets up an Intent object and launches the `Manage Identities` activity.
+- `onBackPressed()`  saves any changes you've made to the identities list.
+
+## class `com.fsck.k9.activity.FolderList$FolderListAdapter$FolderListFilter`
+
+This class  provides a means of filtering the folders in a list.
+
+This class contains the following public method(s):
+
+- `getSearchTerm()`  returns the term that was used to filter the folders in the list.
+
+## class `com.fsck.k9.activity.FolderListFilter`
+
+This class  invalidates the field `mOriginalValues`.
+
+This class contains the following public method(s):
+
+- `invalidate()`  sets the value of the `mOriginalValues` field to null so that it will no longer be used.
+
+## class `com.fsck.k9.activity.MessageList`
+
+This class (no description)
+
+This class contains the following public method(s):
+
+- `shortcutIntent(android.content.Context,java.lang.String)`  creates an Intent object, sets the Action string to be MessageList.ACTION_SHORTCUT, and provides a specialFolder path to which the shortcut should apply.
+- `startIntentSenderForResult(android.content.IntentSender,int,android.content.Intent,int,int,int)`  sets the requestCode field of the IntentSender to a value that signifies that the associated request is still pending.
+- `onOptionsItemSelected(android.view.MenuItem)` (no description)
+- `showNextMessageOrReturn()`  basically checks to see if the user has requested to be returned to the message list or not. If not, it then displays the message view holder. If so, it then displays the message list.
+- `onForward(com.fsck.k9.activity.MessageReference)`  forwards the given messageReference to another activity.
+- `onCreate(android.os.Bundle)`  checks if the user wants to upgrade databases; if they do, it performs the upgrade and then returns.
+- `onCompose(com.fsck.k9.Account)`  takes an account object and calls the actionCompose() method of the MessageActions class, which is defined in the com.fsck.k9.activity.compose package.
+- `setMessageListTitle(java.lang.String)`  sets the title of the main action bar of the message list to the specified title.
+- `updateMenu()`  invalidates (or updates) the options menu.
+- `onCustomKeyDown(int,android.view.KeyEvent)` (no description)
+- `onResume()`  updates the activity state based on the account information that is currently available.
+- `setUnreadCount(int)`  updates the UI elements indicating how many messages in the list have not been read.
+- `onSwitchComplete(int)`  checks the displayed child of the activity, and if it equals 0, then it remove the MessageViewFragment from the activity.
+- `onForward(com.fsck.k9.activity.MessageReference,android.os.Parcelable)`  causes the MessageList activity to invoke the actionForward() Method from the MessageActions class, which in turn will send a message to another activity with the decryptionResultForReply Parcelable attached as an argument.
+- `onKeyUp(int,android.view.KeyEvent)`  determines what key was pressed on the touchscreen (or keyboard) and if it's one of the volume up or down keys, it sends a message to the Timber logging library to log that event.
+- `onReply(com.fsck.k9.activity.MessageReference,android.os.Parcelable)`  enables a MessageActions object to be called with the messageReference and false as parameters, and the decryptionResultForReply value as the result.
+- `onRestoreInstanceState(android.os.Bundle)`  restores the previous state of the MessageList Activity, as specified by the savedInstanceState Bundle. If the state was "Message List was displayed", then the mMessageListWasDisplayed flag is set to true. If the state was "First Back Stack Id" (the first time the Activity was displayed), then the mFirstBackStackId value is set to the saved value.
+- `openMessage(com.fsck.k9.activity.MessageReference)`  opens the given MessageReference in the user's account, gets the account's Drafts folder name from the reference, and if it is the folder name of the Drafts folder, it calls the action EditDraft() on the MessageActions object associated with this list.
+- `remoteSearchStarted()`  removes the action button for searching for messages from the message list.
+- `startSearch(com.fsck.k9.Account,java.lang.String)`  checks if the account and folderName variables are null and if they are not null, it sets up the bundle and calls the startSearch method with the account and folderName parameters.
+- `actionDisplaySearch(android.content.Context,com.fsck.k9.search.SearchSpecification,boolean,boolean,boolean)`  starts an Activity with the intent "MessageList: intentDisplaySearch(context, search, noThreading, newTask, clearTop)"
+- `onReplyAll(com.fsck.k9.activity.MessageReference,android.os.Parcelable)`  schedules an action for the object it's been passed as a parameter on the object's `com.fsck.k9.activity.MessageList`'s `com.fsck.k9.activity.compose.MessageActions` object.
+- `setProgress(boolean)`  sets the visibility of the progress bar to indeterminate if the enable parameter is true or false.
+- `messageHeaderViewAvailable(com.fsck.k9.view.MessageHeader)`  sets the messageHeader view of the action bar subject to the givenMessageHeader.
+- `onPause()`  removes the listener for messages from the storage manager.
+- `onCreateOptionsMenu(android.view.Menu)`  creates a menu in the app's main menu, and then it retrieves the check_mailitem from that menu. Finally, it makes that item the active menu button.
+- `onSwipeLeftToRight(android.view.MotionEvent,android.view.MotionEvent)`  invokes the onSwipeLeftToRight method of the given MotionEvent objects, depending on the current display mode of the MessageList fragment.
+- `setActionBarTitle(java.lang.String)`  sets the title of the action bar to the given string.
+- `onSearchRequested()`  checks if the user has requested to search for a message in the list. If the user has requested to search, this method invokes the `onSearchRequested()` method of the `MessageListFragment` object, which will in turn execute the requested search.
+- `showMoreFromSameSender(java.lang.String)`  finds a message list fragment with the same sender address as the passed in parameter and loads it in.
+- `onBackStackChanged()`  calls `findFragments()` to find all the fragments in the message list, and if the `mDisplayMode` property is set to `com.fsck.k9.activity.MessageList.DisplayMode.SPLIT_VIEW` then it will also call `showMessageViewPlaceHolder()`.
+- `onReply(com.fsck.k9.activity.MessageReference)`  takes the message reference for the current message and hands it off to the onReply(…) method, which is defined below.
+
+```
+
+This method is called when a user replies to a message. It updates the message's status and sends a reply back to the sender.
+- `onBackPressed()`  checks to see if the user has selected to display a message list, and if so, it invocation of the showMessageList() method.
+- `onPrepareOptionsMenu(android.view.Menu)`  calls the method `configureMenu(android.view.Menu)` which configures the options menu for the activity.
+- `onResendMessage(com.fsck.k9.activity.MessageReference)`  calls `actionEditDraft` on the `MessageActions` object, using the `messageReference` as the input.
+- `setActionBarSubTitle(java.lang.String)`  sets the title of the action bar for the MessageList activity.
+- `actionDisplaySearch(android.content.Context,com.fsck.k9.search.SearchSpecification,boolean,boolean)`  displays the search results in a MessageList activity.
+- `intentDisplaySearch(android.content.Context,com.fsck.k9.search.SearchSpecification,boolean,boolean,boolean)`  creates an Intent and sets the extra values for the `com.fsck.k9.activity.MessageList` class.
+- `enableActionBarProgress(boolean)`  hides the action bar progress, if the user has checked the mail menu, and then sets the action bar progress to visible if enable is true.
+- `actionDisplayMessageIntent(android.content.Context,com.fsck.k9.activity.MessageReference)`  creates an Intent using the MessageList class, sets the FLAG_ACTIVITY_CLEAR_TOP flag, and adds the reference for the message that we want to show as a result of the Intent.
+- `setMessageListSubTitle(java.lang.String)`  sets the title of the "action bar" (a bar at the top of the Activity screen that contains buttons for various actions) to the given subTitle.
+- `showThread(com.fsck.k9.Account,java.lang.String,long)`  creates a MessageList fragment with the specified account, folder and thread root ID. The fragment is added to the list of fragment participants.
+- `dispatchKeyEvent(android.view.KeyEvent)`  checks which key was pressed down and if it's one of the custom key codes, it'll perform the custom handling.
+- `displayMessageSubject(java.lang.String)`  sets the subject text for the message's action bar to the given string.
+- `onSaveInstanceState(android.os.Bundle)`  stores a Bundle containing various state information for the MessageList Activity. This state information includes information about the display mode (e.g. whether the MessageList was displayed), whether the message list was displayed, and the ID of the first back stack.
+- `setActionBarUnread(int)`  sets the visibility and text of the "ActionBar Unread" indicator in the message list to the value of unread, which is either 0 (if unread is not set) or the number of unread messages in the message list.
+- `onReplyAll(com.fsck.k9.activity.MessageReference)`  takes the MessageReference as a parameter, and then calls the onReplyAll() method defined for the MessageList class with that parameter as its only argument.
+- `onSwipeRightToLeft(android.view.MotionEvent,android.view.MotionEvent)`  triggers the "onSwipeRightToLeft" method of the "mMessageListFragment" object if the "mDisplayMode" property of the "MessageList" activity is set to "MESSAGE_VIEW".
+- `goBack()`  checks if the user is in the message display mode and, if so, it calls the method `showMessageList()`. If the user is not in the message display mode, this method calls the method `finish()`.
+- `setMessageListProgress(int)`  updates the progress bar in the MessageList view.
+- `disableDeleteAction()`  disables the "delete" menu item on the "MessageList" activity's ContextMenu.
+- `onNewIntent(android.content.Intent)`  takes an Intent object and processes it as if it was a new MessageList activity.
+
+## class `com.fsck.k9.activity.FolderInfoHolder`
+
+This class  helps you compare folder names and return a number to indicate how similar the two names are.
+
+This class contains the following public method(s):
+
+- `compareTo(com.fsck.k9.activity.FolderInfoHolder)`  compares the string values of the object being compared (in this case, the name fields of the two objects) and returns a number that tells you how similar the two strings are.
+- `setMoreMessagesFromFolder(com.fsck.k9.mailstore.LocalFolder)`  checks to see if the given LocalFolder has any more messages, and if it does, it sets a new sequence number for those messages.
+- `hashCode()`  calculates the hash code for the named properties of the object.
+- `populate(android.content.Context,com.fsck.k9.mailstore.LocalFolder,com.fsck.k9.Account,int)`  sets the unread messagecount for the given account and folder in the given context.
+- `getDisplayName(android.content.Context,com.fsck.k9.Account,java.lang.String)`  looks for a folder with the given name in the provided context and returns the localized name for that folder.
+- `populate(android.content.Context,com.fsck.k9.mailstore.LocalFolder,com.fsck.k9.Account)`  populates the fields of an object with the values from a local folder and an account.
+- `equals(java.lang.Object)`  compares the given object for equality with the current object. If the object is equal to the current object, the method returns true.
+
+
+# package `com.fsck.k9.activity.compose`
+
+This package  enables the user to encrypt messages and attachments.
+
+This package contains the following class(es):
+
+## interface `com.fsck.k9.activity.compose.PgpEnabledErrorDialog$OnOpenPgpDisableListener`
+
+This interface  allows the listener to disable the compose activity when the user open the PGP dialog.
+
+This class contains the following public method(s):
+
+- `onOpenPgpClickDisable()`  notifies the listener when the user opens the PGP dialog, so that the listener can disable the compose activity.
+
+## class `com.fsck.k9.activity.compose.RecipientLoader`
+
+This class  helps load recipients for a contact or recipient list.
+
+This class contains the following public method(s):
+
+- `loadInBackground()`  loads the recipients for the given recipient list or contact URI from the given data sources.
+- `deliverResult(java.util.List)`  first caches the results of the recipient selection for later use, and then it calls the superclass's deliverResult() method if the recipient selection is already started.
+
+## class `com.fsck.k9.activity.compose.PgpInlineDialog`
+
+This class  creates a new instance of the `com.fsck.k9.activity.compose.PgpInlineDialog` class, sets the `FirstTime` field to either `1` or `0`, and displays a dialog box asking the user to confirm that they want to start an encrypted message.
+
+This class contains the following public method(s):
+
+- `newInstance(boolean,int)`  creates a new instance of the `com.fsck.k9.activity.compose.PgpInlineDialog` class, setting the `FirstTime` field to either `1` or `0` depending on whether this is the first time the dialog is being created. The dialog is then configured with the arguments passed in. Finally, the instance is returned.
+- `onCreateDialog(android.os.Bundle)`  displays a dialog box asking the user to confirm that they want to start an encrypted message.
+
+## class `com.fsck.k9.activity.compose.PgpSignOnlyDialog`
+
+This class  creates a dialog with two buttons, one to disable PGP signing and one to keep it enabled.
+
+This class contains the following public method(s):
+
+- `newInstance(boolean,int)`  creates a new instance of the PgpSignOnlyDialog class, with the firstTime flag set to true so that the dialog is created only the first time it is accessed (i.e. when it is first displayed). The dialog also has the showcaseView argument set to the ID of the fragment that will be used to highlight the signed message.
+- `onCreateDialog(android.os.Bundle)`  creates a dialog with two buttons, one to disable PGP signing and one to keep it enabled. If the user clicks the button to disable PGP signing, then the OnOpenPgpSignOnlyChangeListener (an instance of the com.fsck.k9.activity.compose.PgpSignOnlyDialog.OnOpenPgpSignOnlyChangeListener class) will be called, and it will set the signOnly attribute to false. If the user clicks the button to keep it enabled, then the OnOpenPgpSignOnlyChangeListener will be called, and it will set the signOnly attribute to true.
+
+## interface `com.fsck.k9.activity.compose.AttachmentPresenter$AttachmentMvpView`
+
+This interface  provides a UI for attaching and managing attachments.
+
+This class contains the following public method(s):
+
+- `performSaveAfterChecks()`  saves any changes made to the attachment view to the database after the checks have been run.
+- `updateAttachmentView(com.fsck.k9.activity.misc.Attachment)`  updates the UI representation of an attachment.
+- `performSendAfterChecks()`  performs a send after checking the attachment.
+- `showWaitingForAttachmentDialog(com.fsck.k9.activity.compose.AttachmentPresenter$WaitingAction)`  displays a dialog box that asks the user if they want to wait for an attachment.
+- `showPickAttachmentDialog(int)`  displays a dialog box that allows the user to select an attachment from their photo library.
+- `dismissWaitingForAttachmentDialog()`  dismisses the waiting for attachment dialog.
+- `removeAttachmentView(com.fsck.k9.activity.misc.Attachment)`  removes the attachment view from the Activity.
+- `addAttachmentView(com.fsck.k9.activity.misc.Attachment)`  adds an attachment view to the presentation.
+- `showMissingAttachmentsPartialMessageWarning()`  shows a warning to the user that some attachments are not present in the document.
+
+## class `com.fsck.k9.activity.compose.ComposeCryptoStatus`
+
+This class  checks the status of a recipient's cryptographic provider and returns a SendErrorState object if there is an error.
+
+This class contains the following public method(s):
+
+- `getSendErrorStateOrNull()`  checks the status of the crypto provider and returns a SendErrorState object if there is an error.
+- `isPgpInlineModeEnabled()`  determines whether PGP inline mode is enabled.
+- `getOpenPgpKeyId()`  gets the OpenPGP key identifier.
+- `isEncryptionEnabled()`  checks if the recipient's cryptographic status is UNCONFIGURED or if it is set to CHOICE_ENABLED or CHOICE_DISABLED. If it is set to CHOICE_ENABLED or CHOICE_DISABLED, then this method returns false. If the recipient's cryptographic status is either MUTUAL or CAN_ENCRYPT_AND_IS_MUTUAL, then this method returns true.
+- `getRecipientAddresses()`  returns a list of recipient addresses for the Compose CryptoStatus object.
+- `isProviderStateOk()`  checks to see if the crypto provider state for a recipient is OK.
+- `isSigningEnabled()`  determines if signing or encryption is enabled for the recipient.
+- `shouldUsePgpMessageBuilder()`  checks to see if the "CryptoProviderState" of the recipient presenter is "UNCONFIGURED". If it is, then the method returns "true", otherwise it returns "false".
+- `hasRecipients()`  checks to see if there are any recipients associated with the given CryptoStatus instance.
+
+## class `com.fsck.k9.activity.compose.IdentityAdapter`
+
+This class  helps manage the list of identities in an activity.
+
+This class contains the following public method(s):
+
+- `hasStableIds()`  checks if the object has stable ids.
+- `getItemId(int)`  retrieves the identifier for a given position in the list of items.
+- `getView(int,android.view.View,android.view.ViewGroup)`  gets a view for the given position in the items list, and uses that to display the name and description of the account item at that location.
+- `getViewTypeCount()`  returns the number of view types in this activity.
+- `getItem(int)`  returns the value of the `item` field of the `Items` object at the given `position` within the `Items` object.
+- `getCount()`  returns the size of the items array in the class.
+- `isEnabled(int)`  checks to see if the object at the specified position in the array of items is an instance of com.fsck.k9.activity.compose.IdentityAdapter.IdentityContainer.
+- `getItemViewType(int)`  returns the type of the object found at the Position argument.
+
+## interface `com.fsck.k9.activity.compose.RecipientPresenter$RecipientsChangedListener`
+
+This interface  listens for changes to the recipients list of the Activity presenter.
+
+This class contains the following public method(s):
+
+- `onRecipientsChanged()`  will be invoked whenever the list of recipients for the Activity presenter changes.
+
+## class `com.fsck.k9.activity.compose.PgpEncryptDescriptionDialog`
+
+This class  creates a dialog that asks the user to encrypt a file.
+
+This class contains the following public method(s):
+
+- `newInstance(int)`  creates a new instance of the com.fsck.k9.activity.compose.PgpEncryptDescriptionDialog class, sets the value of the ARG_HIGHLIGHT_VIEW parameter to the value of the showcaseView parameter, and returns the newly created instance.
+- `onCreateDialog(android.os.Bundle)`  creates a dialog that asks the user to encrypt a file.
+
+## class `com.fsck.k9.activity.compose.PgpEnabledErrorDialog`
+
+This class  creates a new instance of the `com.fsck.k9.activity.compose.PgpEnabledErrorDialog` class, sets the booleanargument isGotItDialog to true, and sets the intargument showcaseView to the value of the View ID of the dialog fragment that the user is asked to highlight in.
+
+This class contains the following public method(s):
+
+- `newInstance(boolean,int)`  creates a new instance of the `com.fsck.k9.activity.compose.PgpEnabledErrorDialog` class, sets the booleanargument isGotItDialog to true, and sets the intargument showcaseView to the value of the View ID of the dialog fragment that the user is asked to highlight in.
+- `onCreateDialog(android.os.Bundle)`  displays a dialog box asking the user to enter their PGP key to continue.
+
+## class `com.fsck.k9.activity.compose.RecipientAdapter`
+
+This class  allows the user to view and compose a recipient list.
+
+This class contains the following public method(s):
+
+- `setContactPhotoOrPlaceholder(android.content.Context,android.widget.ImageView,com.fsck.k9.view.RecipientSelectView$Recipient)`  gets a contact picture for the recipient from the contact picture loader and sets it as the imageView for the recipient select view.
+- `getView(int,android.view.View,android.view.ViewGroup)`  checks the supplied position and then uses the getItem() method of the recipientSelectView object to get the desired recipient view object. Next, it binds that view to the supplied view using the bindView() method. Finally, it returns the supplied view.
+- `getItem(int)`  looks up the item at position in the recipients list and returns it.
+- `getFilter()`  returns a new Filter object which specifies how the received data will be filtered. The first thing it does is check to see if the received Recipients object is null. If it is, then the method simply returns null. Otherwise, the method creates a new Filter object which stores the Recipients object as well as its size inixels. Once it has been created, the method calls the publishResults method on the currently supplied Filter object. This method sends a notification to the sender that the results of the filtering have been published.
+- `getCount()`  returns the size of the recipients list.
+- `getItemId(int)`  returns the unique ID for aRecipient in the Position position of the recipients array.
+- `setHighlight(java.lang.String)`  sets the highlight property of the object to the given highlight string.
+- `setRecipients(java.util.List)`  sets the list of recipient views to be used by the RecipientAdapter.
+- `setShowAdvancedInfo(boolean)`  sets the value of the `showAdvancedInfo` field to `true`.
+
+## interface `com.fsck.k9.activity.compose.PgpSignOnlyDialog$OnOpenPgpSignOnlyChangeListener`
+
+This interface  enables or disables the ability to change a signature only.
+
+This class contains the following public method(s):
+
+- `onOpenPgpSignOnlyChange(boolean)`  enables or disables the ability to change a signature only.
+
+## class `com.fsck.k9.activity.compose.ComposeCryptoStatus$ComposeCryptoStatusBuilder`
+
+This class  provides methods for configuring the CryptoMode and CryptoProviderState of the composed status builder, and for setting the recipients list and openPGP key id for the status builder.
+
+This class contains the following public method(s):
+
+- `setCryptoMode(com.fsck.k9.activity.compose.RecipientPresenter$CryptoMode)`  sets the cryptoMode property of the composition's status builder to the given cryptoMode.
+- `build()`  builds a new ComposeCryptoStatus object, setting its various properties based on the parameters provided.
+- `setCryptoProviderState(com.fsck.k9.activity.compose.RecipientPresenter$CryptoProviderState)`  builds a ComposeCryptoStatus object, sets the CryptoProviderState property to the value retrieved from the CryptoProviderState object, and returns the ComposeCryptoStatus object.
+- `setRecipients(java.util.List)`  sets the recipients list for the compose cryptographic status builder.
+- `setEnablePgpInline(boolean)`  sets the enablePgpInline property to the given boolean value.
+- `setOpenPgpKeyId(java.lang.Long)`  sets the openPGP key id for the crypto status builder.
+- `setPreferEncryptMutual(boolean)`  sets the preference for how this object will negotiate encrypting data.
+
+## class `com.fsck.k9.activity.compose.MessageActions`
+
+This class  provides an interface for composing a new message as a reply to a given message reference.
+
+This class contains the following public method(s):
+
+- `getActionReplyIntent(android.content.Context,com.fsck.k9.activity.MessageReference)`  sets the intent to send a reply message to a given message reference.
+- `actionForward(android.content.Context,com.fsck.k9.activity.MessageReference,android.os.Parcelable)`  forwards the given message to another user.
+- `getActionReplyIntent(android.content.Context,com.fsck.k9.activity.MessageReference,boolean,android.os.Parcelable)`  gets the Intent for composing a new message as a reply to the given message. It also sets the Intent's action to either ACTION_REPLY_ALL or ACTION_REPLY.
+- `actionCompose(android.content.Context,com.fsck.k9.Account)`  takes the given account as an input and then creates an Intent to send a compose message to that account.
+- `actionEditDraft(android.content.Context,com.fsck.k9.activity.MessageReference)`  continues composition of the given message. This action modifies how this Activity handles certain actions.
+- `actionReply(android.content.Context,com.fsck.k9.activity.MessageReference,boolean,android.os.Parcelable)`  updates the context to request the MessageActions.getActionReplyIntent() that was provided as an argument when the method was invoked. This method then uses this intent to request the relevant reply action from the MessageActions.
+
+## interface `com.fsck.k9.activity.compose.PgpInlineDialog$OnOpenPgpInlineChangeListener`
+
+This interface  listens for changes in the "enabled" property of an object that implements the interface.
+
+This class contains the following public method(s):
+
+- `onOpenPgpInlineChange(boolean)`  listens to changes in the "enabled" property of the object that implements the "com.fsck.k9.activity.compose.PgpInlineDialog$OnOpenPgpInlineChangeListener" interface.
+
+## class `com.fsck.k9.activity.compose.RecipientMvpView`
+
+This class (no description)
+
+This class contains the following public method(s):
+
+- `showCryptoSpecialMode(com.fsck.k9.activity.compose.RecipientMvpView$CryptoSpecialModeDisplayType)`  sets the visibility of the "cryptoSpecialModeIndicator" object to "visible" and sets the child id of the "cryptoSpecialModeDisplayType" object to the "cryptoSpecialModeDisplayType.childIdToDisplay" value.
+- `showNoRecipientsError()`  sets the error text of a view to say that there are no recipients.
+- `recipientCcTryPerformCompletion()`  tries to perform a completion for the RecipientMvpView instance.
+- `recipientToTryPerformCompletion()`  checks to see if the given recipient view is able to perform its completion operation. If so, then the method returns true.
+- `getCcRecipients()`  returns a list of RecipientSelectView instances that represent recipients of the current composition.
+- `getToRecipients()`  returns a list of recipients of the current view.
+- `getBccRecipients()`  returns a list of all recipients associated with the selected recipient in the recipient view.
+- `recipientBccHasUncompletedText()`  returns true if the recipient view has unfinished text.
+- `setCryptoProvider(java.lang.String)`  sets the crypto provider on the three views (toView, ccView, and bccView) to the value openPgpProvider.
+- `requestFocusOnCcField()`  tells the recipient view to request focus so it can be worked on.
+- `showErrorOpenPgpIncompatible()`  displays a toast notification informing the user that the current crypto provider is incompatible with OpenPGP.
+- `getToAddresses()`  returns a list of addresses in the recipient view of the composition.
+- `showOpenPgpEncryptExplanationDialog()`  creates a dialog that displays a message about OpenPGP encryption.
+- `launchUserInteractionPendingIntent(android.app.PendingIntent,int)`  launches an activity (specified by the `activity` parameter) with a pending Intent for the given `requestCode` even if that Activity doesn't already exist.
+- `showToUncompletedError()`  sets the error message of a view to the string "compose_error_incomplete_recipient".
+- `setBccVisibility(boolean)`  sets a visibility for the `bccWrapper` and `bccDivider` widgets.
+- `showErrorIsSignOnly()`  displays a toast notification informing the user that the error is only related to the lack of an encryption key.
+- `showErrorInlineAttach()`  displays a Toast message with the text 'Error attaching crypto' in a long text.
+- `getCcAddresses()`  returns a list of recipient addresses from the `ccView` instance.
+- `recipientToHasUncompletedText()`  checks if the text of a recipient is incomplete.
+- `onClick(android.view.View)`  goes to the appropriate view based on the id parameter. Then, it calls the appropriate presenter's onClick method.
+- `onFocusChange(android.view.View,boolean)`  checks to see which view has focus and, depending on that, it calls either the onToFocused() or onCcFocused() methods.
+- `recipientBccTryPerformCompletion()`  tries to perform a completion for the recipient BCC list view.
+- `isCcVisible()`  checks the visibility of the CC wrapper.
+- `getBccAddresses()`  retrieves all of the senders' email addresses from the `BccView` object and returns them as a list.
+- `setRecipientTokensShowCryptoEnabled(boolean)`  enables or DISables displaying of recipient tokens as Crypto tokens in the recipient views.
+- `showErrorContactNoAddress()`  displays an error message indicating that the contact's address cannot be found.
+- `showErrorNoKeyConfigured()`  displays the message `Error: No key configured for recipient` on the screen of the Android device where the activity is running.
+- `showErrorOpenPgpUserInteractionRequired()`  prints a message to the user informing them that they need to interact with the OpenPGP provider in order to use this recipient's activity.
+- `setLoaderManager(android.app.LoaderManager)`  sets the loader manager for the three views in the composition (toView, ccView, bccView) to the same loader manager.
+- `requestFocusOnBccField()`  requests that the recipient view in the compose window focus on the "Bcc" field.
+- `setFontSizes(com.fsck.k9.FontSizes,int)`  sets the font sizes for the three views of the recipient in the compose view.
+- `setRecipientExpanderVisibility(boolean)`  sets which child of the recipient composition view's list of child compositions to be the recipient composition view's "expander" - the part of the list that shows all of the recipient compositions.
+- `showContactPicker(int)`  calls the `activity.showContactPicker(requestCode)'` method to display the contact picker dialog box.
+- `showErrorOpenPgpConnection()`  shows a Toast onscreen alerting the user that the OpenPGP connection was not successful.
+- `addTextChangedListener(android.text.TextWatcher)`  registers a TextWatcher object on all the views in the activity.
+- `recipientCcHasUncompletedText()`  checks whether the text in the `ccView` field of the `RecipientMvpView` object is incomplete.
+- `showOpenPgpInlineDialog(boolean)`  opens a dialog box that allows you to encrypt/decrypt a message with OpenPGP.
+- `showCcUncompletedError()`  sets the error view to say that a recipient is incomplete.
+- `addRecipients(com.fsck.k9.mail.Message.RecipientType,com.fsck.k9.view.RecipientSelectView$Recipient[])`  takes a recipientType (TO, CC, or BCC) and adds recipients to the appropriate view using the same default constructor.
+- `showErrorOpenPgpRetrieveStatus()`  displays a Toast message indicating the status of the Crypto Retrieve operation for the recipient apk in the activity.
+- `requestFocusOnToField()`  requests focus on the "toView" field of the current recipient MVP view, so the user can input data into that field.
+- `showBccUncompletedError()`  sets an error message in the recipient view that indicates that there are missing recipients in the BCC list.
+- `showCryptoStatus(com.fsck.k9.activity.compose.RecipientMvpView$CryptoStatusDisplayType)`  updates the CryptoStatusDisplayType field of the recipientMvpView object to represent the current state of the crypto status of the recipient. Note that this method only updates the display; the underlying crypto status remains unchanged.
+- `showOpenPgpSignOnlyDialog(boolean)`  displays a dialog box asking the user if they want to sign only with OpenPGP.
+- `isBccVisible()`  checks if the `BCCWrapper` object for this `RecipientMvpView` object has the `VISIBLE` visibility property set to `true`.
+- `setPresenter(com.fsck.k9.activity.compose.RecipientPresenter)`  assigns the presenter to the recipient view's token listener.
+- `showOpenPgpEnabledErrorDialog(boolean)`  creates a PgpEnabledErrorDialog object and then shows it to the user.
+- `setCcVisibility(boolean)`  sets the visibility of the CC wrapper, CC divider and any other views that may be included in the MVP.
+
+## class `com.fsck.k9.activity.compose.RecipientPresenter`
+
+This class  contains methods to manage the recipient list, such as `onPrepareOptionsMenu`, `initFromSendOrViewIntent`, `onSwitchAccount`, `initFromReplyToMessage`, `checkRecipientsOkForSending`, `onCryptoModeChanged`, `onNonRecipientFieldFocused`, `shouldSaveRemotely`, `builderSetProperties`, `initFromTrustIdAction`, `onActivityResult`, and `onMenuSetEnableEncryption`.
+
+This class contains the following public method(s):
+
+- `onPrepareOptionsMenu(android.view.Menu)`  fetches the current cached crypto status, checks if crypto is configured and, if so, sets the visibility of the openpgp_encrypt and openpgp_sign_only menu items.
+- `initFromSendOrViewIntent(android.content.Intent)`  extracts the email addresses from the Intent (extraEmail) and stores them in the variables extraEmail, extraCc, and extraBcc. If any of those strings are null, the method will not do anything and return.
+- `onSwitchAccount(com.fsck.k9.Account)`  updates the recipientMvpView component to show the user's CC and BCC recipients.
+- `builderSetProperties(com.fsck.k9.message.PgpMessageBuilder,com.fsck.k9.activity.compose.ComposeCryptoStatus)`  sets the properties of the PGP message builder to the values passed in as arguments.
+- `onMenuSetPgpInline(boolean)`  uses a counter to determine whether or not the user should be shown a dialog that allows them to choose whether or not to inline PGP. If the dialog should be shown, it is displayed; otherwise, the method does nothing.
+- `getBccAddresses()`  returns a list of all the addresses that are in the `recipientMvpView` object.
+- `getCcAddresses()`  gets the list of addresses for the recipients represented in the recipient view.
+- `getCurrentCachedCryptoStatus()`  returns the cached crypto status for the recipient presenter.
+- `addBccAddresses(com.fsck.k9.mail.Address[])`  checks to see if there are any BCC recipients in the list, and if so, it adds them to the recipient list view with the appropriate type and visibility. In addition, it updates the recipient's Expandable recipient visibility.
+- `onCryptoModeChanged(com.fsck.k9.activity.compose.RecipientPresenter$CryptoMode)`  updates the recipient presenter's currentCryptoMode value.
+- `initFromTrustIdAction(java.lang.String)`  parses the provided trustId and passes it to the `addToAddresses` method to add it to the recipient addresses list. Next, the `cryptoMode` value is set to ` CHOICE_ENABLED ` so that recipients can choose whether to enable encryption or not.
+- `onNonRecipientFieldFocused()`  hides any fields that are not always included in the user's CC list.
+- `shouldSaveRemotely()`  determines if the recipient object should be saved remotely, based on the cached crypto status.
+- `builderSetProperties(com.fsck.k9.message.MessageBuilder)`  sets the properties of the MessageBuilder object to the values passed as arguments.
+- `initFromReplyToMessage(com.fsck.k9.mail.Message,boolean)`  sets the recipient's presentCryptoMode to either CHOICE_ENABLED or NO_CHOICE, based on the value of shouldEnablePgpByDefault.
+- `checkRecipientsOkForSending()`  verifies that the user has send recipients, and if they haven't, it'll show an error message.
+- `onCryptoPgpClickDisable()`  disables crypto on the recipient presenter.
+- `onRestoreInstanceState(android.os.Bundle)`  sets the visibility of the CC and BCC logos in the recipientMvpView cocurated by recipientPresenter, and sets the lastFocusedType to the value of the last recipient focused type from the savedInstanceState.
+- `onMenuAddFromContacts()`  passes a request code to the `RecipientPresenter`'s `showContactPicker()` method, so that the user can choose a contact from the list of contacts on the screen.
+- `showPgpSendError(com.fsck.k9.activity.compose.ComposeCryptoStatus$SendErrorState)`  displays a dialog box that says either the recipient is not enabled for PGP (ENABLED_ERROR) or the crypto provider is not configured (KEY_CONFIG_ERROR).
+- `onCryptoPgpInlineChanged(boolean)`  updates the cryptoEnablePgpInline flag to either true or false depending on the value of the enablePgpInline parameter.
+- `onSaveInstanceState(android.os.Bundle)`  saves the recipient presenter's current state, including the visibility of the recipient's CC and BCC fields.
+- `initFromMailto(com.fsck.k9.helper.MailTo)`  adds the email address contained in the `MailTo` object to the `addToAddresses` and `addCcAddresses` methods of the `RecipientPresenter` class.
+- `initFromDraftMessage(com.fsck.k9.mail.Message)`  initializes the recipients and the inline GPG message from the given Message object.
+- `onPgpPermissionCheckResult(android.content.Intent)`  checks the result code of the Intent received and depending on which code it is, it does different things.
+- `onActivityDestroy()`  releases any resources associated with the openPgpServiceConnection object if it is found.
+- `onSwitchIdentity(com.fsck.k9.Identity)`  updates the recipient's visibility and text field in the recipient view if the identity has changed.
+- `onMenuSetEnableEncryption(boolean)`  checks to see if the status of encryption has been cached, and, if not, it initializes the status of encryption.
+- `asyncUpdateCryptoStatus()`  updates the CryptoStatus for all recipients in the recipient list provided, checks to see if the current CryptoProviderState is OK, and if not, updates it to LostConnection. If there is an AsyncTask to run in the background, it will also call the AutocryptStatusInteractor.RetrieveCryptoProviderRecipientStatus() method to fetch the CryptoProviderRecipientStatus for the currently open PGP key.
+- `onActivityResult(int,int,android.content.Intent)`  determines the type of recipient that was selected by the user underlying the activity and then updates the Contact list with the corresponding data.
+- `onMenuSetSignOnly(boolean)`  checks if the user wants to sign only, and if so, it executes the `showOpenPgpSignOnlyDialog()` method on the recipient's MVP view.
+- `getToAddresses()`  returns a list of addresses associated with the recipient MVP view.
+- `onCryptoPgpSignOnlyDisabled()`  tells the recipient presenter that it is disables crypto signing for this recipient.
+- `isForceTextMessageFormat()`  determine if the given activity supports Force Text Message Format (FMT). If so, it returns a boolean value indicating that the activity supports FMT.
+
+## class `com.fsck.k9.activity.compose.AttachmentPresenter`
+
+This class  helps organize and deal with attachments on an activity.
+
+This class contains the following public method(s):
+
+- `addAttachment(android.net.Uri,java.lang.String)`  attempts to add an attachment at the specified URI using the ContentType provided as the parameter.
+- `checkOkForSendingOrDraftSaving()`  checks to see if the user wants to send or draft an attachment, and based on that decision, it sets the action to be performed after waiting (SEND or DRAFT).
+- `processMessageToForward(com.fsck.k9.mailstore.MessageViewInfo)`  looks for any attachments in the message that are not inline and then warns the user if any are missing.
+- `loadNonInlineAttachments(com.fsck.k9.mailstore.MessageViewInfo)`  checks if all the attachments in the messageViewInfo object are available inline. If they are all inline attachments, then it adds the attachment to the list of attachments for the MessageViewInfo object.
+- `onClickRemoveAttachment(android.net.Uri)`  removes an attachment from the attachment table.
+- `onRestoreInstanceState(android.os.Bundle)`  checks the state of the attachments present in the saved instance state, and takes appropriate actions based on that state.
+- `onClickAddAttachment(com.fsck.k9.activity.compose.RecipientPresenter)`  checks the cached crypto status of the present recipient, and if the crypto status isn't cached then it shows the user a dialog to add an attachment.
+- `onActivityResult(int,int,android.content.Intent)`  takes the Intent passed in as data and uses it to get a List<Attachment> of all the attachments on the current activity.
+- `createAttachmentList()`  creates and returns a list of attachments for the given activity.
+- `onSaveInstanceState(android.os.Bundle)`  sets the state key "STATE_KEY_WAITING_FOR_ATTACHMENTS" to the name of the action to be performed after waiting for attachments. It also sets the state key "STATE_KEY_ATTACHMENTS" to a list of Parcelable objects that will be used to create the attachment list. Lastly, it sets the state key "STATE_KEY_NEXT_LOADER_ID" to the id of the next loader to be used.
+- `attachmentProgressDialogCancelled()`  cancels the progress dialog that was started when the attachment was loaded.
+
+## interface `com.fsck.k9.activity.compose.AttachmentPresenter$AttachmentsChangedListener`
+
+This interface  listens for changes to attachments being added or removed from the presentation.
+
+This class contains the following public method(s):
+
+- `onAttachmentAdded()`  notifies the listener when an attachment is added to the presentation.
+- `onAttachmentRemoved()`  will be called when an attachment is removed from the composition.
+
+
+# package `com.fsck.k9.activity.loader`
+
+This package  allows you to load and store attachments in a cache.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.activity.loader.AttachmentContentLoader`
+
+This class  loads an attachment from the given source file and stores it in the given cache folder.
+
+This class contains the following public method(s):
+
+- `loadInBackground()`  saves an attachment from the given source file to the given cache folder.
+
+## class `com.fsck.k9.activity.loader.AttachmentInfoLoader`
+
+This class  downloads the attachment and loads it into memory.
+
+This class contains the following public method(s):
+
+- `loadInBackground()`  loads a new attachment to the activity as if it had been downloaded from the internet. It uses the content provider to get the file digests for the attachment so it can properly load the file into memory.
+
+
+# package `com.fsck.k9.activity.misc`
+
+This package  contains classes that deal with contact pictures, attachments, and swipe gestures.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideModelLoader`
+
+This class  gets a model for the pictures and uses its `loadData` method to load the pictures into an implicit data structure.
+
+This class contains the following public method(s):
+
+- `getResourceFetcher(com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideParams,int,int)`  gets the given model and uses its `loadData` method to load the pictures into an implicit data structure. It also provides override methods so that you can customise how the pictures are loaded.
+
+## class `com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideBitmapDecoder`
+
+This class  tries to decode a bitmap from a ContactPictureLoader instance's FallbackGlideParams object, decoding it to a Resource object.
+
+This class contains the following public method(s):
+
+- `decode(com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideParams,int,int)`  tries to decode a bitmap from a ContactPictureLoader instance's FallbackGlideParams object, decoding it to a Resource object. If the bitmap is not found, it tries to create it from the source picture size. Finally, it uses the drawTextAndBgColorOnBitmap() method to draw the text and background color on the bitmap.
+- `getId()`  returns the ID of the fallback glide bitmap decoder that should be used if the main bitmap decoder is not available.
+
+## class `com.fsck.k9.activity.misc.ContactPictureLoader`
+
+This class  loads contact pictures of recipients in the given mail view.
+
+This class contains the following public method(s):
+
+- `loadContactPicture(com.fsck.k9.view.RecipientSelectView$Recipient,android.widget.ImageView)`  loads the contact picture of the given recipient from the given photo thumbnail URI and address.
+- `loadContactPicture(com.fsck.k9.mail.Address,android.widget.ImageView)`  uses the contact helper class to get the photo Url for the given address and then uses it to load the photo into the Image View.
+
+## class `com.fsck.k9.activity.misc.ContactPictureLoader$FallbackGlideParams`
+
+This class  provides a fallback glide picture if the given contact address and personal data don't match any of the stored glide pictures.
+
+This class contains the following public method(s):
+
+- `getId()`  returns the id of the glide picture for the given contact address and personal.
+
+## interface `com.fsck.k9.activity.misc.SwipeGestureDetector$OnSwipeGestureListener`
+
+This interface  listens for gestures in either the right-to-left or left-to-right direction, and processes them as appropriate.
+
+This class contains the following public method(s):
+
+- `onSwipeRightToLeft(android.view.MotionEvent,android.view.MotionEvent)`  executes the following algorithm:
+
+if the touchmove is outside of the viewport, ignore it
+
+if the swipe is full-screen, flip the viewport
+
+set the gesture detector to "on swipe gesture"
+
+start progressing the gesture if the gesture detector is set
+
+This method is called when a swipe gesture is detected. This gesture is usually a two-finger swipe from the right edge of the screen to the left edge.
+- `onSwipeLeftToRight(android.view.MotionEvent,android.view.MotionEvent)`  listens for swipe gestures from the left to right direction and processes them accordingly.
+
+## class `com.fsck.k9.activity.misc.Attachment`
+
+This class  creates a new attachment with the same local URI, loaded state, content type, name, and size as the original attachment.
+
+This class contains the following public method(s):
+
+- `createAttachment(android.net.Uri,int,java.lang.String)`  creates an attachment object with the given Uri, loaderId, and contentType.
+- `deriveWithLoadComplete(java.lang.String)`  tries to load the given attachment's metadata into a temporary file, and then uses the `com.fsck.k9.activity.misc.Attachment` class to create a new attachment with the same local URI, loaded state, content type, name, and size as the original attachment.
+- `writeToParcel(android.os.Parcel,int)`  writes the value of specified fields in the Parcel to the corresponding fields in the activity. The fields that are writeable are URI, state, loaderId, contentType, and name. If size is not null, then size is written as well. Otherwise, size is set to 0.
+- `describeContents()`  returns an integer value indicating the number of items in the parcel.
+- `deriveWithLoadCancelled()`  returns a new attachment based on the given arguments.
+- `deriveWithMetadataLoaded(java.lang.String,java.lang.String,long)`  takes a String of the contents of an attachment, a String name for the attachment, the size of the attachment in bytes, and an identifier for the loader that should be used to load the metadata for the attachment. Then, it creates a new attachment with this same information, setting the LoadingState to "METADATA".
+
+## abstract class `com.fsck.k9.activity.misc.ExtendedAsyncTask`
+
+This abstract class  allows you to create AsyncTask instances that are attached to specific activities, and it also allows you to remove AsyncTask instances from activities if you want.
+
+This class contains the following public method(s):
+
+- `restore(android.app.Activity)`  connects the current AsyncTask to the newly created Activity instance after the activity has been restarted.
+- `retain()`  detaches the given AsyncTask instance from the given Activity instance and also ensures that the progress dialog is removed if it is bound to the Activity that is being destroyed.
+
+## class `com.fsck.k9.activity.misc.SwipeGestureDetector`
+
+This class  checks to see if the MotionEvent that was passed in is null or not, and if not, it attempts to grab the last MotionEvent that was fired that the detector was animating to. If that MotionEvent is null or not available, it then looks for the last OnDownEvent and uses that. After that, it calculates the X and Y movement of the MotionEvent that was passed in, and compares it to the minimum distance that it requires for a swipe to be recognized.
+
+This class contains the following public method(s):
+
+- `onFling(android.view.MotionEvent,android.view.MotionEvent,float,float)`  checks to see if the MotionEvent that was passed in is null or not, and if not, it attempts to grab the last MotionEvent that was fired that the detector was animating to. If that MotionEvent is null or not available, it then looks for the last OnDownEvent and uses that. After that, it calculates the X and Y movement of the MotionEvent that was passed in, and compares it to the minimum distance that it requires for a swipe to be recognized. If both the X and Y movement are out of bounds, or the event doesn't correspond to a swipe, then this method returns false. Otherwise, it calls onSwipeLeftToRight or onSwipeRightToLeft on the supplied MotionEvent, depending on which direction the swipe was in.
+- `onDown(android.view.MotionEvent)`  receives a MotionEvent and keeps track of the last event that was received, then it consults the superclass's onDown method and decides what to do with the event.
+
+## interface `com.fsck.k9.activity.misc.NonConfigurationInstance`
+
+This interface  restores an Activity instance that had been restarted due to a configuration change.
+
+This class contains the following public method(s):
+
+- `restore(android.app.Activity)`  connects the retained NonConfigurationInstance to the new Activity instance, after the Activity was restarted due to a configuration change.
+- `retain()`  decides whether the given NonConfigurationInstance should be retained or not. If it should be retained, the method cleans up any resources that might be necessary.
+
+
+# package `com.fsck.k9.activity.setup`
+
+This package  allows the user to setup an account on their device. It provides classes to handle the majority of the UI configuration, and also provides classes to handle account activation and the user's input.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.activity.setup.OpenPgpAppSelectDialog`
+
+This class  allows the user to select a package for which the activity setup dialog should be displayed.
+
+This class contains the following public method(s):
+
+- `onDismissApgDialog()`  will show the OpenPgpSelectDialog fragment.
+- `onCreate(android.os.Bundle)`  sets the dialog's theme to either "Theme_LIGHT" or "Theme_DARK" based on the value of the "K9.Theme" constant.
+- `onSelectProvider(java.lang.String)`  checks if the given package name is one of the packages supported by the activity setup dialog. If it is, it displays a dialog fragment to let the user know that the package is deprecated. Then, it saves the selected package setting so that the user can continue editing the dialog without having to worry about the deprecated package. Finally, it finishes the dialog.
+
+## class `com.fsck.k9.activity.setup.OpenPgpAppSelectDialog$ApgDeprecationDialogFragment`
+
+This class  displays a dialog warning the user about the deprecation of the openPGP app.
+
+This class contains the following public method(s):
+
+- `onCreateDialog(android.os.Bundle)`  displays a dialog that warns the user about the deprecation of the openPGP app.
+- `onDismiss(android.content.DialogInterface)`  calls a method on the parent activity, which in turn calls the method on the fragment.
+
+## class `com.fsck.k9.activity.setup.AccountSetupOptions`
+
+This class  sets up the views for an account setup options activity.
+
+This class contains the following public method(s):
+
+- `onCreate(android.os.Bundle)`  sets up the views for an account setup options activity. We will look at the views in more detail later.
+- `actionOptions(android.content.Context,com.fsck.k9.Account,boolean)`  extends an Intent and sets the account's UUID and makes the account the default.
+- `onClick(android.view.View)`  triggers an activity when the user clicks on a particular button.
+
+## class `com.fsck.k9.activity.setup.AuthTypeAdapter`
+
+This class  converts between the auth types supported by the activity and the types the user's system supports.
+
+This class contains the following public method(s):
+
+- `getAuthPosition(com.fsck.k9.mail.AuthType)`  looks for an item with the given authType in the activity's items list and returns the position of that item in that list.
+- `useInsecureText(boolean)`  selects a localized text label for the `AuthType.PLAIN` option presented to users, depending on whether using `insecureText` is true or false.
+- `get(android.content.Context)`  obtains a list of auth types from the user's system, and creates an instance of a class that will hold the list of auth types. Then, it sets the resource for a drop-down list that will be used to select an auth type.
+
+## class `com.fsck.k9.activity.setup.OpenPgpAppSelectDialog$OpenPgpProviderEntry`
+
+This class  provides a simple name for an object.
+
+This class contains the following public method(s):
+
+- `toString()`  returns the simple name of the object.
+
+## class `com.fsck.k9.activity.setup.AccountSetupAccountType`
+
+This class  sets the Account activation settings for an activity.
+
+This class contains the following public method(s):
+
+- `actionSelectAccountType(android.content.Context,com.fsck.k9.Account,boolean)`  sets the Intent object's "EXTRA_ACCOUNT" and "EXTRA_MAKE_DEFAULT" properties to the given "account" and "true" values, respectively, and then starts the activity associated with the AccountSetupAccountType class.
+- `onClick(android.view.View)`  fetches the account type (provided as an argument to the method), creates a settings object for that account type, and then calls the `actionIncomingSettings` method on the `com.fsck.k9.activity.setup.AccountSetupIncoming` object.
+- `onCreate(android.os.Bundle)`  sets the account type to be used for the new account, fetches the account details from the preferences, sets the make default boolean to false if it needs to be set, and saves the result to a preferences variable.
+
+## class `com.fsck.k9.activity.setup.AccountSetupOutgoing`
+
+This class  updates the visibility of the `mRequireLoginSettingsView` node based on the ```isChecked``` value.
+
+This class contains the following public method(s):
+
+- `onCheckedChanged(android.widget.CompoundButton,boolean)`  updates the visibility of the `mRequireLoginSettingsView` node based on the ```isChecked``` value.
+- `onSaveInstanceState(android.os.Bundle)`  sets the extra account field to the corresponding uuid of the Account object, sets the state security type to `position` (which can be one of `None`, `Auto`, or `Incremental`), and sets the auth type to `view position` (which can be one of `None`, `Auto`, or `Incremental`).
+- `onActivityResult(int,int,android.content.Intent)`  checks the result code, and if it is RESULT_OK, then it gets the fragment of the intent that defines what action was performed (either EDIT or MADE_DEFAULT), saves the account data prefs in that intent's data field, and finally terminates the activity.
+- `actionOutgoingSettings(android.content.Context,com.fsck.k9.Account,boolean)`  sets the account's Uuid as an extra in the Intent object, and then sets the permissions for the account to be made default.
+- `actionEditOutgoingSettings(android.content.Context,com.fsck.k9.Account)`  prompts the user for an outgoing settings for an account and updates the account's outgoing settings in the system.
+- `onCreate(android.os.Bundle)` (no description)
+- `intentActionEditOutgoingSettings(android.content.Context,com.fsck.k9.Account)`  creates an Intent object, sets the action to `Intent.ACTION_EDIT`, and sets the extra to the account's UUID.
+- `onClick(android.view.View)`  checks to see if the id of the view pointed to by v is equal to the id of the view that this activity maintains for its next button. If so, it calls the onNext() method. Otherwise, it breaks out of the switch statement.
+
+## class `com.fsck.k9.activity.setup.AccountSettings`
+
+This class  setups an Activity to handle the result of an account selection.
+
+This class contains the following public method(s):
+
+- `onCreateDialog(int)`  creates a dialog and sets the content of the dialog based on the passed in id parameter.
+- `onPrepareDialog(int,android.app.Dialog)`  opens a dialog box for the user to pick an account color.
+- `actionSettings(android.content.Context,com.fsck.k9.Account)`  creates an Intent and sets the account's UUID as the extra in the Intent. Once the Intent is created, the method starts the activity associated with the Intent.
+- `onChooseLedColor()`  calls a showDialog method to show a color picker dialog.
+- `onChooseChipColor()`  displays a dialog box that lets the user choose a chip color.
+- `onActivityResult(int,int,android.content.Intent)`  checks to see if the provided client key is valid (if it is, it calls a method to handle the result of the activity). If everything is okay, it updates the summary of the auto-expand folder.
+- `onChooseAutoExpandFolder()`  sets up an Intent to go to the ChooseFolder activity, with an extra item that specifies the folder name that the user wants the account to be automatically expanded to. It then sets the appropriate extras on the Intent, telling the ChooseFolder activity to show the folder name that was specified and to only show the folder if the user wants it to. Finally, it starts the ChooseFolder activity, and when it completes, it returns the result to the caller.
+- `onCreate(android.os.Bundle)` (no description)
+
+## class `com.fsck.k9.activity.setup.SpinnerOption`
+
+This class  provides a way to display a spinner (a widget that can be used to select one of several options) and lets you set its value using the setSpinnerOptionValue() method.
+
+This class contains the following public method(s):
+
+- `toString()`  returns the label of the SpinnerOption object.
+- `setSpinnerOptionValue(android.widget.Spinner,java.lang.Object)`  sets the value of the given object as the option in the given Spinner.
+
+## class `com.fsck.k9.activity.setup.FolderSettings`
+
+This class  saves the current folder settings and sets them up for a given account and folder.
+
+This class contains the following public method(s):
+
+- `onPause()`  saves the current folder settings.
+- `actionSettings(android.content.Context,com.fsck.k9.Account,java.lang.String)`  sets up the folder settings for the given account and folder.
+- `onCreate(android.os.Bundle)` (no description)
+
+## class `com.fsck.k9.activity.setup.AccountSetupCheckSettings`
+
+This class  configures the UI for the account setup check.
+
+This class contains the following public method(s):
+
+- `onDestroy()`  calls super.onDestroy() to clean up any resources that was leaked, cancelled the current account setup check, and sets mDestroyed and mCanceled to true.
+- `actionCheckSettings(android.app.Activity,com.fsck.k9.Account,com.fsck.k9.activity.setup.AccountSetupCheckSettings$CheckDirection)`  checks the account settings for the requested direction and, if needed, prompts the user for confirmation.
+- `onClick(android.view.View)`  triggers the `onCancel()` method if the clicked view's id is `R.id.cancel`.
+- `doPositiveClick(int)`  enables you to click on the "OK" button in the dialog box that appears whenever you attempt to create an account on the app.
+- `onCreate(android.os.Bundle)`  sets up the user interface for the checking of an account. First, a text view is created to display the account information. A progress bar is also created and set to indeterminate, so that it doesn't have a specific value and can instead update as the user interacts with the task. Then, the account information obtained from the user's intents is used to create a new CheckAccountTask object. This object is then executed, using the user's desired check direction as the input.
+- `dialogCancelled(int)`  cancels the dialog with dialogId.
+- `onActivityResult(int,int,android.content.Intent)`  receives an int (reqCode) and a int (resCode) values indicating the result of an activity, and it sets the result of the activity to the resCode.
+- `doNegativeClick(int)`  checks the dialog_account_setup_error dialog and, if it exists, sets the cancelled flag to false. If the dialog does not exist, this method either finishes the activity or breaks out of the loop.
+
+## class `com.fsck.k9.activity.setup.AccountSetupComposition`
+
+This class  sets up the views for an account setup composition, handles the results of calling the save() method on the preference object, and then sets the Intent to the appropriate Activity to handle the user's input.
+
+This class contains the following public method(s):
+
+- `onBackPressed()`  saves the current settings of the activity.
+- `onCreate(android.os.Bundle)`  sets up the views for an account setup composition.
+- `onActivityResult(int,int,android.content.Intent)`  updates the mAccount field in the activity's savedInstanceState with the result of calling the save() method on the preference object configured in the this variable.
+- `onSaveInstanceState(android.os.Bundle)`  saves the state of an AccountSetupComposition object, which is an instance of the com.fsck.k9.activity.setup.AccountSetupComposition class, to a Bundle object. Then, it assigns the object's serializable field (which is also an instance of the com.fsck.k9.activity.setup.AccountSetupComposition.EXTRA_ACCOUNT class) the value of the AccountSetupComposition object's user id.
+- `actionEditCompositionSettings(android.app.Activity,com.fsck.k9.Account)`  sets the Intent of an Activity that belongs to the class `AccountSetupComposition` to the Intent action `ACTION_EDIT`. Inside this intent, you can specify the account that you want to edit by passing in the Uri of the account's UUID. Once you have set this up, you can start the Activity and it will take you to the appropriate form to edit the account.
+
+## class `com.fsck.k9.activity.setup.ConnectionSecurityAdapter`
+
+This class  enables you to configure the connection security for an activity.
+
+This class contains the following public method(s):
+
+- `get(android.content.Context,com.fsck.k9.mail.ConnectionSecurity[])`  creates a ConnectionSecurityAdapter object with the given Context and an array of ConnectionSecurity objects. Next, it sets the ConnectionSecurityAdapter's dropDownView Resource to an R.layout.simple_spinner_dropdown_item.
+- `getConnectionSecurityPosition(com.fsck.k9.mail.ConnectionSecurity)`  returns the security status of the specified connection security for the given activity.
+- `get(android.content.Context)`  returns a ConnectionSecurityAdapter object which will allow you to access the ConnectionSecurity properties associated with the given Context object.
+
+## class `com.fsck.k9.activity.setup.WelcomeMessage`
+
+This class  sets up the WelcomeMessage view, sets some TextViews to show the conversion to HTML, and sets up a couple of listeners so that the user can navigate to the next screen and import their settings.
+
+This class contains the following public method(s):
+
+- `onCreate(android.os.Bundle)`  sets up the WelcomeMessage view, sets up some TextViews to show the conversion to HTML, and sets up a couple of listeners so that the user can navigate to the next screen and import their settings.
+- `onClick(android.view.View)`  gets the id of the view that was clicked, and then uses that id to call a method in the class `com.fsck.k9.activity.setup`. That method is `com.fsck.k9.activity.setup.AccountSetupBasics`. That method has the following code:
+
+```java
+@Override
+public void actionNewAccount(Account account) {
+    // TODO: Add your code here to create the new account
+    }
+- `showWelcomeMessage(android.content.Context)`  starts an Activity to display the WelcomeMessage.
+
+## class `com.fsck.k9.activity.setup.AccountSetupIncoming`
+
+This class  enables the user to enter their account details into the Activity, and then uses various methods to save and restart push notifications if required.
+
+This class contains the following public method(s):
+
+- `actionIncomingSettings(android.app.Activity,com.fsck.k9.Account,boolean)`  sets the account and makeDefault flags in the Intent which is sent to the Activity.
+- `onSaveInstanceState(android.os.Bundle)`  sets variables for the account's security type, authentication type, and position in the security type view.
+- `intentActionEditIncomingSettings(android.content.Context,com.fsck.k9.Account)`  attempts to create an Intent object and sets the action to 'edit'. It also sets the account property to the UUID of the account object.
+- `onClick(android.view.View)`  sets up the next activity on the screen, if the user clicks on the "next" button. If an error occurs, this method prints the error and terminates the activity.
+- `actionEditIncomingSettings(android.app.Activity,com.fsck.k9.Account)`  opens the account setup Activity and gets the account's incoming settings. It then passes this info on to the AccountSetupIncoming Intent intenthandler.
+- `onActivityResult(int,int,android.content.Intent)`  saves the user's username and password in preferences and then uses com.fsck.k9.service.MailService.actionRestartPushers() to restart push services if the user has enabled push notifications.
+- `onCreate(android.os.Bundle)` (no description)
+
+## class `com.fsck.k9.activity.setup.FontSizeSettings`
+
+This class  helps the user set the messaging text field's font size.
+
+This class contains the following public method(s):
+
+- `actionEditSettings(android.content.Context)`  starts the FontSizeSettings activity.
+- `onCreate(android.os.Bundle)`  gets the font sizes for the message compose text field, stores those in an preferences file, sets some preferences, and then sets a listener for when those preferences change so that the user sees the updated values in the notification content area.
+- `onBackPressed()`  saves the settings stored in the activity's FontSettings object to the filesystem.
+
+## class `com.fsck.k9.activity.setup.AccountSetupNames`
+
+This class  displays an input field where the user can enter the account description, and a Done button if they're finished.
+
+This class contains the following public method(s):
+
+- `onClick(android.view.View)`  calls the `onNext()` method if the user clicks on the `done` button, and it clears the screen if they click on the `next` button.
+- `onCreate(android.os.Bundle)`  creates an instance of a EditText view, sets its text field to the account description field value from the account object, and sets a boolean flag to indicate whether the Done button is enabled or not.
+- `actionSetNames(android.content.Context,com.fsck.k9.Account)`  sets the Intent object's "extra" property to the UUID of the account being setup.
+
+## class `com.fsck.k9.activity.setup.SliderPreference`
+
+This class  allows the user to set the value of the slider to be the maximum or minimum possible value.
+
+This class contains the following public method(s):
+
+- `setValue(float)`  sets the value of the slider to be the maximum or minimum possible value, depending on whether the slider should persist or not. If the value has changed, the method persists the value and then notifies the user about the change.
+- `getValue()`  returns the value of the mValue constant.
+- `getSummary()`  retrieves the summary for each preference in the summary list. If the preference has an associated summary, it returns that summary. Otherwise, it returns the summary for the preference's parent.
+- `setSummary(int)`  uses the given context's string array to set the summary for the given preference id.
+- `setSummary(java.lang.CharSequence)`  sets a CharSequence (a string) as the summary for the SliderPreference object.
+- `setSummary(java.lang.CharSequence[])`  sets the summary text for the slider preference.
+
+## class `com.fsck.k9.activity.setup.ConnectionSecurityHolder`
+
+This class  returns the string representation of the ``connectionSecurity`` field of the ``ConnectionSecurityHolder`` object.
+
+This class contains the following public method(s):
+
+- `toString()`  returns the string representation of the ``connectionSecurity`` field of the ``ConnectionSecurityHolder`` object.
+
+## class `com.fsck.k9.activity.setup.Prefs`
+
+This class  allows you to create and start an activity using an Intent.
+
+This class contains the following public method(s):
+
+- `actionPrefs(android.content.Context)`  creates an Intent and starts an activity using that Intent.
+- `onCreate(android.os.Bundle)` (no description)
+
+## class `com.fsck.k9.activity.setup.OpenPgpAppSelectDialog$OpenPgpAppSelectFragment`
+
+This class  creates a dialog, and allows the user to select one or more packages for the OpenPGP app to be installed from.
+
+This class contains the following public method(s):
+
+- `onDismiss(android.content.DialogInterface)`  dismisses the dialog created by the `onSelectProvider` method.
+- `onCreateDialog(android.os.Bundle)`  allows the user to select one or more packages from which to install the OpenPGP app. After the packages have been selected, theDialog is dismissed.
+- `onCreate(android.os.Bundle)`  gets the OpenPgpProvider object, and stores it in the selectedPackage variable.
+
+## class `com.fsck.k9.activity.setup.AuthTypeHolder`
+
+This class  returns the name of the authType as a string and sets the `insecure` boolean property of the `AuthTypeHolder` instance to the given value.
+
+This class contains the following public method(s):
+
+- `toString()`  returns the name of the authType as a string.
+- `setInsecure(boolean)`  sets the `insecure` boolean property of the `AuthTypeHolder` instance to the given value.
+
+## class `com.fsck.k9.activity.setup.AccountSetupBasics`
+
+This class  prepares the user interface for an account setup.
+
+This class contains the following public method(s):
+
+- `onSaveInstanceState(android.os.Bundle)`  saves the user's account and provider information to a Bundle.
+- `afterTextChanged(android.text.Editable)`  validates the fields in the record that was just changed.
+- `onActivityResult(int,int,android.content.Intent)`  checks to see if there are any pending outgoing transactions and, if so, it sets the user's account's description and saves it to the preferences file. Additionally, this method enables the K9 services and sets the account's name. Finally, it finishes the action.
+- `beforeTextChanged(java.lang.CharSequence,int,int,int)`  counts the number of characters from the beginning of the text field s to the position after, then it updates the text field's value to the result of stripping off the leading and trailing whitespace characters.
+- `onClick(android.view.View)`  calls the `onNext()` and `onManualSetup()` methods, depending on the id of the view that was clicked.
+- `onCreate(android.os.Bundle)`  sets up the user interface for an account setup. It initializes a couple of views (mEmailView and mPasswordView), sets up a CheckBox (mClientCertificateCheckBox) to toggle whether the user must enter a client certificate, and spinner (mClientCertificateSpinner) to show the client certificate UI. The method also sets up a Button (mNextButton) to advance to the next step in the account setup, and a Button (mManualSetupButton) to launch the manual setup flow for this account.
+- `onCreateDialog(int)`  creates a dialog and sets the appropriate buttons.
+- `onTextChanged(java.lang.CharSequence,int,int,int)`  keeps track of how many characters have been changed in s, from before to count. Then, it updates the display text (defined by start and before) accordingly.
+- `actionNewAccount(android.content.Context)`  creates an Intent to start an Activity. The Activity will be the same class as the class that this method is called from.
+- `onClientCertificateChanged(java.lang.String)`  validates the fields of the current certificate.
+- `onCheckedChanged(android.widget.CompoundButton,boolean)`  updates the view of the check box depending on whether or not the user has checked it. If the user has checked it, it uses the `mClientCertificateSpinner` to get the user to select a certificate.
+
+
+# package `com.fsck.k9.autocrypt`
+
+This package  provides the classes that allow you to interact with the AutocryptOpenPgpApi class and calculate the hash code for the AutocryptHeader object.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.autocrypt.AutocryptHeaderParser`
+
+This class  parses the Autocrypt header.
+
+This class contains the following public method(s):
+
+- `getInstance()`  gets the AutocryptHeaderParser default instance.
+
+## class `com.fsck.k9.autocrypt.AutocryptOperations`
+
+This class  implements the Autocrypt header functionality in android.content.Intent objects.
+
+This class contains the following public method(s):
+
+- `addAutocryptPeerUpdateToIntentIfPresent(com.fsck.k9.mail.Message,android.content.Intent)`  checks to see if a message has a valid Autocrypt header and if not, sets up a new Autocrypt peer update with the given key data and effective date, and attaches it to the Intent.
+- `getInstance()`  returns a new instance of the AutocryptOperations class, which is a class that provides methods to work with Autocrypt headers.
+- `addAutocryptHeaderToMessage(com.fsck.k9.mail.Message,byte[],java.lang.String,boolean)`  adds an AutocryptHeader header to a Message. The AutocryptHeader looks like this:
+
+```
+
+com.fsck.k9.autocrypt.AutocryptHeader
+{
+
+com.fsck.k9.autocrypt.AutocryptAddress
+{
+
+byte[]: "MIGdTUh0NSUlJT04="
+
+},
+
+byte[]: "alg="
+
+}
+
+preferEncryptMutual: boolean
+- `hasAutocryptHeader(com.fsck.k9.mail.Message)`  checks the length of the `AUTOCRYPT_HEADER` header field in the given `Message` object and returns `true` if it is greater than zero.
+
+## class `com.fsck.k9.autocrypt.AutocryptOpenPgpApiInteractor`
+
+This class  allows you to interact with the AutocryptOpenPgpApi class.
+
+This class contains the following public method(s):
+
+- `getInstance()`  creates a new instance of the AutocryptOpenPgpApiInteractor class.
+- `getKeyMaterialFromApi(org.openintents.openpgp.util.OpenPgpApi,long,java.lang.String)`  parses the results of a successful API call to get the key material for the given key id.
+
+## class `com.fsck.k9.autocrypt.AutocryptHeader`
+
+This class  calculates the hash code for the AutocryptHeader object, compares it against other AutocryptHeader objects, and verifies if the values of the keys, addresses, and parameters are equal.
+
+This class contains the following public method(s):
+
+- `hashCode()`  calculates the hash code for the keyData, parameters, and isPreferEncryptMutual fields of the AutocryptHeader object.
+- `equals(java.lang.Object)`  compares the given object with the current AutocryptHeader instance and verifies that the given object is either null or the corresponding class instance. If it is not, then the method evaluates whether the objects' corresponding fields are equal. If they are not, the method checks whether the values of the given objects' keys are equal, compares the values of the given objects' addresses, and compares the values of the given objects' parameters. If they are not, the method returns false.
+
+
+# package `com.fsck.k9.cache`
+
+This package  stores files for temporary usage and keeps a list of email addresses and their corresponding thread IDs.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.cache.TemporaryAttachmentStore`
+
+This class  stores files for temporary usage.
+
+This class contains the following public method(s):
+
+- `getFileForWriting(android.content.Context,java.lang.String)`  tries to find a temporary file with the given name in the directory set by the caller. If the file cannot be found, or is invalid, an IOException is thrown.
+- `getFile(android.content.Context,java.lang.String)`  tries to find a file with the given name inside the temporary attachment store. If the file is not found, then the method returns an empty file instead.
+
+## class `com.fsck.k9.cache.EmailProviderCacheCursor`
+
+This class  keeps a list of email addresses and their corresponding thread IDs. When an user requests a particular email address, the class looks it up in the cache and provides the corresponding thread ID.
+
+This class contains the following public method(s):
+
+- `getPosition()`  gets the cursor's current position in the cache.
+- `moveToNext()`  moves the cursor by 1 position, and returns the result.
+- `moveToPosition(int)`  finds the first position where the cursor (containing the supplied integer) falls behind the hidden rows table and then moves the cursor to that new position.
+- `moveToLast()`  moves the cursor to the position that has the latest data.
+- `isLast()`  compares the position of the cursor against the number of hidden rows. If the cursor is at the bottom of the list of hidden rows, then the method returns true; otherwise, the method returns false.
+- `getInt(int)`  retrieves the value associated with a given message ID and thread ID from the cache, and if the value is found, it returns an integer value. If no value is found, the method returns the default value (which is 0 in this case).
+- `moveToFirst()`  tries to find the first email in the cursor and move to that position.
+- `move(int)`  moves the provided offset to the desired position in the data store.
+- `moveToPrevious()`  moves the cursor back one position.
+- `getCount()`  returns the number of rows in the cache matching the given criteria.
+
+## class `com.fsck.k9.cache.EmailProviderCache`
+
+This class  provides an interface for storage and retrieval of thread and message information, as well as an interface for querying whether a message is hidden.
+
+This class contains the following public method(s):
+
+- `getCache(java.lang.String,android.content.Context)`  looks up the EmailProviderCache instance for the given AccountUuid, and if it isn't found, it creates the instance and adds it to the EmailProviderCache instance store.
+- `setValueForThreads(java.util.List,java.lang.String,java.lang.String)`  updates the value for a column in the thread cache based on a given value for the column in the thread root IDs list.
+- `removeValueForThreads(java.util.List,java.lang.String)`  removes the value for a given thread root ID from the thread cache.
+- `hideMessages(java.util.List)`  caches all the messages (local or imported) that match the given criteria in the `mHiddenMessageCache` object. When a new message comes in, it checks to see if it already exists in the `mHiddenMessageCache` and, if so, it updates the value of the `messageId` field with the value of the `message.getDatabaseId()` field. Finally, it calls the `notifyChange()` method to update the user interface.
+- `removeValueForMessages(java.util.List,java.lang.String)`  loops through the list of message ids and looks for a matching column in the message metadata. If it finds a matching column, it removes the value for that column. Finally, it renumbers the remaining columns in the message metadata to reflect the removal of the old values.
+- `setValueForMessages(java.util.List,java.lang.String,java.lang.String)`  updates the value in a map for a given column from a list of message ids and values.
+- `getValueForThread(java.lang.Long,java.lang.String)`  looks up a value for a given thread ID and column name in the thread cache.
+- `getValueForMessage(java.lang.Long,java.lang.String)`  looks up the value for a given messageId and columnName in the `mMessageCache` hash table, and returns the value if it exists, or null if not.
+- `unhideMessages(java.util.List)`  looks up a message id from a list of messages and compares it to a hidden message number that is stored in a cache. If the id matches, it removes the message from the cache and updates the hidden message number.
+- `isMessageHidden(java.lang.Long,long)`  checks to see if a hidden message with a given message id is in the cache, and if it is, it returns true.
+
+
+# package `com.fsck.k9.controller`
+
+This package  provides classes that allow the communication between the controller (the Application that interacts with the certificate management system) and its associated listeners.
+
+This package contains the following class(es):
+
+## interface `com.fsck.k9.controller.ProgressBodyFactory$ProgressListener`
+
+This interface  listens for changes to the progress bar, and updates the view accordingly.
+
+This class contains the following public method(s):
+
+- `updateProgress(int)`  increments the progress bar by the given integer value.
+
+## class `com.fsck.k9.controller.MessagingControllerPushReceiver`
+
+This class  sends push messages to the controller's notification user if there is a problem with the certificate.
+
+This class contains the following public method(s):
+
+- `pushError(java.lang.String,java.lang.Exception)`  sends the error message and exception to the controller's notification user if there was a problem with the certificate.
+- `messagesArrived(com.fsck.k9.mail.Folder,java.util.List)`  notifies the messaging controller that some new messages has arrived.
+- `messagesRemoved(com.fsck.k9.mail.Folder,java.util.List)`  updates the controller's messagesArrived counter whenever any messages are deleted from a folder that the controller is subscribed to.
+- `sleep(com.fsck.k9.mail.power.TracingPowerManager.TracingWakeLock,long)`  calls the sleep service, which will then execute the body of the method inside it for a given amount of time (in milliseconds).
+- `getPushState(java.lang.String)`  tries to get the push state of a specific folder from the account specified. It then uses the LocalFolder class to get the state of the relevant files (assuming they exist) and returns the information as a String.
+- `syncFolder(com.fsck.k9.mail.Folder)`  waits for the \"countDown\" timer to expire, and then it synchronizes the mailbox of the account with the given folder.
+- `authenticationFailed()`  will handle the authentication failure and do what needs to be done.
+- `getContext()`  returns the current context of the class.
+- `messagesFlagsChanged(com.fsck.k9.mail.Folder,java.util.List)`  updates the "messagesArrived" property on the "controller" object for the given "account" and "folder" combination.
+- `setPushActive(java.lang.String,boolean)`  sets the PushActive property of a listener for the given folderName to be enabled or not.
+
+## class `com.fsck.k9.controller.MemorizingMessagingListener`
+
+This class  listens for messages and updates the various properties associated with the Memory object as the messages are processed.
+
+This class contains the following public method(s):
+
+- `setPushActive(com.fsck.k9.Account,java.lang.String,boolean)`  updates the push state of a MemorizingMessagingListener with the active/inactive flag.
+- `pendingCommandsFinished(com.fsck.k9.Account)`  updates the `Memory` object associated with the `Account` object with the latest information about the state of the message processing for that account.
+- `synchronizeMailboxFinished(com.fsck.k9.Account,java.lang.String,int,int)`  updates the `memory.syncingState` internal variable to reflect the current state of the synchronization process, and then updates the values for `memory.syncingTotalMessagesInMailbox`, `memory.syncingNumNewMessages` accordingly.
+- `synchronizeMailboxStarted(com.fsck.k9.Account,java.lang.String)`  checks the state of the mailbox in the account identified by account and folder, and if it's STARTED, it syncs the mailbox. If it's already synchronized, it updates the state to MESSAGING_STATE_COMPLETED. Finally, it calculates and sets the total number of folders in the mailbox.
+- `pendingCommandStarted(com.fsck.k9.Account,java.lang.String)`  checks the memory for the given account and gets a reference to the object representing the memory for that account, before setting the processingCommandTitle attribute to the value of the commandTitle attribute of the given object.
+- `synchronizeMailboxFailed(com.fsck.k9.Account,java.lang.String,java.lang.String)`  attempts to synchronize the memory for the given account and folder with the server. If the synchronization is successful, the memory.syncingState is set to `MemorizingState.FAILED` and the memory.failureMessage is set to the message. Otherwise, the memory.syncingState is set to `MemorizingState.OK` and the memory.failureMessage is not set.
+- `sendPendingMessagesStarted(com.fsck.k9.Account)`  sets the SendingState of the memory for the corresponding account to STARTED, and it updates the memory allocated for this object to reflect the state of the sending process. Additionally, this method keeps a running count of the number of folders completed and total.
+- `pendingCommandsProcessing(com.fsck.k9.Account)`  sets the state of the Memory object to “started”, fetches the contents of the “memory” property (which is an instance of the `MemorizingMessagingListener` class), and sets the “processingState” property to “memorizingState”.
+- `synchronizeMailboxProgress(com.fsck.k9.Account,java.lang.String,int,int)`  retrieves the memory for the given account and folder name, and updates the progress and total values accordingly.
+- `sendPendingMessagesCompleted(com.fsck.k9.Account)`  updates the "sending state" of the "memory" object to "finished" and saves the updated memory object to the "memory" field in the "account" object.
+- `pendingCommandCompleted(com.fsck.k9.Account,java.lang.String)`  gets the memory for the given account and stores the current processing commandTitle in it. It also sets the memory's processingCommandTitle to null so that it won't overwrite it if it gets called again in the future.
+- `sendPendingMessagesFailed(com.fsck.k9.Account)`  updates the sending state of the memorizing messaging listener to "FAILED" as a result of trying to send pending messages for the account.
+
+## abstract class `com.fsck.k9.controller.SimpleMessagingListener`
+
+This abstract class (no description)
+
+This class contains the following public method(s):
+
+- `setPushActive(com.fsck.k9.Account,java.lang.String,boolean)`  set the active push notification setting for the specified account.
+- `messageUidChanged(com.fsck.k9.Account,java.lang.String,java.lang.String,java.lang.String)`  updates the message uid in the account's folder structure as specified by the oldUid and newUid parameters.
+- `sendPendingMessagesFailed(com.fsck.k9.Account)`  notifies listeners that there were some messages that were failed to be sent.
+- `pendingCommandsProcessing(com.fsck.k9.Account)`  updates the `com.fsck.k9.account.Status` field of the `com.fsck.k9.account` object with the results of the commands processing for the given `account` object.
+- `sendPendingMessagesCompleted(com.fsck.k9.Account)`  sends a message to the account's pending messages queue to let the account know that all pending messages have been successfully sent.
+- `listFoldersFailed(com.fsck.k9.Account,java.lang.String)`  prints a list of folders that failed to be checked.
+- `remoteSearchServerQueryComplete(java.lang.String,int,int)`  completes the query for the given remote search folder (folderName) and returns the results count (numResults) and maximum results count (maxResults).
+- `checkMailStarted(android.content.Context,com.fsck.k9.Account)`  checks to see if the messaging service has started up.
+- `pendingCommandStarted(com.fsck.k9.Account,java.lang.String)`  tracks when a command related to the given account has started.
+- `loadAttachmentFailed(com.fsck.k9.Account,com.fsck.k9.mail.Message,com.fsck.k9.mail.Part,java.lang.String)`  fires a callback when an attachment fails to load.
+- `checkMailFinished(android.content.Context,com.fsck.k9.Account)`  checks to see if the email sending process has been completed.
+- `remoteSearchFinished(java.lang.String,int,int,java.util.List)`  sends a search query to the K9 server, and based on the response, it updates the listeners' relevant data.
+- `remoteSearchFailed(java.lang.String,java.lang.String)`  prints out a message to the console if the remote search for a file or folder on a remote server fails.
+- `synchronizeMailboxStarted(com.fsck.k9.Account,java.lang.String)`  checks to see if the mailbox of the given account is currently started and, if so, updates its state.
+- `synchronizeMailboxNewMessage(com.fsck.k9.Account,java.lang.String,com.fsck.k9.mail.Message)`  attempts to remember what new messages are in the specified account's mailbox and updates the listener's internal data structures accordingly.
+- `accountSizeChanged(com.fsck.k9.Account,long,long)`  updates the size of an account.
+- `synchronizeMailboxHeadersFinished(com.fsck.k9.Account,java.lang.String,int,int)`  finished synchronizing mailbox headers for the given account and folder.
+- `sendPendingMessagesStarted(com.fsck.k9.Account)`  starts the process of sending pending messages for the given account.
+- `synchronizeMailboxFailed(com.fsck.k9.Account,java.lang.String,java.lang.String)`  attempts to get a list of messages in the given account's mailbox from the given folder on the server, and if it fails, it prints an error message.
+- `enableProgressIndicator(boolean)`  enables/disables a progress indicator on the messaging client.
+- `synchronizeMailboxProgress(com.fsck.k9.Account,java.lang.String,int,int)`  updates the progress of mailbox actions on an account by calling the corresponding methods on the account's SimpleMessagingListener object.
+- `synchronizeMailboxFinished(com.fsck.k9.Account,java.lang.String,int,int)` 
+- `accountStatusChanged(com.fsck.k9.BaseAccount,com.fsck.k9.AccountStats)`  updates the account status with the account stats.
+- `messageDeleted(com.fsck.k9.Account,java.lang.String,com.fsck.k9.mail.Message)`  deletes the message from the given account and folder.
+- `pendingCommandsFinished(com.fsck.k9.Account)`  notifies the listener that all pending commands for the specified account have finished.
+- `listFoldersStarted(com.fsck.k9.Account)`  prints a list of folders that have been started on the given account.
+- `folderStatusChanged(com.fsck.k9.Account,java.lang.String,int)`  notifies the listener when the folder status of account's folder changes.
+- `emptyTrashCompleted(com.fsck.k9.Account)`  calls `clear garbage` on the account.
+- `loadMessageRemoteFailed(com.fsck.k9.Account,java.lang.String,java.lang.String,java.lang.Throwable)`  tries to load a message from the given folder and user ID, but if the message couldn't be loaded for some reason, the method will throw an exception.
+- `synchronizeMailboxHeadersProgress(com.fsck.k9.Account,java.lang.String,int,int)`  updates a progress bar indicating the status of syncing mailbox headers between the the account and the folder.
+- `synchronizeMailboxHeadersStarted(com.fsck.k9.Account,java.lang.String)`  keeps track of when the headers of a mailbox have been synchronized.
+- `listFolders(com.fsck.k9.Account,java.util.List)`  iterates through the folders stored in the given account and prints the contents of each folder to the console.
+- `listFoldersFinished(com.fsck.k9.Account)`  determines if the list of folders for the given account has finished.
+- `loadAttachmentFinished(com.fsck.k9.Account,com.fsck.k9.mail.Message,com.fsck.k9.mail.Part)`  waits for the `loadAttachmentFinished` method in a listener (this listener is implemented in the class `com.fsck.k9.controller.SimpleMessagingListener`) to be called, and when it is, it checks to see if the attachment has been successfully loaded.
+- `systemStatusChanged()`  broadcasts any system status changes to all interested listeners.
+- `synchronizeMailboxRemovedMessage(com.fsck.k9.Account,java.lang.String,com.fsck.k9.mail.Message)`  reads the message from the message database and compares it to the MailboxRemovedMessage object that is stored on the account. If they are the same, it marks the message as removed from the mailbox on the account.
+- `loadMessageRemoteFinished(com.fsck.k9.Account,java.lang.String,java.lang.String)`  loads a message from the given account and folder in the given user's mailbox.
+- `remoteSearchStarted(java.lang.String)`  updates the SimpleMessagingListener instance's 'remoteSearchState' property to indicate that a remote search has started.
+- `updateProgress(int)`  updates the progress bar indicating how far through the messaging operation the current thread is.
+- `pendingCommandCompleted(com.fsck.k9.Account,java.lang.String)`  waits for the given command to completed, and then it will update the observer accordingly.
+- `listLocalMessagesAddMessages(com.fsck.k9.Account,java.lang.String,java.util.List)`  appends messages to the given message list in the given local folder of the given account.
+- `searchStats(com.fsck.k9.AccountStats)`  searches the stats for the given entity through the given messaging service.
+
+## class `com.fsck.k9.controller.PendingCommandSerializer`
+
+This class  deserializes a pending command from JSON data into a MessagingControllerCommands.PendingCommand object.
+
+This class contains the following public method(s):
+
+- `unserialize(long,java.lang.String,java.lang.String)`  deserializes a pending command from JSON data into a MessagingControllerCommands.PendingCommand object.
+- `serialize(com.fsck.k9.controller.MessagingControllerCommands$PendingCommand)`  serializes a pending command into a JSON object.
+- `getInstance()`  returns the default instance of the com.fsck.k9.controller.PendingCommandSerializer class.
+
+## class `com.fsck.k9.controller.MessagingControllerCommands$PendingMoveOrCopy`
+
+This class  allows you to create a new instance of the `com.fsck.k9.controller.MessagingControllerCommands.PendingMoveOrCopy` class with the source and destination folders, and set the 'isCopy' property to true.
+
+This class contains the following public method(s):
+
+- `create(java.lang.String,java.lang.String,boolean,java.util.Map)`  creates a new instance of the `com.fsck.k9.controller.MessagingControllerCommands.PendingMoveOrCopy` class with the source folder (passed in as a string) and the destination folder (also passed in as strings) and sets the parameter isCopy to true.
+- `create(java.lang.String,java.lang.String,boolean,java.util.List)`  creates a new instance of the `com.fsck.k9.controller.MessagingControllerCommands.PendingMoveOrCopy` class with the given source and destination folders, and sets the 'isCopy' property to true.
+- `getCommandName()`  returns the name of the command associated with the pending move or copy operation.
+- `execute(com.fsck.k9.controller.MessagingController,com.fsck.k9.Account)`  processes any pending moves or copies that are identified in the given account.
+
+## class `com.fsck.k9.controller.MessagingControllerCommands$PendingEmptyTrash`
+
+This class  contains methods that allow a user to create a new instance of the class `com.fsck.k9.controller.MessagingControllerCommands.PendingEmptyTrash` and to call the `processPendingEmptyTrash` method on the `MessagingController` object to process a message.
+
+This class contains the following public method(s):
+
+- `create()`  creates a new instance of the class `com.fsck.k9.controller.MessagingControllerCommands.PendingEmptyTrash` and returns it.
+- `execute(com.fsck.k9.controller.MessagingController,com.fsck.k9.Account)`  calls the `processPendingEmptyTrash` method on the `MessagingController` object, and the `account` parameter is used to identify the account associated with the message that is being processed.
+- `getCommandName()`  returns the command name for the pending empty trash command.
+
+## class `com.fsck.k9.controller.MessagingControllerCommands$PendingMarkAllAsRead`
+
+This class  creates and executes pending mark all as read commands.
+
+This class contains the following public method(s):
+
+- `create(java.lang.String)`  creates a new pending mark all as read command for the given folder.
+- `execute(com.fsck.k9.controller.MessagingController,com.fsck.k9.Account)`  will tell the messaging controller to process all pending marks as read.
+- `getCommandName()`  returns the name of the command that marks all messages as read.
+
+## abstract class `com.fsck.k9.controller.MessagingControllerCommands$PendingCommand`
+
+This abstract class  stores a list of commands that are currently being processed by the messaging controller, and it provides a method to execute any of those commands against an account.
+
+This class contains the following public method(s):
+
+- `getCommandName()`  returns the name of the command that's currently being processed by the messaging controller.
+- `execute(com.fsck.k9.controller.MessagingController,com.fsck.k9.Account)`  takes a controller and an account and executes any pending commands on the controller against the account.
+
+## interface `com.fsck.k9.controller.MessagingListener`
+
+This interface (no description)
+
+This class contains the following public method(s):
+
+- `synchronizeMailboxNewMessage(com.fsck.k9.Account,java.lang.String,com.fsck.k9.mail.Message)`  attempts to connect to the appropriate Mailbox and send the message contained within it to the account's Message store.
+- `pendingCommandsProcessing(com.fsck.k9.Account)`  processes notifications for pending commands that have been invoked on the given account.
+- `setPushActive(com.fsck.k9.Account,java.lang.String,boolean)`  sets the "push active" flag on the specified account and folder.
+- `pendingCommandsFinished(com.fsck.k9.Account)`  confirms that all commands associated with the given account have been completed.
+- `listFoldersFailed(com.fsck.k9.Account,java.lang.String)`  prints a list of folders that failed to be recreated on the account.
+- `loadMessageRemoteFinished(com.fsck.k9.Account,java.lang.String,java.lang.String)`  tries to load a message from the given user's mailbox in the given folder, and if it can't find the message, it logs a message to the console.
+- `loadAttachmentFailed(com.fsck.k9.Account,com.fsck.k9.mail.Message,com.fsck.k9.mail.Part,java.lang.String)`  attempts to load an attachment from the account specified in account and message. If the attachment isn't found, the reason parameter is set to the error message.
+- `synchronizeMailboxHeadersFinished(com.fsck.k9.Account,java.lang.String,int,int)`  synchronizes mailbox header information.
+- `checkMailStarted(android.content.Context,com.fsck.k9.Account)`  checks if the「営業メールアドレス」is set for the account and if so, it notifies the listener that the mail has been started.
+- `loadMessageRemoteFailed(com.fsck.k9.Account,java.lang.String,java.lang.String,java.lang.Throwable)`  tries to load a message from the "folder" (specified by "uid") of the "account" (specified by "account") using the "uuid" (specified by "uid") of the "this" object as the "reference" object. If the message could not be loaded, then an "Exception" object is thrown.
+- `messageUidChanged(com.fsck.k9.Account,java.lang.String,java.lang.String,java.lang.String)`  allows the controller to easily determine the uid of a newly-added message in a specified folder.
+- `remoteSearchServerQueryComplete(java.lang.String,int,int)`  completes a remote search on a server.
+- `folderStatusChanged(com.fsck.k9.Account,java.lang.String,int)`  informs the user about the current folder status.
+- `listFoldersStarted(com.fsck.k9.Account)`  returns a list of folders that the given account has started folding.
+- `enableProgressIndicator(boolean)`  tells the controller whether or not to show a progress indicator in the messages detail pane.
+- `synchronizeMailboxRemovedMessage(com.fsck.k9.Account,java.lang.String,com.fsck.k9.mail.Message)`  synchronizes the removal of a message from a specified mailbox from the account specified.
+- `synchronizeMailboxHeadersProgress(com.fsck.k9.Account,java.lang.String,int,int)`  attempts to synchronize the mailbox headers for the given account and folder.
+- `emptyTrashCompleted(com.fsck.k9.Account)`  completes the task of deleting an account's trash.
+- `systemStatusChanged()`  listens for system status changes and notifies the caller of that change.
+- `loadAttachmentFinished(com.fsck.k9.Account,com.fsck.k9.mail.Message,com.fsck.k9.mail.Part)`  finishes loading an attachment from the account's message store into the listener's memory.
+- `synchronizeMailboxProgress(com.fsck.k9.Account,java.lang.String,int,int)`  updates the progress of an account (folder) for the current syncing operation. The completed and total parameters represent how far along in the syncing process the account (folder) is currently.
+- `sendPendingMessagesCompleted(com.fsck.k9.Account)`  sends a message to the account's messaging queue informing the account that all of the pending messages have been sent.
+- `synchronizeMailboxHeadersStarted(com.fsck.k9.Account,java.lang.String)`  tries to synchronize the email headers of the specified account in the given folder.
+- `remoteSearchFinished(java.lang.String,int,int,java.util.List)`  updates the listener with the results of the remote search.
+- `synchronizeMailboxStarted(com.fsck.k9.Account,java.lang.String)`  will synchronize the mailbox state of the account with the given folder.
+- `searchStats(com.fsck.k9.AccountStats)`  searches for messages within the given account stats.
+- `pendingCommandCompleted(com.fsck.k9.Account,java.lang.String)`  listens for messages that have been sent from the account's messaging system and it processes them.
+- `messageDeleted(com.fsck.k9.Account,java.lang.String,com.fsck.k9.mail.Message)`  removes a message from the specified account's folder.
+- `checkMailFinished(android.content.Context,com.fsck.k9.Account)`  checks if the mail has been sent.
+- `remoteSearchStarted(java.lang.String)`  starts the remote search for a file or folder.
+- `updateProgress(int)`  updates the global progress indicator for the messaging controller.
+- `listFolders(com.fsck.k9.Account,java.util.List)`  returns a list of all the folders belonging to the account specified in the first parameter.
+- `remoteSearchFailed(java.lang.String,java.lang.String)`  reports an error if the user is not authorized to perform a remote search on the specified folder.
+- `listFoldersFinished(com.fsck.k9.Account)`  returns a list of all the folders in the account that have been completed.
+- `sendPendingMessagesStarted(com.fsck.k9.Account)`  starts the process of sending pending messages to the account.
+- `accountSizeChanged(com.fsck.k9.Account,long,long)`  updates the size of the account in bytes.
+- `synchronizeMailboxFailed(com.fsck.k9.Account,java.lang.String,java.lang.String)`  tries to resynchronize the mailbox associated with account with the folder and the message inside it.
+- `sendPendingMessagesFailed(com.fsck.k9.Account)`  sends a notification to the listener that messages for the given account have failed.
+- `synchronizeMailboxFinished(com.fsck.k9.Account,java.lang.String,int,int)`  updates the _totalMessagesInMailbox_ and _numNewMessages_ properties of the account's mailbox with the numbers of new and old messages in the folder.
+- `accountStatusChanged(com.fsck.k9.BaseAccount,com.fsck.k9.AccountStats)`  fires off an event called `accountStatusChanged` when the status of the given account changes.
+- `listLocalMessagesAddMessages(com.fsck.k9.Account,java.lang.String,java.util.List)`  attempts to add messages to the specified folder in the account's mail store, if it does not exist, and if the folder exists, it adds the messages to the folder.
+- `pendingCommandStarted(com.fsck.k9.Account,java.lang.String)`  listens for messages that contain the specified commandTitle. If it detects a message, it then executes the command contained in the message.
+
+## interface `com.fsck.k9.controller.MessagingController$MessageActor`
+
+This interface  allows an application to manage messages in a messageFolder.
+
+This class contains the following public method(s):
+
+- `act(com.fsck.k9.Account,com.fsck.k9.mailstore.LocalFolder,java.util.List)`  performs actions on messages in the messageFolder.
+
+## class `com.fsck.k9.controller.MessagingControllerCommands$PendingAppend`
+
+This class  manages commands that are pending for appending to the messaging controller.
+
+This class contains the following public method(s):
+
+- `getCommandName()`  returns the name of the command that is currently pending for appending to the messaging controller.
+- `create(java.lang.String,java.lang.String)`  creates a new instance of the com.fsck.k9.controller.MessagingControllerCommands.PendingAppend class, specifying the desired folder name and user ID.
+- `execute(com.fsck.k9.controller.MessagingController,com.fsck.k9.Account)`  executes the command for an account that is pending an append message.
+
+## class `com.fsck.k9.controller.MessagingController$Command`
+
+This class  compares the frequencies of the two commands.
+
+This class contains the following public method(s):
+
+- `compareTo(com.fsck.k9.controller.MessagingController$Command)`  compares the frequencies of the two commands. If the commands have the same frequency, it returns 1. Otherwise, if the commands have different frequencies, it returns -1.
+
+## class `com.fsck.k9.controller.UidReverseComparator`
+
+This class  compares two ids in reverse order.
+
+This class contains the following public method(s):
+
+- `compare(com.fsck.k9.mail.Message,com.fsck.k9.mail.Message)`  compares two ids in reverse order.
+
+## class `com.fsck.k9.controller.MessagingController`
+
+This class (no description)
+
+This class contains the following public method(s):
+
+- `getAccountStats(android.content.Context,com.fsck.k9.Account,com.fsck.k9.controller.MessagingListener)`  gets the stats for a given account from the account's stats() method. This method then notifies the listener of any changes to the account's status.
+- `copyMessage(com.fsck.k9.Account,java.lang.String,com.fsck.k9.activity.MessageReference,java.lang.String)`  copies a message from one account to another account.
+- `listFoldersSynchronous(com.fsck.k9.Account,boolean,com.fsck.k9.controller.MessagingListener)`  calls the `listFoldersCallback` method for each folder in the `remote` folder list, and finally finishes the call by calling `listFoldersFinished` on the `listeners` list.
+- `getPushers()`  returns a collection of all the pushers associated with the messaging controller.
+- `getId(com.fsck.k9.mail.Message)`  looks up the id for a Message object based on the message's database id.
+- `isCopyCapable(com.fsck.k9.activity.MessageReference)`  checks to see if the given MessageReference object can be moved.
+- `moveMessage(com.fsck.k9.Account,java.lang.String,com.fsck.k9.activity.MessageReference,java.lang.String)`  moves a message from srcFolder to destFolder.
+- `copyMessagesInThread(com.fsck.k9.Account,java.lang.String,java.util.List,java.lang.String)`  takes an input of an account and a source folder, and it then tries to collect messages in that folder from the source account into an list called `messagesInThreads`. Once the list has been collected, it then moves the messages from the threads to the destination folder.
+- `isCopyCapable(com.fsck.k9.Account)`  checks to see if the local store (the one on the current machine) and the remote store (the one the account is associated with) are both compatible with copy capability.
+- `recreate(com.fsck.k9.Account,com.fsck.k9.controller.MessagingListener)`  creates a new instance of the `com.fsck.k9.controller.MessagingController` class, sets the `listeners` attribute to contain the `MessagingListener` instance passed as an argument, and then calls the `recreate` method on the `com.fsck.k9.account` instance.
+- `checkMail(android.content.Context,com.fsck.k9.Account,boolean,boolean,com.fsck.k9.controller.MessagingListener)`  checks the mail for one or multiple accounts. If the account is null, all accounts are checked.
+- `debugClearMessagesLocally(java.util.List)`  loops through all the messages in the list, and for each one, it calls the `debugClearLocalData` method on the corresponding message object.
+- `expunge(com.fsck.k9.Account,java.lang.String)`  queues up the expunge operation for the specified account and folder in the messaging controller.
+- `markAllMessagesRead(com.fsck.k9.Account,java.lang.String)`  marks all messages in the specified folder as read.
+- `setupPushing(com.fsck.k9.Account)` (no description)
+- `getSearchAccountStatsSynchronous(com.fsck.k9.search.SearchAccount,com.fsck.k9.controller.MessagingListener)`  gets the account stats for all the accounts that are related to the SearchAccount. It then converts the string representations of the count (i.e. UNREAD_COUNT and FLAGGED_COUNT) to integer values and notifies the listener.
+- `deleteMessage(com.fsck.k9.activity.MessageReference,com.fsck.k9.controller.MessagingListener)`  removes a message from the messaging system, and then tells the messaging listener to remove any references it has to that message.
+- `getCheckMailListener()`  returns a listener that responds to notifications of new messages in the system.
+- `setFlagForThreads(com.fsck.k9.Account,java.util.List,com.fsck.k9.mail.Flag,boolean)`  sets the flag for threads in the account's thread pool.
+- `loadSearchResults(com.fsck.k9.Account,java.lang.String,java.util.List,com.fsck.k9.controller.MessagingListener)`  calls afunction, which will execute one or more Java threads to load the specified search results into the account's remote store or local store.
+- `saveDraft(com.fsck.k9.Account,com.fsck.k9.mail.Message,long,boolean)`  saves a draft message in the account's local store.
+- `isMoveCapable(com.fsck.k9.activity.MessageReference)`  checks to see if the message reference's UID starts with the K9.LOCAL_UID_PREFIX, which is the prefix used by the FSCK to identify messages that are to be moved.
+- `sendAlternate(android.content.Context,com.fsck.k9.Account,com.fsck.k9.mailstore.LocalMessage)`  sends a message from the account specified by the `account` parameter to the recipient specified by the `recipient` parameter.
+- `getListeners(com.fsck.k9.controller.MessagingListener)`  takes a listener object and adds it to the set of listeners for the messaging controller.
+- `deleteMessages(java.util.List,com.fsck.k9.controller.MessagingListener)`  uses the `actOnMessagesGroupedByAccountAndFolder` method to act on messages in a group, based on the account and folder from which they were sent.
+- `isMoveCapable(com.fsck.k9.Account)`  checks to see if the account's local store and remote store are both capable of moving messages.
+- `systemStatusChanged()`  checks for changes in the system status and updates any listening message listeners.
+- `searchLocalMessages(com.fsck.k9.search.LocalSearch,com.fsck.k9.controller.MessagingListener)`  calls the `searchLocalMessagesSynchronous` method, which handles the asynchronous processing.
+- `cancelNotificationForMessage(com.fsck.k9.Account,com.fsck.k9.activity.MessageReference)`  removes a new mail notification for the given account and message reference.
+- `setCheckMailListener(com.fsck.k9.controller.MessagingListener)`  sets the checkMailListener object as the listener for the MessagingController object. When the MessagingController object sends a message, the checkMailListener object is notified. If the checkMailListener object is not null, it is also removed from the list of listeners for this MessagingController object.
+- `listFolders(com.fsck.k9.Account,boolean,com.fsck.k9.controller.MessagingListener)`  calls the `listFoldersCallback` for local folders, and then for remote folders it calls the `listFoldersSynchronous` method.
+- `removeListener(com.fsck.k9.controller.MessagingListener)`  removes a listener from the Listeners collection.
+- `sendPendingMessages(com.fsck.k9.Account,com.fsck.k9.controller.MessagingListener)`  attempts to send any messages that are sitting in the Outbox of the account.
+- `compact(com.fsck.k9.Account,com.fsck.k9.controller.MessagingListener)`  compacts an account by removing all the messages from the local store and compacts the store.
+- `messagesArrived(com.fsck.k9.Account,com.fsck.k9.mail.Folder,java.util.List,boolean)`  loops through each of the listeners attached to the `com.fsck.k9.controller.MessagingController` instance, and for each one, it sets the `status` attribute of the `com.fsck.k9.mail.Folder` that the listener is attached to to `null` and then runs the `downloadMessages` method on the account associated with the `com.fsck.k9.account.Description` of the message. Finally, it releases the `messagesArrived` latch.
+- `deleteAccount(com.fsck.k9.Account)`  clears all new and old messages from the given account.
+- `loadMessageRemote(com.fsck.k9.Account,java.lang.String,java.lang.String,com.fsck.k9.controller.MessagingListener)`  calls an asynchronous method on the `loadMessageRemoteSynchronous` class, which we will create in a moment.
+- `clearFolder(com.fsck.k9.Account,java.lang.String,com.fsck.k9.activity.ActivityListener)`  clears the folder specified by the `folderName` parameter. The `listener` parameter is an object that the method will use to send a notification when the folder has been cleared.
+- `getFolderUnreadMessageCount(com.fsck.k9.Account,java.lang.String,com.fsck.k9.controller.MessagingListener)`  counts the number of unread messages in a folder, and updates the folder status (unread and active) for the given account and folder.
+- `addListener(com.fsck.k9.controller.MessagingListener)`  adds a listener to the list of listeners registered with the messaging controller.
+- `loadMessage(com.fsck.k9.Account,java.lang.String,java.lang.String)`  retrieves a message from a local store, fetches the body of the message, and queues a notification to be sent to the user's account when the message is fetched.
+- `setFlag(com.fsck.k9.Account,java.util.List,com.fsck.k9.mail.Flag,boolean)`  updates the flag for the given account and message ids in the MessagingController's cache.
+- `refreshListener(com.fsck.k9.controller.MessagingListener)`  calls the `refreshOther()` method of the `memorizingMessagingListener` object, which refreshes the listening instance for all listeners subscribed to it.
+- `deleteDraft(com.fsck.k9.Account,long)`  deletes a draft from an account.
+- `loadMoreMessages(com.fsck.k9.Account,java.lang.String,com.fsck.k9.controller.MessagingListener)`  loads more messages from the given account and folder into the given messaging listener.
+- `moveMessagesInThread(com.fsck.k9.Account,java.lang.String,java.util.List,java.lang.String)`  moves messages from one account to another account.
+- `searchRemoteMessages(java.lang.String,java.lang.String,java.lang.String,java.util.Set,java.util.Set,com.fsck.k9.controller.MessagingListener)`  sends a message called "searchRemoteMessages" to the "MessagingListener" object that you specify.
+- `emptyTrash(com.fsck.k9.Account,com.fsck.k9.controller.MessagingListener)`  empties the Trash folder for the given account.
+- `sendMessage(com.fsck.k9.Account,com.fsck.k9.mail.Message,com.fsck.k9.controller.MessagingListener)`  stores the given message in the account's Outbox and starts a sendPendingMessages command to attempt to send the message.
+- `notifyUserIfCertificateProblem(com.fsck.k9.Account,java.lang.Exception,boolean)`  will notify the user if there is a problem with the account's certificate.
+- `loadMessageRemotePartial(com.fsck.k9.Account,java.lang.String,java.lang.String,com.fsck.k9.controller.MessagingListener)`  will call the `loadMessageRemoteSynchronous(account, folder, uid, listener, true)` method, passing in the `account`, `folder`, and `uid` values. The `true` parameter tells the method to wait for the reply from the `listener` before returning.
+- `loadAttachment(com.fsck.k9.Account,com.fsck.k9.mailstore.LocalMessage,com.fsck.k9.mail.Part,com.fsck.k9.controller.MessagingListener)`  tries to connect to the local store and the remote store on the account given, and then loads the message part that was specified.
+- `clearAllPending(com.fsck.k9.Account)`  clears all pending commands associated with the given account in the local store.
+- `synchronizeMailbox(com.fsck.k9.Account,java.lang.String,com.fsck.k9.controller.MessagingListener,com.fsck.k9.mail.Folder)`  starts the synchronization process for the specified folder. The listener instance is passed as a parameter, and the providedRemoteFolder is used to specify the remote folder to be synchronized.
+- `moveMessages(com.fsck.k9.Account,java.lang.String,java.util.List,java.lang.String)`  moves messages from the source account to the destination folder.
+- `stopAllPushing()`  stops all the pushing of messages from the specified pushers.
+- `copyMessages(com.fsck.k9.Account,java.lang.String,java.util.List,java.lang.String)`  copies messages from the source account ( srcAccount ) to the destination folder( destFolder ). It also sets up a new instance of the `MessagingController` class to handle the messages.
+- `getInstance(android.content.Context)`  gets a reference to the `com.fsck.k9.controller.MessagingController` instance that is defined within the `com.fsck.k9.controller` package. It also references a reference to the `android.content.Context` instance that is associated with the user's current activity. Within the `com.fsck.k9.controller.MessagingController` class, there are various methods that can be used to manage messaging activities.
+- `setFlag(com.fsck.k9.Account,java.lang.String,java.lang.String,com.fsck.k9.mail.Flag,boolean)`  sets or removes a flag for a message referenced by the message's UID.
+- `setFlag(com.fsck.k9.Account,java.lang.String,java.util.List,com.fsck.k9.mail.Flag,boolean)`  sets the flag for a set of messages on a specific account in a folder named 'folderName'. The messages that are passed in are used to determine whether the flag should be set or removed. If the flag should be set, then the unread message count for the messages is used to update the messages in the local store. Lastly, pending commands for the account are processed.
+- `cancelNotificationsForAccount(com.fsck.k9.Account)`  removes all new mail notifications for the given account.
+- `deleteThreads(java.util.List)`  removes all messages from a specific folder and account, then sends a notification to all the registered Message Actors to let them know the task has been completed.
+- `sendPendingMessages(com.fsck.k9.controller.MessagingListener)`  checks the preferences of the object called `prefs` and sends pending messages for each of the available accounts in that object.
+- `clear(com.fsck.k9.Account,com.fsck.k9.controller.MessagingListener)`  clears the specified account and all its associated messages.
+- `getListeners()`  returns the list of listeners registered for this MessagingController.
+- `clearCertificateErrorNotifications(com.fsck.k9.Account,com.fsck.k9.activity.setup.AccountSetupCheckSettings$CheckDirection)`  clears any notifications that might have been generated about errors when trying to Lock or Sign a certificate with a specific account.
+- `getSearchAccountStats(com.fsck.k9.search.SearchAccount,com.fsck.k9.controller.MessagingListener)`  sends a message to the listener, asking for the stats of the given SearchAccount object.
+
+## class `com.fsck.k9.controller.MessagingControllerCommands$PendingExpunge`
+
+This class  provides a mechanism for managing commands related to the pending expunge operation.
+
+This class contains the following public method(s):
+
+- `getCommandName()`  returns the name of the command that will be triggered when the pending expunge operation is complete.
+- `create(java.lang.String)`  creates a new instance of the com.fsck.k9.controller.MessagingControllerCommands.PendingExpunge class with the given folder name as the instance's parameter.
+- `execute(com.fsck.k9.controller.MessagingController,com.fsck.k9.Account)`  calls the `controller.processPendingExpunge` method on the `MessagingController` object, passing in the `Account` object as a parameter.
+
+## class `com.fsck.k9.controller.MessagingControllerCommands$PendingSetFlag`
+
+This class  manages pending set flags for a given messaging controller.
+
+This class contains the following public method(s):
+
+- `create(java.lang.String,boolean,com.fsck.k9.mail.Flag,java.util.List)`  creates a new pending set flag for the given folder.
+- `getCommandName()`  returns thecommand name for the pending set flag.
+- `execute(com.fsck.k9.controller.MessagingController,com.fsck.k9.Account)`  grabs the account associated with the given messaging controller, and then calls its processPendingSetFlag() method. This method will determine whether or not there are any pending sets currently waiting to be processed.
+
+
+# package `com.fsck.k9.crypto`
+
+This package  helps to secure email communication by verifying the identities of the sender and recipient.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.crypto.MessageCryptoStructureDetector`
+
+This class  looks for encrypted or signed parts of aMail structure and returns them.
+
+This class contains the following public method(s):
+
+- `findPrimaryEncryptedOrSignedPart(com.fsck.k9.mail.Part,java.util.List)`  looks through all parts of aMail structure and tries to find the part that is either encrypted or signed. If it is encrypted or signed, it returns that part. If it isn't encrypted or signed, it tries to find the part that is the most similar to the part that is encrypted or signed, and returns that part.
+- `getSignatureData(com.fsck.k9.mail.Part)`  retrieves the message body and then, for a multipart message, it looks for the first part that is signed. The method then writes the signature data for that part (a byte array) to a stream. Finally, it returns the stream's byte array.
+- `isMultipartSignedOpenPgpProtocol(com.fsck.k9.mail.Part)`  checks to see if the part is multipart/signed. If it isn't, an IllegalArgumentException is thrown.
+- `isPartPgpInlineEncrypted(com.fsck.k9.mail.Part)`  uses the Internet Message Extractor to get the text from the Part object, and if the text does not start with "PGP_INLINE_START_MARKER", the Part object is assumed to be an encrypted part.
+- `findMultipartEncryptedParts(com.fsck.k9.mail.Part)`  extracts individual parts of a multipart message and checks whether those parts are encrypted.
+- `isMultipartEncryptedOpenPgpProtocol(com.fsck.k9.mail.Part)`  checks to see if the passed in part is multipart/encrypted, and if it is not, it throws an exception.
+- `isPartMultipartEncrypted(com.fsck.k9.mail.Part)`  checks if the part of the message that it's dealing with (in this case, the body) is a MIME multipart (i.e. it has multiple parts), and if so, it looks for the encryption protocol parameter that can be found in the Contenttype header of a multipart message. If that parameter doesn't exist or the type of the part doesn't match, the message isn't encrypted and can be processed by the scanning process.
+- `findMultipartSignedParts(com.fsck.k9.mail.Part,com.fsck.k9.ui.crypto.MessageCryptoAnnotations)`  lazily looks through all the parts of the message and looks for ones that have a corresponding annotation from the messageCryptoAnnotations list, and if it finds one, it assigns the part to the signedParts list.
+- `findPgpInlineParts(com.fsck.k9.mail.Part)`  traverses the given Part object recursively and looks for any inline PGP data.
+
+## class `com.fsck.k9.crypto.OpenPgpApiHelper`
+
+This class  adds an extra layer of security to the OpenPGP communication by validating the identity of the sender and recipient of messages before sending them.
+
+This class contains the following public method(s):
+
+- `buildUserId(com.fsck.k9.Identity)`  takes the identity (a K9 ID) and uses it to create an "account name" of the form user@example.com.
+
+
+# package `com.fsck.k9.fragment`
+
+This package  provides classes that help with sorting and comparing messages.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.fragment.MessageListFragment`
+
+This class (no description)
+
+This class contains the following public method(s):
+
+- `dialogCancelled(int)`  triggers a doNegativeClick() method when a dialog is cancelled.
+- `onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)`  inflates a layout file (in this case, R.layout.message_list_fragment) into a View object, initialized with the values from the savedInstanceState bundle. Next, it calls two methods: initializePullToRefresh and initializeLayout. The initializePullToRefresh method sets the pull-to-refresh gesture action to active, while the initializeLayout method sets up the overall layout of the fragment list.
+- `onSwipeRightToLeft(android.view.MotionEvent,android.view.MotionEvent)`  handles any movement that happens on the right side of the device, and then sets the boolean "handleSwipe" to true.
+- `onContextItemSelected(android.view.MenuItem)` (no description)
+- `isFirst(com.fsck.k9.activity.MessageReference)`  checks to see if the object passed in as a parameter, messageReference, is the first object in the list of messages. If it is not the first, then it returns false.
+- `isOutbox()`  checks to see if the given folder name is equal to the account's Outbox folder name.
+- `onMoveUp()`  moves the selected message up one position in the list view.
+- `onCreate(android.os.Bundle)`  initializes the fragment's preferences, messaging controller and preview lines.
+- `onAttach(android.app.Activity)`  adds a listener to the activity for receiving messages from the fragment.
+- `onCycleSort()`  cycles through the sorted list of account types and checks if the current account type is in the list of sorted types. If it is, it increments the curIndex and breaks out of the loop. If the list is complete, it sets the curIndex to the length of the list and cycles through the sorted list again to change the account type.
+- `isLoadFinished()`  checks to see if the cursor has been valid for the entire list. If it has not, it returns false to signal to the Fragment that the load has not finished and the user should be notified. If the cursor has been valid for the entire list, this method checks to see if any items have been loaded. If no items have been loaded, then the load has finished and this method returns true.
+- `isCheckMailSupported()`  checks if the user wants to check mail in the currently active account, the currently active folder, or in a remote folder.
+- `isMarkAllAsReadSupported()`  checks to see if the fragment is in a single account or single folder mode.
+- `openPrevious(com.fsck.k9.activity.MessageReference)`  opens the previous message in the list, if it isn't at the current position.
+- `selectAll()`  selects all the fragments in the list and sets the selection state to true.
+- `onActivityCreated(android.os.Bundle)`  sets up a cursor loader to get account                                                                                                                                                   messages.
+- `confirmMarkAllAsRead()`  confirms that all the fragments in the message list have been read. If all the fragments have been read, the method displays a dialog box confirming this. If any fragments have not been read, the method calls the `markAllAsRead()` method to force the message list to be marked as read.
+- `onItemClick(android.widget.AdapterView,android.view.View,int,long)`  checks to see if the user has selected a message in the list view, and if so, it toggles the message selection highlight.
+- `onActivityResult(int,int,android.content.Intent)`  takes the result code from the called activity, and if it's not OK, it returns. From there, it checks the request code, and if it's either `com.fsck.k9.fragment.MessageListFragment.ACTIVITY_CHOOSE_FOLDER_MOVE` or `com.fsck.k9.fragment.MessageListFragment.ACTIVITY_CHOOSE_FOLDER_COPY`, it moves the active Messages list and sets the new folder's name as the last selected folder's name.
+- `isManualSearch()`  checks if the ``search`` field of the fragment's associated ``MessageList`` object is set to ``true``.
+- `onDestroyView()`  calls the `listView.onSaveInstanceState()` method, saves the current list state, and then calls the `super.onDestroyView()` method.
+- `onSearchRequested()`  starts the search process for a specified account and folder (if passed in).
+- `newInstance(com.fsck.k9.search.LocalSearch,boolean,boolean)`  creates a new MessageListFragment object, based on the passed in parameters.
+- `onLoaderReset(android.content.Loader)`  clears the list of messages and sets the cursor to the first message in the adapter.
+- `isSingleAccountMode()`  tests to see if the current instance is in single account mode.
+- `onLoadFinished(android.content.Loader,android.database.Cursor)`  sets the context menu on the cursor and updates the list of messages if the cursor has been moved to the first message.
+- `onCompose()`  calls the `onCompose()` method of the `fragmentListener` object if there is no `account` object in the `queryString` value, or else it calls the `onCompose()` method of the `account` object.
+- `openNext(com.fsck.k9.activity.MessageReference)`  checks to see if the given position in the message list is within the current adapter's count; if not, it returns false to indicate that the user should not open the next message in the list. If the position is within the adapter's count, it opens the next message at the given position and returns true.
+- `checkMail()`  synchronizes the mailbox of an account with a folder, sends any pending messages for that account to the activity listener, and checks the mailbox for that account.
+- `doPositiveClick(int)`  confirms that the user wants to spam one of the messages in the list, then deletes the message, and confirms that the user wants to mark all the messages in the list as read.
+- `onOptionsItemSelected(android.view.MenuItem)`  checks the ID of the menu item (by getting the item's ID), and then it calls one of the following methods:
+
+- `changeSort(com.fsck.k9.Account.SortType.SORT_DATE)` if the menu item is of the type `R.id.set_sort_date`
+- `changeSort(com.fsck.k9.Account.SortType.SORT_ARRIVAL)` if the menu item is of the type `R.id.set_sort_arrival`
+- `changeSort(com.fsck.k9.Account.SortType.SORT_SUBJECT)` if the menu item is of the type `R.id.set_sort_subject`
+- `changeSort(com.fsck.k9.Account.SortType.SORT_SENDER)` if the menu item is of the type `
+- `onRemoteSearch()`  checks to see if the user has connectivity or not, and, if not, then a Toast message is shown indicating that the user cannot do a remote search.
+- `isLast(com.fsck.k9.activity.MessageReference)`  checks to see if the given messageReference is the last message in the list.
+- `onCreateLoader(int,android.os.Bundle)`  opens a database cursor using the provided account id and thread id. It then reads all of the messages associated with the given account and thread, optionally filtering which messages are considered active. Finally, it constructs a SQL query that returns the active messages.
+- `onPause()`  removes the activity listener that was registered in the constructor.
+- `isRemoteSearch()`  checks if a requested search is done through a remote server.
+- `onSwipeLeftToRight(android.view.MotionEvent,android.view.MotionEvent)`  handles the situation where the user swipes left to right on a list of messages.
+- `setActiveMessage(com.fsck.k9.activity.MessageReference)`  marks the given message as "active".
+- `onReverseSort()`  sorts the list in reverse order.
+- `onResume()`  checks to see if there are any new mail notifications pending (due to an account being added or refreshed), and if so, cancels them.
+- `isAccountExpungeCapable()`  checks to see if the account holder can Expunge the account.
+- `isRemoteSearchAllowed()`  determines if remote searches are allowed on this fragment. If remote searches are allowed, the method returns true; otherwise, it returns false.
+- `onToggleFlagged()`  toggles the flag for the "flagged" column in the "MLFProjectionInfo" object.
+- `toggleMessageSelect()`  selects and toggles the message at the selected position on the fragment's list view.
+- `isSingleFolderMode()`  returns whether the fragment is in single-folder mode or not.
+- `onSendPendingMessages()`  sends pending messages from the account passed as an argument to the class.
+- `onCopy()`  copies the value of the ``message`` field of the ``getSelectedMessage()`` reference to the ``onCopy()`` method of a \"MessageListFragment\" object.
+- `doNegativeClick(int)`  checks the ID of the dialog that was clicked on and then calls a corresponding method according to the ID.
+- `isRemoteFolder()`  verifies if the account the fragment is attached to has the move capability enabled. If it doesn't, the method returns false. If the account does have the move capability enabled, it then verifies if the specified folder name (account.getInboxFolderName()) matches the folder name of the account's inbox. If it does, then the fragment is considered to be located on the remote side of the account's communication. Note that this method only applies to POP3 accounts.
+- `onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu.ContextMenuInfo)`  creates a context menu for the given activity, with the given view, with the given context menu information. It also gets the account information associated with the given view, and if the account has an archive or spam folder, it sets those menu items to be visible.
+- `changeSort(com.fsck.k9.Account$SortType)`  compares the indicated sortType to the current sortType, and if the two are equal then it sets the sortAscending boolean to "null" which means that the list will not be sorted in ascending order. Otherwise, the method changes the sortType value to the new sortType and sets the sortAscending boolean to the value previously set to "null".
+- `onMoveDown()`  moves the selection of the listView down by one position.
+- `updateTitle()`  updates the title of the fragment window.
+- `updateFooter(java.lang.String)`  updates the footer view with the new text.
+- `onMove()`  fetches the selected message from the list, and if it exists, it calls a `onMove()` method with that message as its parameter.
+- `onStop()`  kills any activity in progress and sends a remoteSearchFinished() message.
+- `onToggleRead()`  changes the flag associated with the "read column" in the MLF ProjectionInfo object.
+- `onSaveInstanceState(android.os.Bundle)`  saves the state of the fragment, sets the corresponding instance variables to their current values, and sets a flag to tell the fragment that a remote search has been performed.
+- `isInitialized()`  checks to see if the fragment has been initialized, which means it has been created, loaded and initialized with its associated data.
+- `onArchive()`  retrieves the selected message from the list of messages and archives it if it exists. If the message does not exist, this method does not execute.
+- `onExpunge()`  calls the `onExpunge(account, currentFolder.name)` method for each fragment in the `currentFolder` variable.
+- `onDelete()`  recursively removes messages from the list as long as the message reference is still valid.
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$SenderComparator`
+
+This class  compares the sender addresses of two cursors and returns a value based on that compare.
+
+This class contains the following public method(s):
+
+- `compare(android.database.Cursor,android.database.Cursor)`  compares the sender addresses of two cursors. If the two cursors have the same sender, return 0; if the two cursors have different sender addresses, return 1; otherwise, return the sender address of the first cursor compared to the sender address of the second cursor.
+
+## class `com.fsck.k9.fragment.ProgressDialogFragment`
+
+This class  provides a way to capture and cancel progress updates while the dialog is being displayed.
+
+This class contains the following public method(s):
+
+- `onCancel(android.content.DialogInterface)`  captures the progress listener and cancels the listener's progress updates if the activity is the cancel listener.
+- `onCreateDialog(android.os.Bundle)`  creates and displays a dialog with the given title and message.
+- `newInstance(java.lang.String,java.lang.String)`  creates a new ProgressDialogFragment instance with the given title and message.
+
+## class `com.fsck.k9.fragment.AttachmentDownloadDialogFragment`
+
+This class  creates a dialog and sets its properties.
+
+This class contains the following public method(s):
+
+- `onDestroyView()`  removes the listener from the messagingController object that was supplied as an argument when the onCreateView() method was called.
+- `onCreateDialog(android.os.Bundle)`  creates a dialog and sets its properties.
+- `onCancel(android.content.DialogInterface)`  calls the listener's onProgressCancel() method when the user cancels the attachment download.
+- `newInstance(int,java.lang.String)`  creates a new instance of a com.fsck.k9.fragment.AttachmentDownloadDialogFragment class, sets the arguments it needs, and returns it.
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$ArrivalComparator`
+
+This class  compares the given date values in two cursors and returns a value indicating the difference between them.
+
+This class contains the following public method(s):
+
+- `compare(android.database.Cursor,android.database.Cursor)`  compares the given date values in the two cursors, and return a value indicating the difference between them.
+
+## interface `com.fsck.k9.fragment.ProgressDialogFragment$CancelListener`
+
+This interface  allows the calling application to know when the user has canceled the operation.
+
+This class contains the following public method(s):
+
+- `onProgressCancel(com.fsck.k9.fragment.ProgressDialogFragment)`  notifies the caller that the user has canceled the ongoing operation.
+
+## class `com.fsck.k9.fragment.MessageListFragment$MessageListActivityListener`
+
+This class  keeps track of the status of the messages in a mailbox, and updates the user on the current status.
+
+This class contains the following public method(s):
+
+- `synchronizeMailboxFailed(com.fsck.k9.Account,java.lang.String,java.lang.String)`  attempts to update the mailbox for the given account and folder, and prints a message indicating whether the update was successful.
+- `synchronizeMailboxFinished(com.fsck.k9.Account,java.lang.String,int,int)`  updates the listener's UI when the number of messages in the mailbox changes, and tells the handler when the folder is loaded.
+- `folderStatusChanged(com.fsck.k9.Account,java.lang.String,int)`  gets the unread message count for the given account and folder, updates the status accordingly, and calls the superclass's folderStatusChanged() method.
+- `remoteSearchFailed(java.lang.String,java.lang.String)`  prints a message to the user's toast, if the activity associated with the fragment is not null.
+- `remoteSearchStarted(java.lang.String)`  flag the "progress" indicator in the fragment's footer as being "true", and updates the footer's text to reflect the currently-sent query.
+- `remoteSearchFinished(java.lang.String,int,int,java.util.List)`  notifies the listener when the remote search has finished.
+- `synchronizeMailboxStarted(com.fsck.k9.Account,java.lang.String)`  updates the progress bar and "folder Loading" indicator in the "handler" activity if the account specified is updated in the "updateForMe" method.
+- `enableProgressIndicator(boolean)`  sets the handler.progress() method to enable or disable the progress indicator based on the enable parameter.
+- `remoteSearchServerQueryComplete(java.lang.String,int,int)`  updates the "Message List Fragment" activity's progress bar depending on the number of results returned from the "remoteSearchServerQuery" call.
+- `informUserOfStatus()`  updates the "status" label in the main layout of the Activity so that the user knows the current status of the Messages List.
+
+## class `com.fsck.k9.fragment.MessageListAdapter`
+
+This class  converts a cursor into a view, so that it can be displayed in a layout.
+
+This class contains the following public method(s):
+
+- `newView(android.content.Context,android.database.Cursor,android.view.ViewGroup)`  creates a new view, populated with the data from the given cursor, and sets that view as the parent of the current view.
+- `bindView(android.view.View,android.content.Context,android.database.Cursor)` (no description)
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$FlaggedComparator`
+
+This class  compares two cursors to see if they have a flag set in the 'FLAGGED_COLUMN' column, and if they do, it returns the negative of the value of the flag in the other cursor.
+
+This class contains the following public method(s):
+
+- `compare(android.database.Cursor,android.database.Cursor)`  checks if one of the cursors has a flag set in the 'FLAGGED_COLUMN' column. If it does, then the method returns the negative of the value of the flag in the other cursor.
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$SubjectComparator`
+
+This class  compares the strings in the Subject column of the two cursors.
+
+This class contains the following public method(s):
+
+- `compare(android.database.Cursor,android.database.Cursor)`  compares the strings in the Subject column of the two cursors. If they are the same, it returns 0; if they are different, it returns -1.
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$AttachmentComparator`
+
+This class  compares the number of attachments of two cursors and returns a value that indicates how many more attachments the second cursor has.
+
+This class contains the following public method(s):
+
+- `compare(android.database.Cursor,android.database.Cursor)`  compares the number of attachments of the first cursor with the number of attachments of the second cursor. If the first cursor has more attachments, then this method returns a negative value. If the second cursor has more attachments, then this method returns a positive value.
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$UnreadComparator`
+
+This class  compares two cursors and returns the difference in the number of rows read by each.
+
+This class contains the following public method(s):
+
+- `compare(android.database.Cursor,android.database.Cursor)`  compares the Ints of the read columns of the cursors and returns the difference between them.
+
+## class `com.fsck.k9.fragment.MessageListHandler`
+
+This class  processes messages from the Android operating system and sends them to the fragment's message handler.
+
+This class contains the following public method(s):
+
+- `folderLoading(java.lang.String,boolean)`  obtains a message from the Android operating system and sends it to the fragment's message handler.
+- `updateFooter(java.lang.String)`  updates the footer on a fragment, if there is one, with the given message.
+- `remoteSearchFinished()`  sends a message to the user's mobile phone that says the remote search has finished.
+- `goBack()`  retrieves the current message from the Message object and sends it to the sendMessage() method.
+- `refreshTitle()`  obtain a Message from the Android OS, and then it sends it to a recipient.
+- `restoreListPosition()`  restores the list position of the given fragment in the list of fragments.
+- `openMessage(com.fsck.k9.activity.MessageReference)`  fetches an instance of the Android OSMessage class and uses it to send a new message to the message list.
+- `handleMessage(android.os.Message)`  checks to see if the fragment is attached to an activity, and then it handles any messages that the fragment should handle.
+- `progress(boolean)`  reads a message from the queue, updates the progress bar, and sends the message to the thread that calls it.
+
+## interface `com.fsck.k9.fragment.AttachmentDownloadDialogFragment$AttachmentDownloadCancelListener`
+
+This interface  handles the cancelation of the progress of the current attachment download.
+
+This class contains the following public method(s):
+
+- `onProgressCancel(com.fsck.k9.fragment.AttachmentDownloadDialogFragment)`  cancels the progress of the current attachment download.
+
+## class `com.fsck.k9.fragment.ConfirmationDialogFragment`
+
+This class  allows you to create a confirmation dialog, and provides methods to manage the dialog's buttons and listener, as well as to create a new instance of the dialog when it is needed.
+
+This class contains the following public method(s):
+
+- `onClick(android.content.DialogInterface,int)`  cycles through three dialog buttons (plus the "neutral" button), and based on the button that was clicked, the method executes a different set of code that might do something like launch the app's "do positive/negative" dialog, or launch the app's "neutral" dialog.
+- `newInstance(int,java.lang.String,java.lang.String,java.lang.String,java.lang.String)`  creates a new ConfirmationDialogFragment instance, sets its arguments, and returns it.
+- `onAttach(android.app.Activity)`  sets up a listener which will be called when the user dismisses the confirmation dialog.
+- `newInstance(int,java.lang.String,java.lang.String,java.lang.String)`  returns a new instance of the ConfirmationDialogFragment class.
+- `onCreateDialog(android.os.Bundle)`  builds an AlertDialog and sets its title, message, and buttons. If the user clicks on the `confirmText` button, the method will set the `positiveButton` to the text and the `cancelText` to null. If the user clicks on the `cancelText` button, the method will set the `positiveButton` to null and the `cancelText` to the text.
+- `onCancel(android.content.DialogInterface)`  receives a dialog and if the user cancels the dialog, the fragment's listener is called to inform the user that the dialogue was cancelled.
+
+## class `com.fsck.k9.fragment.MessageViewHolder`
+
+This class  manages the checkbox position on a fragment.
+
+This class contains the following public method(s):
+
+- `onClick(android.view.View)`  checks the current position of the view (specified as an integer), and if it's not -1, this method switches the checkbox positions based on their ID values.
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$ComparatorChain`
+
+This class  creates a chain of comparators that compare two objects.
+
+This class contains the following public method(s):
+
+- `compare(java.lang.Object,java.lang.Object)`  takes two objects and compares them using a comparator. If the results of the comparison are not 0, then the Comparator breaks out of the loop.
+
+## interface `com.fsck.k9.fragment.ConfirmationDialogFragment$ConfirmationDialogFragmentListener`
+
+This interface  allows the listener to be notified of various events that happen with the confirmation dialog.
+
+This class contains the following public method(s):
+
+- `doNegativeClick(int)`  listens for negative clicks on confirmation dialogs.
+- `dialogCancelled(int)`  notifies the listener that the dialog has been cancelled.
+- `doPositiveClick(int)`  listens for positive clicks on confirmation dialogs.
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$DateComparator`
+
+This class  compares two dates to see if they are the same.
+
+This class contains the following public method(s):
+
+- `compare(android.database.Cursor,android.database.Cursor)`  compares the date columns of the two cursors. If the two dates are compared, then the value returned is 0. If they are not equal, then the value returned is 1.
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$ReverseIdComparator`
+
+This class  compares the _id field values of two cursors and if they are not equal, then the _id field value for the first cursor is compared to the _id field value for the second cursor.
+
+This class contains the following public method(s):
+
+- `compare(android.database.Cursor,android.database.Cursor)`  compare the _id field values of the two cursors. If the _id field value is -1 for the first cursor and it is not zero for the second cursor, then the _id field value for the first cursor is compared to the _id field value for the second cursor.
+
+## interface `com.fsck.k9.fragment.MessageListFragment$MessageListFragmentListener`
+
+This interface  provides an interface for listening to messages in the fragment, and four public methods (updateMenu, setUnreadCount, setMessageListTitle, onForward, and startSearch) that are used to get messages from the MessageQueue and pass them on to the other methods in the listener.
+
+This class contains the following public method(s):
+
+- `updateMenu()`  updates the menu items in the system-provided messages.
+- `setUnreadCount(int)`  sets the unread count for a fragment's messages.
+- `setMessageListTitle(java.lang.String)`  sets the title of the list of messages in the fragment.
+- `onForward(com.fsck.k9.activity.MessageReference)`  pulls the message from the MessageQueue and passes it on to the other methods in the listener.
+- `startSearch(com.fsck.k9.Account,java.lang.String)`  initiates a search of the specified account or folder for messages that match the given folder name.
+- `onReplyAll(com.fsck.k9.activity.MessageReference)`  listens for messages that are sent from the fragment to the parent activity.
+- `showThread(com.fsck.k9.Account,java.lang.String,long)`  displays all threads for the given account in the folder with the given name.
+- `showMoreFromSameSender(java.lang.String)`  provides more information about the message from the same sender.
+- `enableActionBarProgress(boolean)`  tells the fragment what to do with the actionbar progress bar.
+- `setMessageListProgress(int)`  sets the progress value of the list of messages.
+- `goBack()`  invokes the method `Back()` of the outermost fragment in the hierarchy of fragments.
+- `remoteSearchStarted()`  starts the remote searching process on the server.
+- `setMessageListSubTitle(java.lang.String)`  sets the title of the message list in the fragment.
+- `onResendMessage(com.fsck.k9.activity.MessageReference)`  tells the fragment's message list listener to resend the given message.
+- `openMessage(com.fsck.k9.activity.MessageReference)`  opens the given message reference in the messages list.
+- `onCompose(com.fsck.k9.Account)`  listens for new messages that are sent to the fragment's message list.
+- `onReply(com.fsck.k9.activity.MessageReference)`  listens for replies to messages that have been posted in the activity.
+
+## class `com.fsck.k9.fragment.MessageListFragment$ActionModeCallback`
+
+This class  provides callbacks that are invoked when different actionmode events occur.
+
+This class contains the following public method(s):
+
+- `showMarkAsRead(boolean)`  sets the visibility of the "mMarkAsRead" and "mMarkAsUnread" fields to show if the actionMode field is not null.
+- `onCreateActionMode(android.view.ActionMode,android.view.Menu)`  calls the callback with the current ActionMode and menu.
+- `showFlag(boolean)`  checks to see if the actionMode object is defined, and if so, it sets the flag to be visible depending on the show parameter. Additionally, it sets the unflag flag to be visible or not depending on the show parameter.
+- `showSelectAll(boolean)`  determines whether the "showSelectAll" flag is set and, if so, sets the "mSelectAll" view object to be visible.
+- `onDestroyActionMode(android.view.ActionMode)`  calls the superclass implementation of onDestroyActionMode(), which, in turn, unsets all the instance variables and sets the selection state to false.
+- `onPrepareActionMode(android.view.ActionMode,android.view.Menu)`  sets up the menu options that will be available when the user enters into action mode.
+- `onActionItemClicked(android.view.ActionMode,android.view.MenuItem)`  calls `onDelete( Messages )` when the user clicks on the `delete` button, `onMove( Messages )` when the user clicks on the `move` button, and `onCopy( Messages )` when the user clicks on the `copy` button.
+
+## class `com.fsck.k9.fragment.MessageListFragmentComparators$ReverseComparator`
+
+This class  compares two objects in reverse order.
+
+This class contains the following public method(s):
+
+- `compare(java.lang.Object,java.lang.Object)`  reverses the order of the arguments and compares them.
+
+
+# package `com.fsck.k9.helper`
+
+This package  helps to manage and access cursor data.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.helper.MergeCursor`
+
+This class  helps you move and access data in a cursor.
+
+This class contains the following public method(s):
+
+- `getColumnName(int)`  gets the name of the column in the current row of the active cursor that corresponds to the given columnIndex.
+- `getDouble(int)`  returns the double value of the data at the given column index in the currently active cursor.
+- `getWantsAllOnMoveCalls()`  returns a boolean indicating whether or not all the wanted items from the currently active cursor should be moved when it is moved.
+- `getCount()`  gathers the aggregate count of all the cursors in the calling object's database. It does this by looping through all of the cursors in the object and tallying up the number of records in each one. This value is then stored in the mCount variable.
+- `isBeforeFirst()`  checks to see if the cursor's position -1 is before the first cursor position. If it is, then it returns true; if it is not, then it returns false.
+- `getColumnIndexOrThrow(java.lang.String)`  returns the index of a specified column in the ActiveCursor (a cursor that has data currently in it), or throws an IllegalArgumentException if the column does not exist.
+- `moveToPosition(int)`  moves the mouse cursor to the given position.
+- `moveToPrevious()`  moves the active cursor to the previous position in the list of cursors.
+- `moveToFirst()`  moves the cursor to the first row of the given range.
+- `isFirst()`  compares the position of the current cursor with the first position it finds in the underlying storage. If it finds that the current cursor is at the first position, then it returns false. Otherwise, it returns the position of the current cursor.
+- `isClosed()`  tests whether the current cursor is the last active cursor in the database.
+- `getPosition()`  returns the position of the cursor in the underlying dataset.
+- `move(int)`  moves the given cursor position by the given offset.
+- `setNotificationUri(android.content.ContentResolver,android.net.Uri)`  sets the notification URI for all the cursors in the MergeCursor.
+- `isNull(int)`  checks to see if the given column in the active cursor matches the given column index in the provided argument.
+- `registerContentObserver(android.database.ContentObserver)`  registers an observer for all the content in the given Cursor.
+- `getFloat(int)`  retrieves the float value for the given columnIndex from the current active cursor.
+- `respond(android.os.Bundle)`  takes a bundle as an input and returns a response bundle as an output.
+- `registerDataSetObserver(android.database.DataSetObserver)`  registers a DataSetObserver for each cursor in the enumeration provided.
+- `unregisterContentObserver(android.database.ContentObserver)`  unregisters all ContentObserver instances attached to the cursor.
+- `getColumnIndex(java.lang.String)`  returns the index of the specified column in the active cursor.
+- `setExtras(android.os.Bundle)`  sets the extras parameter of the cursor to the given bundle.
+- `getType(int)`  returns the type of the data held at the given column index in the given active cursor.
+- `getShort(int)`  gets the short value for a given column in the active cursor.
+- `copyStringToBuffer(int,android.database.CharArrayBuffer)`  copies the string data corresponding to the given columnIndex value from the current active cursor to the given buffer.
+- `getBlob(int)`  retrieves the data from the active cursor at column index ``columnIndex``.
+- `unregisterDataSetObserver(android.database.DataSetObserver)`  unregisters all of the DataSetObserver instances that were registered on the specified data set.
+- `requery()`  iterates through all of the cursors in the database and tries to requery them. If the requery() method succeeds, then success is set to true.
+- `moveToNext()`  moves the cursor to the next item in the current cursor, if it is located at the end of the cursor (meaning the count returned from the method is equal to the number of items in the cursor). If the cursor isn't at the end of the cursor, the method moves the cursor to the index of the smallest item in the cursor, and sets the active cursor to that item.
+- `close()`  closes all of the open cursors in theMergeCursor object.
+- `getNotificationUri()`  tries to find the notification URI for the current cursor position (based on the selected notification channel).
+- `getString(int)`  gets the text value of the specified column index from the active cursor.
+- `getColumnNames()`  returns a string array of the names of the columns in the current MergeCursor.
+- `getExtras()`  attempts to load any additional resources that might be needed by the program, and if it can't find them, it throws a runtime exception.
+- `getInt(int)`  grabs the value of the specified column from the active cursor.
+- `isAfterLast()`  checks to see if the cursor is after the last element in the current group.
+- `isLast()`  checks if the cursor is at the last position in the data set.
+- `deactivate()`  traverses through all the cursors in the system, finds the one belonging to the current object, and deactivates it.
+- `moveToLast()`  tries to move the cursor to the position that corresponds to the specified "count" - minus one.
+- `getLong(int)`  retrieves the value of the long column at the specified column index from the active cursor.
+- `getColumnCount()`  returns the number of columns in the active cursor.
+
+## class `com.fsck.k9.helper.EmailHelper`
+
+This class  searches for an @ symbol in the email address and returns the string that is after the @ symbol and up to the last character in the email address.
+
+This class contains the following public method(s):
+
+- `getDomainFromEmailAddress(java.lang.String)`  searches for an @ symbol in the email address and returns the string that is after the @ symbol and up to the last character in the email address.
+
+## class `com.fsck.k9.helper.IdentityHelper`
+
+This class  helps you find the identity of the sender of a message.
+
+This class contains the following public method(s):
+
+- `getRecipientIdentityFromMessage(com.fsck.k9.Account,com.fsck.k9.mail.Message)`  looks for the identity of the sender of the message in the message's recipients, and if it can find that identity, it sets the recipient variable to that identity.
+
+## class `com.fsck.k9.helper.MergeCursorWithUniqueId`
+
+This class  helps to manage and access cursor data.
+
+This class contains the following public method(s):
+
+- `getLong(int)`  gets the unique ID for the current cursor position. From this, it checks to see if the current ID value is greater than the maximum allowed ID value for the class. If so, an exception is thrown.
+- `getColumnCount()`  returns the total number of columns in the cursor.
+- `getColumnIndex(java.lang.String)`  looks for the column with the specified name in the given cursor and returns the corresponding index.
+- `getColumnIndexOrThrow(java.lang.String)`  either returns the index of the column referred to by the given string, or throws an IllegalArgumentException if the column doesn't have a unique identifier.
+
+## class `com.fsck.k9.helper.UrlEncodingHelper`
+
+This class  helps conversions between UTF-8 and other encodings.
+
+This class contains the following public method(s):
+
+- `encodeUtf8(java.lang.String)`  takes a Java string and tries to convert it to a UTF-8 encoded string using the Java networking library's URLEncoder class. If the string cannot be encoded in UTF-8 then an UnsupportedEncodingException is thrown.
+- `decodeUtf8(java.lang.String)`  uses the Java class ```URLDecoder``` to decode a UTF-8 string representation of a URL.
+
+## class `com.fsck.k9.helper.MessageHelper`
+
+This class  helps to find the display name of an account in the K9's contacts database, and to construct a "friendly" name for the address if it is found.
+
+This class contains the following public method(s):
+
+- `getDisplayName(com.fsck.k9.Account,com.fsck.k9.mail.Address[],com.fsck.k9.mail.Address[])`  looks up the display name of the affected account in the K9's contacts database. If the account is an identity, then the display name is returned as a CharSequence builder. Otherwise, the display name is obtained from the K9's helper class, which presumably handles cases where the user doesn't want to show their name.
+- `toFriendly(com.fsck.k9.mail.Address,com.fsck.k9.helper.Contacts)`  returns a "friendly" name for this address.
+- `populate(com.fsck.k9.activity.MessageInfoHolder,com.fsck.k9.mailstore.LocalMessage,com.fsck.k9.activity.FolderInfoHolder,com.fsck.k9.Account)`  updates the following fields in the target object:
+
+* message
+* compareArrival
+* compareDate
+* sender
+
+ Additionally, if the message has recipients, this method also updates the following fields:
+
+* compareCounterparty
+* senderAddress
+
+- `toMe(com.fsck.k9.Account,com.fsck.k9.mail.Address[])` Checkes whether the specified address is found in the account's identity. If it is, the method returns true; if not, the method returns false.
+- `toFriendly(com.fsck.k9.mail.Address[],com.fsck.k9.helper.Contacts)`  looks up the contact information for each address in the list and constructs a SpannableStringBuilder to hold the results.
+- `getInstance(android.content.Context)`  returns a newly-created instance of the `com.fsck.k9.helper.MessageHelper` class.
+
+## class `com.fsck.k9.helper.FileHelper`
+
+This class  helps manage files.
+
+This class contains the following public method(s):
+
+- `move(java.io.File,java.io.File)`  tries to move a file from one location to another, and verifies whether the destination file already exists and if not, it tries to delete the source file first. If all goes well, it returns true. If there is an error, it returns false.
+- `createUniqueFile(java.io.File,java.lang.String)`  creates a unique file in the given directory by appending a hyphen (-) and a number to the given filename.
+- `sanitizeFilename(java.lang.String)`  replaces all the characters that are not allowed in filenames with a replacement character.
+- `moveRecursive(java.io.File,java.io.File)`  moves a file from one directory to another, checking to see if the file already exists and if not creates it if it doesn't exist, if the file is a directory, it moves all the files in the directory to the destination directory, and if the file is a non-directory and doesn't have a delete button, it creates the file and moves the file and all its files inside it to the destination directory.
+- `touchFile(java.io.File,java.lang.String)`  tries to touch the given file, and, if it fails for any reason (like the file not existing), it prints a message to the Timber console.
+- `renameOrMoveByCopying(java.io.File,java.io.File)`  tries to rename the from file to the to file if the two files exist, or if it creates the to file if the two files don't exist. If the rename operation fails, it tries to copy the files instead. If the delete operation fails, then the method returns successfully.
+
+## class `com.fsck.k9.helper.K9AlarmManager`
+
+This class  helps to cancel a pending intent or set an alarm.
+
+This class contains the following public method(s):
+
+- `cancel(android.app.PendingIntent)`  cancels the pending intent associated with the given operation.
+- `getAlarmManager(android.content.Context)`  gets an instance of the `android.app.AlarmManager` class and then creates a `com.fsck.k9.power.DozeChecker` object to check for doze.
+- `set(int,long,android.app.PendingIntent)`  sets the alarm to go off at a certain time (in milliseconds) and specifies what intent the alarm should trigger.
+
+## class `com.fsck.k9.helper.UnreadWidgetProperties`
+
+This class  provides information about the unread widget properties for an account on a device.
+
+This class contains the following public method(s):
+
+- `getClickIntent(android.content.Context)`  returns the intent to display for the given context.
+- `getAppWidgetId()`  returns the unique identifier for the app widget associated with this class.
+- `getFolderName()`  returns the name of the folder where the widget properties are stored.
+- `getTitle(android.content.Context)`  returns the title of the unread widget property in the given context.
+- `getUnreadCount(android.content.Context)`  returns the number of unread messages on the referenced account.
+- `getAccountUuid()`  returns the account's unique identifier.
+
+## class `com.fsck.k9.helper.SizeFormatter`
+
+This class  formats a size as a String in bytes, kB, MB or GB with a single digit of precision.
+
+This class contains the following public method(s):
+
+- `formatSize(android.content.Context,long)`  formats a size as a String in bytes, kB, MB or GB with a single digit of precision.
+
+## class `com.fsck.k9.helper.FileBrowserHelper`
+
+This class  provides a helper class to show file browsers for files that reside in an external storage location.
+
+This class contains the following public method(s):
+
+- `showFileBrowserActivity(android.app.Fragment,java.io.File,int,com.fsck.k9.helper.FileBrowserHelper$FileBrowserFailOverCallback)`  tries to get the Intent of the file specified by startPath, then figures out what Intent the file corresponds to and starts the corresponding Activity.
+- `getInstance()`  looks for a instance of FileBrowserHelper class and if it doesn't find one, it creates a new instance and sets its instance variable to that.
+- `showFileBrowserActivity(android.app.Activity,java.io.File,int,com.fsck.k9.helper.FileBrowserHelper$FileBrowserFailOverCallback)`  tries to open known file browsers. If no file browser is found, a fallback text input is shown.
+
+## class `com.fsck.k9.helper.ParcelableUtil`
+
+This class  helps to convert between Parcelable objects and byte arrays.
+
+This class contains the following public method(s):
+
+- `marshall(android.os.Parcelable)`  converts the Parcelable object into a byte array.
+- `unmarshall(byte[],android.os.Parcelable$Creator)`  "unmarshalls" a byte array to its Parcelable equivalent, and then uses the ParcelableUtil.createFromParcel() method to create a T object from that Parcelable.
+
+## class `com.fsck.k9.helper.RetainFragment`
+
+This class  helps retain fragments after an activity is destroyed.
+
+This class contains the following public method(s):
+
+- `setData(java.lang.Object)`  sets the data field of the `this` object to the given T object.
+- `onCreate(android.os.Bundle)`  sets the "retain instance" flag on the "RetainFragment" class, so that the fragment will be kept after the activity is destroyed.
+- `findOrCreate(android.app.FragmentManager,java.lang.String)`  looks for a fragment with the given tag and if it isn't found, it creates a new fragment instance with the given tag.
+- `findOrNull(android.app.FragmentManager,java.lang.String)`  returns the first fragment that has the given tag.
+- `getData()`  returns the data contained in the fragment.
+- `hasData()`  checks to see if there is data stored in the fragment. If there is, then it returns true; otherwise, it returns false.
+- `clearAndRemove(android.app.FragmentManager)`  removes the fragment from the FragmentManager instance and commits the transaction.
+
+## interface `com.fsck.k9.helper.FileBrowserHelper$FileBrowserFailOverCallback`
+
+This interface  provides a mechanism for the caller to be notified about any failures that occur while the FileBrowserHelper is browsing the files.
+
+This class contains the following public method(s):
+
+- `onPathEntered(java.lang.String)`  trigged the FileBrowserHelper.FileBrowserFailOverCallback when the user enters a new path.
+- `onCancel()`  cancels the inputtext dialog if the user presses the cancel button.
+
+## class `com.fsck.k9.helper.MailTo`
+
+This class  helps to parse and send emails.
+
+This class contains the following public method(s):
+
+- `getCc()`  returns a list of email addresses that was cc'ed to the object.
+- `getBody()`  returns the text of the email message body.
+- `getSubject()`  returns the subject of the email message.
+- `getBcc()`  returns an array of addresses which were included in the email.
+- `getTo()`  returns an array of addresses to which the object can send emails.
+- `parse(android.net.Uri)`  parses the mailto URI and tries to extract the recipient's email address from the URI. If there is a recipient, it will add the addresses to a list.
+- `isMailTo(android.net.Uri)`  checks to see if the given URI is a mailto URI format. If so, it checks to see if the scheme defined in the MailTo class matches the given URI scheme.
+
+## class `com.fsck.k9.helper.Contacts`
+
+This class  looks up a contact in the Android contacts database based on an email address.
+
+This class contains the following public method(s):
+
+- `isInContacts(java.lang.String)`  looks up the contact with the provided email address in the Android contacts database. If the contact is found, the method returns true . If the contact is not found, the method returns false .
+- `isAnyInContacts(com.fsck.k9.mail.Address[])`  checks whether any of the provided addresses belong to any of the contacts.
+- `getInstance(android.content.Context)`  tries to find a Contacts instance that's appropriate for the given Context.
+- `getPhotoUri(java.lang.String)`  fetches the photo for the contact with the given email address from the contact database. If the contact isn't found in the contact database, or the photo isn't available for that contact, this method returns null.
+- `contactPickerIntent()`  creates an intent to open a contact picker. The contactPickerIntent intent will contain the action Intent.ACTION_PICK and the uri for the contact data.
+- `getNameForAddress(java.lang.String)`  searches for a particular contact in the Contacts database based on the given address. If the contact is found, the method retrieves the contact's name from the database.
+- `createContact(com.fsck.k9.mail.Address)`  takes an email address for an entity and creates a new contact entry for that entity in the contacts application.
+- `markAsContacted(com.fsck.k9.mail.Address[])`  marks the provided email addresses as contacted in the Contacts database.
+- `addPhoneContact(java.lang.String)`  starts an activity to add a phone number to an existing contact or to create a new contact.
+
+## class `com.fsck.k9.helper.SimpleTextWatcher`
+
+This class  watches for changes to the text in an Editable object and updates the corresponding fields in a holder class.
+
+This class contains the following public method(s):
+
+- `afterTextChanged(android.text.Editable)`  updates the text value of the given Editable object.
+- `onTextChanged(java.lang.CharSequence,int,int,int)`  watches for changes to the text in the given sequence and updates the corresponding fields in the given holder class.
+- `beforeTextChanged(java.lang.CharSequence,int,int,int)`  checks for a specific character in the text and updates the given position and count accordingly.
+
+## class `com.fsck.k9.helper.ContactPicture`
+
+This class  provides a way to load a contact picture as a background.
+
+This class contains the following public method(s):
+
+- `getContactPictureLoader(android.content.Context)`  returns a ContactPictureLoader object that can be used to load a contact picture as a background.
+
+## class `com.fsck.k9.helper.ClipboardManager`
+
+This class  allows you to copy text from a label to the system clipboard.
+
+This class contains the following public method(s):
+
+- `setText(java.lang.String,java.lang.String)`  copies the text inside the given label to the system clipboard.
+- `getInstance(android.content.Context)`  returns a new instance of the ClipboardManager class.
+
+## class `com.fsck.k9.helper.MailTo$CaseInsensitiveParamWrapper`
+
+This class  provides a way to add query parameters onto a URI without having to worry about case.
+
+This class contains the following public method(s):
+
+- `getQueryParameters(java.lang.String)`  looks through the various query parameters on the URI and checks to see if theparameter name is the same as the key parameter. If it is, then it adds the parameter onto the list of parameters for the URI.
+
+## class `com.fsck.k9.helper.ReplyToParser`
+
+This class  parses a message's recipient list and returns the corresponding address as a reply to address.
+
+This class contains the following public method(s):
+
+- `getRecipientsToReplyTo(com.fsck.k9.mail.Message,com.fsck.k9.Account)`  looks through the message's recipient list to see if any of the addresses contained in the list are the address of the account. If so, it returns the corresponding address as a reply to address.
+- `getRecipientsToReplyAllTo(com.fsck.k9.mail.Message,com.fsck.k9.Account)`  takes a Message object and an Account object, and it returns a ReplyToAddresses object. The ReplyToAddresses object has two fields: toAddresses, which is a list of addresses, and ccAddresses, which is a list of addresses for cc recipients.
+
+## class `com.fsck.k9.helper.ExceptionHelper`
+
+This class  tries to find the exception's cause and if it is not null, it goes onto find the localized message for that exception.
+
+This class contains the following public method(s):
+
+- `getRootCauseMessage(java.lang.Throwable)`  tries to find the exception's cause and if it is not null, it goes onto find the localized message for that exception.
+
+## class `com.fsck.k9.helper.Utility`
+
+This class  provides helpful utilities for checking the device's connectivity and field validations.
+
+This class contains the following public method(s):
+
+- `hasConnectivity(android.content.Context)`  checks to see if the current device has connectivity by querying the Android Network Manager. If so, it returns true; otherwise, it returns false.
+- `domainFieldValid(android.widget.EditText)`  checks to see if the text entered into the EditText field is a valid 25- or 2-digit month name, followed by a 2- or 3-digit day name.
+- `arrayContainsAny(java.lang.Object[],java.lang.Object[])`  checks if an item in the given array equals an item in the given list of objects. If the items are equal, the method returns true; otherwise, it returns false.
+- `closeQuietly(android.database.Cursor)`  tells the cursor to close itself if it is not null.
+- `stripNewLines(java.lang.String)`  removes all new lines from a multi-line string.
+- `wrap(java.lang.String,int)`  takes a string and splits it into pieces that conform to the `wrapLength` parameter. Then, it concatenates each of the pieces together using the `Utility.wrap()` method and appends a newline character. Finally, it returns the resulting string.
+- `wrap(java.lang.String,int,java.lang.String,boolean)`  wraps a single line of text in quotes, identifying words by ' '. Leading and trailing spaces on a new line are stripped.
+- `setContactForBadge(com.fsck.k9.ui.ContactBadge,com.fsck.k9.mail.Address)`  sets the contact for the badge to the given address.
+- `setCompoundDrawablesAlpha(android.widget.TextView,int)`  sets the alpha value of all the drawn compound drawables for the given TextView to the given alpha value.
+- `hasExternalImages(java.lang.String)`  looks for images in the given message and compares it to a pattern to see if there are any matches. If there are any matches, it returns true; otherwise, it returns false.
+- `combine(java.lang.Object[],char)`  uses each Object's toString() function to create a string containing each object's name separated by the specified separator character.
+- `requiredFieldValid(android.widget.TextView)`  checks to see if the text in the TextView is not null and if it is longer than zero characters.
+- `getMainThreadHandler()`  gets the main thread handler.
+- `extractMessageId(java.lang.String)`  looks for a regular expression match of the text parameter against the message id regular expression found in the utility class. If a match is found, the substring from the match point onwards is returned.
+- `isAnyMimeType(java.lang.String,java.lang.String[])`  checks to see if the given input is a valid MIME type for the given output.
+- `combine(java.lang.Iterable,char)`  concatenates the string representations of each object in parts, using the given separator character as the delimiter.
+- `extractMessageIds(java.lang.String)`  extracts the message IDs from a text input. It uses a matching regex filter to find the message IDs.
+- `stripSubject(java.lang.String)`  strips out any material (subject text, response markers, and any other formatting) up to, but not including the first '=' character. (If there is no '=' character, the whole subject is stripped.)
+- `requiredFieldValid(android.text.Editable)`  checks to see if the given text is not null and if it has at least one character.
+- `arrayContains(java.lang.Object[],java.lang.Object)`  tests whether a particular object is found in an array by comparing it against the specified object. If the objects are the same, then the method returns true; otherwise, the method returns false.
+
+## class `com.fsck.k9.helper.Preconditions`
+
+This class  checks the given object for nullity.
+
+This class contains the following public method(s):
+
+- `checkNotNull(java.lang.Object)`  checks to see if the given object is null. If it is null, then an exception is thrown. If the object is not null, then the reference is returned.
+
+
+# package `com.fsck.k9.helper.jsoup`
+
+This package  provides helper classes for performing filtering operations on JSoup nodes. Specifically, the package provides classes that allow you to specify the filter decision for a node and depth, as well as performing a depth-first traversal of the root node and then every node that is a descendant of the root node. If either of the traversal results in a `STOP` condition, then the operation has ended and the returned value is `ENDED`.
+
+This package contains the following class(es):
+
+## interface `com.fsck.k9.helper.jsoup.NodeFilter`
+
+This interface  helps you specify the filter decision for a node and depth.
+
+This class contains the following public method(s):
+
+- `head(org.jsoup.nodes.Node,int)`  returns a Filter decision for the given node and depth.
+- `tail(org.jsoup.nodes.Node,int)`  calls the reverse of `NodeFilter.Filter` to get the decision that should be applied to the node that is passed in as a parameter.
+
+## class `com.fsck.k9.helper.jsoup.AdvancedNodeTraversor`
+
+This class  starts a depth-first traversal of the root node, and then every node that is a descendant of the root node. After it finishes traversing the entire tree, it compares the results of the head and tail filters and if either of them returns `STOP`, then the operation has ended and the returned value is `ENDED`.
+
+This class contains the following public method(s):
+
+- `filter(org.jsoup.nodes.Node)`  starts a depth-first traversal of the root node, and after that, every node that is a descendant of the root node. Once it finishes traversing the entire tree, it compares the results of the head and tail filters and if either of them returns `STOP`, then the operation has ended and the returned value is `ENDED`.
+
+
+# package `com.fsck.k9.mailstore`
+
+This package  provides classes and interfaces to allow for the management of attachments on Android devices.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.mailstore.StorageManager$SamsungGalaxySStorageProvider`
+
+This class  provides access to the Android label and internal ID for the Samsung Galaxy S storage provider.
+
+This class contains the following public method(s):
+
+- `getName(android.content.Context)`  returns the Android label of the Samsung Galaxy S storage provider.
+- `getId()`  returns the internal ID of the SamsungGalaxySStorageProvider class.
+
+## class `com.fsck.k9.mailstore.StorageManager$ExternalStorageProvider`
+
+This class  looks for the attachment directory that has the given unique identifier and returns the path to it.
+
+This class contains the following public method(s):
+
+- `getAttachmentDirectory(android.content.Context,java.lang.String)`  looks for a file called "id + ".db_att" in the application's core directory and returns that file's path.
+- `init(android.content.Context)`  loads the internal storage of the device as an external storage location and sets up a file system to store application data there.
+- `getDatabase(android.content.Context,java.lang.String)`  tries to find the database file with the given identifier in the application directory.
+- `isSupported(android.content.Context)`  checks to see if the concerned app has been configured to use external storage and, if so, returns true.
+- `getName(android.content.Context)`  gets the label assigned to the internal storage provider that is external to the current application.
+- `getRoot(android.content.Context)`  looks for the root file for the given context and returns it.
+- `getId()`  gets the unique identifier for the storage provider.
+- `isReady(android.content.Context)`  checks whether the user's device has an external storage device connected.
+
+## class `com.fsck.k9.mailstore.LocalStore`
+
+This class  allows for the storage and retrieval of messages locally on a machine.
+
+This class contains the following public method(s):
+
+- `isCopyCapable()`  checks if the class is capable of being copied.
+- `getFolder(java.lang.String)`  returns a copy of this instance's "LocalFolder" instance, with the specified namebind as its parameter.
+- `isMoveCapable()`  tests to see if the local store is capable of moving data.
+- `getPendingCommands()`  gets a list of pending commands from the database.
+- `getAttachmentDataSource(java.lang.String)`  creates a new OpenPgpDataSource object, and then it overrides the writeTo() method, so that it writes the attachment data to an OutputStream object.
+- `createFolders(java.util.List,int)`  picks folders to create based on a list that is passed in and it limits the number of folders that are created to the number specified in the `visibleLimit` parameter.
+- `getFoldersAndUids(java.util.List,boolean)`  retrieves the folder name and UIDs for the messages in a list. If the list is threaded, it also returns the thread IDs for the messages at the root of the thread.
+- `setFlagForThreads(java.util.List,com.fsck.k9.mail.Flag,boolean)`  changes the flag for a given list of threads.
+- `getAttachmentInfo(java.lang.String)`  accesss the `message_parts` attribute of the `message_id` provided as an argument and retrieves the `display_name`, `decoded_body_size`, and `mime_type` values for the given attachment.
+- `compact()`  compacts the local store by deleting older messages and compacting the storage space used by the messages.
+- `getColumnNameForFlag(com.fsck.k9.mail.Flag)`  returns a column name for a given flag.
+- `setFlag(java.util.List,com.fsck.k9.mail.Flag,boolean)`  sets the flag for the given messages in the LocalStore using the given id and selection set.
+- `delete()`  deletes all the messages in the local store.
+- `removePendingCommand(com.fsck.k9.controller.MessagingControllerCommands$PendingCommand)`  removes the pending command from the messaging controller's commands list.
+- `getInstance(com.fsck.k9.Account,android.content.Context)`  gets an instance of a local mail store. This mail store might be ready or might need to be upgraded. If the mail store is ready, then the method creates a new instance of the mail store and stores the instance in a static variable. If the mail store is not ready, the method tries to get an instance of the mail store using the account ID and context. If the mail store cannot be found, the method creates a new instance of the mail store and stores the instance in a static variable. Finally, the method returns the instance stored in the static variable.
+- `checkSettings()`  checks the settings in the mailstore based on a user's preferences.
+- `removeAccount(com.fsck.k9.Account)`  tries to remove an account from the `LocalStore` instance. If that fails for some reason, it throws an exception and logs it to the log file `Timber`.
+- `switchLocalStorage(java.lang.String)`  switches the local storage provider for the current application's MailStore.
+- `getPersonalNamespaces(boolean)`  queries the local store for all folders, and then returns a list of folder objects.
+- `addPendingCommand(com.fsck.k9.controller.MessagingControllerCommands$PendingCommand)`  adds a pending command to the messaging controller commands table in the local store.
+- `getSize()`  gets the size of the local store attached to the given account, divides that size by the number of files in the attachment directory and returns the result as a long.
+- `recreate()`  restores the database from a previously saved state.
+- `resetVisibleLimits(int)`  resets the `visibleLimit` value for the `com.fsck.k9.mailstore.LocalStore` to the specified value, sets the `moreMessages` value to the value of the `LocalFolder.MoreMessages` column in the `com.fsck.k9.mailstore.LocalFolder` table, and finally, fires a `db.update()` query against the `folders` table.
+- `getDatabase()`  obtains a lock on the given LocalStore database.
+- `getMessageFulltextCreator()`  returns the instance of the `MessageFulltextCreator` class.
+- `searchForMessages(com.fsck.k9.mail.MessageRetrievalListener,com.fsck.k9.search.LocalSearch)`  builds a query that will find messages that have an `id` that falls within the given conditions (in this case, the account AND search.getConditions() filters out messages that have been deleted). Then, it binds the `id` column from the `messages` table to the `id` column in the `threads` table, and builds a WHERE clause to include those messages in the returned list.
+- `clear()`  clears the local store by deleting all messages, folders, and search data.
+- `removePendingCommands()`  deletes all the commands in the pending_commands table from the database.
+- `getMessagesInThread(long)`  returns a list of all messages in a thread with the given rootId.
+
+## class `com.fsck.k9.mailstore.LockableDatabase$StorageListener`
+
+This class  listens for a Mount event to happen on a provided Timber storage provider, and if the event happens, it calls various methods to open and configure the lockable database.
+
+This class contains the following public method(s):
+
+- `onMount(java.lang.String)`  checks to see if the provided providerId matches the mStorageProviderId that is associated with the Timber storage component. If it does not, the method returns. If it does, it then logs a message to the Timber log saying that the lockable database has been opened due to the mount event on the provided storage provider. Finally, it calls the openOrCreateDataspace() method to open the lockable database.
+- `onUnmount(java.lang.String)`  schedules a shutdown of the database using the try-with-resources statement. Then, it tries to write a lock to the database using the lockWrite() method. Finally, if that fails, it tries to unlock the write lock.
+
+## interface `com.fsck.k9.mailstore.LockableDatabase$DbCallback`
+
+This interface  provides a way to call a callback function when the database is locked.
+
+This class contains the following public method(s):
+
+- `doDbWork(android.database.sqlite.SQLiteDatabase)`  takes the locked database db and does some work based on that database. If the database is unavailable, then an `UnavailableStorageException` is thrown. Otherwise, any errors that occur while working with the database are thrown in the form of `WrappedException` objects.
+
+## class `com.fsck.k9.mailstore.CryptoResultAnnotation`
+
+This class  encapsulates the results of a cryptographic operation.
+
+This class contains the following public method(s):
+
+- `getEncapsulatedResult()`  returns a Java object that encapsulates the result of a cryptographic operation.
+- `getOpenPgpSigningKeyIntentIfAny()`  checks to see if the user has a result for a signature, and if they do, it returns the pending intent for the signature. If the user does not have a result for a signature, this method returns null.
+- `createErrorAnnotation(com.fsck.k9.mailstore.CryptoResultAnnotation$CryptoError,com.fsck.k9.mail.internet.MimeBodyPart)`  replaces an error annotation with another annotation that has the same error message, but with a different body part to signify that the error occurred with a message body part.
+- `createOpenPgpCanceledAnnotation()`  creates an annotation with the error "OPENPGP_UI_CANCELED" and sets its properties to null.
+- `withEncapsulatedResult(com.fsck.k9.mailstore.CryptoResultAnnotation)`  takes an annotation representing a CryptoResult, and returns a new annotation representing the same CryptoResult with the contents encapsulated.
+- `getOpenPgpSignatureResult()`  returns the result of opening the signature with the OpenPGP extension.
+- `createOpenPgpSignatureErrorAnnotation(org.openintents.openpgp.OpenPgpError,com.fsck.k9.mail.internet.MimeBodyPart)`  creates an annotation representing an error that occurred when trying to create a signature using OpenPGP. The annotation has the following fields:
+
+- CryptoError: The error that occurred when trying to create the signature
+- ReplacementData: The data that will be used to replace the missing signature component in the MIME body part
+- Error: True if the signature could not be generated, false otherwise
+
+Note that if the signature could not be generated, the value of Error will be false.
+- `getOpenPgpInsecureWarningPendingIntent()`  returns the pending intent that will be used to handle any warnings about PGP being insecure.
+- `getOpenPgpDecryptionResult()`  returns the OpenPgpDecryptionResult object associated with the given CryptoResultAnnotation.
+- `hasSignatureResult()`  checks to see if the provided OpenPGP signature result contains the RESULT_NO_SIGNATURE value. If so, it concludes that the signature is not valid.
+- `getReplacementData()`  returns a byte array containing the replacement data for the part of the MIME body that is missing.
+- `hasReplacementData()`  returns a boolean value that indicates whether or not the given CryptoResultAnnotation has any replacement data associated with it.
+- `isOpenPgpResult()`  checks to see if the two crypto results are not null. If they are not null, then the annotation is considered "open".
+- `hasOpenPgpInsecureWarningPendingIntent()`  returns a boolean indicating whether there is a pending intent to warn the user about insecure PGP encryption.
+- `isOverrideSecurityWarning()`  determines whether or not a CryptographicResult annotation specifies that the data it contains should be treated as insecure.
+- `getErrorType()`  returns the type of the error that was encountered while trying to read the message.
+- `getOpenPgpError()`  returns the OpenPgpError object for the indicated CryptographicResult annotation.
+- `createOpenPgpEncryptionErrorAnnotation(org.openintents.openpgp.OpenPgpError)`  creates a new CryptoResultAnnotation object, with the following fields:
+
+- "CryptoError" - The OpenPgpEncryptionError that caused the annotation to be created
+- "Cause" - The reason why the OpenPGP encryption failed
+- "Status" - The status of the failed encryption
+
+The "Status" field will indicate whether the encryption was successful or not.
+- `createOpenPgpResultAnnotation(org.openintents.openpgp.OpenPgpDecryptionResult,org.openintents.openpgp.OpenPgpSignatureResult,android.app.PendingIntent,android.app.PendingIntent,com.fsck.k9.mail.internet.MimeBodyPart,boolean)`  creates a new annotation with the following values:
+
+- CryptoError.OPENPGP_OK: The message was successfully decrypted and signed
+- ReplacementPart: The part of the message that was replaced with a MimeBodyPart
+- DecryptionResult, SignatureResult: The results of the decryption and signing
+- `hasEncapsulatedResult()`  returns a boolean indicating whether the result is encapsulated.
+- `getOpenPgpPendingIntent()`  returns the open PGP pending intent.
+
+## class `com.fsck.k9.mailstore.AttachmentViewInfo`
+
+This class  tells the attachment view that the content is now available and then checks to see if the content is available for reading.
+
+This class contains the following public method(s):
+
+- `setContentAvailable()`  tells the attachment view info that the content is now available.
+- `isContentAvailable()`  checks to see if the attachment is available for reading.
+
+## enum `com.fsck.k9.mailstore.DatabasePreviewType`
+
+This enum  holds a list of public methods that allow an object to find a counterpart for a given previewType in the list of database preview types. The public methods that the enum provides are:                                                                         
+- `fromPreviewType(com.fsck.k9.message.extractors.PreviewResult$PreviewType)`: tries to find a counterpart for the given previewType in the list of database preview types. If the previewType is found, the method returns the database preview type represented by that preview type. If the preview type is not found, the method throws an assertion error.
+- `getDatabaseValue()`:
+
+This class contains the following public method(s):
+
+- `fromPreviewType(com.fsck.k9.message.extractors.PreviewResult$PreviewType)`  tries to find a counterpart for the given previewType in the list of database preview types. If the previewType is found, the method returns the database preview type represented by that preview type. If the preview type is not found, the method throws an assertion error.
+- `getDatabaseValue()`  returns the name of the database preview type.
+- `fromDatabaseValue(java.lang.String)`  uses the Java enum class `com.fsck.k9.mailstore.DatabasePreviewType` to lookup the value for the given string in the database. If the string matches the value of the enum's `DatabaseValue` field, then the method returns that value.
+- `getPreviewType()`  returns the preview type of the given database.
+
+## enum `com.fsck.k9.mailstore.LocalFolder$MoreMessages`
+
+This enum  provides a list of values from the `com.fsck.k9.mailstore.LocalFolder.MoreMessages` enum associated with the given `databaseName`.
+
+This class contains the following public method(s):
+
+- `fromDatabaseName(java.lang.String)`  returns a list of values from the `com.fsck.k9.mailstore.LocalFolder.MoreMessages` enum associated with the given `databaseName`. If the given `databaseName` matches the name of the current database, then the value at that location in the list is returned. otherwise, an exception is thrown.
+- `getDatabaseName()`  returns the name of the database this enum represents.
+
+## class `com.fsck.k9.mailstore.LocalMimeMessage`
+
+This class  provides access to the part ID, message, and account identifier for a given local MIME message.
+
+This class contains the following public method(s):
+
+- `getPartId()`  returns the part ID for the given local MIME message.
+- `getMessage()`  returns the LocalMessage instance.
+- `getAccountUuid()`  returns the unique account identifier for this local MIME message.
+
+## class `com.fsck.k9.mailstore.StorageManager$HtcIncredibleStorageProvider`
+
+This class  provides access to a storage provider on the Samsungga Galaxy device.
+
+This class contains the following public method(s):
+
+- `getName(android.content.Context)`  returns the label for the storage provider on the Samsungga Galaxy device.
+- `getId()`  returns the unique identifier for the specified StorageManager instance.
+
+## class `com.fsck.k9.mailstore.MessageHelper`
+
+This class  helps deal with incomplete messages.
+
+This class contains the following public method(s):
+
+- `isCompletePartAvailable(com.fsck.k9.mail.Part)`  tries to find all the parts of a given message that are available for processing, and returns a boolean indicating whether all of the parts are available or not.
+- `createEmptyPart()`  generates a MimeBodyPart object which does not have any contents.
+
+## class `com.fsck.k9.mailstore.StoreSchemaDefinition$RealMigrationsHelper`
+
+This class  provides helper methods for working with migration data.
+
+This class contains the following public method(s):
+
+- `getContext()`  gets the context of the current StoreSchemaDefinition instance, which is used to access its RealMigrationsHelper instance.
+- `getLocalStore()`  returns the local store of the object.
+- `getStorage()`  uses the 'localStore' variable to get the 'storage' property of the 'localStore' object.
+- `serializeFlags(java.util.List)`  takes a list of Flag objects and serializes them into a string that can be stored by the Local Store.
+- `getAccount()`  returns the account for the store from the local store.
+
+## class `com.fsck.k9.mailstore.LockableDatabase`
+
+This class  helps you to lock and access a database so that other threads can't physically access it while you are using it.
+
+This class contains the following public method(s):
+
+- `execute(boolean,com.fsck.k9.mailstore.LockableDatabase$DbCallback)`  executes the given callback in a shared context, taking care of locking the DB storage.
+- `open()`  acquires a lock on the database, then writes some data to it. After that, it opens or creates the database's data space.
+- `recreate()`  re-creates the database, which means it opens and reads all the data from the disk, verifies it's valid, and determines if any changes need to be made to it.
+- `switchProvider(java.lang.String)`  updates the storage provider (mStorageProviderId) and then unlocks the write for the old provider (oldProviderId). Finally, it re-initializes the class with the new provider.
+- `setStorageProviderId(java.lang.String)`  sets the storage provider ID for the mailstore.
+- `getStorageProviderId()`  returns the unique identifier for the storage provider the database is using.
+- `delete()`  tries to delete the specified database. If it cannot find the database, then it throws an unavailable storage exception.
+
+## class `com.fsck.k9.mailstore.LocalFolder`
+
+This class (no description)
+
+This class contains the following public method(s):
+
+- `getMessagesByUids(java.util.List)`  takes a list of ids, and looks through the messages for thoseids. If it finds a message with that id, it adds it to the list of messages.
+- `getName()`  returns the name of the LocalFolder.
+- `getMessages(int,int,java.util.Date,com.fsck.k9.mail.MessageRetrievalListener)`  returns a list of messages from the local folder that are older than the given date. The listener parameter is used to receive notification when new messages are added to this list.
+- `getMessage(java.lang.String)`  gets the latest message for the given user in the given folder.
+- `getUidFromMessageId(com.fsck.k9.mail.Message)`  attempts to lookup the message's UID (unique identifier) in the LocalFolder's metadata. If the UID can't be found, an exception is thrown.
+- `save(com.fsck.k9.preferences.StorageEditor)`  saves some preferences, and for each preference it saves the name of the preference, the display class name, whether or not the preference is inherited, and if the preference is a flag, it also saves a boolean value that indicates whether or not the preference is set to “inherited” or “second class”.
+- `setDisplayClass(com.fsck.k9.mailstore.FolderClass)`  sets the display class for the "display_class" column in the "folder" table.
+- `refresh(java.lang.String,com.fsck.k9.mailstore.LocalFolder$PreferencesHolder)`  fetches the preferences for the given name from the local folder's storage, and sets the values for the displayClass, syncClass, notifyClass, and inTopGroup properties.
+- `getMessages(com.fsck.k9.mail.MessageRetrievalListener,boolean)`  fetches the messages from the local store, retrieves the messages that have been deleted (if includeDeleted is set to true), and sorts the results by date.
+- `addPartToMessage(com.fsck.k9.mailstore.LocalMessage,com.fsck.k9.mail.Part)`  retrieves the message part id for the part that was passed in, and then updates or inserts that message part into the local store.
+- `getSyncClass()`  returns the class for the syncing mailbox if the sync class is in the folder class or the display class, respectively.
+- `delete(boolean)`  removes messages from the LocalFolder's database.
+- `isOpen()`  checks to see whether the given databaseId and name are both not -1, and return true if they are.
+- `create(com.fsck.k9.mailstore.FolderType)`  takes the type of folder we want to create (LocalFolder in this case) and then calls the create method with the appropriate parameters.
+- `equals(java.lang.Object)`  checks if the object o is an instance of the class com.fsck.k9.mailstore.LocalFolder and if so, it returns true if the name of the object is the same as the name of the class.
+- `setPushState(java.lang.String)`  sets the push state of the local folder to the given string.
+- `changeUid(com.fsck.k9.mailstore.LocalMessage)`  changes the stored uid of the given message (using its internal id as a key) to the uid in themessage.
+- `getVisibleLimit()`  returns the maximum number of messages that the local folder can display at one time.
+- `clearAllMessages()`  clears all messages in the Mailstore.
+- `getAccountUuid()`  gets the account's uuid.
+- `appendMessages(java.util.List)`  appends the messages in the given list to the existing Messages instance.
+- `setStatus(java.lang.String)`  updates the "status" column in the "Folder" table in the "mailstore" database with the specified status value.
+- `exists()`  queries the database for folders with a specific name. If one of the folders is found, the method returns a boolean value indicating if the folder exists.
+- `getMode()`  returns the current mode of the LocalFolder.
+- `getDatabaseId()`  gets the identifier for the current database that this object is in.
+- `hashCode()`  calculates the hash code for the specified name.
+- `getPushState()`  returns the current push state for a local folder. This could be anything from "manually initiated" to "active."
+- `getSignatureUse()`  checks to see if the account has set the SignatureUse flag to true for the LocalFolder object. If it has, the method return this as a boolean value.
+- `setInTopGroup(boolean)`  sets the "top_group" column in the LocalFolder table to either 1 or 0 depending on whether the current value of the "isInTopGroup" field is true or false.
+- `updateLastUid()`  retrieves the latest numeric UID in the LocalFolder. This is used by the messaging controller shouldNotifyForMessage() method to determine if messages being fetched are new and unread.
+- `clearMessagesOlderThan(long)`  clears out messages from the store that are older than the cutoff date.
+- `areMoreMessagesAvailable(int,java.util.Date)`  checks to see if there are more messages available in the LocalFolder mailbox than the index of the oldest message.
+- `getRawSyncClass()`  returns the class that represents the raw sync mechanism for a particular folder.
+- `copyMessages(java.util.List,com.fsck.k9.mail.Folder)`  takes a list of Messages objects and saves them to a Folder object. It also makes sure that the Folder object is a subclass of the LocalFolder class, otherwise an exception will be thrown. Finally, it appends the Messages objects to the Folder object.
+- `setIntegrate(boolean)`  updates the "integrate" column in the "Mailstore" table to either 1 (if the user wants to Integrate the mailbox) or 0 (if the user does not want to Integrate the mailbox).
+- `fetch(java.util.List,com.fsck.k9.mail.FetchProfile,com.fsck.k9.mail.MessageRetrievalListener)`  fetches messages from the local store, using the fetch profile (fp) and message retrieval listener (listener). If anything goes wrong, an exception is thrown.
+- `setMoreMessages(com.fsck.k9.mailstore.LocalFolder$MoreMessages)`  sets the MoreMessages field in the LocalFolder object to the value returned by the getDatabaseName() method of the MoreMessages class.
+- `storeSmallMessage(com.fsck.k9.mail.Message,java.lang.Runnable)`  wraps a transaction around storing a message in a local store. The transaction is started, and then the runnable is executed. The runnable contains code that sets a flag indicating that the message has been fully downloaded. The method then returns the local version of the message.
+- `setLastSelectedFolderName(java.lang.String)`  sets the last selected folder's name to the given destination folder name.
+- `isIntegrate()`  returns a boolean indicating whether the given object is an integrate object.
+- `getNotifyClass()`  checks to see if the notifyClass field of the FolderClass class is inherited from a different class, and if so, it uses the getPushClass() method to return that class.
+- `getAllMessageUids()`  tries to get all message UIDs from the local store and returns them as a List.
+- `getOldestMessageDate()`  gets the oldest message date of the local folder.
+- `setFlags(java.util.List,java.util.Set,boolean)`  opens the local folder and then uses one transaction to set all the messages' flags.
+- `getMessageCount()`  retrieves the message count for messages in a local store by querying the database.
+- `save()`  opens the storage editor, selects a folder to save to, and then saves the folder.
+- `setNotifyClass(com.fsck.k9.mailstore.FolderClass)`  sets the notifyClass field of the local folder object to the notifyClass parameter.
+- `getMoreMessages()`  returns the next set of messages from the local folder.
+- `getAllMessagesAndEffectiveDates()`  returns a map that contains all of the messages and effective dates for a given local folder.
+- `setPushClass(com.fsck.k9.mailstore.FolderClass)`  updates the push class column in the LocalFolder table's metadata with the name of the class being pushed.
+- `close()`  closes the mailbox associated with the given database ID.
+- `delete()`  removes the selected folder, its related options (displayMode, syncMode, pushMode, etc.), as well as the selected folder's location within the group of folders.
+- `purgeToVisibleLimit(com.fsck.k9.mailstore.MessageRemovalListener)`  opens the database so that we can get search results, then gets the latest local message that contains the specified identifier. If the listener is not null, it then sends a message to the listener informing it that the given message has been removed.
+- `open(int)`  opens the local store's database connection, gets the folder list, and if there is a folder with the given id, it opens it in read/write mode. Otherwise, it creates a folder with that same name and id and opens it in read/only mode.
+- `getRawPushClass()`  returns the raw PushClass for the current LocalFolder.
+- `setLastChecked(long)`  updates the "last_updated" column in the "folder" table in the LocalFolder object with the current value of the "lastChecked" column in the LocalFolder object.
+- `getMessageUidById(long)`  fetches the message's unique id from the database and returns it as a string.
+- `setVisibleLimit(int)`  sets the limit on how many messages are visible in the LocalFolder at once.
+- `isInTopGroup()`  checks to see if the object is in a top-group or not.
+- `getLastUid()`  returns the last integer of the UID range for the LocalFolder.
+- `setSyncClass(com.fsck.k9.mailstore.FolderClass)`  sets the sync class for a given local folder to the given sync class.
+- `moveMessages(java.util.List,com.fsck.k9.mail.Folder)` (no description)
+- `getDisplayClass()`  returns the class that is responsible for displaying folder contents in a user interface.
+- `create(com.fsck.k9.mailstore.FolderType,int)`  checks to see if the specified FolderType exists, and if so, it throws an exception. If the FolderType does not exist, this method creates a new LocalFolder object and passes it to the LocalStore's createFolds method. Finally, this method returns true to indicate that the operation completed successfully.
+- `setFlags(java.util.Set,boolean)`  sets the flags of a Message object according to the passed in flag setter (flag values are provided in the Set instance).
+- `syncRemoteDeletions()`  calls the `syncRemoteDeletions` method of the account that the `LocalFolder` object is associated with.
+- `getMessages(com.fsck.k9.mail.MessageRetrievalListener)`  retrieves all the messages in the LocalFolder where the listener is registered.
+- `hasMoreMessages()`  compares the number of messages in the `LocalFolder` instance with the number of messages in the `MoreMessages` instance. If the numbers areequal, then the method returns `true`.
+- `getMessagesByReference(java.util.List)`  loads the messages for a given reference (messageReference) from the local mailbox(s) and returns a List of LocalMessages objects.
+- `setLastPush(long)`  updates the `last_pushed` file column in the `LocalFolder` instance's database.
+- `getUnreadMessageCount()`  checks whether the given database id is -1, and if so, it opens the database in read-write mode. Once the database is open, it tries to get the unread message count for the given database. Finally, it returns the unread message count.
+- `getRawNotifyClass()`  returns the notifyClass property of the class LocalFolder.
+- `destroyMessages(java.util.List)`  fetches all messages from the `localStore` and then it calls the `DestroyMessage` method of each one.
+- `getPushClass()`  returns the push class for the given local folder if it is inheriting from the sync class, or the push class itself if the folder does not inherit from the sync class.
+- `getFlaggedMessageCount()`  gets the number of messages that have been flagged in the given local folder.
+- `extractNewMessages(java.util.List)` (no description)
+
+## interface `com.fsck.k9.mailstore.MessageRemovalListener`
+
+This interface  listens to when a message is removed from the mail store.
+
+This class contains the following public method(s):
+
+- `messageRemoved(com.fsck.k9.mail.Message)`  removes a message from the mail store.
+
+## class `com.fsck.k9.mailstore.TempFileBody`
+
+This class  helps to read the contents of a (.k9) file.
+
+This class contains the following public method(s):
+
+- `getInputStream()`  tries (1) to open the (.k9) file that the method was called on, and (2) if that couldn't be done, it falls back to opening the empty byte array.
+- `getSize()`  returns the size of the file as a long integer.
+
+## class `com.fsck.k9.mailstore.MimePartStreamParser$PartBuilder`
+
+This class  parses a MIME multipart file and converts the parts into a Message object.
+
+This class contains the following public method(s):
+
+- `epilogue(java.io.InputStream)`  creates an output stream, copies the contents of the input stream to that stream, and then calls the `setEpilogue` method on the resulting MIME multipart object.
+- `startHeader()`  initializes part local variables.
+- `startBodyPart()`  parses the multipart into a BodyPart and a MessagingException.
+- `endMessage()`  pops the stack and proceeds to the next method.
+- `endHeader()`  calls the public method `endHeader()` of class `org.apache.james.mime4j.MimeException` which is responsible for cleaning up after the part builder.
+- `body(org.apache.james.mime4j.stream.BodyDescriptor,java.io.InputStream)`  parses the contents of a MIME Part into a Part object, and then sets the part's body to that of the parsed MIME Part.
+- `endBodyPart()`  pops the stack, then returns the MIME part stream parser's current body part.
+- `startMultipart(org.apache.james.mime4j.stream.BodyDescriptor)`  parses a Multipart stream and sets the body of the part to the resulting MimeMultipart object.
+- `raw(java.io.InputStream)`  parses the content of the given input stream and builds a PartBuilder object.
+- `preamble(java.io.InputStream)`  creates a copy of the input stream, and then sets the preamble field on the MimeMultipart object that was returned by the `com.fsck.k9.mail.internet.MimeMultipart` class.
+- `endMultipart()`  removes the last part from the stream.
+- `startMessage()`  parses the given MIME Parts as described in RFC 2045 using the PartBuilder provided. If the part is empty, it initializes a new Part and pushes it on the stack. If there is a part on the stack, it parses it and creates an new Message instance. Finally, it pushes the Message instance on the stack.
+- `field(org.apache.james.mime4j.stream.Field)`  extracts the name and raw value of a part's field.
+
+## interface `com.fsck.k9.mailstore.LockableDatabase$SchemaDefinition`
+
+This interface  helps manage schema definitions for a database.
+
+This class contains the following public method(s):
+
+- `getVersion()`  returns the version number of the SchemaDefinition class.
+- `doDbUpgrade(android.database.sqlite.SQLiteDatabase)`  upgrades the schema of the given SQLite database.
+
+## class `com.fsck.k9.mailstore.MessageViewInfoExtractor`
+
+This class  extracts the Message contents and corresponding Cryptography information as needed for displaying the message in a user interface.
+
+This class contains the following public method(s):
+
+- `extractMessageForView(com.fsck.k9.mail.Message,com.fsck.k9.ui.crypto.MessageCryptoAnnotations)`  extracts the Message contents for the given Message and the corresponding Cryptography information.
+- `getInstance()`  loads an instance of an attachment info extractor, then loads an instance of a HTML processor.
+
+## class `com.fsck.k9.mailstore.StorageManager$InternalStorageProvider`
+
+This class  provides access to the app's internal storage on an Android device.
+
+This class contains the following public method(s):
+
+- `getRoot(android.content.Context)`  gets the root of the internal storage.
+- `isReady(android.content.Context)`  checks to see if the internal storage of the given context is ready.
+- `getDatabase(android.content.Context,java.lang.String)`  takes an id (a string) and looks for a corresponding .db file inside the app's internal storage (on an Android device).
+- `getName(android.content.Context)`  retrieves the name of the internal storage provider associated with the given Context.
+- `isSupported(android.content.Context)`  checks whether the device has a supported filesystem.
+- `getAttachmentDirectory(android.content.Context,java.lang.String)`  looks up the attachment's data file ( stored in the `.db_att` directory in the database) in the given storage directory.
+- `init(android.content.Context)`  creates a File object called `mRoot` and sets it as the storage root for the storage manager.
+- `getId()`  returns the internal identifier of the Storage Manager instance.
+
+## class `com.fsck.k9.mailstore.MessageViewInfo`
+
+This class  creates a ViewInfo object representing a message with a flag indicating whether the message is incomplete.
+
+This class contains the following public method(s):
+
+- `createWithErrorState(com.fsck.k9.mail.Message,boolean)`  takes a message and a flag to indicate whether the message is incomplete, and constructs a ViewInfo object representing that message.
+
+## class `com.fsck.k9.mailstore.AttachmentResolver`
+
+This class  helps you to find the attachment URI for a given content id.
+
+This class contains the following public method(s):
+
+- `getAttachmentUriForContentId(java.lang.String)`  looks up the attachment uri for a content id provided.
+- `createFromPart(com.fsck.k9.mail.Part)`  returns a new attachment resolver that associates a content identifier with an attachment URI.
+
+## class `com.fsck.k9.mailstore.DeferredFileBody`
+
+This class  stores data in a file until it either reaches its limit or someone try to read the data.
+
+This class contains the following public method(s):
+
+- `writeTo(java.io.OutputStream)`  writes the contents of the file body to the OutputStream.
+- `getEncoding()`  returns the encoding of the file body as a String.
+- `setEncoding(java.lang.String)`  sets the encoding for the decrypted body of files using the given encoding.
+- `getSize()`  checks if the file components (the boolean file variable) is null and, as long as it is not, it returns the file length (in bytes). If data is also null, then it returns the length of data (in bytes).
+- `getInputStream()`  gets the input stream for the deferred body. If the body is a file, then it opens it and tries to read in the data. If the data is not there, then it just returns null. If the body is memory-backed, then the method just returns the data in bytes.
+- `getFile()`  checks to see if the file referenced by the parameter `file` already exists, and, if not, it creates the file and writes the contents of the `memory` variable to it.
+- `getOutputStream()`  creates a new DeferredFileOutputStream object, sets its memoryBackedThreshold and fileFactory properties, and overrides the close method so that if the threshold has been reached, the DeferredFileOutputStream will close the file it's storing data in, and if the data is not yet stored in a file, then a stream of data will be printed to the console.
+
+## class `com.fsck.k9.mailstore.FileBackedBody`
+
+This class  helps to create, read, and write email bodies.
+
+This class contains the following public method(s):
+
+- `getInputStream()`  attempts to get an input stream for the file specified by the `file` parameter. If the file cannot be found, or there is an error attempting to access it, a `com.fsck.k9.mail.MessagingException` is thrown.
+- `writeTo(java.io.OutputStream)`  reads the contents of the input stream into a byte[] and writes that byte[] to the output stream.
+- `setEncoding(java.lang.String)`  sets the encoding for the body of the email.
+- `getEncoding()`  returns the encoding of the file backed body.
+- `getSize()`  returns the length of the file.
+
+## class `com.fsck.k9.mailstore.LocalBodyPart`
+
+This class  saves the account UUID and message object of each email message body part into a LocalBodyPart buffer, and then it returns the LocalBodyPart buffer's part ID.
+
+This class contains the following public method(s):
+
+- `getAccountUuid()`  returns the saved account UUID of the account assigned to the given LocalBodyPart buffer.
+- `getMessage()`  returns the message object for the given body part.
+- `getSize()`  returns the size of the local body part as a long.
+- `getPartId()`  returns the part ID for the given local body part.
+
+## abstract class `com.fsck.k9.mailstore.StorageManager$FixedStorageProviderBase`
+
+This abstract class  sets up the storage hierarchy for the application and manages the fixed storage providers.
+
+This class contains the following public method(s):
+
+- `init(android.content.Context)`  computes the root of the storage hierarchy, and then sets the file system directory for use by the application.
+- `getAttachmentDirectory(android.content.Context,java.lang.String)`  looks up a file with a given ID in the application's root directory and returns that file's path.
+- `getDatabase(android.content.Context,java.lang.String)`  looks for a file with the given ID in the application's root directory. If it can't find the file, it creates a new one and returns that.
+- `isSupported(android.content.Context)`  checks whether the given context is able to access any fixed storage defined by the storage manager. It also returns a boolean indicating whether the given context can access the fixed storage.
+- `isReady(android.content.Context)`  checks if either the root file of the storage manager is mounted on the system or the media storage state is media-mounted.
+- `getRoot(android.content.Context)`  returns the root of the StorageManager database that is stored in the given context.
+
+## interface `com.fsck.k9.mailstore.StorageManager$StorageProvider`
+
+This interface  provides access to methods to manage storage for files and attachments.
+
+This class contains the following public method(s):
+
+- `init(android.content.Context)`  initiates the storage manager to initialize itself.
+- `getRoot(android.content.Context)`  returns the root directory of the storage denoted by context. It will never return <code>null</code>.
+- `getAttachmentDirectory(android.content.Context,java.lang.String)`  looks through the file system for a file with the given attachment ID and returns that file's location.
+- `getName(android.content.Context)`  returns a localized user-friendly name for the storage provider.
+- `isSupported(android.content.Context)`  checks whether the given StorageManager instance can handle files on the given device.
+- `isReady(android.content.Context)`  checks whether the underlying storage is available to be used.
+- `getDatabase(android.content.Context,java.lang.String)`  looks through the filesystem for a file that matches the given ID. If it is not found, then this method will return null.
+- `getId()`  returns a unique identifier for the given storage provider.
+
+## class `com.fsck.k9.mailstore.LocalMessage`
+
+This class  stores a local message in a database, manages the properties of the local message, and provides methods for getting information about the local message, creating or retrieving messages based on the local message, and sending or receiving messages.
+
+This class contains the following public method(s):
+
+- `getDatabaseId()`  returns the unique identifier for the database the LocalMessage message is stored in.
+- `setFlag(com.fsck.k9.mail.Flag,boolean)`  sets the flag on the message, reads the flag, and sets the corresponding bits in the ContentValues dictionary. Note that the db.update() call is necessary in order to commit the transaction; failing to do so will result in an exception being thrown.
+- `getPreviewType()`  returns the content type of the preview that was created for the localMessage.
+- `getFolder()`  accesses the local folder stored in the local message object.
+- `equals(java.lang.Object)`  compares the object's account uid field with the object's own account uid field. If they match, then the object is deemed to be equal.
+- `clone()`  clones the local message object from the local store and sets the following properties:
+
+*messageReference: the unique id of the local message object
+
+*databaseId: the id of the database that the local message object was saved to
+
+*attachmentCount: the number of attachments in the local message object
+
+*subject: the subject of the local message object
+
+*preview: the preview of the local message object
+
+*threadId: the unique id of the thread that the local message object was sent in
+
+*rootId: the id of the root message object
+
+*messagePartId: the unique id of the message part in which the local message object is located
+
+*mimeType: the MIME type of the local message object
+
+*previewType: the type of preview of the local message object
+
+*headerNeedsUpdating: whether the message header needs to be updated
+
+Finally, this method returns
+- `setSubject(java.lang.String)`  sets the subject of the message in the LocalMessage object's properties.
+- `getThreadId()`  returns the id of the thread that the local message is associated with.
+- `getMessagePartId()`  returns the id of the message part that this LocalMessage corresponds to.
+- `hasAttachments()`  compares the number of attachments in the local message to zero, and returns false if there are any attachments.
+- `hashCode()`  takes the object's hash code, multiplies it by 31, and addes the account UUID to the result if it is NOT null.
+- `getUri()`  constructs the full URI for a message in the local message store, based on the account number (which is extracted from the account object) and the folder name (which is extracted from the folder object).
+- `setMessageId(java.lang.String)`  sets the message id for the given message.
+- `getAccount()`  returns the account for the given local message store.
+- `getSubject()`  returns the subject of the message.
+- `writeTo(java.io.OutputStream)`  updates the header of the message if it needs to be updated.
+- `getPreview()`  returns the latest preview of the message.
+- `debugClearLocalData()`  clears the local data store of all messages so that they can be regenerated from the database.
+- `setRecipients(com.fsck.k9.mailstore.RecipientType,com.fsck.k9.mail.Address[])`  sets the recipients for an email message. The recipients can be either a TO (target address), a CC (corresponding CC address), or a BCC (bcc address). If the type of recipient is not one of those three, then an error is thrown. Once the recipients have been set, this method also checks to see if there are any headers that need to be updated, and if so, it flags that fact.
+- `setReplyTo(com.fsck.k9.mail.Address[])`  sets the replyTo field in the LocalMessage object to the specified array of addresses.
+- `setFlagInternal(com.fsck.k9.mail.Flag,boolean)`  sets the flag for the given message in the local message store.
+- `destroy()`  removes a message from the local database. However, this also updates the thread structure.
+- `setUid(java.lang.String)`  sets the user ID of the local message.
+- `getRootId()`  returns the root ID of the LocalMessage object.
+- `makeMessageReference()`  creates a new MessageReference object, filling in the relevant fields based on the values passed in.
+- `getMimeType()`  reads the 'Content-Type' header of the given LocalMessage and return the value as a string.
+- `setFrom(com.fsck.k9.mail.Address)`  updates the message's from field to match the passed in address.
+
+## class `com.fsck.k9.mailstore.MimePartStreamParser`
+
+This class  lets you parse a MIME Part from a file.
+
+This class contains the following public method(s):
+
+- `parse(com.fsck.k9.mailstore.util.FileFactory,java.io.InputStream)`  parses a MIME Part from an input stream. It uses a MIME Config object to set certain configuration parameters, and then uses a MIME StreamParser to parse the content.
+
+## interface `com.fsck.k9.mailstore.StorageManager$StorageListener`
+
+This interface  allows the calling code to be notified whenever a storage is mounted or unmounted.
+
+This class contains the following public method(s):
+
+- `onMount(java.lang.String)`  registers to be notified whenever the storage manager is mounted (with read/write access).
+- `onUnmount(java.lang.String)`  allows the calling code to be notified when a storage being used by theprovider is about to be unmounted.
+
+## interface `com.fsck.k9.mailstore.LocalStore$BatchSetSelection`
+
+This interface  provides methods for querying and selecting messages from the LocalStore.
+
+This class contains the following public method(s):
+
+- `getListItem(int)`  returns the value at position index of the argument list.
+- `getListSize()`  returns the size of the argument list in a call to the method `getSelection()`.
+- `doDbWork(android.database.sqlite.SQLiteDatabase,java.lang.String,java.lang.String[])`  generates a SQL statement to select a batch of messages from the LocalStore. The selectionSet parameter contains place holders for the argument list, and the selectionArgs parameter contains the current subset of the argument list.
+- `postDbWork()`  executes any database work that has to be done after each batch selection.
+
+## interface `com.fsck.k9.mailstore.LocalPart`
+
+This interface  exports methods that allow you to access specific information about a local part of the mailstore.
+
+This class contains the following public method(s):
+
+- `getPartId()`  returns the unique identifier for a given local part in the mailstore.
+- `getSize()`  returns the size of the local part of the mail store.
+- `getMessage()`  retrieves the message associated with the specified local part.
+- `getAccountUuid()`  returns the unique Account UUID for a given account in the local mailstore.
+
+## class `com.fsck.k9.mailstore.StorageManager`
+
+This class  enables synchronization between an application and a storage manager. This is done by adding and removing listener instances, and by mounting or unmounting the storage provider.
+
+This class contains the following public method(s):
+
+- `getDefaultProviderId()`  gets the default provider id for the storage manager.
+- `onAfterUnmount(java.lang.String)`  calls `resolveProvider(path)`. If this function returns `null`, the method returns and the synchronization action is stopped. If the function returns a `StorageManager` instance, the synchronization action is continued.
+- `addListener(com.fsck.k9.mailstore.StorageManager$StorageListener)`  adds a listener to the list of listeners for the given storage manager.
+- `onBeforeUnmount(java.lang.String)`  logs an event that the storage path "{path}" is about to be unmounted. Furthermore, it gets a StorageProvider object for that path and checks to see if it's been previously initialized. If it hasn't, the method then initializes the StorageProvider object and notifies all registered StorageListener objects. Finally, synchronization aid for the storage provider is locked and then "unmounted" to indicate that the storage is no longer being used.
+- `getDatabase(java.lang.String,java.lang.String)`  looks up the resolved database file for the given provider ID (in this case, it will be looking up the resolved database file for the StorageManager class's provider).
+- `removeListener(com.fsck.k9.mailstore.StorageManager$StorageListener)`  removes a StorageListener from the list of listeners for the StorageManager.
+- `getAttachmentDirectory(java.lang.String,java.lang.String)`  looks up the attachment directory for the given provider ID in the mailstore and returns the resolved path.
+- `getInstance(android.content.Context)`  checks to see if the StorageManager instance is null, and if not, it creates a new instance and sets it as the current instance.
+- `isReady(java.lang.String)`  checks to see if the given provider exists and, if not, it returns false.
+- `unlockProvider(java.lang.String)`  obtains a StorageProvider object from the StorageManager object on which it is called, and then uses the readLock associated with that StorageProvider to unlock the provider locks.
+- `isMountPoint(java.io.File)`  tries to find a matching filesystem root for the given file. If it finds a match, it returns true . Otherwise, it returns false .
+- `lockProvider(java.lang.String)`  tries to lock the storage so that other components cannot use it at the same time. After locking the storage, it verifies that the storage provider is ready to be used and then unlocks the lock if it is locked and the storage provider is ready.
+- `onMount(java.lang.String,boolean)`  mounts the specified path as a storage device for the application. Next, it resolves the provider for the path and if it is not null, it sets up for the application a list of StorageListener instances that will be invoked when files or directories are created, deleted, or mounted on the path. Finally, it calls the `setServicesEnabled()` method on the context object to enable the required services for the storage.
+- `getAvailableProviders()`  returns a map of all the available storage providers present in the storage manager.
+
+## abstract class `com.fsck.k9.mailstore.BinaryAttachmentBody`
+
+This abstract class  sets the encoding of the binary attachment body to the given encoding and writes the contents of the input stream to the output stream.
+
+This class contains the following public method(s):
+
+- `setEncoding(java.lang.String)`  sets the encoding of the binary attachment body to the given encoding.
+- `writeTo(java.io.OutputStream)`  takes a java.io.InputStream as input and writes it to a java.io.OutputStream. It also keep a boolean variable to indicate whether or not the stream should be closed.
+- `getInputStream()`  retrieves the input stream for the binary attachment body.
+- `getEncoding()`  returns the encoding of the binary attachment body.
+
+## class `com.fsck.k9.mailstore.StoreSchemaDefinition`
+
+This class  stores the schema used by the LocalStore in a SQLiteDatabase. If something goes wrong during an upgrade attempt, the class will log the error and perform a reset of the database.
+
+This class contains the following public method(s):
+
+- `getVersion()`  returns the version of the DB used by the LocalStore.
+- `doDbUpgrade(android.database.sqlite.SQLiteDatabase)`  tries to upgrade the underlying database schema. In the event that an error occurs during the upgrade process, it log the error and then does a reset of the database.
+
+
+# package `com.fsck.k9.mailstore.migrations`
+
+This package  contains classes that help you migrate a user mailbox from one Mailstore to another Mailstore.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo61`
+
+This class  migrates a user mailbox from using a database file called "K9mail-errors."
+
+This class contains the following public method(s):
+
+- `removeErrorsFolder(android.database.sqlite.SQLiteDatabase)`  deleting a folder from the database called "K9mail-errors."
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo44`
+
+This class  updates the `messages` table to include columns for the `thread_root`, `thread_parent`, and `normalized_subject_hash`.
+
+This class contains the following public method(s):
+
+- `addMessagesThreadingColumns(android.database.sqlite.SQLiteDatabase)`  updates the `messages` table with the following columns: `thread_root`, `thread_parent`, and `normalized_subject_hash`.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo54`
+
+This class  adds a column to the messages table in the SQLite database that stores the preview type for messages.
+
+This class contains the following public method(s):
+
+- `addPreviewTypeColumn(android.database.sqlite.SQLiteDatabase)`  adds a column to the messages table in the SQLite database that stores the preview type for messages. The default preview type is "none".
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo42`
+
+This class  allows you to move folders from one Mailstore to another Mailstore.
+
+This class contains the following public method(s):
+
+- `from41MoveFolderPreferences(com.fsck.k9.mailstore.migrations.MigrationsHelper)`  gets the LocalStore and Storage objects for the given MigrationHelper, then it advances the SystemClock by the amount of milliseconds it took to run the MigrationHelper() call. Next, it iterates over the folders in the LocalStore and looks for any folders that have a corresponding LocalFolder object. For each such folder, it calls the MigrationHelper.save() method on the LocalFolder object, then calls the MigrationHelper.commit() method on the editor object to commit the changes. Finally, it logs the time it took for the entire operation to finish.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo37`
+
+This class  adds a column to the "attachments" table in a SQLite database that will store information about how the attachments should be treated.
+
+This class contains the following public method(s):
+
+- `addAttachmentsContentDispositionColumn(android.database.sqlite.SQLiteDatabase)`  adds a column called "content_disposition" to the "attachments" table in the database. This column will store information about how the attachments should be treated (e.g. whether they should be displayed in the user's inbox, saved to storage, etc.).
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo60`
+
+This class  migrates pending commands from a given SQLite database to a new table.
+
+This class contains the following public method(s):
+
+- `migratePendingCommands(android.database.sqlite.SQLiteDatabase)`  retrieves all pending commands in the given SQLite database, and then creates a new table in that database with the given command and data values.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo40`
+
+This class  adds a column in the messages table that stores the MIME type of the messages.
+
+This class contains the following public method(s):
+
+- `addMimeTypeColumn(android.database.sqlite.SQLiteDatabase)`  adds a column in the messages table that stores the MIME type of the messages.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo32`
+
+This class  updates the deleted column from the messages table in the database with the same flag value as specified in the parameters.
+
+This class contains the following public method(s):
+
+- `updateDeletedColumnFromFlags(android.database.sqlite.SQLiteDatabase)`  updates the deleted column from the messages table in the database with the same flag value as specified in the parameters.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo52`
+
+This class  adds a new column to the "Folders" table in the SQLiteDatabase that stores the number of messages that are in a particular folder.
+
+This class contains the following public method(s):
+
+- `addMoreMessagesColumnToFoldersTable(android.database.sqlite.SQLiteDatabase)`  adds a new column named "more_messages" to the "Folders" table in the SQLiteDatabase. The column's default value is "unknown".
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo36`
+
+This class  adds a text column to the attachments table, which will store the unique content ID for each attachment.
+
+This class contains the following public method(s):
+
+- `addAttachmentsContentIdColumn(android.database.sqlite.SQLiteDatabase)`  adds a text column to the attachments table, which will store the unique content ID for each attachment.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo51`
+
+This class  takes an SQLiteDatabase object and a helper class that helps with migrating logs and data from a previous version of the mailstore to the current one.
+
+This class contains the following public method(s):
+
+- `db51MigrateMessageFormat(android.database.sqlite.SQLiteDatabase,com.fsck.k9.mailstore.migrations.MigrationsHelper)` (no description)
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo35`
+
+This class  updates a table flag field with a replacement value.
+
+This class contains the following public method(s):
+
+- `updateRemoveXNoSeenInfoFlag(android.database.sqlite.SQLiteDatabase)`  updates the messages table flag field with the replacement value "X_BAD_FLAG".
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo45`
+
+This class  updates the threading indexes on the database.
+
+This class contains the following public method(s):
+
+- `changeThreadingIndexes(android.database.sqlite.SQLiteDatabase)`  updates the threading indexes on the database.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo33`
+
+This class  adds a new column to the table `messages` called `preview`.
+
+This class contains the following public method(s):
+
+- `addPreviewColumn(android.database.sqlite.SQLiteDatabase)`  adds a new column to the table `messages` called `preview`.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo43`
+
+This class  tries to fix a problem with an email folder's structure.
+
+This class contains the following public method(s):
+
+- `fixOutboxFolders(android.database.sqlite.SQLiteDatabase,com.fsck.k9.mailstore.migrations.MigrationsHelper)`  tries to rename an old folder to a new folder and if that folder already exists, it moves any messages inside of it to a new folder called drafts.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo46`
+
+This class  adds columns to the database that stores migrations.
+
+This class contains the following public method(s):
+
+- `addMessagesFlagColumns(android.database.sqlite.SQLiteDatabase,com.fsck.k9.mailstore.migrations.MigrationsHelper)` (no description)
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo39`
+
+This class  deletes all the headers that do not have an associated message.
+
+This class contains the following public method(s):
+
+- `headersPruneOrphans(android.database.sqlite.SQLiteDatabase)`  deletes all the headers that do not have an associated message.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo51$MimeStructureState`
+
+This class  applies the values in a ContentValues object to a State structure, and then uses the nextMultipartChild() method to look up the next multipart ancestor and update its fields.
+
+This class contains the following public method(s):
+
+- `applyValues(android.content.ContentValues)`  applies the values from the given ContentValues object to the given State structure.
+- `popParent()`  returns the next mime structure state in the parent chain if the current state is null, or else returns the current state with the added id of the next mime structure state in the parent chain.
+- `nextMultipartChild(long)`  looks up the next multipart ancestor (either the root part or a part with a given id) and updates the id, parent, and next order fields.
+- `getNewRootState()`  constructs a new MimeStructureState object with the root state as null, null, -1, and 0.
+- `nextChild(long)`  increments the `nextOrder` field of the current `MimeStructureState` object and returns it.
+
+## interface `com.fsck.k9.mailstore.migrations.MigrationsHelper`
+
+This interface  provides access to the local store and storage for migrations files.
+
+This class contains the following public method(s):
+
+- `getLocalStore()`  gets a local store implementation of the `MigrationsHelper` interface.
+- `getStorage()`  returns the storage for the migrations files.
+- `getContext()`  gets the Context object for the current application. This can be useful if you want to access system-level features or services that are available to the application.
+- `serializeFlags(java.util.List)`  serializes a list of flags as a byte array.
+- `getAccount()`  retrieves the account for the given Migration object.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo48`
+
+This class  updates the root index for threads in the database to match the root index of the new row in the newly created row ID column.
+
+This class contains the following public method(s):
+
+- `updateThreadsSetRootWhereNull(android.database.sqlite.SQLiteDatabase)`  updates the root index for threads in the database to match the root index of the new row in the newly created row ID column.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo53`
+
+This class  updates a column in the messages table to have a value of zero if the column is not null.
+
+This class contains the following public method(s):
+
+- `removeNullValuesFromEmptyColumnInMessagesTable(android.database.sqlite.SQLiteDatabase)`  updates the 'empty' column in the messages table to have a value of zero if the 'empty' column is not null.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo50`
+
+This class  adds a notify class column to the table folders.
+
+This class contains the following public method(s):
+
+- `foldersAddNotifyClassColumn(android.database.sqlite.SQLiteDatabase,com.fsck.k9.mailstore.migrations.MigrationsHelper)`  adds a notify class column to the table folders. The notify class column will have the value of Folder.FolderClass.FIRST_CLASS.name() .
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo41`
+
+This class  adds columns to the folders table that hold information about the class that the folder is integrated with. Its public method, db41UpdateFolderMetadata, is used to update the metadata for folders in a given SQLite database.
+
+This class contains the following public method(s):
+
+- `db41FoldersAddClassColumns(android.database.sqlite.SQLiteDatabase)`  adds columns to the folders table that hold information about the class that the folder is integrated with.
+- `db41UpdateFolderMetadata(android.database.sqlite.SQLiteDatabase,com.fsck.k9.mailstore.migrations.MigrationsHelper)`  updates the metadata for folders in a given SQLite database.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo49`
+
+This class  creates a new index on the `messages` table to track composite messages.
+
+This class contains the following public method(s):
+
+- `createMsgCompositeIndex(android.database.sqlite.SQLiteDatabase)`  creates an index on the `messages` table to track composite messages.
+
+## class `com.fsck.k9.mailstore.migrations.Migrations`
+
+This class  helps upgrade a database.
+
+This class contains the following public method(s):
+
+- `upgradeDatabase(android.database.sqlite.SQLiteDatabase,com.fsck.k9.mailstore.migrations.MigrationsHelper)` (no description)
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo47`
+
+This class  creates a new table called `threads` in the SQLite database, and then it updates the `messages` table to uses this table.
+
+This class contains the following public method(s):
+
+- `createThreadsTable(android.database.sqlite.SQLiteDatabase)`  creates a new table called `threads` in the SQLite database, and then it creates indices on this table to make it faster to search for messages. Finally, it updates the `messages` table to uses these indices.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo31`
+
+This class  deletes the msg_folder_id_deleted_date Index and then creates a new msg_folder_id_deleted_date Index.
+
+This class contains the following public method(s):
+
+- `changeMsgFolderIdDeletedDateIndex(android.database.sqlite.SQLiteDatabase)`  deletes the msg_folder_id_deleted_date Index and then creates a new msg_folder_id_deleted_date Index.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo30`
+
+This class  migrates a database from the version 3 format to the version 4 format.
+
+This class contains the following public method(s):
+
+- `addDeletedColumn(android.database.sqlite.SQLiteDatabase)`  adds a new column to the table `messages` called `deleted` with a default value of 0.
+
+## class `com.fsck.k9.mailstore.migrations.MigrationTo34`
+
+This class  adds an integer column called "flagged_count" to the folder table, with a default value of 0.
+
+This class contains the following public method(s):
+
+- `addFlaggedCountColumn(android.database.sqlite.SQLiteDatabase)`  adds an integer column called "flagged_count" to the folder table, with a default value of 0.
+
+
+# package `com.fsck.k9.mailstore.util`
+
+This package  provides classes that help to write data to a deferred file.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.mailstore.util.DeferredFileOutputStream`
+
+This class  produces an output stream that can be used to write data to a deferred file.
+
+This class contains the following public method(s):
+
+- `getData()`  returns an byte array representing the data stored in the deferred file.
+- `getFile()`  tries to determine if the output file is in memory or not. If it is not in memory, it uses the file system to look for the output file.
+
+## interface `com.fsck.k9.mailstore.util.FileFactory`
+
+This interface  provides a way to create files.
+
+This class contains the following public method(s):
+
+- `createFile()`  creates a new file.
+
+## class `com.fsck.k9.mailstore.util.FlowedMessageUtils`
+
+This class  encodes a text using the "standard" encoding.
+
+This class contains the following public method(s):
+
+- `deflow(java.lang.String,boolean)` (no description)
+- `flow(java.lang.String,boolean)`  takes a text and encodes it using the "standard" encoding, which is the default if no encoding is specified.
+- `flow(java.lang.String,boolean,int)` (no description)
+- `isAlphaChar(java.lang.String,int)`  checks if the character at index is one of the 87 alphanumeric characters in text.
+
+
+# package `com.fsck.k9.message`
+
+This package  provides classes for building messages.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.message.IdentityHeaderBuilder`
+
+This class  allows you to set various property values on an IdentityHeaderBuilder object that will be used when building a draft email message.
+
+This class contains the following public method(s):
+
+- `setQuoteTextMode(com.fsck.k9.message.QuotedTextMode)`  sets the quotedTextMode of the IdentityHeaderBuilder to the value of quotedTextMode.
+- `setIdentity(com.fsck.k9.Identity)`  sets the identity variable in the IdentityHeaderBuilder object to be the specified identity.
+- `setMessageFormat(com.fsck.k9.message.SimpleMessageFormat)`  sets the message format for the IdentityHeaderBuilder object.
+- `setQuotedHtmlContent(com.fsck.k9.message.quote.InsertableHtmlContent)`  sets the quoted HTML content of the IdentityHeaderBuilder object to the supplied quoted HTML content.
+- `setCursorPosition(int)`  sets the position of the cursor in the text of the IdentityHeaderBuilder object.
+- `setSignature(java.lang.String)`  sets the signature for the IdentityHeaderBuilder object.
+- `build()`  saves a key/value pair string in the ``identity`` field of a draft message.
+- `setIdentityChanged(boolean)`  sets the `identityChanged` flag on the IdentityHeaderBuilder to indicate whether the identity has changed or not.
+- `setMessageReference(com.fsck.k9.activity.MessageReference)`  updates the messageReference field of the identity header builder instance with the reference to the message object that is being worked on.
+- `setQuoteStyle(com.fsck.k9.Account$QuoteStyle)`  sets the quoteStyle field of the IdentityHeaderBuilder object to the given value.
+- `setBodyPlain(com.fsck.k9.mail.internet.TextBody)`  takes a string (in this case, a plain text email body) and sets it as the body of the email header.
+- `setBody(com.fsck.k9.mail.internet.TextBody)`  sets the body of the IdentityHeaderBuilder to the provided text.
+- `setSignatureChanged(boolean)`  sets the `signatureChanged` property of this object to boolean value `signatureChanged`.
+
+## interface `com.fsck.k9.message.MessageBuilder$Callback`
+
+This interface  provides callbacks for when the message builder process is complete or an exception occurs.
+
+This class contains the following public method(s):
+
+- `onMessageBuildCancel()`  cancels the message build process.
+- `onMessageBuildReturnPendingIntent(android.app.PendingIntent,int)`  returns a pending Intent which can be used to trigger some action when the message builder is done building the message.
+- `onMessageBuildException(com.fsck.k9.mail.MessagingException)`  notifies the caller that an exception occurred during the messagebuilder construction, and provides the exception instance.
+- `onMessageBuildSuccess(com.fsck.k9.mail.internet.MimeMessage,boolean)`  signals to the MessageBuilder that the operation has completed successfully.
+
+## class `com.fsck.k9.message.SimpleMessageBuilder`
+
+This class  constructs a SimpleMessage object.
+
+This class contains the following public method(s):
+
+- `newInstance()`  creates a new SimpleMessageBuilder object. This object has a Context object, a MessageIdGenerator instance, and a BoundaryGenerator instance.
+
+## class `com.fsck.k9.message.AutocryptStatusInteractor$RecipientAutocryptStatus`
+
+This class  checks to see if there is an intent pending with this recipientAutocryptStatus.
+
+This class contains the following public method(s):
+
+- `hasPendingIntent()`  checks if there is an intent pending with this recipientAutocryptStatus. If there is, then it returns true.
+
+## class `com.fsck.k9.message.PgpMessageBuilder`
+
+This class  builds a message using the current activity result (e.g. an MMS Messaging Activity result).
+
+This class contains the following public method(s):
+
+- `buildMessageOnActivityResult(int,android.content.Intent)`  checks to see if the currentProcessedMimeMessage is null, and if not, then it grabs the Intent associated with the activity result (e.g. the PgpMessage from an MMS Messaging Activity). It then calls the startOrContinueBuildMessage() method to begin or resume building the message.
+- `setCryptoStatus(com.fsck.k9.activity.compose.ComposeCryptoStatus)`  sets the cryptoStatus field of the PgpMessageBuilder to the given cryptoStatus.
+- `setOpenPgpApi(org.openintents.openpgp.util.OpenPgpApi)`  sets the OpenPGP API object to use.
+- `newInstance()`  creates a new instance of the PgpMessageBuilder class.
+
+## class `com.fsck.k9.message.ComposePgpEnableByDefaultDecider`
+
+This class  makes a decision about whether to encrypt a specific message by default.
+
+This class contains the following public method(s):
+
+- `shouldEncryptByDefault(com.fsck.k9.mail.Message)`  compares the localMessage to see if it is encrypted. If it is, the method returns true; otherwise, the method returns false.
+
+## class `com.fsck.k9.message.ComposePgpInlineDecider`
+
+This class  determines whether a particular message has inline PGP features.
+
+This class contains the following public method(s):
+
+- `shouldReplyInline(com.fsck.k9.mail.Message)`  determines whether a particular message has inline PGP features.
+
+## enum `com.fsck.k9.message.AutocryptStatusInteractor$RecipientAutocryptStatusType`
+
+This enum  contains information about how recipients can be verified as being able to encrypt messages.
+
+This class contains the following public method(s):
+
+- `canEncrypt()`  tests whether the given enum has a public boolean canEncrypt() method.
+- `isMutual()`  checks if two objects are mutual recipients of the same AutocryptStatus transmitter.
+- `isConfirmed()`  checks if a given recipient AutocryptStatusType is confirmed.
+
+## enum `com.fsck.k9.message.IdentityField`
+
+This enum  allows you to easily access the integer values for the IdentityFields that should be used in your application.
+
+This class contains the following public method(s):
+
+- `getIntegerFields()`  returns a list of the IdentityFields that should be integer values.
+- `value()`  returns the value of the enum instance.
+
+## class `com.fsck.k9.message.TextBodyBuilder`
+
+This class  constructs and mails a text body that includes the entered text, any quoted text, and a signature.
+
+This class contains the following public method(s):
+
+- `setAppendSignature(boolean)`  stores the value of the boolean parameter appendSignature in the global variable mAppendSignature.
+- `buildTextPlain()`  constructs a text body that contains the entered text and possibly the quoted original message.
+- `setQuotedText(java.lang.String)`  sets the quotedText property of the TextBodyBuilder class to the string that was passed in.
+- `setInsertSeparator(boolean)`  sets the insert separator to be a boolean value.
+- `setReplyAfterQuote(boolean)`  sets the "replyAfterQuote" boolean property to the value of "replyAfterQuote" passed in as a parameter.
+- `buildTextHtml()`  takes the user's input (in this case, a string of text) and turns it into a Body instance that can be sent as an email message.
+- `setIncludeQuotedText(boolean)`  determines whether Quote characters should be included in the text body.
+- `setQuotedTextHtml(com.fsck.k9.message.quote.InsertableHtmlContent)`  takes the specified HTML content and turns it into a quoted text string.
+- `setSignature(java.lang.String)`  sets the signature of the text body builder.
+- `setSignatureBeforeQuotedText(boolean)`  sets a flag indicating whether or not the text body builder should include a signature before the quoted text.
+
+## class `com.fsck.k9.message.AutocryptStatusInteractor`
+
+This class  interacts with the Intent notification and tries to get the AutocryptStatus type for the Intent result. Based on that, it can provide information back to the user or show an error.
+
+This class contains the following public method(s):
+
+- `getInstance()`  returns the autocrypt status of the instance currently held in memory.
+- `retrieveCryptoProviderRecipientStatus(org.openintents.openpgp.util.OpenPgpApi,java.lang.String[])`  tries to get the recipient AutocryptStatus type from the Intent result. Based on that, it either returns the user Interaction Required AutocryptStatus or the Unknown Error AutocryptStatus.
+
+## class `com.fsck.k9.message.IdentityHeaderParser`
+
+This class  parses an identity string and returns the value of certain attributes in that identity.
+
+This class contains the following public method(s):
+
+- `parse(java.lang.String)`  parses the identity string and returns a map of values for each field in the identity.
+
+## abstract class `com.fsck.k9.message.MessageBuilder`
+
+This abstract class  sets the subject, cc, requestReadReceipt, bcc, signature, and signatureChanged fields of the message.
+
+This class contains the following public method(s):
+
+- `setSubject(java.lang.String)`  sets the subject of the message to the provided string.
+- `setCc(java.util.List)`  sets the "cc" field of this MessageBuilder object to a list of "Address" objects.
+- `setRequestReadReceipt(boolean)`  updates the requestReadReceipt flag to indicate whether or not the receiver should receive the message inítialized with the request receipt flag set to true.
+- `setCursorPosition(int)`  sets the cursorPosition property of the `MessageBuilder` to the given integer value.
+- `setReplyAfterQuote(boolean)`  sets a boolean value indicating whether or not the message builder will return a reply after placing a quote inside it.
+- `setQuotedHtmlContent(com.fsck.k9.message.quote.InsertableHtmlContent)`  sets the quoted HTML content for the message builder onto the InsertableHtmlContent object.
+- `setInReplyTo(java.lang.String)`  sets the "inReplyTo" field of the "MessageBuilder" declaration to the "inReplyTo" value given as input.
+- `setBcc(java.util.List)`  takes a list of email addresses and sets the "bcc" field of the "MessageBuilder" to be the list.
+- `setSignature(java.lang.String)`  sets the signature field of the message object to the specified value.
+- `setSignatureChanged(boolean)`  sets the signatureChanged flag to true if the signature has been changed, and otherwise it sets it to false.
+- `setIsPgpInlineEnabled(boolean)`  sets the "isPgpInlineEnabled" flag for the "this" object to the given value.
+- `setIdentity(com.fsck.k9.Identity)`  sets the identity of the message builder to the given identity.
+- `setAttachments(java.util.List)`  sets the attachments field of the MessageBuilder object to a list of attachments.
+- `setMessageReference(com.fsck.k9.activity.MessageReference)`  sets the messageReference field of this MessageBuilder to the argument.
+- `reattachCallback(com.fsck.k9.message.MessageBuilder$Callback)`  attaches a new callback to the "callbackLock" and ensures that any existing "asyncCallback" is also detached. Next, it calls "deliverResult" to complete the task.
+- `setSentDate(java.util.Date)`  sets the sent date of the message builder to the given date.
+- `buildAsync(com.fsck.k9.message.MessageBuilder$Callback)`  builds the message asynchronously, calling a callback on the UI thread. The callback may thread-safely be detached and reattached intermittently.
+- `setReferences(java.lang.String)`  sets the references field of the `MessageBuilder` object to the given string.
+- `setDraft(boolean)`  determines if the current message is a draft. If so, it sets the isDraft property to True.
+- `setQuotedText(java.lang.String)`  sets the quotedText property of the message builder to the text that is passed in as a parameter.
+- `setSignatureBeforeQuotedText(boolean)`  sets the value of the `isSignatureBeforeQuotedText` field to `true` if the text before the quotations should have a signature, and sets it to `false` if the text before the quotations does not need a signature.
+- `onActivityResult(int,int,android.content.Intent,com.fsck.k9.message.MessageBuilder$Callback)`  waits for a result from the activity, and if it doesn't match the "RESULT_OK" value, it cancels the task and returns.
+- `detachCallback()`  disables the callback until it is re-enabled.
+- `isDraft()`  checks if the Message object is in draft state.
+- `setQuoteStyle(com.fsck.k9.Account$QuoteStyle)`  sets the QuoteStyle property of the message builder to the value of the quoteStyle argument.
+- `setIdentityChanged(boolean)`  updates the "identityChanged" field of the MessageBuilder instance to reflect whether or not the message's identity has changed.
+- `setMessageFormat(com.fsck.k9.message.SimpleMessageFormat)`  sets the message format for the message builder. This can be used to format different types of messages.
+- `setHideTimeZone(boolean)`  sets the hideTimeZone property to the boolean value of its argument.
+- `setText(java.lang.String)`  sets the text of the message to the given argument.
+- `setTo(java.util.List)`  sets the "to" list to the given "toArray" of Address objects.
+- `setQuotedTextMode(com.fsck.k9.message.QuotedTextMode)`  sets the quotedTextMode attribute of the message builder to the supplied quotedTextMode value.
+
+
+# package `com.fsck.k9.message.extractors`
+
+This package  provides a series of classes that help you extract textual information from emails.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.message.extractors.MessagePreviewCreator`
+
+This class  extracts the text from a message and returns a PreviewResult.
+
+This class contains the following public method(s):
+
+- `createPreview(com.fsck.k9.mail.Message)`  extracts the text from the message and returns a PreviewResult with the text content.
+- `newInstance()`  creates a new MessagePreviewCreator object with the given TextPartFinder and PreviewTextExtractor (if supplied). It also attaches an EncryptionDetector to help protect the data being previewed.
+
+## class `com.fsck.k9.message.extractors.EncryptionDetector`
+
+This class  provides a means to test whether a given message is encrypted using PGP or SMIME.
+
+This class contains the following public method(s):
+
+- `isEncrypted(com.fsck.k9.mail.Message)`  tests to see if the given message is encrypted using PGP or SMIME.
+
+## class `com.fsck.k9.message.extractors.AttachmentCounter`
+
+This class  allows you to count the number of attachments present in the received message.
+
+This class contains the following public method(s):
+
+- `getAttachmentCount(com.fsck.k9.mail.Message)`  counts the number of attachments present in the received message.
+- `newInstance()`  creates a new instance of a com.fsck.k9.message.extractors.AttachmentCounter class. Within that class, it instantiates a com.fsck.k9.message.extractors.TextPartFinder and com.fsck.k9.message.extractors.EncryptionDetector objects, then returns the instance.
+
+## class `com.fsck.k9.message.extractors.AttachmentInfoExtractor`
+
+This class  extracts attachment information from emails.
+
+This class contains the following public method(s):
+
+- `extractAttachmentInfoForDatabase(com.fsck.k9.mail.Part)`  extracts attachment information from a part object, using the defined interface.
+- `getInstance()`  get a context from the Globals object, and then returns a new instance of the AttachmentInfoExtractor class with that context.
+- `extractAttachmentInfo(com.fsck.k9.mail.Part)`  extracts the attachment information for the given part, stored in the given Uri, and returns it as an object.
+- `extractAttachmentInfoForView(java.util.List)`  extracts attachment information from a list of attachments.
+
+## class `com.fsck.k9.message.extractors.PreviewTextExtractor`
+
+This class  extracts the preview text from a part.
+
+This class contains the following public method(s):
+
+- `extractPreview(com.fsck.k9.mail.Part)`  extracts the preview text from a part and returns it as a String.
+
+## class `com.fsck.k9.message.extractors.TextPartFinder`
+
+This class  looks up a text part in a mail and returns it.
+
+This class contains the following public method(s):
+
+- `findFirstTextPart(com.fsck.k9.mail.Part)`  looks up the part which is of the relevant type (either text/plain or text/html) and returns it.
+
+## class `com.fsck.k9.message.extractors.BodyTextExtractor`
+
+This class  takes a MessagePart and a SimpleMessageFormat and it extracts the body text from both of them.
+
+This class contains the following public method(s):
+
+- `getBodyTextFromMessage(com.fsck.k9.mail.Part,com.fsck.k9.message.SimpleMessageFormat)`  extracts the body text from a messagePart in the desired messagePart format. If the format is text, it grabs the text from the messagePart. If the format is HTML, it grabs the HTML from the messagePart. If the format is Plain Text, it grabs the text from the messagePart. Finally, if we had nothing interesting, we return an empty string.
+
+## class `com.fsck.k9.message.extractors.PreviewResult`
+
+This class  helps you get the text content from a preview text field in a Java application, and optionally encrypts that content for protection.
+
+This class contains the following public method(s):
+
+- `text(java.lang.String)`  retrieves the text content of a preview text field and creates a new PreviewResult object with the specified PreviewType.
+- `encrypted()`  creates a new PreviewResult object that uses the PreviewType.ENCRYPTED value and null as its secret key.
+- `getPreviewType()`  returns the type of the preview that this extractor generated.
+- `none()`  returns a preview result with a preview type of "none".
+- `isPreviewTextAvailable()`  determines if the given preview type is available. This preview type is 'TEXT'.
+- `error()`  returns a PreviewResult object which has a PreviewType of ERROR and null as its value. This object will contain information about the error that occurred.
+- `getPreviewText()`  tries to get the preview text from the preview result, if it's not there, it throws an IllegalStateException.
+
+## class `com.fsck.k9.message.extractors.MessageFulltextCreator`
+
+This class  create and manage MessageFulltextCreator objects configured with a TextPartFinder and EncryptionDetector.
+
+This class contains the following public method(s):
+
+- `newInstance()`  creates a new MessageFulltextCreator object with the given TextPartFinder and EncryptionDetector.
+- `createFulltext(com.fsck.k9.mail.Message)`  takes the given message and looks for strings that have been encrypted with the provided encryption detector. If found, it returns the encrypted text with an extra value indicating whether or not the text is encrypted. Finally, it extracts the text from the message.
+
+
+# package `com.fsck.k9.message.html`
+
+This package  processes html documents to create a simpler format that can be easily interpreted by other programs. Specifically, this package converts all HTML tags into text equivalents, cleans up any naughty characters, and converts the result into a simpler format.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.message.html.HtmlProcessor`
+
+This class  takes the document object and sets its outputSettings valve to 'prettyPrint' with a false value for the 'indentAmount' setting. This returns the HTML representation of the document.
+
+This class contains the following public method(s):
+
+- `toCompactString(org.jsoup.nodes.Document)`  takes the document object and sets its outputSettings valve to 'prettyPrint' with a false value for the 'indentAmount' setting, and it returns the HTML representation of the document.
+- `newInstance()`  creates a new instance of a class that implements the `HtmlProcessor` interface.
+- `processForDisplay(java.lang.String)`  takes an HTML document and converts it into a human-readable string.
+
+## class `com.fsck.k9.message.html.UriLinkifier`
+
+This class  replaces all occurrences of a string that is matched against a supported URI scheme with the corresponding URI.
+
+This class contains the following public method(s):
+
+- `linkifyText(java.lang.String,java.lang.StringBuffer)`  "links" the text in inputBuffer by finding and replacing all instances of a matched "scheme" in the text with the corresponding "supported URIs" from parser.
+
+## interface `com.fsck.k9.message.html.UriParser`
+
+This interface  parses text and extracts URI schemes from it.
+
+This class contains the following public method(s):
+
+- `linkifyUri(java.lang.String,int,java.lang.StringBuffer)`  parses the given text and extracts the URI scheme from it, starting at the given position and writing the result to the given output buffer.
+
+## class `com.fsck.k9.message.html.HeadCleaner`
+
+This class  cleans up the head of a Document by copying all of the text nodes in the Document's head to the Document's head in clean Document.
+
+This class contains the following public method(s):
+
+- `clean(org.jsoup.nodes.Document,org.jsoup.nodes.Document)`  copies all the text nodes in dirtyDocument's head to cleanedDocument's head, ensuring that the text nodes in both documents are identical.
+
+## class `com.fsck.k9.message.html.HttpUriParser`
+
+This class  converts a text string into a URL.
+
+This class contains the following public method(s):
+
+- `linkifyUri(java.lang.String,int,java.lang.StringBuffer)`  takes a text string, and it tries to match it up against a list of sub-strings that have been defined in a prior step. If a match is found, the method goes to the next substring, and so on until the string is fully matched. Once the string has been fully matched, the method outputs the relevant information for the given url and also marks the string as being available for translating into a web address.
+
+## class `com.fsck.k9.message.html.HtmlConverter`
+
+This class  converts HTML into plain text.
+
+This class contains the following public method(s):
+
+- `wrapMessageContent(java.lang.CharSequence)`  returns the HTML code to contain the message, including the CSS style and meta tags.
+- `textToHtml(java.lang.String)` (no description)
+- `textToHtmlFragment(java.lang.String)`  takes a plain text string and turns it into an HTML fragment.
+- `htmlToText(java.lang.String)`  takes an HTML string and converts it to plain text.
+- `wrapStatusMessage(java.lang.CharSequence)`  takes the status string and converts it to an HTML string.
+- `convertEmoji2Img(java.lang.String)`  attempts to convert an emoji string to an image. If the emoji string cannot be found in the class's implementation of the `HtmlConverter` interface, then the string is returned unchanged. Otherwise, the code points corresponding to the emoji characters are appended to the string builder, and the string is returned.
+- `htmlToSpanned(java.lang.String)`  takes a string of HTML and converts it into a Span object. This Span object can be used to format the text in a TextView.
+
+## class `com.fsck.k9.message.html.EthereumUriParser`
+
+This class  parses a url and formats it into a string with a list of links.
+
+This class contains the following public method(s):
+
+- `linkifyUri(java.lang.String,int,java.lang.StringBuffer)`  parses one or more uris into a string, and then appends relevant links for each.
+
+## class `com.fsck.k9.message.html.BitcoinUriParser`
+
+This class  looks for a bitcoin URI in the text and converts it to a link.
+
+This class contains the following public method(s):
+
+- `linkifyUri(java.lang.String,int,java.lang.StringBuffer)`  looks for a bitcoin URI in the text and converts it to a link.
+
+## class `com.fsck.k9.message.html.HtmlSanitizer`
+
+This class  cleans the document of any potentially naughty characters.
+
+This class contains the following public method(s):
+
+- `sanitize(java.lang.String)`  cleans the document of any potentially nasty characters before returning it to the caller.
+
+## class `com.fsck.k9.message.html.HeadCleaner$CleaningVisitor`
+
+This class  visits each node in the source document for tags that are both taggable and which have a parent in the DataNode graph. If an element is found that meets these criteria, it is then treated as a destination for further processing.
+
+This class contains the following public method(s):
+
+- `tail(org.jsoup.nodes.Node,int)`  calls `tail` on the source node, and if it's the same as the destination node, it stops iterating and returns. If it's not the same, it continues iterating and calls `tail` on the parent node of the source node. Finally, it sets `skipChildren` to false so that it will not delete the children of the source node that it has already visited.
+- `head(org.jsoup.nodes.Node,int)`  traverses the given Node source and looks for elements that are taggable and whose parent is a DataNode. If such an element is found, it is then processed as a destination.
+
+## class `com.fsck.k9.message.html.HtmlConverter$ListTagHandler`
+
+This class  handles the "ul" and "li" list tags, and they both behave the same way- if the tag name is "ul", then it will append "•" to the text if it is a list item, and if the tag name is "li", then it will just append the text.
+
+This class contains the following public method(s):
+
+- `handleTag(boolean,java.lang.String,android.text.Editable,org.xml.sax.XMLReader)`  takes an opening boolean flag (if true, we are starting a new list), the tag name (which is either "ul" or "li"), and the text to be included in the list item (if "ul", it appends "•"), and if "li", it just appends the text.
+
+## class `com.fsck.k9.message.html.HtmlConverter$HtmlToTextTagHandler`
+
+This class  converts HTML tags into text equivalents.
+
+This class contains the following public method(s):
+
+- `handleTag(boolean,java.lang.String,android.text.Editable,org.xml.sax.XMLReader)`  checks to see if the given tag matches one of the allowed tags, and if it does, it replaces the matched tag with a bunch of underscores (to approximate the behaviour of Outlook in Rich Text mode) and prints the resulting text to the output.
+
+
+# package `com.fsck.k9.message.quote`
+
+This package  provides tools for creating HTML and quoted text content.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.message.quote.InsertableHtmlContent`
+
+This class  replaces all the content in the given content buffer with the specified content.
+
+This class contains the following public method(s):
+
+- `setUserContent(java.lang.String)`  replaces all the content in the inserted content buffer with the specified content.
+- `toDebugString()`  returns a string that contains debugging information about this container.
+- `setQuotedContent(java.lang.StringBuilder)`  takes a StringBuilder as input and sets it as the quoted content for the given insertion point.
+- `setHeaderInsertionPoint(int)`  sets the insertion point at the beginning of the header and content of the quote.
+- `getInsertionPoint()`  looks at the quotes in the content and determines where the insertion point should be.
+- `getFooterInsertionPoint()`  returns the footer insertion point, which is where the footer content will be inserted into the HTML content.
+- `setFooterInsertionPoint(int)`  sets the insertion point for the footer of the quote content to be at position ‘footerInsertionPoint’.
+- `getQuotedContent()`  returns the quoted content as a string.
+- `insertIntoQuotedHeader(java.lang.String)`  inserts text into the "quoted content" of a message, which is typically used to insert reply/forward headers into the quoted content rather than user-generated reply content. After the content is inserted, the "footer insertion point" (defined in the method) is relocated so that the new content will append to any existing header and quoted content.
+- `toString()`  takes the original content and inserts the content from the given insertion point, and then returns the newly composed string.
+- `insertIntoQuotedFooter(java.lang.String)`  inserts the given content into the quoted content footer.
+- `clearQuotedContent()`  removes all the quoted content from the given HTML content.
+- `setInsertionLocation(com.fsck.k9.message.quote.InsertableHtmlContent$InsertionLocation)`  sets the insertion location which is where the user content should be inserted in the quote.
+
+## class `com.fsck.k9.message.quote.TextQuoteCreator`
+
+This class  takes a message, and sets quotes around it, using a style specified by the user.
+
+This class contains the following public method(s):
+
+- `quoteOriginalTextMessage(android.content.res.Resources,com.fsck.k9.mail.Message,java.lang.String,com.fsck.k9.Account$QuoteStyle,java.lang.String)`  takes a quotes-ready message as input, and sets quotes around the given text using specified style.
+
+## class `com.fsck.k9.message.quote.HtmlQuoteCreator`
+
+This class  takes a message and replaces all of the text with a series of quotation marks.
+
+This class contains the following public method(s):
+
+- `quoteOriginalHtmlMessage(android.content.res.Resources,com.fsck.k9.mail.Message,java.lang.String,com.fsck.k9.Account$QuoteStyle)`  replaces all of the text in the given message with a series of Polo-style quotation marks.
+
+
+# package `com.fsck.k9.message.signature`
+
+This package  removes signatures from the content.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.message.signature.HtmlSignatureRemover`
+
+This class  strips the signature from the content passed in.
+
+This class contains the following public method(s):
+
+- `stripSignature(java.lang.String)`  strips the signature from the content passed in.
+
+## class `com.fsck.k9.message.signature.HtmlSignatureRemover$StripSignatureFilter`
+
+This class  removes strip signatures from nodes.
+
+This class contains the following public method(s):
+
+- `head(org.jsoup.nodes.Node,int)`  checks to see if the node contains a strip signature, and if it does, it removes it. If the node is not a strip signature, it checks to see if it is an element or a text node. If it is an element, it checks to see if the last line break was caused by the strip signature. If it was, it skips removing the strip signature. If it wasn't the cause of the last line break, it removes the strip signature.
+- `tail(org.jsoup.nodes.Node,int)`  checks if the current node is a HTML SignatureRemover Signature node and if so, it continues to the next node. However, if the current node is not a HTML SignatureRemover Signature node, it checks to see if the current node is an Element node and if so, it calls the StripSignatureFilter.brElementPrecedingDashes and StripSignatureFilter.p methods respectively. If either of those methods return true, then the method returns CONTINUE.
+
+## class `com.fsck.k9.message.signature.TextSignatureRemover`
+
+This class  removes the dash from the content string and replaces it with a space, if it exists.
+
+This class contains the following public method(s):
+
+- `stripSignature(java.lang.String)`  removes the dash from the content string and replaces it with a space, if it exists.
+
+
+# package `com.fsck.k9.ui`
+
+This package  converts text line endings to \n.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.ui.EolConvertingEditText`
+
+This class  converts all line-endings in the text to \n.
+
+This class contains the following public method(s):
+
+- `setCharacters(java.lang.CharSequence)`  sets the string value of the EolConvertingEditText to the given text, ensuring any line endings in the text are converted to \n.
+- `getCharacters()`  takes the text currently being displayed by the EolConvertingEditText and converts all line endings (CR, LF, and CRLF) to \r\n.
+
+## class `com.fsck.k9.ui.ContactBadge`
+
+This class  looks up the contact's email address and picture from either the ContactsContract.Intents.Insert Intent or from the contact's URI, based on whether the contact is found or not.
+
+This class contains the following public method(s):
+
+- `assignContactFromEmail(java.lang.String,boolean,android.os.Bundle)`  looks up the email address for a contact in the ContactsContract.Intents.Insert Intent and then assigns it to the contactEmail variable.
+- `assignContactUri(android.net.Uri)`  assigns the contact uri to this ContactBadge. This can be used by the badge's QuickContact window to retrieve the contact's email address, if set, or the contact's picture, if set.
+- `onInitializeAccessibilityNodeInfo(android.view.accessibility.AccessibilityNodeInfo)`  sets the "class name" of the class that the accessibility node info is for to the name of the ContactBadge class.
+- `assignContactFromEmail(java.lang.String,boolean)`  looks up the contact's email address from a given Java string and if it doesn't exist, it will search for the contact's URI (made by concatenating the contact's name with the @see url() CamelCase macro) using an extra query.
+- `onInitializeAccessibilityEvent(android.view.accessibility.AccessibilityEvent)`  sets the class name of the accessibility event to be `ContactBadge` so that it can be handled by the ContactBadge class.
+- `onClick(android.view.View)`  checks to see if the contact URI (defined as an Android resource) is null and if it is not, it calls the showQuickContact() method on the QuickContact class to display the contact's full contact URI to the user.
+
+
+# package `com.fsck.k9.ui.compose`
+
+This package  provides a user interface for manipulating quoted text.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.ui.compose.QuotedMessagePresenter`
+
+This class  builds a user interface with the quoted message and then decides which option to choose based on the original MessageFormat of the message.
+
+This class contains the following public method(s):
+
+- `populateUIWithQuotedMessage(com.fsck.k9.mailstore.MessageViewInfo,boolean,com.fsck.k9.activity.MessageCompose$Action)`  builds a UI with the quoted message, and then decides which option to choose based on the original MessageFormat of the message:
+
+- If the original MessageFormat is "TEXT", then the quoted text will be shown in the UI.
+- If the original MessageFormat is "AUTO", then the quoted text will be used if it exists, and plain text will be shown otherwise.
+- `onRestoreInstanceState(android.os.Bundle)`  retrieves the quotedHtmlContent and quotedTextFormat values from the savedInstanceState bundle, and uses them to set the values of the view and forcePlainText fields of the QuoteMessageFragment.
+- `onSaveInstanceState(android.os.Bundle)`  sets the value of the `STATE_KEY_QUOTED_TEXT_MODE` key to `quotedTextMode` and the value of the `STATE_KEY_HTML_QUOTE` key to `quotedHtmlContent`
+- `isForcePlainText()`  determines if the given message is forced to be in plain text format.
+- `includeQuotedText()`  returns whether or not the quotedTextMode is set to show.
+- `processDraftMessage(com.fsck.k9.mailstore.MessageViewInfo,java.util.Map)` (no description)
+- `isQuotedTextText()`  determines if the given text is in a format that is supported by the interface that this class implements, which is the SimpleMessageFormat class.
+- `builderSetProperties(com.fsck.k9.message.MessageBuilder)`  sets the properties of the `MessageBuilder` object to correspond with the properties of the `QuotedMessagePresenter` class.
+- `showOrHideQuotedText(com.fsck.k9.message.QuotedTextMode)`  changes the QuotedTextMode of the specified view to match the mode argument. So, if the mode argument is `QUOTE_ALL`, then the view's QuotedTextMode will be set to `QUOTE_ALL_SELECTED`, and so on.
+- `initFromReplyToMessage(com.fsck.k9.mailstore.MessageViewInfo,com.fsck.k9.activity.MessageCompose$Action)`  takes the messageViewInfo and action objects and populate the user interface with the quoted message.
+- `processMessageToForward(com.fsck.k9.mailstore.MessageViewInfo)`  sets the quoted style to be header,populates the MessageViewInfo with the quoted message, and then sends the message forward.
+- `onSwitchAccount(com.fsck.k9.Account)`  changes the Account object that is passed in to the method to match the parameter that was passed in.
+
+## class `com.fsck.k9.ui.compose.QuotedMessageMvpView`
+
+This class  provides a way for users to view and edit quoted text in a view.
+
+This class contains the following public method(s):
+
+- `getQuotedText()`  retrieves the quoted text from the view.
+- `setMessageContentCursorPosition(int)`  sets the message content cursor position for the given message view.
+- `addTextChangedListener(android.text.TextWatcher)`  adds an event listener for the `TextWatcher` class so that whenever the `mQuotedText` text field's content changes, the `draftNeedsChangingTextWatcher` object will be executed.
+- `setQuotedText(java.lang.String)`  sets the quotedText variable to the textual equivalent of the given string.
+- `setOnClickPresenter(com.fsck.k9.ui.compose.QuotedMessagePresenter)`  instantiates a listener for the "QuotedTextShow" view which will execute the "onClickShowQuotedText" method, and then instantiates a listener for the "QuotedTextEdit" view which will execute the "onClickEditQuotedText" method.
+- `showOrHideQuotedText(com.fsck.k9.message.QuotedTextMode,com.fsck.k9.message.SimpleMessageFormat)`  sets the visibility of the various elements in the view based on the mode parameter. Based on the mode parameter, it either sets the visibility of the QuotedTextShow and QuotedTextBar to Hidden, or it sets the visibility of the QuotedText and QuotedHTML to Show. Finally, it sets the visibility of the QuotedTextEdit to Hide.
+- `setMessageContentCharacters(java.lang.String)`  sets the content of the "message content" portion of the QuotedMessageMvpView class to the given string.
+- `setFontSizes(com.fsck.k9.FontSizes,int)`  sets the font sizes for the text in the view represented by the "mQuotedText" instance.
+- `setQuotedHtml(java.lang.String,com.fsck.k9.mailstore.AttachmentResolver)`  takes a quoted string of html content, and tries to find an attachment to show it with. If one is not found, then the html content is displayed with inline attachments.
+
+
+# package `com.fsck.k9.ui.crypto`
+
+This package  provides support for the annotation-based decryption of messages.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.ui.crypto.MessageCryptoAnnotations`
+
+This class  facilitates the identification and retrieval of annotations for parts of messages.
+
+This class contains the following public method(s):
+
+- `findKeyForAnnotationWithReplacementPart(com.fsck.k9.mail.Part)`  searches for the part annotation with the given replacement data in the annotations map. If it finds the annotation, it returns the key for the annotation.
+- `isEmpty()`  determines whether the list of annotations (defined in the class) is empty.
+- `get(com.fsck.k9.mail.Part)`  returns the annotation for the given part in the CryptoResultAnnotations collection.
+- `has(com.fsck.k9.mail.Part)`  checks whether a given Part instance is contained in an annotation set.
+- `put(com.fsck.k9.mail.Part,com.fsck.k9.mailstore.CryptoResultAnnotation)`  converts the crypto annotation part to a Java Object and then stores it in the annotation.
+
+## class `com.fsck.k9.ui.crypto.MessageCryptoHelper`
+
+This class  helps to process the user interaction result intent from a message.
+
+This class contains the following public method(s):
+
+- `onActivityResult(int,int,android.content.Intent)`  looks at the result code and, if it's equal to `android.app.Activity.RESULT_OK`, it gets the user interaction result intent from the data parameter and calls the nextStep() method.
+- `isConfiguredForOutdatedCryptoProvider()`  tests whether the provided crypto provider package is newer than an outdated package. If so, then the method returns true. Otherwise, it returns false.
+- `cancelIfRunning()`  checks if any active background operations have been cancelled, and if so, it Cancels the currently running operation.
+- `detachCallback()`  releases the callback lock used to synchronize the callback function calls with the main caller.
+- `asyncStartOrResumeProcessingMessage(com.fsck.k9.mail.Message,com.fsck.k9.ui.crypto.MessageCryptoCallback,org.openintents.openpgp.OpenPgpDecryptionResult,boolean)`  attaches the callback to the current message so that it can continue processing it. It then sets the state to 'START' and initializes the currentMessage and cachedDecryptionResult variables. Next, it calls the nextStep() method.
+
+## interface `com.fsck.k9.ui.crypto.MessageCryptoCallback`
+
+This interface  allows the caller to keep track of the progress of the encryption process and update the appropriate fields in the `MessageCryptoCallback` object.
+
+This class contains the following public method(s):
+
+- `startPendingIntentForCryptoHelper(android.content.IntentSender,int,android.content.Intent,int,int,int)`  creates a new pending intent to be sent to the crypto helper when the given intent passes the given severity filter and extra flags.
+- `onCryptoOperationsFinished(com.fsck.k9.ui.crypto.MessageCryptoAnnotations)`  tells the caller when the cryptographic operations have been finished.
+- `onCryptoHelperProgress(int,int)`  keeps track of the progress of the encryption process and updates the appropriate fields in the `MessageCryptoCallback` object.
+
+
+# package `com.fsck.k9.ui.dialog`
+
+This package  provides a dialog UI for FileSystemCheck.
+
+This package contains the following class(es):
+
+
+# package `com.fsck.k9.ui.message`
+
+This package  allows you to load a message from the local message store using the LocalMessageLoader class.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.ui.message.LocalMessageExtractorLoader`
+
+This class  helps to extract the message view information for a given message from the local message store.
+
+This class contains the following public method(s):
+
+- `isCreatedFor(com.fsck.k9.mailstore.LocalMessage,com.fsck.k9.ui.crypto.MessageCryptoAnnotations)`  compares the annotations on the message to the annotations on the local message to see if they match.
+- `loadInBackground()`  uses the `com.fsck.k9.ui.message.LocalMessageExtractorLoader` class to extract the message view information for a given message.
+- `deliverResult(com.fsck.k9.mailstore.MessageViewInfo)`  takes the given MessageViewInfo object and updates it with the current information about the message being delivered.
+
+## class `com.fsck.k9.ui.message.LocalMessageLoader`
+
+This class  compares two MessageReference objects to determine if they are the same, and if they are, it then uses a try/catch statement to load the message from the database.
+
+This class contains the following public method(s):
+
+- `isCreatedFor(com.fsck.k9.activity.MessageReference)`  compares two MessageReference objects and returns a boolean value indicating whether the objects are the same.
+- `loadInBackground()`  uses a try/catch statement to handle any exceptions that might occur while trying to load a message from the database. If any exception occurs, the method logans the error and returns null .
+- `deliverResult(com.fsck.k9.mailstore.LocalMessage)`  takes the given local message and updates the corresponding instance variable.
+
+
+# package `com.fsck.k9.ui.messageview`
+
+This package  implements the attachment view, which allows the user to attach files to messages.
+
+This package contains the following class(es):
+
+## interface `com.fsck.k9.ui.messageview.AttachmentViewCallback`
+
+This interface  provides a callback for when the user clicks on an attachment view.
+
+This class contains the following public method(s):
+
+- `onViewAttachment(com.fsck.k9.mailstore.AttachmentViewInfo)`  extracts information from an attachment view and invokes the `AttachmentViewCallback` interface's `onViewAttachment` method.
+- `onSaveAttachmentToUserProvidedDirectory(com.fsck.k9.mailstore.AttachmentViewInfo)`  saves the attachment to the user's provided directory.
+- `onSaveAttachment(com.fsck.k9.mailstore.AttachmentViewInfo)`  saves the attachment view information to the MailStore.
+
+## class `com.fsck.k9.ui.messageview.MessageViewFragment`
+
+This class (no description)
+
+This class contains the following public method(s):
+
+- `onForward()`  pops the message reference from the message object and sends it to the ```onForward()``` method of the fragment listener instance.
+- `onReplyAll()`  calls a listener's onReplyAll() method, passing in the latest message as well as the encryption result for that message.
+- `onResume()`  calls the `messageCryptoPresenter` method to resume the encryption process.
+- `enableAttachmentButtons(com.fsck.k9.mailstore.AttachmentViewInfo)`  allows the user to attach files to messages.
+- `onClickShowSecurityWarning()`  calls messageCryptoPresenter.onClickShowCryptoWarningDetails().
+- `canMessageBeMovedToSpam()`  checks to see if the message reference (a reference to the message in the account) and the spam folder name are the same. If they aren't, then the message can't be moved to spam and returned false.
+- `onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)`  creates a new View instance, inflates the "message" layout resource (defined in the layout resource's resource file), and sets its content view to that inflated layout.
+- `refreshAttachmentThumbnail(com.fsck.k9.mailstore.AttachmentViewInfo)`  refreshes the thumbnail image for the attachment view in the message view.
+- `allHeadersVisible()`  returns whether the additional headers view for the message view is visible.
+- `onPendingIntentResult(int,int,android.content.Intent)`  determines the request code from the data that the Intent has, and then handles the corresponding result code and data from the corresponding task.
+- `newInstance(com.fsck.k9.activity.MessageReference)`  creates a new instance of a MessageViewFragment, set the given MessageReference as the fragment's argument, and returns the newly created fragment.
+- `doPositiveClick(int)`  checks the dialog_id parameter and depending on what it is, it performs a certain action.
+- `onSaveInstanceState(android.os.Bundle)`  saves the current state of the message viewer to the bundle. This state can then be reloaded if needed.
+- `onCopy()`  checks if the user has the permission to copy a message and, if not, it will show a toast and redirect the user to choose a folder to copy the message to.
+- `showAttachmentLoadingDialog()`  pops up a dialog which says "Loading..." while attachments are being downloaded.
+- `getMessageReference()`  returns the MessageReference for the currently displayed message.
+- `isMessageRead()`  checks to see if the message view's message has been seen by the user. If so, then the method returns true; else, it returns false.
+- `getApplicationContext()`  returns the application context for the current MessageViewFragment instance.
+- `isCopyCapable()`  confirms whether or not the given MessageViewFragment can be used to generate a copy of the content.
+- `onArchive()`  calls the `onRefile()` method, which in turn calls the `getArchiveFolderName()` method on the `mAccount` object.
+- `onToggleAllHeadersView()`  toggles the visibility of the "Additional headers" section in the message header view.
+- `onToggleRead()`  toggles the read flag for a particular message in the MessageView. This allows the user to read the message if they desire, and hides the message if they have already read it. Additionally, it sets the headers for the message in the MessageView, and displays the subject of the message. Finally, the fragment listener is called to update the menu.
+- `onMove()`  checks if the user is able to move the message and if not, it will display a toast message warning the user that the message might not be copied due to it being unsynced.
+- `onSendAlternate()`  checks if there's an object of the class `Message` in the `mMessage` field, and if there is, it calls the `sendAlternate()` method on the `controller` object, passing in the current activity, the account associated with that activity, and the Message object itself.
+- `onDestroy()`  calls the corresponding method in the message loader helper class ( `messageLoaderHelper`) to notify the user that the message view is being destroyed.
+- `onClickShowCryptoKey()`  calls the `messageCryptoPresenter` instance's `onClickShowCryptoKey` method.
+- `onDelete()`  will decide whether the user wants to delete the message or not. If they do, it will show a dialog asking them to confirm, and then it will delete the message.
+- `doNegativeClick(int)`  logs a negative message if the given dialogId corresponds to a dialog that already exists in the fragment's list of dialogs.
+- `onCreate(android.os.Bundle)`  initializes the fragment and sets its options in the action bar.
+- `dialogCancelled(int)`  cancels the dialog with the given ID.
+- `runOnMainThread(java.lang.Runnable)`  executes the Runnable given as an argument on the main thread of the Android device.
+- `moveMessage(com.fsck.k9.activity.MessageReference,java.lang.String)`  moves a message from one folder to another.
+- `onToggleFlagged()`  checks the value of a flag and updates the state of the MessageView controller in order to show or hide the message view for a given account.
+- `canMessageBeArchived()`  determines whether a specific message can be archived.
+- `isMoveCapable()`  checks if the given MessageView controller is capable of performing a move operation on the given account.
+- `disableAttachmentButtons(com.fsck.k9.mailstore.AttachmentViewInfo)`  disables the attachment buttons on the message view.
+- `onSelectText()`  allows the user to select text in a message view.
+- `onActivityCreated(android.os.Bundle)`  looks for the string ARG_REFERENCE in the arguments bundle and extracts the reference to the message view instance to be displayed.
+- `onSaveAttachment(com.fsck.k9.mailstore.AttachmentViewInfo)`  stores the current attachment view information into the `currentAttachmentViewInfo` field of the `MessageViewFragment` instance. Next, the `getAttachmentController` method is called to request the `AttachmentsController` to save the attachment.
+- `onActivityResult(int,int,android.content.Intent)`  handles the result codes for activities that the fragment was involved in (ACTIVITY_CHOOSE_DIRECTORY and ACTIVITY_CHOOSE_FOLDER_MOVE). If the result code is anything other than OK, it returns. Otherwise, it grabs the relevant message reference and calls a method specific to the request code.
+- `onReply()`  notifies the `MessageViewFragment`s `mFragmentListener` about the reply for the given message.
+- `onSpam()`  calls a method named `onRefile()` to reload the message view with the new spam folder.
+- `isInitialized()`  checks to see if the MessageViewFragment is initialized.
+- `zoom(android.view.KeyEvent)`  changes how large the messageview is on the screen.
+- `hideAttachmentLoadingDialogOnMainThread()`  removes the attachment loading dialog from the screen when the main thread is running.
+- `onAttach(android.app.Activity)`  gets a listener for the message view fragment from the Activity and sets it up.
+- `onSaveAttachmentToUserProvidedDirectory(com.fsck.k9.mailstore.AttachmentViewInfo)`  saves the attachment to the provided directory.
+- `copyMessage(com.fsck.k9.activity.MessageReference,java.lang.String)`  copies a MessageReference from the mController to the mAccount and then changes the filename associated with the MessageReference to the destinationFolderName.
+- `onRefile(java.lang.String)`  checks to see if the destination folder is the same as the message's spam folder and, if so, asks the user to confirm the move.
+- `updateTitle()`  updates the subject field of the message view object for the currently displayed message.
+- `onViewAttachment(com.fsck.k9.mailstore.AttachmentViewInfo)`  updates the current attachment view info in the MessageViewFragment instance so that it uses the information from the attachment object that was passed as an argument.
+
+## class `com.fsck.k9.ui.messageview.AttachmentController`
+
+This class  controls the download and viewing of attachments.
+
+This class contains the following public method(s):
+
+- `viewAttachment()`  downloads the attachment and then views it.
+- `saveAttachment()`  creates and saves the attached file to the specified location.
+- `saveAttachmentTo(java.lang.String)`  saves the attachment to the given directory.
+
+## interface `com.fsck.k9.ui.messageview.MessageCryptoPresenter$MessageCryptoMvpView`
+
+This interface  provides a way for the UI to display the message overview for the crypto view and control various crypto settings for the message.
+
+This class contains the following public method(s):
+
+- `restartMessageCryptoProcessing()`  restarts the message crypto processing thread.
+- `redisplayMessage()`  displays the message overview for the crypto view.
+- `startPendingIntentForCryptoPresenter(android.content.IntentSender,java.lang.Integer,android.content.Intent,int,int,int)`  starts a message cryptor presenter messageVP with the given intent, using the given requestCode and fillIntent.
+- `showCryptoConfigDialog()`  pops up a dialog box that allows the user to modify various crypto settings for the current message.
+- `showCryptoInfoDialog(com.fsck.k9.view.MessageCryptoDisplayStatus,boolean)`  displays a dialog box that tells the user whether their system has strong cryptography or not.
+
+## class `com.fsck.k9.ui.messageview.MessageTopView`
+
+This class  shows a message view for a given account and determines whether or not to load pictures from the account's mail store.
+
+This class contains the following public method(s):
+
+- `showMessageCryptoCancelledView(com.fsck.k9.mailstore.MessageViewInfo,android.graphics.drawable.Drawable)`  resets the MessageViewInfo object and prepares it for displaying the corrected message. Then, it sets the Drawable provider icon for the corrected message. Finally, it adds the View for the corrected message to the container View and notifies the user’s OnClickListener that the crypto operation has been retried.
+- `enableDownloadButton()`  enables a Downloads button on the message top view.
+- `setOnDownloadButtonClickListener(com.fsck.k9.ui.messageview.OnClickListener)`  sets a listener for the OnClick event of the Download button in the message viewer.
+- `showMessage(com.fsck.k9.Account,com.fsck.k9.mailstore.MessageViewInfo)`  prepares and displays the message view for the given account. Apart from this, it also determines whether the account should automatically load pictures from its mail store, and if so, it sets up a listener to call the appropriate method when they are loaded.
+- `onFinishInflate()`  updates the message header, inflate the view, sets the onLayoutChangedListener method for the header container, sets the view animator, sets the progress bar, sets the progress text, sets the download remainder button, and hides the header view.
+- `additionalHeadersVisible()`  determines whether or not the user has enabled additional header visibility for the message view.
+- `showAllHeaders()`  calls the `onShowAdditionalHeaders()` method of the `mHeaderContainer` object, which will cause the `MessageTopView` object to show all of the headers in the message.
+- `setAttachmentCallback(com.fsck.k9.ui.messageview.AttachmentViewCallback)`  sets a custom attachment view callback for the MessageTopView. This callback is called whenever an attachment is clicked on within the view.
+- `displayViewOnLoadFinished(boolean)`  animates the progress bar for the currently displayed message. If the user has finished viewing the message, the progress bar will stop animating and the second child in the View setter will be displayed instead.
+- `setOnToggleFlagClickListener(com.fsck.k9.ui.messageview.OnClickListener)`  sets the listener for the "OnFlagClick" event on the "mHeaderContainer" object.
+- `getMessageHeaderView()`  takes the MessageTopView displayed in the top-left corner of a message and returns it.
+- `disableDownloadButton()`  disables the download button on the message view.
+- `setMessageCryptoPresenter(com.fsck.k9.ui.messageview.MessageCryptoPresenter)`  sets the messageCryptoPresenter object as the onCryptoClickListener for the mHeaderContainer element. This object will be responsible for handling the click event on the messageCrypto element.
+- `showMessageCryptoWarning(com.fsck.k9.mailstore.MessageViewInfo,android.graphics.drawable.Drawable,int,boolean)`  displays a warning to the user about potential security risks with messages.
+- `showMessageCryptoErrorView(com.fsck.k9.mailstore.MessageViewInfo,android.graphics.drawable.Drawable)`  disables the loading of the message's content and then sets the drawable provided as the crypto provider icon for the message view.
+- `setLoadingProgress(int,int)`  updates the progress bar and animates it to show the new progress.
+- `setHeaders(com.fsck.k9.mail.Message,com.fsck.k9.Account)`  populates the `mHeaderContainer` with the `message` and `account` headers from the `message` object, and sets the visibility of the `mHeaderContainer` to be `View.VISIBLE`.
+- `setToLoadingState()`  sets the view animator to display the first child, the progress bar to have no progress, and sets the isShowingProgress boolean to false.
+- `showCryptoProviderNotConfigured(com.fsck.k9.mailstore.MessageViewInfo)`  triggers a dialog box in which the user can choose a cryptographic provider.
+- `showMessageEncryptedButIncomplete(com.fsck.k9.mailstore.MessageViewInfo,android.graphics.drawable.Drawable)`  reset the message view to a fresh state, and inflate a layout containing a Drawable provider icon for the Crypto provider. Then, it adds the provider icon to the view so that it will be displayed when the user first views the message.
+
+## class `com.fsck.k9.ui.messageview.MessageContainerView$SavedState`
+
+This class  saves the current state of the message container view to a parcel.
+
+This class contains the following public method(s):
+
+- `writeToParcel(android.os.Parcel,int)`  writes the current state of the message container view to a parcel.
+
+## interface `com.fsck.k9.ui.messageview.CryptoInfoDialog$OnClickShowCryptoKeyListener`
+
+This interface  allows other objects to be notified when the "Show Security Key" button is clicked, as well as reloading the cryptotechnology key if it is currently shown.
+
+This class contains the following public method(s):
+
+- `onClickShowSecurityWarning()`  will show a security warning dialog if the user clicks on the "Show Security Key" button.
+- `onClickShowCryptoKey()`  will reload the cryptotechnology key for the dialog box that is currently shown.
+
+## interface `com.fsck.k9.ui.messageview.MessageViewFragment$MessageViewFragmentListener`
+
+This interface  allows the fragment's listener to be notified when the user replies to a message, updates the decryptionResultForReply field, or shows the message title.
+
+This class contains the following public method(s):
+
+- `disableDeleteAction()`  disables the delete action on the message view.
+- `updateMenu()`  calls the parent MessageViewFragment's `updateMenu()` method.
+- `onForward(com.fsck.k9.activity.MessageReference,android.os.Parcelable)`  forwards a message reference from the parent message view fragment to the listening fragment. If the forwarding fragment is active, it will decode the message and store the decryptionResultForReply in the received parcelable.
+- `setProgress(boolean)`  sets the progress of the message view.
+- `showNextMessageOrReturn()`  tells the MessageViewFragment it needs to show the next message or return to the parent Fragment.
+- `onReply(com.fsck.k9.activity.MessageReference,android.os.Parcelable)`  receives the messageReference as an input, and extracts the decryptionResultForReply parcel from it.
+- `messageHeaderViewAvailable(com.fsck.k9.view.MessageHeader)`  makes sure that the given messageHeaderView object is available for use by the fragment's listener.
+- `onReplyAll(com.fsck.k9.activity.MessageReference,android.os.Parcelable)`  listens for a message and once the user replies to it, it updates the fragment's decryptionResultForReply field.
+- `displayMessageSubject(java.lang.String)`  takes the title of a message as an input and displays it in the message subject area of the message view.
+
+## class `com.fsck.k9.ui.messageview.LockedAttachmentView`
+
+This class  displays a button to the user that triggers the `showUnlockedView()` method if the user clicks on the button with the ID of `locked_button`. The class also sets the `attachment view's information` to the passed in `AttachmentViewInfo` object. Lastly, the class sets a callback function to be called when the `attachment view' is updated.
+
+This class contains the following public method(s):
+
+- `onClick(android.view.View)`  triggers the `showUnlockedView()` method if the user clicks the button with the ID of `locked_button`.
+- `setAttachment(com.fsck.k9.mailstore.AttachmentViewInfo)`  sets the attachment view's information to the passed in attachment.
+- `setCallback(com.fsck.k9.ui.messageview.AttachmentViewCallback)`  sets a callback function to call when the attachment view is updated.
+
+## interface `com.fsck.k9.ui.messageview.OnCryptoClickListener`
+
+This interface  allows the calling program to receive a notification when the user clicks on a message in the Crypto dialog.
+
+This class contains the following public method(s):
+
+- `onCryptoClick()`  prints a message when the user clicks on a message in the Crypto dialog.
+
+## class `com.fsck.k9.ui.messageview.AttachmentController$IntentAndResolvedActivitiesCount`
+
+This class  contains methods to get the Intent associated with the attachments of a message, get the mime type of the Intent, and check to see if there are any unresolved activities in the attachment controller's activity list.
+
+This class contains the following public method(s):
+
+- `getIntent()`  gets the Intent associated with the attachments of the message.
+- `getMimeType()`  returns the mime type of the intent as a String.
+- `hasResolvedActivities()`  checks to see whether there are any unresolved activities in the attachment controller's activity list. If so, then it returns true; otherwise, it returns false.
+- `containsFileUri()`  checks if the intent's scheme matches the file scheme. If it does, then the method returns true.
+
+## interface `com.fsck.k9.ui.messageview.MessageContainerView$OnRenderingFinishedListener`
+
+This interface  listens for when the loading process has finished.
+
+This class contains the following public method(s):
+
+- `onLoadFinished()`  notifies the listener that the loading process has finished.
+
+## class `com.fsck.k9.ui.messageview.MessageContainerView`
+
+This class  allows the user to attach files to messages.
+
+This class contains the following public method(s):
+
+- `hasHiddenExternalImages()`  checks if the MessageContainerView has hidden external images.
+- `onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu.ContextMenuInfo)` (no description)
+- `refreshAttachmentThumbnail(com.fsck.k9.mailstore.AttachmentViewInfo)`  refreshes the image associated with the attachment view.
+- `enableAttachmentButtons()`  sets the enableAttachmentButtons() properties of all the attachment views in the map to true so that the user can attach files to messages.
+- `renderAttachments(com.fsck.k9.mailstore.MessageViewInfo)`  loops through all the attachments in the messageViewInfo object, and for each attachment, it retrieves the internal URI and stores it in the attachments property on the messageViewInfo object. Next, it checks to see if the attachment is an inline attachment, and if so, itcontinues looping. Otherwise, it sets up a locked attachment view and sets its callback method pointer to attachmentCallback . Finally, it adds the view to the mAttachments property of the messageViewInfo object.
+- `displayMessageViewContainer(com.fsck.k9.mailstore.MessageViewInfo,com.fsck.k9.ui.messageview.MessageContainerView$OnRenderingFinishedListener,boolean,boolean,com.fsck.k9.ui.messageview.AttachmentViewCallback)`  renders the message's attachments, if any.
+- `onFinishInflate()`  inflates the message content view, sets up the onCreateContextMenuListener, and sets the visibility of the message content view to visible.
+- `showPictures()`  sets the loading pictures flag to true, refreshes the displayed content, and returns.
+- `enableAttachmentButtons(com.fsck.k9.mailstore.AttachmentViewInfo)`  enables the attachment buttons on the attachment view.
+- `disableAttachmentButtons()`  disables the attachment buttons on the MessageContainerView, so that users cannot add attachments to the message.
+- `resetView()`  clears the WebView content, so that the user can see the entire message again.
+- `onSaveInstanceState()`  updates the visibility of the attachment views (if they are present), sets the flag indicating whether any pictures are currently being displayed, and returns the updated saved state.
+- `disableAttachmentButtons(com.fsck.k9.mailstore.AttachmentViewInfo)`  disables the attachment buttons on the message view.
+- `onRestoreInstanceState(android.os.Parcelable)`  updates the internal state of a MessageContainerView instance to match the state that was saved when the view was last saved.
+- `onLayoutChanged()`  invalidates the view hierarchy if the content view specified in the constructor ( mMessageContentView ) changes.
+- `beginSelectingText()`  causes the emulated shift held mode of the `MessageContentView` to be used.
+- `zoom(android.view.KeyEvent)`  zooms the content view, depending on whether the key event is a Shift or a normal key press.
+
+## class `com.fsck.k9.ui.messageview.CryptoInfoDialog`
+
+This class  displays the Crypto Info dialog when the user selects a message in the message list.
+
+This class contains the following public method(s):
+
+- `onCreateDialog(android.os.Bundle)`  inflates a dialog with the Crypto Info dialog content.
+- `newInstance(com.fsck.k9.view.MessageCryptoDisplayStatus,boolean)`  creates a new CryptoInfoDialog instance, sets its display status to the given value, and checks if the window has a security warning enabled.
+
+## class `com.fsck.k9.ui.messageview.AttachmentView`
+
+This class  enables buttons on the message view, sets the attachment property of the `AttachmentViewInfo` object to the given attachment, and disables the buttons.
+
+This class contains the following public method(s):
+
+- `enableButtons()`  enables the buttons on the message view so that users can attach and download files.
+- `setAttachment(com.fsck.k9.mailstore.AttachmentViewInfo)`  sets the attachment property of the `AttachmentViewInfo` object to the given attachment.
+- `disableButtons()`  disables the buttons on the attachment view.
+- `setCallback(com.fsck.k9.ui.messageview.AttachmentViewCallback)`  sets the callback function that will be called when the user selects an attachment view in the message view.
+- `onLongClick(android.view.View)`  executes the method onSaveButtonLongClick if the view's ID is equal to the ID of the "download" button.
+- `onClick(android.view.View)`  executes two different code blocks depending on the ID of the view that was clicked on. The first block is executed if the view's ID is R.id.view, which is the view that displays the attachment counter. In this block, the onViewButtonClick() method is called, which tells the messageview to click on the "download" button.
+- `refreshThumbnail()`  refreshes the thumbnail image for the attachment view.
+- `getAttachment()`  retrieves the attachment associated with an item.
+
+## class `com.fsck.k9.ui.messageview.MessageCryptoPresenter`
+
+This class  restores the state of the messageCryptoMvpView (if it was modified by a previous request) and then it restarts the messageCryptoProcessing.
+
+This class contains the following public method(s):
+
+- `onActivityResult(int,int,android.content.Intent)`  checks the request code and then, if it is a request code for MessageCryptoPresenter, it restores the state of the messageCryptoMvpView (if it was modified by a previous request) and then it restarts the messageCryptoProcessing.
+- `onCryptoClick()`  checks the cryptogram result annotation for any known errors, and if there are none, it sets the `cryptoResultAnnotation` property to the result annotation, which will then be used by the `displayCryptoInfoDialog` method later.
+- `onSaveInstanceState(android.os.Bundle)`  ensures that the boolean flag "overrideCryptoWarning" is set to true if the user wants to enable/disable cryptography for message decrypting.
+- `maybeHandleShowMessage(com.fsck.k9.ui.messageview.MessageTopView,com.fsck.k9.Account,com.fsck.k9.mailstore.MessageViewInfo)` (no description)
+- `onResume()`  restarts the message crypto processing if the flag ``reloadOnResumeWithoutRecreateFlag`` is set to ``false``.
+- `getDecryptionResultForReply()`  extracts the decryption result from the openpgp result contained in a cryptotype annotation.
+- `onClickShowMessageOverrideWarning()`  sets the `overrideCryptoWarning` variable to true so that a warning will be shown to the user when a message is encrypted.
+- `onClickShowCryptoKey()`  attempts to sign the message using the openpgp key that was specified as an intent sent by the user. If the key is found, the method starts a pending intent to send the message to the crypto presenter view.
+- `onClickRetryCryptoOperation()`  initiates a restart of the message crypto processing.
+- `onClickConfigureProvider()`  opens a dialog box that provides a tabbed interface to manage the cryptographic options for a message.
+- `onClickShowCryptoWarningDetails()`  starts a pending Intent for the MessageCryptoPresenter, which is used to show a security warning dialog when the user clicks on one of the crypto buttons in the UI.
+
+
+# package `com.fsck.k9.service`
+
+This package  handles the management of the K9RemoteControl service.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.service.RemoteControlReceiver`
+
+This class  receives Intents from the K9RemoteControl service and uses them to determine if the WakeLockId should be set.
+
+This class contains the following public method(s):
+
+- `receive(android.content.Context,android.content.Intent,java.lang.Integer)`  checks to see if the received Intentcomes from the K9RemoteControl service. If it does, it sets the WakeLockId for the given Context to the value that the service returned.
+
+## class `com.fsck.k9.service.RemoteControlService`
+
+This class  starts the service using the Intent object that was provided.
+
+This class contains the following public method(s):
+
+- `startService(android.content.Intent,int)` (no description)
+- `set(android.content.Context,android.content.Intent,java.lang.Integer)`  sets the Intent object for the service and then calls the `addWakeLockId` method on the `CoreService` object. This method takes the `Context` object as an argument and then uses it to start the service.
+
+## class `com.fsck.k9.service.ShutdownReceiver`
+
+This class  handles the ACTION_SHUTDOWN Intent and calls the appropriate methods based on whether the Intent is a shutdown action or not.
+
+This class contains the following public method(s):
+
+- `onReceive(android.content.Context,android.content.Intent)`  checks to see if the Intent passed in is ACTION_SHUTDOWN (a shutdown action), and if it is, it calls the ` Timber.log.Timber.i("System is shutting down, releasing resources")` method. After that, it calls the `com.fsck.k9.service.BootReceiver.purgeSchedule(context)` method which will pop any scheduled intent off the queue and actually initiate the shutdown process.
+
+## class `com.fsck.k9.service.PollService`
+
+This class  allows for polling of registered devices.
+
+This class contains the following public method(s):
+
+- `stopService(android.content.Context)`  stops the PollService.
+- `startService(android.content.Intent,int)`  checks to see if the intent has the `START_SERVICE` action and, if it does, it starts the poll service; if the intent has the `STOP_SERVICE` action, it stops the poll service.
+- `onCreate()`  sets up the main poll service thread and also sets the auto shutdown flag to false.
+- `onBind(android.content.Intent)`  binds to an Intent object and queues it for handling by the polling thread.
+- `startService(android.content.Context)`  starts the PollService, specifying the Context as the main object.
+
+## class `com.fsck.k9.service.SleepService`
+
+This class  starts a service that will do something when the user presses the alarm button.
+
+This class contains the following public method(s):
+
+- `startService(android.content.Intent,int)`  starts a service that will do something when the user presses the alarm button.
+- `sleep(android.content.Context,long,com.fsck.k9.mail.power.TracingPowerManager.TracingWakeLock,long)`  prepares a count-down latch to wait for a certain amount of time, then sleeps for that amount of time. If the time is not reached, the count-down latch will time out and the sleep service will attempt to re-acquire the wake lock.
+
+## class `com.fsck.k9.service.MailService`
+
+This class  keeps track of when the user has asked the mail service not to poll or push cards, and it will cancel the polling or syncing if the user asks it to again.
+
+This class contains the following public method(s):
+
+- `isSyncBlocked()`  checks if the MailService is currently blocked from syncing.
+- `getNextPollTime()`  returns the that time as a long value in seconds since the epoch.
+- `actionCancel(android.content.Context,java.lang.Integer)`  registers a Intent to be called " ACTION_CANCEL " when the specified " wakeLockId " is released. The " com.fsck.k9.service.CoreService.addWakeLockId(" context, i, wakeLockId, false) " line adds the wake lock " id " provided as an argument to the " context.startService(i) " line.
+- `isSyncDisabled()`  checks whether the mail service is currently disabled (either due to sync blocked or because we've asked the server not to poll or push cards).
+- `connectivityChange(android.content.Context,java.lang.Integer)`  sets an Intent to start the MailService class. The Intent has an ACTION of "CONNECTIVITY_CHANGE" which will call the connectivityChange() method of the MailService class.
+- `isPollAndPushDisabled()`  checks if the user has asked for polling or pushing mail, and returns a boolean accordingly.
+- `actionReschedulePoll(android.content.Context,java.lang.Integer)`  schedules a "mail reschedule poll" for a specific wake lock ID.
+- `startService(android.content.Intent,int)`  starts the MailService. The service can then start syncing (if this is the first time it's been started since being disabled) or polling (if it's been previously started). If the user chooses to start syncing or polling, then the appropriate background operation will be started.
+- `saveLastCheckEnd(android.content.Context)`  saves the current time stamp as LastCheckEnd, then open the preferences for the MailService, find the storage subsection and set the value for LAST_CHECK_END to the current time stamp. Finally, it commits the changes.
+- `actionReset(android.content.Context,java.lang.Integer)`  starts the main MailService service. It uses a wakeLockId to hold the service until it is done.
+- `onBind(android.content.Intent)`  receives the Intent object and calls the `android.content.Intent.bind` method on it.
+- `hasNoConnectivity()`  checks if the MailService is currently not connected to the notify server.
+- `onDestroy()`  logs the fact that the MailService has been destroyed.
+- `isSyncNoBackground()`  determines whether the specified MailService object is in the "no-background" mode, which means that the object is actively syncing, rather than waiting for updates.
+- `onCreate()`  initializes the properties and methods of the `MailService` class.
+- `actionRestartPushers(android.content.Context,java.lang.Integer)`  starts the mail service, using the provided wake lock id.
+
+## class `com.fsck.k9.service.StorageGoneReceiver`
+
+This class  checks if the given intent has an action indicating a media event has occurred (e.g. ACTION_MEDIA_EJECT or ACTION_MEDIA_UNMOUNTED). If so, the appropriate code is run.
+
+This class contains the following public method(s):
+
+- `onReceive(android.content.Context,android.content.Intent)`  checks to see if the given intent has an ACTION_MEDIA_EJECT or ACTION_MEDIA_UNMOUNTED action, and if so, it executes the corresponding code for the given case.
+
+## abstract class `com.fsck.k9.service.CoreService`
+
+This abstract class  handles all the logistics associated with starting the core service in a controlled manner.
+
+This class contains the following public method(s):
+
+- `onDestroy()`  shuts down the thread pool and logs a message to Timber.
+- `onStartCommand(android.content.Intent,int,int)` :
+
+Acquires a new wake lock.
+
+Assesses if the service is started with START_STICKY, and if so, proceeds to start the service.
+
+If there is no outstanding work to be done in a background thread, it quits the service.
+- `startService(android.content.Intent,int)`  serves as a bridge between the user and the Service so that the Service can be started in a controlled manner.
+- `onCreate()`  initializes the Timber logging service and creates a thread pool.
+- `onLowMemory()`  calls the `Timber.log.Timber.w()` method to print a message to the console that says `CoreService: ...`.
+- `execute(android.content.Context,java.lang.Runnable,int,java.lang.Integer)`  runs a code in the background, acquires a wake lock, and then wraps the code inside the supplied runner with code to release the wake lock and stop the service.
+- `onBind(android.content.Intent)`  takes an Intent and processes it.
+
+## class `com.fsck.k9.service.CoreReceiver`
+
+This class  waits for a certain wakeLock to be released, then it either captures the released wake lock or releases the given wake lock.
+
+This class contains the following public method(s):
+
+- `receive(android.content.Context,android.content.Intent,java.lang.Integer)`  waits for a certain wakeLock identified by the integer wakeLockId to be released. When it is released, the method returns the integer value it was waiting for.
+- `onReceive(android.content.Context,android.content.Intent)`  captures which wake lock was released, and releases it if it's the same as the intent's wake lock ID.
+- `releaseWakeLock(android.content.Context,int)`  releases the given wake lock.
+
+## class `com.fsck.k9.service.PushService`
+
+This class  manages the execution of the service by calling the startService() and stopService() methods.
+
+This class contains the following public method(s):
+
+- `startService(android.content.Context)`  starts the PushService.
+- `startService(android.content.Intent,int)`  checks if the intent passed in as an argument is one of the two possible actions for the PushService: starting or stopping. If it's the start action, the method sets the flag to start sticky, which means the service will not go down even if the user closes the app and restart it. If it's the stop action, the method sets the flag to stop sticky, which means the service will not go down even if the user closes the app and restart it.
+- `onCreate()`  calls the `super.onCreate()` method. Next, it sets the `setAutoShutdown()` method to `false`, which means that the service will be shutdown after it's done processing events.
+- `onBind(android.content.Intent)`  binds to the Intent object that is passed as an argument and then returns null.
+- `stopService(android.content.Context)`  starts the service and releases the wake lock.
+
+## class `com.fsck.k9.service.StorageReceiver`
+
+This class  receives the Intent from the Operating System and it checks to see if the Intent has a URI. If the Intent does have a URI, it attempts to read the contents of that URI.
+
+This class contains the following public method(s):
+
+- `onReceive(android.content.Context,android.content.Intent)`  checks to see if the Intent contained a URI, and if so, it attempts to read the contents of that URI.
+
+## class `com.fsck.k9.service.PollService$Listener`
+
+This class  listens for mail to be sent from the poll service, and if it detects that the mail has been sent, it releases the context.
+
+This class contains the following public method(s):
+
+- `wakeLockRelease()`  releases the wake lock that was acquired in order to poll the service.
+- `setStartId(int)`  sets the startId field of this listener to the given integer value.
+- `checkMailFinished(android.content.Context,com.fsck.k9.Account)`  checks to see if the poll service has finished sending the email. If it has, it releases the context.
+- `getStartId()`  retrieves the current start ID of the polling service.
+- `checkMailStarted(android.content.Context,com.fsck.k9.Account)`  checks if the mail server for the given account has started.
+- `wakeLockAcquire()`  acquires a "wakeLock" from the "com.fsck.k9.mail.power.TracingPowerManager" instance. The "wakeLock" is then set to "referenceCounted" (false), so that it will not be released until the "com.fsck.k9.K9.WAKE_LOCK_TIMEOUT" milliseconds have elapsed.
+- `synchronizeMailboxFinished(com.fsck.k9.Account,java.lang.String,int,int)`  checks whether the mailbox exists, and if not, creates it and adds the number of new messages to the number of messages currently in the mailbox.
+
+## class `com.fsck.k9.service.DatabaseUpgradeService`
+
+This class  helps to manage database upgrades.
+
+This class contains the following public method(s):
+
+- `onBind(android.content.Intent)`  binds to the Intent object and uses it to determine what to do next.
+- `onCreate()`  connects to the LocalBroadcastManager service to receive updates about database upgrades.
+- `onStartCommand(android.content.Intent,int,int)`  determines whether the service is running and, if not, it starts the upgrade process.
+- `startService(android.content.Context)`  starts the DatabaseUpgradeService.
+
+## class `com.fsck.k9.service.BootReceiver`
+
+This class  schedules and cancels intents.
+
+This class contains the following public method(s):
+
+- `scheduleIntent(android.content.Context,long,android.content.Intent)`  schedules the Intent that is passed in as an argument to be executed at a certain time in the future.
+- `cancelIntent(android.content.Context,android.content.Intent)`  cancels the alarmed intent, that was previously created.
+- `receive(android.content.Context,android.content.Intent,java.lang.Integer)`  receives a notification about a particular event and it updates a lock id.
+- `purgeSchedule(android.content.Context)`  cancels any scheduled alarm.
+
+
+# package `com.fsck.k9.setup`
+
+This package  suggests a name for a given server type.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.setup.ServerNameSuggester`
+
+This class  suggests a name for a given server type.
+
+This class contains the following public method(s):
+
+- `suggestServerName(com.fsck.k9.mail.ServerSettings.Type,java.lang.String)`  returns a string that is the name of the server type for which it issuggesting a name.
+
+
+# package `com.fsck.k9.search`
+
+This package  provides methods to manage and control the search account object.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.search.SearchAccount`
+
+This class  provides methods to manage and control the search account object.
+
+This class contains the following public method(s):
+
+- `getDescription()`  returns the description of the search account.
+- `setEmail(java.lang.String)`  sets the email field in the SearchAccount instance to the given String value.
+- `getRelatedSearch()`  returns the related search result of the currently queried SearchAccount.
+- `getUuid()`  returns the { @link SearchAccount} instance's unique ID.
+- `setDescription(java.lang.String)`  sets the description of the search account object to the given string.
+- `createAllMessagesAccount(android.content.Context)`  creates a new search account with the name "all messages" and sets the searchable field to "1" which means the account will search all messages.
+- `getId()`  return the unique id of this search account.
+- `getEmail()`  retrieves the email address of the SearchAccount instance.
+- `createUnifiedInboxAccount(android.content.Context)`  creates a unified inbox meta account which is a collection of all of the user's search accounts.
+
+## interface `com.fsck.k9.search.SearchSpecification`
+
+This interface  allows you to get information about a search that was invoked.
+
+This class contains the following public method(s):
+
+- `getConditions()`  returns the root node of the condition tree accompanying a search.
+- `getName()`  tries to return the name of the search that was invoked.
+- `getAccountUuids()`  returns an array of uuids for all the accounts this search specification is acting on.
+
+## class `com.fsck.k9.search.LocalSearch`
+
+This class  saves a search as a property on an object, and allows you to traverse the tree of conditions and compare conditions values to determine if a search should be conducted on a particular account.
+
+This class contains the following public method(s):
+
+- `or(com.fsck.k9.search.ConditionsTreeNode)`  creates a new top OR node, and updates the conditions field to contain the result of 'or'ing the provided node with the existing node's conditions field.
+- `clone()`  clones the conditions tree node from the original LocalSearch object, and sets the mManualSearch and mAccountUuids properties to the same values as the original object.
+- `describeContents()`  returns the number of items in the Parcelable object.
+- `isManualSearch()`  checks to see if the current search is manual.
+- `getAccountUuids()`  returns an array of account uuids that this search will try to match against.
+- `or(com.fsck.k9.search.SearchSpecification$SearchCondition)`  uses the provided condition as the second argument of an OR clause to this node.
+- `getName()`  returns the name of the saved search.
+- `and(com.fsck.k9.search.ConditionsTreeNode)`  'ANDs' the provided node with the current node, then adds the result as the second argument of an AND clause to the current node.
+- `getFolderNames()`  traverses the tree of conditions and compares each condition's attribute value to the list of folders defined in the SearchSpecification class. If the condition's attribute value equals one of the folders in the list, the value of the node's condition attribute is added to the list of folder values.
+- `addAccountUuids(java.lang.String[])`  adds the account uuids in the provided array to the search. This search will then match any account uuids that are in the provided array.
+- `isPredefined()`  checks to see if the search object was hard coded into the application and if so, returns true.
+- `getConditions()`  returns the root node of the local conditions tree.
+- `searchAllAccounts()`  checks whether or not the `mAccountUuids` field is empty. If it is, then the search will be conducted on all accounts.
+- `writeToParcel(android.os.Parcel,int)`  writes the name of the search field, the predefined (1) or manual (0) flag, as well as the list of account ids to the Parcel.
+- `addAllowedFolder(java.lang.String)`  checks to see if the name passed in equals the name of the folder to be added, and, if it does, then the folder will be added to the search. Otherwise, the folder will be added to the tree search or the tree search, depending on whether or not the folder subtree was found in the process.
+- `addAccountUuid(java.lang.String)`  searches for an account with the given UUID and if it is not found, it clears the list of account ids and returns.
+- `and(com.fsck.k9.search.SearchSpecification$SearchField,java.lang.String,com.fsck.k9.search.SearchSpecification$Attribute)`  adds the provided node as the second argument of an AND clause to this node.
+- `and(com.fsck.k9.search.SearchSpecification$SearchCondition)`  takes the provided condition as the second argument and applies it to the current (top) AND node, creating a new top AND node with the result.
+- `getRemoteSearchArguments()`  looks for the condition nodes that have the `SUBJECT` or `SENDER` fields and returns the value of those fields.
+- `setName(java.lang.String)`  sets the name of the saved search to the passed in name param.
+- `getLeafSet()`  gets all the leaf conditions of the related condition tree.
+- `removeAccountUuid(java.lang.String)`  removes the given account UUID from the current search.
+- `setManualSearch(boolean)`  sets the `mManualSearch` field to the given `manualSearch` value.
+
+## class `com.fsck.k9.search.ConditionsTreeNode`
+
+This class  gives a textual description of the contents of a node in a tree structure. It also provides methods to write data to a parcel object and to "AND" two conditions.
+
+This class contains the following public method(s):
+
+- `describeContents()`  returns a textual description of the contents of a node in a tree structure.
+- `writeToParcel(android.os.Parcel,int)`  writes data to a parcel object, using the ordinal values for the conditions as values.
+- `or(com.fsck.k9.search.ConditionsTreeNode)`  creates an OR clause in this node by adding the expression expr as the second argument.
+- `or(com.fsck.k9.search.SearchSpecification$SearchCondition)`  adds the provided condition as the second argument of an OR clause to this node.
+- `preorder()`  traverses the tree from the root to the leaves and returns a list of nodes in preorder.
+- `and(com.fsck.k9.search.SearchSpecification$SearchCondition)`  "ANDs" the condition provided with the givennode.
+- `getLeafSet()`  returns a set of all the leaves in the tree.
+- `and(com.fsck.k9.search.ConditionsTreeNode)`  adds the expression set as the second argument to the AND clause of this node.
+- `getCondition()`  retrieves the condition stored in this node.
+- `buildTreeFromDB(android.database.Cursor)`  builds a condition tree from a database cursor. The cursor should point to rows representing the nodes of the tree. The rows are ordered by leftmost position of the nodes.
+- `applyMPTTLabel()`  applies the MPTT labeling to the subtree of this node as its root node.
+
+## class `com.fsck.k9.search.SqlQueryBuilder`
+
+This class  helps you construct a SQL WHERE clause.
+
+This class contains the following public method(s):
+
+- `addPrefixToSelection(java.lang.String[],java.lang.String,java.lang.String)`  looks for a column that begins with the given prefix, and then replaces all occurrences of that column name with the prefix string.
+- `buildWhereClause(com.fsck.k9.Account,com.fsck.k9.search.ConditionsTreeNode,java.lang.StringBuilder,java.util.List)`  generates a SQL WHERE clause that matches the specified conditions on the given node.
+
+## class `com.fsck.k9.search.SearchSpecification$SearchCondition`
+
+This class  saves the hash code of a SearchCondition object, cloned it, and then wrote it to a Parcel object.
+
+This class contains the following public method(s):
+
+- `hashCode()`  calculates the hash code for the class and its attributes, fields, and values.
+- `clone()`  creates a copy of the given SearchCondition object. The new object has the same field, attribute, and value as the original object, but with a new (unique) identifier.
+- `writeToParcel(android.os.Parcel,int)`  calls the corresponding write() method of the Parcel object's fields with the given flags. The flags can be interpreted as follows:
+
+
+flag Description
+
+STREAM Output the data as a stream.
+
+BKCACHE Write the data to BKCACHE.
+- `toHumanString()`  takes the field and attribute names and returns a string representation of them.
+- `describeContents()`  returns the total number of bytes contained in the SearchSpecification object.
+- `equals(java.lang.Object)`  checks to see if the object being compared is a specific type of object and if so, it compares the values of the object's attributes and fields. If the values are the same, it returns true; otherwise, it returns false.
+
+
+# package `com.fsck.k9.view`
+
+This package  provides a GUI for viewing encrypted messages.
+
+This package contains the following class(es):
+
+## interface `com.fsck.k9.view.MessageHeader$OnLayoutChangedListener`
+
+This interface  listens for changes to the layout of a message header and calls a public method if needed.
+
+This class contains the following public method(s):
+
+- `onLayoutChanged()`  is supposed to be called whenever the layout of the message header changes.
+
+## class `com.fsck.k9.view.HighlightDialogFragment`
+
+This class  builds and displays a highlighting view which is used to highlight parts of an android view.
+
+This class contains the following public method(s):
+
+- `onDismiss(android.content.DialogInterface)`  hides (or dismisses) the highlighting view and then calls the hideShowcaseView() method.
+- `onStart()`  calls `highlightViewInBackground()` which will then trigger the focus of the dialog and the underlying view will be highlighted.
+
+## interface `com.fsck.k9.view.CryptoModeSelector$CryptoStatusSelectedListener`
+
+This interface  provides an interface for listening to changes in the ``CryptoModeSelectorState`` object.
+
+This class contains the following public method(s):
+
+- `onCryptoStatusSelected(com.fsck.k9.view.CryptoModeSelector$CryptoModeSelectorState)`  receives the ``CryptoModeSelectorState`` object from the caller and updates the GUI accordingly.
+
+## class `com.fsck.k9.view.ViewSwitcher`
+
+This class  controls the animations that are used while the ViewSwitcher is visible.
+
+This class contains the following public method(s):
+
+- `setFirstInAnimation(android.view.animation.Animation)`  sets the first animation in the view switcher to the given animation.
+- `onAnimationStart(android.view.animation.Animation)`  calls the `onAnimationStart` method of the parent view class (in this case, the `ViewSwitcher` class). Then, within this method, it sets up some state for the animation, which is completely unused in our code.
+- `setSecondOutAnimation(android.view.animation.Animation)`  sets the animation that will be used to display the second Out button on the ViewSwitcher.
+- `getSecondInAnimation()`  retrieves the second animation from the animation list.
+- `showSecondView()`  sets up the necessary animations to show the second view, if the current view is a second view. It then sets the displayed child to be the second view, and finally calls the handleSwitchCompleteCallback() method.
+- `setOnSwitchCompleteListener(com.fsck.k9.view.ViewSwitcher$OnSwitchCompleteListener)`  sets a listener on the ViewSwitcher that will be called when the switch from one view to another is complete.
+- `showFirstView()`  sets up animations that will animate the first view in the tree from the first node to the second node. Then it sets the displayed child to 0 so that it will animate through the rest of the views in the tree.
+- `getFirstInAnimation()`  returns the first animation in the view animation queue.
+- `getmFirstOutAnimation()`  returns the first animation out of the ViewSwitcher's animations.
+- `setFirstOutAnimation(android.view.animation.Animation)`  sets the first animation that will be used when the ViewSwitcher is shown.
+- `getSecondOutAnimation()`  returns the Animation for the second out animation.
+- `setSecondInAnimation(android.view.animation.Animation)`  sets the animation that will be used to show the second item in the ViewSwitcher.
+- `onAnimationEnd(android.view.animation.Animation)`  triggers the ViewSwitcher's onSwitchComplete() method when the Animation completes.
+- `onAnimationRepeat(android.view.animation.Animation)`  calls the `onAnimationRepeat` method in the parent class, `ViewSwitcher`, and sets the `animation` parameter to the current animation that the parent class is currently playing.
+
+## class `com.fsck.k9.view.NonLockingScrollView`
+
+This class  determines the appropriate action to take based on the MotionEvent that's being received.
+
+This class contains the following public method(s):
+
+- `onInterceptTouchEvent(android.view.MotionEvent)`  checks to see if the MotionEvent that's being received is an ACTION_UP event - this means the user has tapped the screen - and if so, it makes a decision as to what to do with the event. If it's not an ACTION_UP event, then it checks to see if the MotionEvent is a dragging event, and if so, it handles the event itself. If it isn't a dragging event, then it passes the event on to the child views.
+- `requestChildFocus(android.view.View,android.view.View)`  checks whether the view that we are requesting focus on is a MessageWebView and, if so, it makes sure that the user has already scrolled to at least partly view it, otherwise it just requests focus on the view normally.
+
+## enum `com.fsck.k9.view.MessageCryptoDisplayStatus`
+
+This enum  tests whether a particular result is an encrypted signed message or not.
+
+This class contains the following public method(s):
+
+- `isUnencryptedSigned()`  tests the return value of the `com.fsck.k9.view.MessageCryptoDisplayStatus` enum against a set of possible values.
+- `fromResultAnnotation(com.fsck.k9.mailstore.CryptoResultAnnotation)`  takes a CryptoResultAnnotation object and from that object it tries to determine the display status for that result.
+- `hasAssociatedKey()`  checks if the associated key of this enum is known.
+
+## class `com.fsck.k9.view.MessageWebView`
+
+This class  displays a message on the screen.
+
+
+
+This class is used to display a message on the screen.
+
+This class contains the following public method(s):
+
+- `emulateShiftHeld()`  tries to dispatch a KeyEvent with the ACTION_DOWN and KEYCODE_SHIFT_LEFT values as its action and left Shift key as its key code. If this dispatch succeeds, the method prints the text "select_text_now" to the screen and shows a Toast.
+- `displayHtmlContentWithInlineAttachments(java.lang.String,com.fsck.k9.mailstore.AttachmentResolver,com.fsck.k9.view.MessageWebView$OnPageFinishedListener)`  sets up the web view client with the attachment resolver and then sets up the html content to be displayed in the web view.
+- `blockNetworkData(boolean)`  sets the settings on the WebView so that network data will not be loaded.
+- `configure()`  sets the view's settings to reflect the user's preferences.
+
+## class `com.fsck.k9.view.MessageHeader`
+
+This class  sets the visibility and enabled state of the "crypto status icon" on the message header.
+
+This class contains the following public method(s):
+
+- `setCryptoStatus(com.fsck.k9.view.MessageCryptoDisplayStatus)`  sets the visibility and enabled state of the "crypto status icon" on the message header.
+- `onShowAdditionalHeaders()`  changes the visibility of the additional header views (represented by instances of class MessageHeader) based on the current selection in the main header view (represented by instance of class Message).
+- `populate(com.fsck.k9.mail.Message,com.fsck.k9.Account)`  Populates a Message with its associated Account, ContactList, Date, From and Subject.
+- `setOnCryptoClickListener(com.fsck.k9.ui.messageview.OnCryptoClickListener)`  sets the OnCryptoClickListener instance to be called when a user clicks on a crypto link.
+- `onSaveInstanceState()`  saves the current state of the view, including any headers that have been set, as a Parcelable. Then, it sets the flag indicating whether or not the user should be able to see the additional headers. Finally, it returns this Parcelable.
+- `showSubjectLine()`  sets the visibility of a subject view to be visible.
+- `additionalHeadersVisible()`  checks to see if there is a view named "AdditionalHeadersView" and if so, it makes that view visible.
+- `onClick(android.view.View)`  takes the id of the view (e.g. R.id.from ) and executes the appropriate code depending on the value of that id. For example, if the id is R.id.to , then it will call onAddSenderToContacts() .
+- `onLongClick(android.view.View)`  will add recipients to the clipboard if the corresponding Id is R.id.to, add addresses to the clipboard if the corresponding Id is R.id.from, or CC if the corresponding Id is R.id.cc.
+- `hideCryptoStatus()`  sets the visibility of the cryptostatus icon to "gone" so that it will not be displayed on the screen.
+- `setOnFlagListener(android.view.View.OnClickListener)`  sets a listener for the flag's "onclick" event.
+- `createMessage(int)`  returns a string with the total number of addresses in the given list.
+- `setOnLayoutChangedListener(com.fsck.k9.view.MessageHeader$OnLayoutChangedListener)`  sets the listener to be called whenever the layout of the message header changes.
+- `shouldShowSender(com.fsck.k9.mail.Message)`  checks if the addresses in the `from` field of the message are the same as the addresses in the `sender` field of the message. If they are not, then this method returns false.
+- `onRestoreInstanceState(android.os.Parcelable)`  determines if the Parcelable state object is of type MessageHeader.SavedState, and if not, it proceeds to call the superclass's onRestoreInstanceState() method with the state object. Once the onRestoreInstanceState() method has been called, the state object is saved to the mSavedState variable and the program ends.
+- `setCryptoStatusDisabled()`  disables the Cryptography status icon.
+- `setCryptoStatusLoading()`  sets the visibility of the crypto status icon to be visible and it also sets the enabled state of the crypto status icon to be false. Lastly, it sets the crypto display status to be loading.
+
+## class `com.fsck.k9.view.ClientCertificateSpinner`
+
+This class  allows users to set aliases for certificates, gets lists of available private keys with the specified alias, and listens for updates on the client certificate status.
+
+This class contains the following public method(s):
+
+- `setAlias(java.lang.String)`  sets the alias that corresponds to the given string. This alias can be used by subsequent calls to the method.
+- `getAlias()`  retrieves the alias for the selected certificate.
+- `chooseCertificate()`  opens a connection to the KeyChain service to get a list of available private keys with the specified alias. The list of available private keys is then used to set the alias for the currently selected certificate.
+- `setOnClientCertificateChangedListener(com.fsck.k9.view.ClientCertificateSpinner$OnClientCertificateChangedListener)`  registers a listener to be called whenever the client certificate status changes.
+
+## abstract class `com.fsck.k9.view.K9WebViewClient`
+
+This abstract class  provides a way to create a new instance of a K9WebViewClient object based on the given attachmentResolver.
+
+This class contains the following public method(s):
+
+- `newInstance(com.fsck.k9.mailstore.AttachmentResolver)`  returns a new instance of a K9WebViewClient object based on the given attachmentResolver.
+- `onPageFinished(android.webkit.WebView,java.lang.String)`  notifies the listener that the page has finished loading.
+- `setOnPageFinishedListener(com.fsck.k9.view.MessageWebView$OnPageFinishedListener)`  sets the listener for `OnPageFinished` event to be called when the current page is finished loading.
+- `shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String)`  checks if the uri sent in is of the type that this K9WebViewClient class can handle. If it is, then it returns false so that the browser's loading process isn't interfered with.
+
+## interface `com.fsck.k9.view.MessageWebView$OnPageFinishedListener`
+
+This interface  fires the `com.fsck.k9.view.MessageWebView$OnPageFinishedCallback` when the webview has finished displaying the currently displayed page.
+
+This class contains the following public method(s):
+
+- `onPageFinished()`  fires the `com.fsck.k9.view.MessageWebView$OnPageFinishedCallback` when the webview has finished displaying the currently displayed page.
+
+## interface `com.fsck.k9.view.ClientCertificateSpinner$OnClientCertificateChangedListener`
+
+This interface  allows an object to be notified whenever a client certificate changes.
+
+This class contains the following public method(s):
+
+- `onClientCertificateChanged(java.lang.String)`  will be called whenever a client certificate changes.
+
+## class `com.fsck.k9.view.MessageTitleView`
+
+This class  displays the subject line of a message in its header.
+
+This class contains the following public method(s):
+
+- `showSubjectInMessageHeader()`  displays the subject line of the message in the MessageTitleView's header.
+- `setMessageHeader(com.fsck.k9.view.MessageHeader)`  sets the "From" and "Subject" fields of the header object to the values of the "From" and "Subject" properties of the passed in message title object.
+- `onDraw(android.graphics.Canvas)`  determines if we need to ellipsize the text in the message header. If so, it will determine the line end index and modify the text accordingly.
+
+## class `com.fsck.k9.view.K9WebViewClient$LollipopWebViewClient`
+
+This class  determines if a request should be intercepted and handled.
+
+This class contains the following public method(s):
+
+- `shouldInterceptRequest(android.webkit.WebView,android.webkit.WebResourceRequest)`  determines whether or not the WebView should intercept a request and handle it.
+
+## class `com.fsck.k9.view.K9WebViewClient$PreLollipopWebViewClient`
+
+This class  checks to see if a given URL can be intercepted and responses returned accordingly.
+
+This class contains the following public method(s):
+
+- `shouldInterceptRequest(android.webkit.WebView,java.lang.String)`  checks to see if a given URL can be intercepted and responses returned accordingly.
+
+## class `com.fsck.k9.view.RecipientSelectView$Recipient`
+
+This class  allows the user to select a recipient from a list, and it also manages their crypto status.
+
+This class contains the following public method(s):
+
+- `equals(java.lang.Object)`  checks if the object being compared is an instance of the given class and if the addresses of the objects are the same.
+- `getDisplayNameOrUnknown(android.content.Context)`  checks whether the given context object contains a string named "displayName" and, if so, it returns that string.
+- `setCryptoStatus(com.fsck.k9.view.RecipientSelectView$RecipientCryptoStatus)`  sets the recipient's crypto status to the given value.
+- `getContactLookupUri()`  looks up a contact lookup URI for a given contact ID.
+- `isValidEmailAddress()`  checks to see if the email address provided is valid.
+- `getDisplayNameOrAddress()`  takes the display name or address of the recipient and returns it.
+- `getCryptoStatus()`  returns the crypto status of the recipient.
+- `getNameOrUnknown(android.content.Context)`  looks up the personal name of the recipient in the address object, and if the name is not null then it returns that name. If it cannot find the name, it returns the string "unknown_recipient".
+
+## class `com.fsck.k9.view.FoldableLinearLayout`
+
+This class  allows you to add child views to a foldableContainer view.
+
+This class contains the following public method(s):
+
+- `addView(android.view.View)`  adds the provided child view to the given foldableContainer view.
+
+## interface `com.fsck.k9.view.RecipientSelectView$TokenListener`
+
+This interface  listens for changes to the token that is being sent by the server.
+
+This class contains the following public method(s):
+
+- `onTokenChanged(java.lang.Object)`  keeps a record of the token that was just received by the view, and it will call the `onTokenReceived` method when the token changes.
+
+## class `com.fsck.k9.view.ToolableViewAnimator`
+
+This class  manages the animation of a view, displaying it either as a child or as a separate view.
+
+This class contains the following public method(s):
+
+- `setDisplayedChildId(int)`  checks to see if a child with the given ID exists in the view's list of children and, if so, sets the child's display id to the given value.
+- `setDisplayedChild(int,boolean)`  starts an animation using the animator that is set as the displayed child and ends it by clearing the displayed child animator (if animate is true).
+- `setDisplayedChild(int)`  updates the displayed child of the ToolableViewAnimator object according to the value of the whichChild parameter.
+- `addView(android.view.View,int,android.view.ViewGroup$LayoutParams)`  adds a newly created view to the current tool-view animation. This view may be a child of the current tool-view or it may be a new view that has been created specifically for the tool-view animation. The index parameter is the position of the view in the animator's presentation sequence, and params is the LayoutParams object that contains the layout information for the new view.
+- `getDisplayedChildId()`  returns the identifier of the child displaying this toolable view.
+
+## interface `com.fsck.k9.view.ViewSwitcher$OnSwitchCompleteListener`
+
+This interface  keeps track of which child view has been displayed the longest, and updates the interface's displayedChild attribute accordingly.
+
+This class contains the following public method(s):
+
+- `onSwitchComplete(int)`  checks to see which child view has been displayed the longest and updates the interface's displayedChild attribute accordingly.
+
+## class `com.fsck.k9.view.NonLockingScrollView$HierarchyTreeChangeListener`
+
+This class  listens for changes to the hierarchy of child views in the currently focused part of the hierarchy tree, and depending on the type of change, it either removes or adds child views.
+
+This class contains the following public method(s):
+
+- `onChildViewRemoved(android.view.View,android.view.View)`  removes any child views which are not WebView or ViewGroup views, and replaces them with a flag indicating those views need all touches confirmed.
+- `onChildViewAdded(android.view.View,android.view.View)`  registers as a listener for changes to the hierarchy of child views in the currently focused part of the hierarchy tree. It does this by calling `childGroup.setOnHierarchyChangeListener(this)`.
+
+## class `com.fsck.k9.view.MessageCryptoStatusView`
+
+This class  sets the visibility of MessageCryptoDisplayStatus icons based on the statusDotsRes attribute.
+
+This class contains the following public method(s):
+
+- `setCryptoDisplayStatus(com.fsck.k9.view.MessageCryptoDisplayStatus)`  sets the visibility of the icons for the MessageCryptoDisplayStatus object to either View.VISIBLE or View.GONE, based on the displayStatus.statusDotsRes attribute.
+
+## class `com.fsck.k9.view.FoldableLinearLayout$SavedState`
+
+This class  stores the current state of the foldable linear layout so it can be written to a parcel.
+
+This class contains the following public method(s):
+
+- `writeToParcel(android.os.Parcel,int)`  formats the state of the foldable linear layout to be written to the parcel. It does this by either setting the flag mFolded to either 1 or 0, based on whether or not the foldable linear layout has been folded yet.
+
+## class `com.fsck.k9.view.LinearViewAnimator`
+
+This class  sets up and displays animations for views in an Android application.
+
+This class contains the following public method(s):
+
+- `setUpInAnimation(android.view.animation.Animation)`  sets up the animation depicted by the passed in animation.
+- `setUpOutAnimation(android.content.Context,int)`  sets up the out animation for the given resource ID.
+- `setDownInAnimation(android.view.animation.Animation)`  sets the given Animation as the animation sequence that will be applied when the view is "dropped" down.
+- `setUpInAnimation(android.content.Context,int)`  sets up the animation for a view in the context given by the 'context' parameter.
+- `setDownOutAnimation(android.content.Context,int)`  loads an animation for the view that will cause it to gradually slide down from the top.
+- `setUpOutAnimation(android.view.animation.Animation)`  sets up and calls the outAnimation() method of the animation object passed in.
+- `setDownOutAnimation(android.view.animation.Animation)`  sets the animation to be used for when the view Drops Down.
+- `setDownInAnimation(android.content.Context,int)`  sets a Down animation on the current LinearView in the context of Android.View animation framework.
+- `setDisplayedChild(int)`  sets the child displayed in the viewer animator to whichChild. If whichChild is less than 0, then the first child is displayed. If whichChild is greater than or equal to the number of displayed children, then the last child is displayed.
+- `setDisplayedChild(int,boolean)`  picks the next child that is displayed and sets its displayedChild property to that child.
+
+## class `com.fsck.k9.view.MessageHeader$SavedState`
+
+This class  saves the current state of the message header fields that are pointed to by this.additionalHeadersVisible.
+
+This class contains the following public method(s):
+
+- `writeToParcel(android.os.Parcel,int)`  updates the saved state for the message header fields pointed to by this.additionalHeadersVisible.
+
+## class `com.fsck.k9.view.ThemeUtils`
+
+This class  provides convenient access to the styled color for an attribute of a given context.
+
+This class contains the following public method(s):
+
+- `getStyledColor(android.content.res.Resources.Theme,int)`  looks up the "typed value" attribute for the given theme resource and returns the value as a Java int.
+- `getStyledColor(android.content.Context,int)`  gets the styled color for an attribute of a given context.
+
+## class `com.fsck.k9.view.RecipientSelectView`
+
+This class  lets the user select recipients from a drop-down list box, and then shows an alternate recipient if the selected recipient isn't the current recipient.
+
+This class contains the following public method(s):
+
+- `onLoaderReset(android.content.Loader)`  sets the highlight for the adapter to be null, and sets the recipients to be null.
+- `hasUncompletedText()`  checks to see if the text in the completion field is empty, and if it is not, it checks to see if the text in the placeholder text is also not empty.
+- `onLoadFinished(android.content.Loader,java.util.List)`  calls `setRecipients(data)` on the `Adapter` and then calls the `postShowAlternatesPopup(data)` method on the `LoaderManager` if it is set.
+- `setCryptoProvider(java.lang.String,boolean)`  sets the crypto provider for the recipient select view. It also determines whether or not to show advanced information about the crypto provider. If the showAdvancedInfo property is set to true, then the advanced information will be shown; otherwise, it will not be shown.
+- `setLoaderManager(android.app.LoaderManager)`  sets the loader manager for the RecipientSelectView.
+- `setShowCryptoEnabled(boolean)`  sets whether the display of cryptographic keys will be enabled on the RecipientSelectView.
+- `onTouchEvent(android.view.MotionEvent)`  checks to see if the MotionEvent has an ACTION_UP action mask, and if so, it gets the text attached to the MotionEvent and looks for an offset in the text where the user's finger was located when the MotionEvent was triggered. If it finds an offset, it goes and finds the spans for all of the links in the text that are within the offset range, and then it calculates whether or not the link refers to the current recipient. If it does, then it shows the alternate recipient in the UI.
+- `addRecipients(com.fsck.k9.view.RecipientSelectView$Recipient[])`  adds recipients to the recipient list view.
+- `showDropDown()`  displays a drop-down list box for selecting recipients in the view.
+- `onCreateLoader(int,android.os.Bundle)`  gets the requested loader ID for the given recipient view. It then uses that ID to get the context and the crypto provider needed for the selected recipients.
+- `postShowAlternatesPopup(java.util.List)`  posts a new Runnable which will call the showAlternatesPopup(data) method, which will layout the popup.
+- `setTokenListener(com.fsck.k9.view.RecipientSelectView$TokenListener)`  sets a listener for changes to the token in the Listener Recipient Select View.
+- `getAddresses()`  grabs all of the addresses in the recipients list, iterates through them, and creates a new list of addresses with the value of the given recipient's address.
+- `performCompletion()`  checks if the user has filtered the list to only recipient texts that match the required criteria, and if so, it replaces the text in the completion dialog with the filtered text.
+- `onKeyDown(int,android.view.KeyEvent)`  calls the corresponding method in the `RecipientSelectView`'s superclass, which in turn handles the KeyEvent.
+- `isEmpty()`  checks to see if an object in the data set returned by the `getObjects()` method is empty.
+- `onFocusChanged(boolean,int,android.graphics.Rect)`  guards against the widget losing focus, by checking to see if the hasFocus field of the recipientSelectView object is set to true. If so, it then calls displayKeyboard(), which will display the keyboard if it's currently enabled.
+- `onRecipientRemove(com.fsck.k9.view.RecipientSelectView$Recipient)`  dismisses the alternate popup menu and removes the recipient from the view.
+- `showAlternatesPopup(java.util.List)`  copies the anchor settings from the autocomplete dropdown on the recipient select view to the listView in the alternate recipients popup.
+- `onRecipientChange(com.fsck.k9.view.RecipientSelectView$Recipient,com.fsck.k9.view.RecipientSelectView$Recipient)`  finds the recipient to replace in the list of recipients and sets the corresponding fields on the current recipient.
+- `tryPerformCompletion()`  checks if the user has any incomplete text, and if not, it performs the completion.
+
+## interface `com.fsck.k9.view.CryptoModeSelector`
+
+This interface  allows you to assign a listener to receive cryptostatus notifications, and then sets the current CryptoModeSelectorState to the specified status.
+
+This class contains the following public method(s):
+
+- `setCryptoStatusListener(com.fsck.k9.view.CryptoModeSelector$CryptoStatusSelectedListener)`  assigns an listener to receive cryptostatus notifications.
+- `setCryptoStatus(com.fsck.k9.view.CryptoModeSelector$CryptoModeSelectorState)`  sets the current CryptoModeSelectorState to the specified status.
+
+## class `com.fsck.k9.view.ColorChip`
+
+This class  returns a drawable that can be used to draw the screen background with any color.
+
+This class contains the following public method(s):
+
+- `drawable()`  returns a shape drawable that can be used to draw the screen background with any color.
+
+
+# package `com.fsck.k9.widget.list`
+
+This package  allows the app to interact with the AppWidgetManager APIs to update the list of messages on a widget.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.widget.list.MessageListWidgetProvider`
+
+This class  allows the app to interact with the AppWidgetManager APIs to update the list of messages on a widget.
+
+This class contains the following public method(s):
+
+- `onReceive(android.content.Context,android.content.Intent)`  checks to see if the Intent the app is receiving has a ACTION_UPDATE_MESSAGE_LIST flag attached to it. If it does, it uses the AppWidgetManager APIs to update the list of messages on the widget.
+- `onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])`  sends a message to the appwidget manager for each appwidget id that was passed in. It then updates the appwidget with the current contents of the msg list.
+- `triggerMessageListWidgetUpdate(android.content.Context)`  gets a list of all the appwidgets that are managed by the widget manager, identify which one is the MessageListWidget, and then sends a broadcast Intent to update it.
+
+## class `com.fsck.k9.widget.list.MessageListWidgetService`
+
+This class  returns a RemoteViewsFactory instance that can be used to retrieve views for a message list widget.
+
+This class contains the following public method(s):
+
+- `onGetViewFactory(android.content.Intent)`  returns a RemoteViewsFactory instance that can be used to retrieve views for a message list widget displayed on an Android device.
+
+## class `com.fsck.k9.widget.list.MessageListRemoteViewFactory`
+
+This class  creates a new RemoteViews object that has a layout named "message_list_widget_loading", sets the text view's text to "context.getString(R.string.mail_list_widget_loading)", and sets view visibility to "View.VISIBLE".
+
+This class contains the following public method(s):
+
+- `getLoadingView()`  creates a new RemoteViews object, with a layout named `message_list_widget_loading`, set text view's text to `context.getString(R.string.mail_list_widget_loading)`, and sets view visibility to `View.VISIBLE`.
+- `getItemId(int)`  returns the position of the message in the list at runtime.
+- `getCount()`  returns the size of the list of messages.
+- `onDestroy()`  destroys the widget list view factory.
+- `hasStableIds()`  checks if the objects that this class produces are globally unique.
+- `onCreate()`  sets the senderAboveSubject property so that the TextView widget at the top of the content area displays the name of the MessageListSenderAboveSubject object. It sets the readTextColor and unreadTextColor colors so that the text in these widgets is readable and unreadable, respectively.
+- `getViewTypeCount()`  returns the number of view types in the given MessageListRemoteViewFactory.
+- `onDataSetChanged()`  calls `loadMessageList()`, which will load the message list from the server.
+- `getViewAt(int)`  creates a remote view of the list item at the given position, sets the text views for the sender, subject, and the date, and sets the intent for the list item so that when the user clicks on it, the fill-in dialog will be displayed.
+
+
+# package `com.fsck.k9.notification`
+
+This package  provides a way to manage notifications for an account in Android.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.notification.CertificateErrorNotifications`
+
+This class  provides a way to cancel or show certificate error notifications.
+
+This class contains the following public method(s):
+
+- `clearCertificateErrorNotifications(com.fsck.k9.Account,boolean)`  cancels the notification for the given certificate error notification ID.
+- `showCertificateErrorNotification(com.fsck.k9.Account,boolean)`  generates a notification with the specified identifier and sends it to the account specified.
+
+## class `com.fsck.k9.notification.SendFailedNotifications`
+
+This class  helps keep track of notifications that have failed to be sent, and makes them visible and active.
+
+This class contains the following public method(s):
+
+- `showSendFailedNotification(com.fsck.k9.Account,java.lang.Exception)`  populates a notification with the relevant data for the account specified, including the title and text for the notification, and sets it as visible and active.
+- `clearSendFailedNotification(com.fsck.k9.Account)`  cancels a notification with the given notification id for the given account.
+
+## class `com.fsck.k9.notification.NotificationContentCreator`
+
+This class  creates a new NotificationContent object that contains the details of the message.
+
+This class contains the following public method(s):
+
+- `createFromMessage(com.fsck.k9.Account,com.fsck.k9.mailstore.LocalMessage)`  takes a message from the LocalMessage object and creates a new NotificationContent object that contains the details of the message. The LocalMessage object is the message that was received at the given account, and the Account object is the account that generated the message. The parametersآیا MessageReference، sender، displaySender، and subject، are all the same as the corresponding fields in the LocalMessage object. Finally, the sender and summary fields are build from the values in the message's reference and sender fields, while the preview field is filled in with the contents of the preview field in the LocalMessage object.
+
+## class `com.fsck.k9.notification.NotificationIds`
+
+This class  returns the notification ids for various types of notifications that a given account might receive.
+
+This class contains the following public method(s):
+
+- `getAuthenticationErrorNotificationId(com.fsck.k9.Account,boolean)`  gets the notification id for the authentication error notification.
+- `getCertificateErrorNotificationId(com.fsck.k9.Account,boolean)`  gets the notification "Id" for the given "account" that is associated with either a CertificateError notification (the incoming parameter is set to true) or a CertificateNotFound notification (the incoming parameter is set to false). The "base notificationId" for this type of notification is then returned minus the offset for that particular notification.
+- `getNewMailStackedNotificationId(com.fsck.k9.Account,int)`  searches for the new mail notification in the notification stack for the given account and updates the notification's index for that stack so that it's easier to find.
+- `getNewMailSummaryNotificationId(com.fsck.k9.Account)`  takes the account ID of the account to be notified and adds an offset to it, which is the notificaiton ID for the new mail summary notification.
+- `getFetchingMailNotificationId(com.fsck.k9.Account)`  returns the unique identifier for the notification that is associated with the given account.
+- `getSendFailedNotificationId(com.fsck.k9.Account)`  figures out an integer ID for a notification that relates to a failure in sending a message.
+
+## class `com.fsck.k9.notification.NotificationController`
+
+This class  provides an interface for managing the notifications for an account in Android.
+
+This class contains the following public method(s):
+
+- `clearNewMailNotifications(com.fsck.k9.Account)`  clears all the new mail notifications for the specified account.
+- `platformSupportsExtendedNotifications()`  checks to see if the current Android platform supports extended notifications. If so, the method returns true; otherwise, it returns false.
+- `showSendingNotification(com.fsck.k9.Account)`  fetches all the notifications for the given account and displays them in a notification viewer.
+- `removeNewMailNotification(com.fsck.k9.Account,com.fsck.k9.activity.MessageReference)`  removes a notification for the given account and message reference.
+- `showFetchingMailNotification(com.fsck.k9.Account,com.fsck.k9.mail.Folder)`  shows an alert notification for the currently-selected account and the selected folder.
+- `clearSendingNotification(com.fsck.k9.Account)`  clears the notification for the given account.
+- `platformSupportsLockScreenNotifications()`  checks to see if the device's platform (API level) supports lock screen notifications.
+- `clearCertificateErrorNotifications(com.fsck.k9.Account,boolean)`  clears all certificate errors notifications for the given account.
+- `showSendFailedNotification(com.fsck.k9.Account,java.lang.Exception)`  will show a notification to the user informing them that the send() call failed.
+- `showAuthenticationErrorNotification(com.fsck.k9.Account,boolean)`  notifies the user about an authentication error.
+- `showCertificateErrorNotification(com.fsck.k9.Account,boolean)`  shows a notification to the user if there is a problem with the certificate chain for the account.
+- `newInstance(android.content.Context)`  constructs a new NotificationController object, initializing it with the given context (an instance of Android's Application Context) and the given notification manager.
+- `clearSendFailedNotification(com.fsck.k9.Account)`  clears all failed notifications for the given account.
+- `clearAuthenticationErrorNotification(com.fsck.k9.Account,boolean)`  clears any notification about an authentication error for the given account.
+- `clearFetchingMailNotification(com.fsck.k9.Account)`  clears the fetching mail notification for the given account.
+- `addNewMailNotification(com.fsck.k9.Account,com.fsck.k9.mailstore.LocalMessage,int)`  adds a new notification to the notification storage for the given account and message. The previousUnreadMessageCount parameter indicates how many messages ago the currently viewing message should be compared to to find the "previousUnreadMessageCount".
+
+## class `com.fsck.k9.notification.DeviceNotifications`
+
+This class  builds notifications and provides methods to create new notifications.
+
+This class contains the following public method(s):
+
+- `buildSummaryNotification(com.fsck.k9.Account,com.fsck.k9.notification.NotificationData,boolean)`  returns a notification which will show the user the latest summary for their account, along with the unread messages count and an icon based on the user's notification settings.
+- `newInstance(com.fsck.k9.notification.NotificationController,com.fsck.k9.notification.NotificationActionCreator,com.fsck.k9.notification.WearNotifications)`  creates a new instance of the DeviceNotifications class, with the given NotificationController and NotificationActionCreator. The lockScreenNotification is then created using the LockScreenNotification class, and the wearNotifications property is set to true so that the new instance will wear notifications.
+
+## class `com.fsck.k9.notification.NotificationData`
+
+This class  keeps track of all the notifications that have been added, and it also keeps track of how many messages have been read. It also allows you to manage your notifications by removing them, as well as adding new ones.
+
+This class contains the following public method(s):
+
+- `getNewMessagesCount()`  returns the number of new notifications added to this NotificationData object, plus any additional notifications that have been added since the last time this method was called.
+- `getAllMessageReferences()`  pulls all the message references for messages present in the activeNotifications and additionalNotifications data sets, and returns a new ArrayList of MessageReference objects.
+- `getHolderForLatestNotification()`  retrieves the holder for the latest notification that the user is currently subscribed to.
+- `addNotificationContent(com.fsck.k9.notification.NotificationContent)`  adds a notification content to an existing notification holder.
+- `hasSummaryOverflowMessages()`  checks the number of messages that are currently in the Summary Notification area (activeNotifications.size()) and if it's greater than the maximum number of messages that will be shown in the Summary Notification area, then it returns false.
+- `getActiveNotificationIds()`  returns an array of int values that represent the notification IDs of the active notifications.
+- `getUnreadMessageCount()`  increments the “unreadMessageCount” variable by the “getNewMessagesCount” variable.
+- `containsStarredMessages()`  iterates through every notification in the activeNotifications list, and checks whether the notification has a starred state. If it does, then the method returns true; else it returns false.
+- `removeNotificationForMessage(com.fsck.k9.activity.MessageReference)`  removes the notification for the given MessageReference from the active notifications list.
+- `getAccount()`  returns the account object associated with this notification data.
+- `getSummaryOverflowMessagesCount()`  counts the total number of messages for a summary notification, minus the number of messages that is set in the MAX_NUMBER_OF_MESSAGES_FOR_SUMMARY_NOTIFICATION constant. If there are more messages than this, the method adds the number of messages from additionalNotifications to the result.
+- `getContentForSummaryNotification()`  returns a list of messages for a summary notification, counting up from the first notification in the active notifications list.
+- `isSingleMessageNotification()`  checks to see if there is only one active notification.
+- `setUnreadMessageCount(int)`  updates the notification data's "unread message count".
+
+## class `com.fsck.k9.notification.NewMailNotifications`
+
+This class  creates, saves, and cancels notifications for an account.
+
+This class contains the following public method(s):
+
+- `addNewMailNotification(com.fsck.k9.Account,com.fsck.k9.mailstore.LocalMessage,int)`  creates a notification for the given account and message, and stores it in the notification data. The method then checks to see if the user wants to cancel the notification. If they do, it gets the notification id and cancels it. Otherwise, it creates a stacked notification with the notification data and summary information.
+- `clearNewMailNotifications(com.fsck.k9.Account)`  removes the active notifications for an account, and then iterates over the notificationIds and cancels the notifications for those id's.
+- `newInstance(com.fsck.k9.notification.NotificationController,com.fsck.k9.notification.NotificationActionCreator)`  creates a new instance of a notification class, populated with the given controller and actionCreator.
+- `removeNewMailNotification(com.fsck.k9.Account,com.fsck.k9.activity.MessageReference)`  removes the notification for the given MessageReference from the account's notification data.
+
+## class `com.fsck.k9.notification.WearNotifications`
+
+This class  adds summary actions to notifications and builds a stacked notification containing information about a given account and notification holder.
+
+This class contains the following public method(s):
+
+- `addSummaryActions(android.support.v4.app.NotificationCompat.Builder,com.fsck.k9.notification.NotificationData)`  adds the summary actions for a notification to the wearable extension.
+- `buildStackedNotification(com.fsck.k9.Account,com.fsck.k9.notification.NotificationHolder)`  builds a notification containing information about a given account and notification holder, and sends it to the system as a pending notification.
+
+## class `com.fsck.k9.notification.AuthenticationErrorNotifications`
+
+This class  shows notifications for authentication errors.
+
+This class contains the following public method(s):
+
+- `showAuthenticationErrorNotification(com.fsck.k9.Account,boolean)`  shows a notification for an authentication error.
+- `clearAuthenticationErrorNotification(com.fsck.k9.Account,boolean)`  cancels the notification with the given ID.
+
+## class `com.fsck.k9.notification.SyncNotifications`
+
+This class  allows the user to see notifications about their mail being fetched or sent.
+
+This class contains the following public method(s):
+
+- `clearFetchingMailNotification(com.fsck.k9.Account)`  cancels a notification for an account.
+- `showFetchingMailNotification(com.fsck.k9.Account,com.fsck.k9.mail.Folder)`  shows a notification to the user that their mail is fetching, using the account and folder name that is provided.
+- `showSendingNotification(com.fsck.k9.Account)`  shows a notification for the given account name in the given notification drawer. It sets the notification's title, ticker text, and Yiouos icon. It also sets the notification's visibility to "public" if the "SyncNotifications" permission is set for the given account. If the "SyncNotifications" permission is not set for the given account, then this method does nothing and returns immediately.
+- `clearSendingNotification(com.fsck.k9.Account)`  cancels the notification with the notification id given as an argument.
+
+## class `com.fsck.k9.notification.RemoveNotificationResult`
+
+This class  keeps track of whether there is a notification for an object and if not, it will create the notification.
+
+This class contains the following public method(s):
+
+- `shouldCreateNotification()`  checks to see if there is a notification holder set for the object. If there isn't, then it will create the notification.
+- `unknownNotification()`  returns a new RemoveNotificationResult object with null notification ID and 0 removal results.
+- `getNotificationHolder()`  gets the holder of the notification object.
+- `createNotification(com.fsck.k9.notification.NotificationHolder)`  creates a new notificationResult object, which contains the notifier and the notificationId. The false parameter indicates that the result should not be displayed in the user interface.
+- `isUnknownNotification()`  returns a boolean value saying whether the notification is "unknown" or not.
+- `cancelNotification(int)`  cancels the notification for the given notificationId.
+- `getNotificationId()`  returns the notification ID of the notification that was removed.
+
+## class `com.fsck.k9.notification.NotificationActionCreator`
+
+This class  provides the ability to create actions that will be sent to the notification service when a message is read, marked as spam, or responded to.
+
+This class contains the following public method(s):
+
+- `createMarkAllAsReadPendingIntent(com.fsck.k9.Account,java.util.List,int)`  creates a new pending intent to mark all the messages in the given message references as read.
+- `createArchiveMessagePendingIntent(com.fsck.k9.activity.MessageReference,int)`  creates an archive message pending intent that will be cancelled if the current activity is stopped (i.e. the user clicks the back button).
+- `createDeleteMessagePendingIntent(com.fsck.k9.activity.MessageReference,int)`  creates a pending Intent that will result in the called activity triggering a confirmation or service deletion for the given message reference.
+- `createViewFolderPendingIntent(com.fsck.k9.Account,java.lang.String,int)`  builds a task stack, which is a list of tasks that will be completed when the user clicks on the notification. It then uses the task stack to create a PendingIntent object, which flags the notification as being canceled and also makes it the only notification on the device.
+- `createArchiveAllPendingIntent(com.fsck.k9.Account,java.util.List,int)`  creates an archive intent for all pending messages for the given account using the given message references.
+- `createMarkMessageAsReadPendingIntent(com.fsck.k9.activity.MessageReference,int)`  creates a new pending intent with the notificationId as an attribute. This pending intent will be used to update the current notification (if it is still open) or to start a new notification with the same message reference.
+- `createDeleteAllPendingIntent(com.fsck.k9.Account,java.util.List,int)`  creates a DeleteAllPendingIntent that cancels all the pending notifications for the given account and messageReference list.
+- `getDeleteAllPendingIntent(com.fsck.k9.Account,java.util.List,int)`  looks up a pending intent for an account and, if it's confirmation or service-related, returns the corresponding pending intent with the FLAG_NO_CREATE flag set. Otherwise, it returns the corresponding service-related pending intent.
+- `createViewFolderListPendingIntent(com.fsck.k9.Account,int)`  builds a task stack (a list of desired actions) to list pending views for the given account. Once this task stack is created, it returns a pending intent containing the flag FLAG_CANCEL_CURRENT and FLAG_ONE_SHOT to cancel the current request and only show the view list for the given account once.
+- `createViewMessagePendingIntent(com.fsck.k9.activity.MessageReference,int)`  builds a task stack (a collection of tasks) for the given message reference, and then it requests a cancelable pending intent with the given flag parameters.
+- `getMarkAllAsReadPendingIntent(com.fsck.k9.Account,java.util.List,int)`  gets a pending intent that will mark all the messages referenced in the list as read.
+- `createReplyPendingIntent(com.fsck.k9.activity.MessageReference,int)`  finds the action ReplyIntent in the MessageActions class, and returns an Intent object that will start the action.
+- `createViewMessagesPendingIntent(com.fsck.k9.Account,java.util.List,int)`  creates a pending intent to show a list of messages in the notification center for the given account.
+- `createDismissAllMessagesPendingIntent(com.fsck.k9.Account,int)`  creates an Intent to be sent to the notification service that will dismiss all messages pending for the given account.
+- `createDismissMessagePendingIntent(android.content.Context,com.fsck.k9.activity.MessageReference,int)`  creates an Intent that will be used to dismiss a message.
+- `createMarkMessageAsSpamPendingIntent(com.fsck.k9.activity.MessageReference,int)`  creates a pending Intent, that will when triggered, cancel any other pending Intents with the same notificationId.
+
+## class `com.fsck.k9.notification.LockScreenNotification`
+
+This class  sets the visibility of the notification to one of the supported values.
+
+This class contains the following public method(s):
+
+- `configureLockScreenNotification(android.support.v4.app.NotificationCompat.Builder,com.fsck.k9.notification.NotificationData)`  sets the visibility of the notification to one of the supported values.
+- `newInstance(com.fsck.k9.notification.NotificationController)`  creates a new instance of the LockScreenNotification class, given a NotificationController instance.
+
+## class `com.fsck.k9.notification.NotificationGroupKeys`
+
+This class  allows you to find the key (prefix) of the notification group belonging to the given account.
+
+This class contains the following public method(s):
+
+- `getGroupKey(com.fsck.k9.Account)`  finds the key (prefix) of the notification group belonging to the given account.
+
+## class `com.fsck.k9.notification.NotificationActionService`
+
+This class  creates and returns an intent with the ACTION_DELETE action, and sets the accountUuid and messageReferences extras to the values that were provided.
+
+This class contains the following public method(s):
+
+- `createDeleteAllMessagesIntent(android.content.Context,java.lang.String,java.util.List)`  creates and returns an intent with the ACTION_DELETE action, and sets the accountUuid and messageReferences extras to the values that were provided.
+- `startService(android.content.Intent,int)`  starts a service that monitors notifications that the given user has received, andacts on those notifications as appropriate.
+
+## class `com.fsck.k9.notification.AddNotificationResult`
+
+This class  creates a new AddNotificationResult object, based on the provided notification holder.
+
+This class contains the following public method(s):
+
+- `newNotification(com.fsck.k9.notification.NotificationHolder)`  creates a new AddNotificationResult object, using the provided notification holder as an instance.
+- `shouldCancelNotification()`  checks to see if the notification should be cancelled before it is reused.
+- `replaceNotification(com.fsck.k9.notification.NotificationHolder)`  replaces the existing notification held by the ``notificationHolder`` object with a new notification.
+- `getNotificationHolder()`  returns the notification holder for this add notification result.
+- `getNotificationId()`  returns the notificationId for the notification holder.
+
+
+# package `com.fsck.k9.power`
+
+This package  registers and unregisters a receiver for the device idle state changes.
+
+This package contains the following class(es):
+
+## abstract class `com.fsck.k9.power.DeviceIdleManager`
+
+This abstract class  registers and unregisters a receiver for the device idle state changes.
+
+This class contains the following public method(s):
+
+- `registerReceiver()`  registers a receiver to be notified whenever the device idle state changes.
+- `getInstance(android.content.Context)`  tries to get a specific instance of the DeviceIdleManager class, which is an abstract class. If the instance is not found, it creates a new instance and sets the context to that instance.
+- `unregisterReceiver()`  unregisters the receiver for the given device id.
+
+## class `com.fsck.k9.power.DozeChecker`
+
+This class  checks to see if the device is in idle mode and if the app is whitelisted.
+
+This class contains the following public method(s):
+
+- `isDeviceIdleModeSupported()`  tests if the API level of the device is at or above the minimum required level.
+- `isAppWhitelisted()`  determines if an application is whitelisted by the system. If so, then this method returns true; otherwise, it returns false.
+
+## class `com.fsck.k9.power.DeviceIdleReceiver`
+
+This class  monitors the device for when it goes into idle mode so it can reset the mail service's action.
+
+This class contains the following public method(s):
+
+- `onReceive(android.content.Context,android.content.Intent)`  checks whether the device is in idle mode and, if not, it resets the action for the mail service.
+
+## class `com.fsck.k9.power.DeviceIdleManager$RealDeviceIdleManager`
+
+This class  manages the receivers for idle devices.
+
+This class contains the following public method(s):
+
+- `unregisterReceiver()`  unregisters the DeviceIdleManager receiver for the given deviceIdleReceiver.
+- `registerReceiver()`  registers a receiver to receive updates about the device being idle.
+
+## class `com.fsck.k9.power.DeviceIdleManager$NoOpDeviceIdleManager`
+
+This class  is a wrapper around the Java method `java.util.concurrent. advertisers.NoOpAdvertiser`.
+
+This class contains the following public method(s):
+
+- `unregisterReceiver()`  does nothing.
+- `registerReceiver()`  nothing.
+
+
+# package `com.fsck.k9.preferences`
+
+This package  stores preferences for the folder system.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.preferences.FolderSettings`
+
+This class  stores preferences for the folder system.
+
+This class contains the following public method(s):
+
+- `convert(java.util.Map)`  converts the referenced folders settings from a Java Map into a Java Settings object.
+- `upgrade(int,java.util.Map)`  tries to upgrade the given version of the preferences folder to the latest version and then checks if any of the settings in the validatedSettings map have been updated.
+
+## class `com.fsck.k9.preferences.GlobalSettings$DirectorySetting`
+
+This class  checks to see if the value passed in is a file path. If it is, it returns the value and doesn't do anything else. If the value is not a file path, then it throws an exception.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  checks to see if the value passed in is a file path. If it is, it return the value and doesn't do anything else. If the value is not a file path, then it throws an exception.
+
+## class `com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV12`
+
+This class  updates the keyguard privacy setting to be ALWAYS_SHOW_SUBJECT.
+
+This class contains the following public method(s):
+
+- `upgrade(java.util.Map)`  replaces any occurrences of the keyguard privacy setting with the new value, which is ALWAYS_SHOW_SUBJECT.
+
+## class `com.fsck.k9.preferences.Settings$BooleanSetting`
+
+This class  compares the value entered to the boolean field and returns the same value if it is equal, or if the value is not a boolean, it tries to convert it to a boolean and if that fails, it throws an exception.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  checks to see if the supplied value is a boolean and if it is, it returns the same as what is in the boolean field. If the value is not a boolean, then it tries to convert it to a boolean and if that fails, it throws an exception.
+
+## abstract class `com.fsck.k9.preferences.Settings$PseudoEnumSetting`
+
+This abstract class  provides a way to turn an enum into a string representation.
+
+This class contains the following public method(s):
+
+- `toPrettyString(java.lang.Object)`  calls the "getMapping" method of the " Settings" object and returns its corresponding "Mapping" object.
+- `fromPrettyString(java.lang.String)`  looks at the mapping of enum values and tries to look up the key value of that entry if it equals the passed in value.
+
+## class `com.fsck.k9.preferences.SettingsExporter`
+
+This class  exports the preferences of an app to a file.
+
+This class contains the following public method(s):
+
+- `exportToFile(android.content.Context,boolean,java.util.Set)`  exports the preferences settings to a file. The file can be on the device or on external storage. The method also takes in a boolean parameter to indicate whether the global preferences (those in System.getenv()) should be included in the exported file or not.
+- `exportToUri(android.content.Context,boolean,java.util.Set,android.net.Uri)`  exports the preferences of an app to a Uri.
+- `generateDatedExportFileName()`  takes the current date as input and uses that to generate a file name that will be used in the export mechanism.
+
+## class `com.fsck.k9.preferences.GlobalSettings$LanguageSetting`
+
+This class  overrides a previously set language setting with a higher precedence and if the value provided is not in the override mapping, it throws an exception.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  checks whether a given value is in the mapping that it is overriding and if so, returns it. If not, it throws an exception.
+
+## class `com.fsck.k9.preferences.Settings$EnumSetting`
+
+This class  tries to parse an enum value and return an appropriate instance of an Enum class if the value can be autodetected, otherwise it throws an exception.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  tries to convert a string value (in this case an enum value) into an instance of an Enum class. If there is an error, it throws a new InvalidSettingValueException exception.
+
+## class `com.fsck.k9.preferences.CheckBoxListPreference`
+
+This class  allows you to manipulate the checkboxes list in a preference.
+
+This class contains the following public method(s):
+
+- `getCheckedItems()`  returns a boolean array containing the checked items of the preference.
+- `setItems(java.lang.CharSequence[])`  sets the array items of a CheckBoxListPreference object to the given CharSequence representation.
+- `setCheckedItems(boolean[])`  sets a boolean array named mCheckedItems to the boolean values in items.
+
+## class `com.fsck.k9.preferences.Settings`
+
+This class  writes preference settings to an internal representation, and then later updates those same preferences if any settings have been upgraded since the last time the class was run.
+
+This class contains the following public method(s):
+
+- `convert(java.util.Map,java.util.Map)`  converts settings from the internal representation to the string representation used in the preference storage.
+- `upgrade(int,java.util.Map,java.util.Map,java.util.Map)`  examines the version number given and looks for settings that have been upgraded since the last time this method was ran. If such a setting exists, the upgrader specified by the customUpgraders map is called and the updated settings are placed into the deletedSettings set.
+
+## class `com.fsck.k9.preferences.GlobalSettings$TimeSetting`
+
+This class  tries to match the given value against the validation expression that is defined in the class. If the values don't match, an exception is thrown.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  tries to match the given value against the validation expression that is defined in the class. If the values don't match, an exception is thrown.
+
+## class `com.fsck.k9.preferences.SettingsImporter$ImportedServerSettings`
+
+This class  allows you to import the extra settings for a server in a particular instance.
+
+This class contains the following public method(s):
+
+- `getExtra()`  returns a map of strings which indicate the extra settings for the imported server.
+
+## class `com.fsck.k9.preferences.Settings$ColorSetting`
+
+This class  parses integer values and returns the corresponding hexadecimal representation.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  tries to parse an integer from a string and return it as a Java integer.
+- `fromPrettyString(java.lang.String)`  tries to parse the integer value between 1 and 7, and returns the hexadecimal value of it.
+- `toPrettyString(java.lang.Integer)`  converts an integer value into a string with a 6-digit hexadecimal representation.
+
+## class `com.fsck.k9.preferences.AccountSettings$RingtoneSetting`
+
+This class  converts a String value into a Java string.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  takes a String value and returns it as a Java string.
+
+## class `com.fsck.k9.preferences.AccountSettings$DeletePolicySetting`
+
+This class  takes the input string and looks for a key named `deletePolicy` in the map. If the key exists, the value of the key is returned; otherwise, an exception is thrown.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  parses the value of the input string and looks for a key in the map named `deletePolicy`. If the key exists, it returns the value of the key; otherwise, it throws an exception.
+
+## class `com.fsck.k9.preferences.Settings$IntegerRangeSetting`
+
+This class  tries to parse an integer value into an integer, and if it can determine that the integer value starts at and ends at the given range, it returns the integer value.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  tries to parse an integer value into an integer, and if it can determine that the integer value starts at and ends at the given range, it returns the integer value.
+
+## class `com.fsck.k9.preferences.Settings$WebFontSizeSetting`
+
+This class  takes a string value and converts it into an integer value.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  takes a string value and turns it into an integer value. It does this by getting the value from a mapping table. If the string value is found in the table, then the integer value returned is the same as the string value. If the string value isn't found in the table, then a NumberFormatException is thrown.
+
+## class `com.fsck.k9.preferences.GlobalSettings$SubThemeSetting`
+
+This class  takes a theme name and returns a SubThemeSetting object for that theme.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  gives the theme defined in the `com.fsck.k9.preferences.GlobalSettings$SubThemeSetting` object for the given integer value.
+- `toPrettyString(com.fsck.k9.K9$Theme)`  checks to see if the given value is the GlobalTheme setting, and if so, it returns the SubThemeSetting for the GlobalTheme.
+- `fromPrettyString(java.lang.String)`  Looks up the value of the `THEME_USE_GLOBAL` preference setting in the current configuration, and if it matches the value of the String argument, it returns the `USE_GLOBAL` theme.
+
+## class `com.fsck.k9.preferences.GlobalSettings`
+
+This class  allows the user to easily convert a map of strings to a map of objects, and then upgrade preferences using a given set of upgrade settings.
+
+This class contains the following public method(s):
+
+- `convert(java.util.Map)`  converts a map of strings to a map of objects, using the com.fsck.k9.preferences.GlobalSettings class.
+- `upgrade(int,java.util.Map)`  finds all the preferences in the given version (which is specified in the first argument) that have the given set of upgrade settings (specified in the second argument). It then uses the Settings class to upgrade the preferences according to the given upgrade settings.
+
+## class `com.fsck.k9.preferences.AccountSettings$StringResourceSetting`
+
+This class  looks for a key called `value` in the mapping attribute of the setting, and if it doesn't find it, it creates a new key called `value` and sets the value to the provided string.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  looks for a key called `value` in the mapping attribute of the setting and if it doesn't find it, it creates a new key called `value` and sets the value to the provided string.
+
+## class `com.fsck.k9.preferences.AccountSettings$IntegerResourceSetting`
+
+This class  tries to convert a value into an integer.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  attempts to convert the provided value into an Integer using Java's parseInt() function. If there is an error parsing the number, an InvalidSettingValueException will be thrown.
+
+## class `com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV31`
+
+This class  converts old preferences values into new values, and then upgrades the GlobalSettings so that the new preference values take effect.
+
+This class contains the following public method(s):
+
+- `convertFromOldSize(int)`  takes an old size of a preference and converts it to a new size.
+- `upgrade(java.util.Map)`  sets the fontSizeMessageViewContent property in the GlobalSettings to the new value of the oldSize variable and then returns a new HashSet with the same contents as the oldHashSet.
+
+## class `com.fsck.k9.preferences.AccountSettings$StorageProviderSetting`
+
+This class  tries to find a stored provider with a given string value, and if it is found, it returns the value; otherwise, an exception is thrown.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  attempts to find a stored provider with the given string value. If it is found, it returns the value; otherwise, an exception is thrown.
+- `getDefaultValue()`  returns the default storage provider id for the account settings.
+
+## interface `com.fsck.k9.preferences.Settings$SettingsUpgrader`
+
+This interface  upgrades the settings to match the current state of the system.
+
+This class contains the following public method(s):
+
+- `upgrade(java.util.Map)`  upgrades the settings to match the current state of the system, and returns a set of names that were removed during the upgrade process.
+
+## class `com.fsck.k9.preferences.StorageEditor`
+
+This class  allows you to store values in Shared Preferences files.
+
+This class contains the following public method(s):
+
+- `putLong(java.lang.String,long)`  passes "key" as a string and "value" as a long to the "changes" hash table and records the value of "key" in "changes" as "".
+- `putBoolean(java.lang.String,boolean)`  stores a boolean value in the key "value" of the changes collection.
+- `putInt(java.lang.String,int)`  attempts to put a new integer value into the "key" field of the "changes" list, and also sets the "value" field to the string "".
+- `putString(java.lang.String,java.lang.String)`  takes a key and a value and stores the key and value in the changes list of the StorageEditor.
+- `copy(android.content.SharedPreferences)`  copies the Shared Preferences values from input to output, logging any changes along the way.
+- `commit()`  attempts to save the changes to the preferences file. If everything goes okay, it returns true; otherwise, it returns false.
+- `remove(java.lang.String)`  returns a reference to the current instance of the class 'StorageEditor', and then calls the 'remove' method on that reference.
+
+## class `com.fsck.k9.preferences.GlobalSettings$SettingsUpgraderV24`
+
+This class  replaces the default theme with the desired theme.
+
+This class contains the following public method(s):
+
+- `upgrade(java.util.Map)`  replaces the default theme with the desired theme.
+
+## class `com.fsck.k9.preferences.SettingsImporter`
+
+This class  imports files with global settings and account configurations into the Java application.
+
+This class contains the following public method(s):
+
+- `getImportStreamContents(java.io.InputStream)`  parses the contents of an input stream and returns Internationalization (i.e. localization) information about the file. This information includes information about global settings and account configurations.
+- `importSettings(android.content.Context,java.io.InputStream,boolean,java.util.List,boolean)` (no description)
+
+## class `com.fsck.k9.preferences.IdentitySettings$SignatureSetting`
+
+This class  provides default values for the `R.string.default_signature` resource.
+
+This class contains the following public method(s):
+
+- `getDefaultValue()`  gets the default value for the `R.string.default_signature` resource.
+- `fromString(java.lang.String)`  coerces a Java String value to a byte array.
+
+## abstract class `com.fsck.k9.preferences.Settings$SettingsDescription`
+
+This abstract class  provides a way to store various settings for the application, and return their default values or convert them to another format.
+
+This class contains the following public method(s):
+
+- `getDefaultValue()`  returns the default value of the Settings instance.
+- `fromString(java.lang.String)`  takes the string representation of a setting's value and converts it into an internal value for the setting.
+- `toString(java.lang.Object)`  converts the internal representation of a setting to a human-readable string.
+- `fromPrettyString(java.lang.String)`  converts the pretty printed version of a setting's value to the internal representation.
+- `toPrettyString(java.lang.Object)`  takes the given value and converts it to a prettier string representation.
+
+## class `com.fsck.k9.preferences.IdentitySettings`
+
+This class  allows you to update or reconfigure your identity settings.
+
+This class contains the following public method(s):
+
+- `upgrade(int,java.util.Map)`  returns a new Java Set with the specified version and identity settings.
+- `convert(java.util.Map)`  extracts the object properties from a Java map and returns a new map populated with the identity settings for the given map.
+
+## class `com.fsck.k9.preferences.IdentitySettings$OptionalEmailAddressSetting`
+
+This class  takes a value and formats it into a pretty format.
+
+This class contains the following public method(s):
+
+- `fromPrettyString(java.lang.String)`  takes a value and returns a prettified version of that value.
+- `fromString(java.lang.String)`  tries to find a matching address value using a validator and, if found, returns it.
+- `toPrettyString(java.lang.String)`  returns the value as a string, with all the appropriate formatting and Unicode characters, if the value is not null.
+- `toString(java.lang.String)`  returns the value of the specified String as a human-readable string, without any formatting.
+
+## class `com.fsck.k9.preferences.Storage`
+
+This class  allows you to store preferences in a file.
+
+This class contains the following public method(s):
+
+- `isEmpty()`  checks to see if the Storage object is empty.
+- `contains(java.lang.String)`  checks to see if a given key (specified by key) is present in the given storage (specified by storage).
+- `getString(java.lang.String,java.lang.String)`  takes the "key" and "defValue" keys and looks them up in the "storage" object to see if the value of "val" is present for that key. If it is not present, then it will return the "defValue" key's value.
+- `getBoolean(java.lang.String,boolean)`  looks up the given key in the storage object, and if the value is not found, it returns the default value of the boolean parameter. If the value is found, it then tries to parse it as a boolean value.
+- `edit()`  creates a new instance of the ` StorageEditor` class, which is a subclass of the `java.io.FileEditor` class. This class will allow you to manage preferences files.
+- `getLong(java.lang.String,long)`  goes to the storage object for the given key and looks for a value that matches the given string. If the value is not found, then the defValue is returned. If it is found, then the long value from the string is parsed into a Java Long object.
+- `getInt(java.lang.String,int)`  tries to parse the integer value from the supplied String, and if it can't find a parsing solution, it returns the supplied defValue.
+- `getAll()`  returns a map containing all the preferences stored in the given storage.
+- `getStorage(android.content.Context)`  retrieves the existing storage or creates a new storage if it doesn't exist.
+
+## class `com.fsck.k9.preferences.TimePickerPreference`
+
+This class  persists the selected time in a String, and then every time the time changes, it calls a ChangeListener to update the preferences.
+
+This class contains the following public method(s):
+
+- `onTimeChanged(android.widget.TimePicker,int,int)`  persists the selected time in a String so that the user can see it and calls a ChangeListener to update the preferences whenever the time changes.
+- `getTime()`  gets the time from the preference and returns it as a String.
+- `setDefaultValue(java.lang.Object)`  sets the default value of the preference to the passed in object.
+
+## class `com.fsck.k9.preferences.Settings$StringSetting`
+
+This class  allows users to input a string value into the class and the class will return the string value as is, without reformatting it.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  takes a String value and returns it "as is", without any reformatting.
+
+## class `com.fsck.k9.preferences.Settings$FontSizeSetting`
+
+This class  translates an integer value into a font size.
+
+This class contains the following public method(s):
+
+- `fromString(java.lang.String)`  parses the integer value supplied as a String and uses that to lookup the corresponding font size in the mappings table. If the font size is found, it returns that value; otherwise, an exception is thrown.
+
+## class `com.fsck.k9.preferences.GlobalSettings$ThemeSetting`
+
+This class  provides a way to display the ordinal number for a given theme setting in a human-readable format.
+
+This class contains the following public method(s):
+
+- `toString(com.fsck.k9.K9$Theme)`  returns a string containing the ordinal number of the given Theme value.
+- `fromString(java.lang.String)`  looks up the theme resource ID for the given string value. If the given theme value is LIGHT or DARK, the method returns the corresponding theme instance; otherwise, it throws an InvalidSettingValueException.
+- `toPrettyString(com.fsck.k9.K9$Theme)`  returns a Java String that represents the Theme Setting as defined by the value parameter.
+- `fromPrettyString(java.lang.String)`  looks up the given value in the `GlobalSettings` class's `ThemeSetting` enum and returns the corresponding value from within that enum.
+
+## class `com.fsck.k9.preferences.AccountSettings`
+
+This class  lets you configure preferences for your account.
+
+This class contains the following public method(s):
+
+- `upgrade(int,java.util.Map)`  uses the `com.fsck.k9.preferences.AccountSettings` class to get a list of all the settings that need to be upgraded, and then uses the `Settings` class to get a new set of the upgraded settings.
+- `convert(java.util.Map)`  takes a cleaned up map of strings and converts it into a map of objects.
+
+
+# package `com.fsck.k9.provider`
+
+This package  provides access to various message providers so that the application can query for messages.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.provider.AttachmentProvider`
+
+This class  manages attachments for a given account.
+
+This class contains the following public method(s):
+
+- `onCreate()`  returns true if the provider needs to be attached as a service.
+- `update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[])`  takes in an Url (for example, http://example.com), a list of content values (for example, { "name": "Neil", "age": 32}), and a selection (for example, "name"). It then creates an annotation object and stores it in the `attachmentProvider` field. Finally, it calls the `update()` method on the underlying provider to actually perform the action.
+- `insert(android.net.Uri,android.content.ContentValues)`  takes an Uri and a list of ContentValues and inserts it into a ContentProvider.
+- `getAttachmentUri(java.lang.String,long)`  takes the accountUuid and id of the attachment and converts them into a Content Uri and then uses that Uri to retrieve the attachment from the provider.
+- `openFile(android.net.Uri,java.lang.String)`  tries to open an attachment (identified by the given accountUuid and attachmentId) from the given uri. If the attachment cannot be opened, an exception is thrown.
+- `delete(android.net.Uri,java.lang.String,java.lang.String[])`  deletes a specific attachment from a specific Android URI.
+- `getType(android.net.Uri)`  attempts to get the type of the attachment as a Strings object.
+- `query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)`  takes a Uri reference as input, and then uses the projection and selection arguments to extract the columns that the user wants to query. It then creates a SQL cursor using these columns and loops through it to insert the values into it.
+
+## class `com.fsck.k9.provider.MessageProvider$MessagesQueryHandler`
+
+This class  provides a cursor that can be used to fetch messages from a message provider.
+
+This class contains the following public method(s):
+
+- `query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)`  provides a cursor that can be used to fetch messages from a message provider.
+- `getPath()`  returns the path to the messages folder.
+
+## class `com.fsck.k9.provider.MessageProvider$AccountNumberExtractor`
+
+This class  returns the account number for a message.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  retrieves the account number for the message from the message object.
+
+## class `com.fsck.k9.provider.MessageProvider$CountExtractor`
+
+This class  extracts the "count" field from the given T object and returns it as a property.
+
+This class contains the following public method(s):
+
+- `getField(java.lang.Object)`  retrieves the "count" field from the given T object.
+
+## class `com.fsck.k9.provider.MessageProvider$DeleteUriExtractor`
+
+This class  extracts the record associated with a message, and then constructs a URL to delete the message.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  retrieves the record associated with the message and then constructs a URL to delete the message.
+
+## class `com.fsck.k9.provider.EmailProvider`
+
+This class  provides methods for querying and deleting email addresses from a Google Cloud server.
+
+This class contains the following public method(s):
+
+- `query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)`  queries the applicable Google Cloud mailbox for the given email address and returns a Cursor object with the relevant data.
+- `delete(android.net.Uri,java.lang.String,java.lang.String[])`  deletes a specific email from an android.net. Uri. The selection parameter is the email URI that you want to delete, and the selectionArgs parameter is an array of parameters that describes the email you want to delete.
+- `getType(android.net.Uri)`  tries to find out the type of the specified URI.
+- `update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[])`  updates the given URI, ContentValues, and selection values, and optionally saves the selection arguments as a byte[].
+- `insert(android.net.Uri,android.content.ContentValues)`  takes an input URI (URL) and sets its content to a specified ContentValues instance.
+- `onCreate()`  returns whether the provider should be created or not.
+
+## class `com.fsck.k9.provider.MessageProvider$AccountColorExtractor`
+
+This class  extracts the color of an account specified in a message's "chip color" field.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  retrieves the color of the account specified in the message's "chip color" field.
+
+## class `com.fsck.k9.provider.MessageProvider$HasAttachmentsExtractor`
+
+This class  extracts attachments from a message.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  checks if the message has attachments.
+
+## class `com.fsck.k9.provider.MessageProvider$MessageInfoHolderRetrieverListener`
+
+This class  retrieves messages from the MessageInfoHolderRetriever listener and logs any Java exceptions that may occur.
+
+This class contains the following public method(s):
+
+- `searchStats(com.fsck.k9.AccountStats)`  retrieves all messages in the queue from theMessageInfoHolderRetriever listener, and logs any Java exceptions that may occur.
+- `listLocalMessagesAddMessages(com.fsck.k9.Account,java.lang.String,java.util.List)`  looks up a message in the local message store for the given account and folder and assigns it to a MessageInfoHolder object. Next, it creates an instance of the FolderInfoHolder class, giving it the context of the current activity and the given message folder and account. Finally, it uses the populate() method on the MessageHelper class to populate the MessageInfoHolder object with the relevant information about the message (name, account, folder, etc.), as well as the holder object for the message (in this case, the activity object).
+
+## class `com.fsck.k9.provider.DecryptedFileProvider`
+
+This class  decrypts a file and then returns the decrypted file's Uri.
+
+This class contains the following public method(s):
+
+- `onTrimMemory(int)`  checks if there are more memory trimming tasks to do and, if not, it returns. If there are more tasks to do, this method calls the doInBackground() method of a new AsyncTask object that is marked with the @Override annotation. The doInBackground() method of this task calls the deleteOldTemporaryFiles() method of the DecryptedFileProvider class. Finally, the doInBackground() method of this task unregisters the FileCleanupReceiver class.
+- `getFileFactory(android.content.Context)`  returns a FileFactory object that will be able to create files in the directory specified in the string `decrypted-`.
+- `getUriForProvidedFile(android.content.Context,java.io.File,java.lang.String,java.lang.String)`  tries to get a Uri for the provided file using the FileProvider class. If the given file has a valid encoding (and, if present, a MIME type), the method appends this information to the Uri. Finally, the method returns the Uri.
+- `deleteOldTemporaryFiles(android.content.Context)`  checks to see if any of the files in the temp directory have been modified since the last time the files were deleted. If the file has been modified since then, it is not deleted. If the file has not been modified, it is deleted.
+- `getType(android.net.Uri)`  examines the uri's "mime_type" query parameter and returns the string representation of that parameter's value.
+- `delete(android.net.Uri,java.lang.String,java.lang.String[])`  allows you to delete a file from an Android device using its Uri and selection parameters.
+- `openFile(android.net.Uri,java.lang.String)`  takes in a incoming stream of bytes that has been decrypted using the provided URI and sets the parcel file descriptor to that stream.
+
+## class `com.fsck.k9.provider.MessageProvider$ThrottlingQueryHandler`
+
+This class  helps the user query the throttling query handler for a path.
+
+This class contains the following public method(s):
+
+- `getPath()`  returns the path of the throttling query handler.
+- `query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)`  retrieve a cursor from the given Android URI. The given projection is a list of column names from the table in question, and the given selection is a list of SELECT statement selections. The given selectionArgs is a list of SELECT statement arguments. The given sortOrder is a column sort order.
+
+## class `com.fsck.k9.provider.MessageProvider$SubjectExtractor`
+
+This class  extracts the topic of a message from the source.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  retrieves the subject of the message from the source.
+
+## class `com.fsck.k9.provider.MessageProvider$PreviewExtractor`
+
+This class  extracts the "Preview" field from the MessageInfoHolder object that is passed in as a parameter.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  gets the field "Preview" from the MessageInfoHolder object that is passed in as a parameter.
+
+## class `com.fsck.k9.provider.MessageProvider$IncrementExtractor`
+
+This class  uses a field to increment a value.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  increments the "count" field by one.
+
+## class `com.fsck.k9.provider.MessageProvider$HasStarExtractor`
+
+This class  looks for a flag in a MessageInfoHolder object that indicates a message has been flagged as important.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  checks if the flag for a message in the source is set (meaning that the message has been flagged as important).
+
+## class `com.fsck.k9.provider.MessageProvider$ReverseDateComparator`
+
+This class  compares two dates to see if they match.
+
+This class contains the following public method(s):
+
+- `compare(com.fsck.k9.activity.MessageInfoHolder,com.fsck.k9.activity.MessageInfoHolder)`  compares the dates of the two objects and if they are equal, it returns 0; if they are not equal, it returns 1.
+
+## class `com.fsck.k9.provider.AttachmentTempFileProvider`
+
+This class  looks for files that have been modified more than a certain amount of time, and if they are not deleted then it will print out a message indicating that the file will not be deleted.
+
+This class contains the following public method(s):
+
+- `deleteOldTemporaryFiles(android.content.Context)`  checks the last modified time for all files in a temporary directory, and if it's less than the deletion threshold, it tries to delete the file. If it can't delete the file, the method then prints out a message indicating the file will not be deleted.
+- `getMimeTypeUri(android.net.Uri,java.lang.String)`  tries to figure out what MIME type the URI points to, and if it's not yet known, it fallbacks to the MIME type that was specified in the query parameter.
+- `getType(android.net.Uri)`  looks for a string value that is set as a query parameter on the URI and returns that value.
+- `onTrimMemory(int)`  tries to trim memory by deleting temporary files that have been stored since the last time the application was closed.
+- `createTempUriForContentUri(android.content.Context,android.net.Uri)`  creates a temporary URI for the given content URI, and finally uses the FileProvider classes to write the content to the temporary URI.
+- `delete(android.net.Uri,java.lang.String,java.lang.String[])`  deletes a resource associated with a particular Uri.
+
+## class `com.fsck.k9.provider.MessageProvider`
+
+This class  provides access to message providers so that the application can query for messages.
+
+This class contains the following public method(s):
+
+- `update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[])`  takes a Uri (a location on the Internet), a set of ContentValues (a data structure that describes what the Uri should contain), a selection (which ContentValues should be used), and an array of String (containing the selection arguments). This method then looks up the MessageProvider class instance (which is defined in the same project) and calls the `update()` method with the supplied arguments.
+- `getType(android.net.Uri)`  looks up the type of the specified URI and returns it as a String.
+- `onCreate()`  registers three query handlers (accounts, messages, and unread messages), then configures the application to listen for changes to any of those query handlers.
+- `delete(android.net.Uri,java.lang.String,java.lang.String[])`  looks up the specified message in the provided account's preferences, if it exists, and deletes it.
+- `insert(android.net.Uri,android.content.ContentValues)`  tries to find a MessageProvider associated with the given Uri, and if it can't find one, it returns null. If the given Uri is associated with a MessageProvider, this method tries to insert the given values into that provider. Finally, it prints a warning message to the Timber logging system.
+- `query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)`  searches for a message provider with the given code, and then uses that provider's query handler to search the specified URI for messages.
+
+## interface `com.fsck.k9.provider.MessageProvider$QueryHandler`
+
+This interface  provides a way for objects to make queries against otherobjects.
+
+This class contains the following public method(s):
+
+- `getPath()`  returns the path that this instance is able to respond to.
+- `query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)`  takes an Android URI and a set of projection and selection variables, and it uses the String[] array to specify what fields in the URI should be used for projections and selections, and what order they should be in.
+
+## interface `com.fsck.k9.provider.MessageProvider$FieldExtractor`
+
+This interface  extract the field value from the source object.
+
+This class contains the following public method(s):
+
+- `getField(java.lang.Object)`  extracts the field value from the source object.
+
+## class `com.fsck.k9.provider.EmailProvider$SpecialColumnsCursor`
+
+This class  provides a way to look up special column values in a data set that correspond to column indices in a mapping table.
+
+This class contains the following public method(s):
+
+- `getColumnCount()`  returns the number of columns in the mapping the cursor is using.
+- `getDouble(int)`  looks up the double value corresponding to the specified column index in the column mapping table and returns it.
+- `isNull(int)`  looks up the special columns value for columnIndex from the mapping file and compares it to null if it isn't found.
+- `getColumnName(int)`  retrieves the name of the column associated with the given column index in the mColumnNames array.
+- `getColumnNames()`  clones the list of column names from the cursor.
+- `getLong(int)`  looks up the specific column in the mColumnMapping array that corresponds to the columnIndex parameter. Once it finds the column, it retrieves the long value associated with that column.
+- `getShort(int)`  looks up the special column value in the column mapping for the given column index. If the column index is less than 0, then this method throws a RuntimeException. After looking up the special column value, this method returns it.
+- `getColumnIndex(java.lang.String)`  loops through the column names in the matching emails, and if the column name matches the column name specified in the column index, then it returns the index of the matched column.
+- `getType(int)`  looks up the columnIndex of the given special column in the mColumnMapping array and returns the corresponding field type (here: TYPE_STRING).
+- `getInt(int)`  retrieves the integer value for the given column from the mapping stored in the variable `mColumnMapping`.
+- `getFloat(int)`  looks up the float value for the given column in the data set associated with the cursor row associated with column index index. If the column index is not found in the data set then the method returns the string value for the column.
+- `getBlob(int)`  fetches the blob value for the given column index from the rows in the cursor's mapping table.
+- `getColumnIndexOrThrow(java.lang.String)`  looks for the specified column in the data set and returns its index number. If the column does not exist (or is not the desired type), then an IllegalArgumentException is thrown.
+- `getString(int)`  looks up the string corresponding to the given column index in the mColumnMapping array, and returns it if the column index is less than 0 or the special column values stored in the mSpecialColumnValues array if the column index is not less than 0.
+
+## class `com.fsck.k9.provider.MessageProvider$AccountsQueryHandler`
+
+This class  queries the given projection and returns the results in a String[] array.
+
+This class contains the following public method(s):
+
+- `query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)`  uses the object's ``getAllAccounts()`` method to get all the accounts that belong to the given projection (in this case, the Uri).
+- `getAllAccounts(java.lang.String[])`  retrieves all the accounts from the given database cursor and assigns the values to a String[] array.
+- `getPath()`  returns the path to the constructor of the class.
+
+## class `com.fsck.k9.provider.MessageProvider$AccountExtractor`
+
+This class  extracts the description of the account that the message belongs to from the message itself.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  extracts the description of the account that the message belongs to from the message itself.
+
+## class `com.fsck.k9.provider.MessageProvider$SenderAddressExtractor`
+
+This class  extracts the sender address from the given message information holder object.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  looks up the field `senderAddress` from the given messageInfoHolder object and returns the value it finds.
+
+## class `com.fsck.k9.provider.MessageProvider$UnreadQueryHandler`
+
+This class  provides an interface to query an account's "unread" stat.
+
+This class contains the following public method(s):
+
+- `getPath()`  returns the path to the Unread Query Handler.
+- `query(android.net.Uri,java.lang.String[],java.lang.String,java.lang.String[],java.lang.String)`  queries an account's "unread" stat from the underlying EmailProvider.
+
+## class `com.fsck.k9.provider.MessageProvider$IdExtractor`
+
+This class  extracts the database id from the message object.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  extracts the database id from the message object.
+
+## class `com.fsck.k9.provider.AttachmentTempFileProvider$AttachmentTempFileProviderCleanupReceiver`
+
+This class  uses the `com.fsck.k9.provider.AttachmentTempFileProvider$AttachmentTempFileProviderCleanupReceiver` class to clean up old temporary files.
+
+This class contains the following public method(s):
+
+- `onReceive(android.content.Context,android.content.Intent)`  uses the `com.fsck.k9.provider.AttachmentTempFileProvider$AttachmentTempFileProviderCleanupReceiver` class to clean up old temporary files.
+
+## class `com.fsck.k9.provider.MessageProvider$SenderExtractor`
+
+This class  extracts the string sender field from a MessageInfoHolder object and returns it.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  gets the string sender field of the MessageInfoHolder object and returns it.
+
+## class `com.fsck.k9.provider.MessageProvider$MonitoredCursor`
+
+This class  allows for the monitoring of a cursor in a database and provides various methods to control the cursor's state and behavior.
+
+This class contains the following public method(s):
+
+- `unregisterDataSetObserver(android.database.DataSetObserver)`  unregisters a DataSetObserver that was previously registered with the cursor.
+- `isBeforeFirst()`  determines whether the given cursor is before the first cursor in the list.
+- `getInt(int)`  gets the value of the given integer column from the given cursor.
+- `moveToPrevious()`  moves the cursor to the previous item in the list.
+- `getPosition()`  checks to see if the cursor is closed, and then returns its position.
+- `getColumnNames()`  returns the names of the columns from the cursor that is being monitored.
+- `getNotificationUri()`  returns the notification URI for the cursor. This URI is the URI associated with the notification that was sent when the cursor was last updated.
+- `getColumnCount()`  returns the number of columns in a cursor.
+- `setNotificationUri(android.content.ContentResolver,android.net.Uri)`  sets the notification URI for the current cursor to the given URI.
+- `getColumnName(int)`  returns the name of the column in the cursor that corresponds to the given column index.
+- `isNull(int)`  checks if the provided columnIndex is null.
+- `getString(int)`  returns the string value of a column in the cursor's text table.
+- `getColumnIndexOrThrow(java.lang.String)`  returns the index of the specified column in the cursor. If the column isn't found in the cursor, the method will throw an IllegalArgumentException.
+- `copyStringToBuffer(int,android.database.CharArrayBuffer)`  copies a string from the cursor into a buffer.
+- `deactivate()`  cancels all currently running queries on the cursor and deactivates the cursor.
+- `requery()`  returns the current cursor position, given that it has been closed.
+- `isLast()`  checks whether the last element in the cursor is the last element in the sequence.
+- `isClosed()`  compares the status of the cursor (whether it is closed or not) with the status of the closed variable.
+- `getBlob(int)`  retrieves the blob value at the specified column in the cursor.
+- `close()`  checks to see if closed is set to true and, if so, it closes the cursor and releases the semaphore.
+- `unregisterContentObserver(android.database.ContentObserver)`  unregisters the ContentObserver that was passed to it from the constructor of the `MessageProvider$MonitoredCursor` object.
+- `registerDataSetObserver(android.database.DataSetObserver)`  registers an observer with an existing data set so that any changes to the data set will be notified to the observer.
+- `getLong(int)`  retrieves the Long value corresponding to the given column index from the cursor.
+- `getWantsAllOnMoveCalls()`  calls the `cursor.getWantsAllOnMoveCalls()` method on the `Cursor` object, and it returns a boolean value.
+- `isAfterLast()`  looks for the last non-closed cursor in the provided list and returns true if it exists.
+- `isFirst()`  checks to see if the cursor is the first one in the list.
+- `getShort(int)`  fetches the value of the specified column from the cursor.
+- `moveToNext()`  moves the cursor to the next row in the data set.
+- `respond(android.os.Bundle)`  responds from the monitored cursor to the given bundle.
+- `registerContentObserver(android.database.ContentObserver)`  registers an observer to be notified when the cursor's content changes.
+- `getFloat(int)`  retrieves the float value for the given column from the cursor.
+- `getCount()`  returns the number of messages in the cursor.
+- `moveToFirst()`  checks if the cursor is closed and, if not, it moves it to the first element.
+- `fillWindow(int,android.database.CursorWindow)`  fills the given cursor position in the given window with the contents of the provided Java object.
+- `getType(int)`  gets the type of the column in the cursor at the given column index.
+- `moveToLast()`  moves the cursor to the last item in the list.
+- `move(int)`  moves the cursor by the given offset.
+- `moveToPosition(int)`  tries to move the cursor to the given position. If the cursor is already at the given position, it returns true.
+- `getExtras()`  gets the extras for a cursor that is currently being monitored by the MessageProvider.
+- `setExtras(android.os.Bundle)`  provides a Bundle of extra options to the MessageProvider's MonitoredCursor object.
+- `getWindow()`  calls the `checkClosed` method to determine if the cursor is closed (i.e., it is no longer being used). If the cursor is closed, the method returns the window object for the cursor.
+- `getColumnIndex(java.lang.String)`  gets the index of the column in the cursor that matches the specified name.
+- `getDouble(int)`  fetches the value of the specified column from the underlying data cursor.
+- `onMove(int,int)`  calls the `onMove` method of the cursor object, passing in the old position (which was previously stored in the cursor's `position` property) and the new position (which was just retrieved from the system).
+
+## class `com.fsck.k9.provider.UnreadWidgetProvider`
+
+This class  maintains the user's unread widget library, updates the widget's configuration, and triggers an update to the unread count.
+
+This class contains the following public method(s):
+
+- `updateWidget(android.content.Context,android.appwidget.AppWidgetManager,com.fsck.k9.helper.UnreadWidgetProperties)`  updates the widget's configuration, Gets the widget's id, and updates the widget's configuration with the Intent that was passed in.
+- `onUpdate(android.content.Context,android.appwidget.AppWidgetManager,int[])`  fetches the properties of the widget with the given id from the UnreadWidgetConfiguration object, and then calls the updateWidget() method of the UnreadWidgetProvider class with the aforementioned properties as arguments.
+- `onDeleted(android.content.Context,int[])`  calls the method `com.fsck.k9.activity.UnreadWidgetConfiguration.deleteWidgetConfiguration(context, appWidgetId)` which in turn deletes the widget instance with the given id from the user's widget library.
+- `updateUnreadCount(android.content.Context)`  triggers an update to all of the unread widgets.
+
+## class `com.fsck.k9.provider.MessageProvider$SendDateExtractor`
+
+This class  extracts the content of the "sentDate" field of the "message" object in the source object.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  returns the value of the "sentDate" field of the "message" object in the source object.
+
+## class `com.fsck.k9.provider.MessageProvider$UriExtractor`
+
+This class  looks through the MessageInfoHolder object and finds the URI field.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  looks through the MessageInfoHolder object and finds the URI field.
+
+## class `com.fsck.k9.provider.EmailProvider$IdTrickeryCursor`
+
+This class  looks for the row containing the given column name in the cursor and returns the index of that row.
+
+This class contains the following public method(s):
+
+- `getColumnIndex(java.lang.String)`  looks for the row containing the given column name in the cursor and returns the index of that row.
+- `getColumnIndexOrThrow(java.lang.String)`  checks to see if the specified column's name is equal to the "_id" column name. If it is, it bypasses the normal indexing methods and returns the "id" column's value directly.
+
+## class `com.fsck.k9.provider.DecryptedFileProvider$DecryptedFileProviderCleanupReceiver`
+
+This class  handles the Intent Screens Off action.
+
+This class contains the following public method(s):
+
+- `onReceive(android.content.Context,android.content.Intent)`  checks to see if the Intent's ACTION_SCREEN_OFF flag is set, and, if so, it deletes any temporary files that may have been created.
+
+## class `com.fsck.k9.provider.MessageProvider$UnreadExtractor`
+
+This class  retrieves the field `messageInfoHolder.readStatus` which indicates whether or not the message information source has been read.
+
+This class contains the following public method(s):
+
+- `getField(com.fsck.k9.activity.MessageInfoHolder)`  checks to see if the message information source has been read, and returns true if it has not.
+
+
+# package `com.fsck.k9.remotecontrol`
+
+This package  stores all the account information received from the system in a repository so that it can be accessed by other classes in the package.
+
+
+The package `com.fsck.k9.remotecontrol` allows you to remotely control the behavior of a remote controller.
+
+This package contains the following class(es):
+
+## class `com.fsck.k9.remotecontrol.AccountReceiver`
+
+This class  receives information about an account from the system and stores it in a method called `receptor.accounts`.
+
+This class contains the following public method(s):
+
+- `onReceive(android.content.Context,android.content.Intent)`  fetches the account data from the given bundle and assigns it to the receiver's `receptor.accounts` method.
+
+## interface `com.fsck.k9.remotecontrol.K9AccountReceptor`
+
+This interface  allows you to check if a given account exists on a remote controller.
+
+This class contains the following public method(s):
+
+- `accounts(java.lang.String[],java.lang.String[])`  takes two strings as input (uuids and descriptions) and returns a boolean indicating whether or not the corresponding account exists on the remote controller.
+
+## class `com.fsck.k9.remotecontrol.K9RemoteControl`
+
+This class  sets the broadcast Intent to the K9RemoteControl class with the desired action.
+
+This class contains the following public method(s):
+
+- `set(android.content.Context,android.content.Intent)`  sets the broadcast Intent to the K9RemoteControl class with the desired action. The Intent broadcast is then sent to the context, which will use it to grant the appropriate permissions to the K9RemoteControl class.
+- `fetchAccounts(android.content.Context,com.fsck.k9.remotecontrol.K9AccountReceptor)`  creates an Intent object and sets the action to K9_REQUEST_ACCOUNTS. It then creates a com.fsck.k9.remotecontrol.AccountReceiver object and sets the receiver to the receptor. Finally, it sends the Intent object to the context with the appropriate flags and the receiver.
+
+

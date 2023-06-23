@@ -1,0 +1,154 @@
+[
+  [
+    "com.fsck.k9",
+    " controls the execution of a task once per second by posting a handler runnable to the handler servlet's post method."
+  ],
+  [
+    "com.fsck.k9.account",
+    " provides classes that create and manage accounts for email."
+  ],
+  [
+    "com.fsck.k9.activity",
+    "(no description)"
+  ],
+  [
+    "com.fsck.k9.activity.compose",
+    " enables the user to encrypt messages and attachments."
+  ],
+  [
+    "com.fsck.k9.activity.loader",
+    " allows you to load and store attachments in a cache."
+  ],
+  [
+    "com.fsck.k9.activity.misc",
+    " contains classes that deal with contact pictures, attachments, and swipe gestures."
+  ],
+  [
+    "com.fsck.k9.activity.setup",
+    " allows the user to setup an account on their device. It provides classes to handle the majority of the UI configuration, and also provides classes to handle account activation and the user's input."
+  ],
+  [
+    "com.fsck.k9.autocrypt",
+    " provides the classes that allow you to interact with the AutocryptOpenPgpApi class and calculate the hash code for the AutocryptHeader object."
+  ],
+  [
+    "com.fsck.k9.cache",
+    " stores files for temporary usage and keeps a list of email addresses and their corresponding thread IDs."
+  ],
+  [
+    "com.fsck.k9.controller",
+    " provides classes that allow the communication between the controller (the Application that interacts with the certificate management system) and its associated listeners."
+  ],
+  [
+    "com.fsck.k9.crypto",
+    " helps to secure email communication by verifying the identities of the sender and recipient."
+  ],
+  [
+    "com.fsck.k9.fragment",
+    " provides classes that help with sorting and comparing messages."
+  ],
+  [
+    "com.fsck.k9.helper",
+    " helps to manage and access cursor data."
+  ],
+  [
+    "com.fsck.k9.helper.jsoup",
+    " provides helper classes for performing filtering operations on JSoup nodes. Specifically, the package provides classes that allow you to specify the filter decision for a node and depth, as well as performing a depth-first traversal of the root node and then every node that is a descendant of the root node. If either of the traversal results in a `STOP` condition, then the operation has ended and the returned value is `ENDED`."
+  ],
+  [
+    "com.fsck.k9.mailstore",
+    " provides classes and interfaces to allow for the management of attachments on Android devices."
+  ],
+  [
+    "com.fsck.k9.mailstore.migrations",
+    " contains classes that help you migrate a user mailbox from one Mailstore to another Mailstore."
+  ],
+  [
+    "com.fsck.k9.mailstore.util",
+    " provides classes that help to write data to a deferred file."
+  ],
+  [
+    "com.fsck.k9.message",
+    " provides classes for building messages."
+  ],
+  [
+    "com.fsck.k9.message.extractors",
+    " provides a series of classes that help you extract textual information from emails."
+  ],
+  [
+    "com.fsck.k9.message.html",
+    " processes html documents to create a simpler format that can be easily interpreted by other programs. Specifically, this package converts all HTML tags into text equivalents, cleans up any naughty characters, and converts the result into a simpler format."
+  ],
+  [
+    "com.fsck.k9.message.quote",
+    " provides tools for creating HTML and quoted text content."
+  ],
+  [
+    "com.fsck.k9.message.signature",
+    " removes signatures from the content."
+  ],
+  [
+    "com.fsck.k9.ui",
+    " converts text line endings to \\n."
+  ],
+  [
+    "com.fsck.k9.ui.compose",
+    " provides a user interface for manipulating quoted text."
+  ],
+  [
+    "com.fsck.k9.ui.crypto",
+    " provides support for the annotation-based decryption of messages."
+  ],
+  [
+    "com.fsck.k9.ui.dialog",
+    " provides a dialog UI for FileSystemCheck."
+  ],
+  [
+    "com.fsck.k9.ui.message",
+    " allows you to load a message from the local message store using the LocalMessageLoader class."
+  ],
+  [
+    "com.fsck.k9.ui.messageview",
+    " implements the attachment view, which allows the user to attach files to messages."
+  ],
+  [
+    "com.fsck.k9.service",
+    " handles the management of the K9RemoteControl service."
+  ],
+  [
+    "com.fsck.k9.setup",
+    " suggests a name for a given server type."
+  ],
+  [
+    "com.fsck.k9.search",
+    " provides methods to manage and control the search account object."
+  ],
+  [
+    "com.fsck.k9.view",
+    " provides a GUI for viewing encrypted messages."
+  ],
+  [
+    "com.fsck.k9.widget.list",
+    " allows the app to interact with the AppWidgetManager APIs to update the list of messages on a widget."
+  ],
+  [
+    "com.fsck.k9.notification",
+    " provides a way to manage notifications for an account in Android."
+  ],
+  [
+    "com.fsck.k9.power",
+    " registers and unregisters a receiver for the device idle state changes."
+  ],
+  [
+    "com.fsck.k9.preferences",
+    " stores preferences for the folder system."
+  ],
+  [
+    "com.fsck.k9.provider",
+    " provides access to various message providers so that the application can query for messages."
+  ],
+  [
+    "com.fsck.k9.remotecontrol",
+    " stores all the account information received from the system in a repository so that it can be accessed by other classes in the package.\n\n\nThe package `com.fsck.k9.remotecontrol` allows you to remotely control the behavior of a remote controller."
+  ]
+]

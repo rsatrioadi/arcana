@@ -1,0 +1,50 @@
+[
+  [
+    "com.fsck.k9.mail",
+    " provides an interface for accessing and manipulating email messages stored on a mail server."
+  ],
+  [
+    "com.fsck.k9.mail.filter",
+    " provides classes for encoding, decoding, and manipulating data from streams in various formats."
+  ],
+  [
+    "com.fsck.k9.mail.helper",
+    " provides methods to encode and decode strings in UTF-8 format."
+  ],
+  [
+    "com.fsck.k9.mail.internet",
+    " provides classes for manipulating, encoding, decoding, and extracting data and text from MIME messages and parts."
+  ],
+  [
+    "com.fsck.k9.mail.message",
+    " provides classes for parsing and handling raw message headers and body parts for use in a message receiver."
+  ],
+  [
+    "com.fsck.k9.mail.oauth",
+    " provides interfaces and a class for supporting OAuth 2.0 authentication for API access."
+  ],
+  [
+    "com.fsck.k9.mail.power",
+    " provides an interface for creating and acquiring wake locks with logging and notification to monitor the acquire and release of the locks."
+  ],
+  [
+    "com.fsck.k9.mail.ssl",
+    " provides utilities for creating a secure and trusted connection to send and receive emails using SSL/TLS network connections."
+  ],
+  [
+    "com.fsck.k9.mail.store.imap",
+    " provides classes and interfaces which allow users to connect to an IMAP server and manipulate the emails contained within by parsing responses, setting flags, and more."
+  ],
+  [
+    "com.fsck.k9.mail.store.pop3",
+    " provides the necessary methods for interacting with a POP3 email server, including generating a formatted string of enabled POP3 features, reading characters from an input stream, creating and decoding a Pop3Store URI, retrieving messages, creating folders, deleting messages, and manipulating Pop3 mail messages."
+  ],
+  [
+    "com.fsck.k9.mail.store.webdav",
+    " provides classes which enable users to access and manipulate messages stored in a webDAV mail store."
+  ],
+  [
+    "com.fsck.k9.mail.store",
+    " provides an abstract class and an interface to enable applications to manage remote mail stores and their associated credentials."
+  ]
+]

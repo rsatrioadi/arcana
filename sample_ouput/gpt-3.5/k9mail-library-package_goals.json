@@ -1,0 +1,50 @@
+[
+  [
+    "com.fsck.k9.mail",
+    "provides classes and interfaces for handling email messaging, including sending and receiving emails, managing email stores, and handling authentication and certificate validation."
+  ],
+  [
+    "com.fsck.k9.mail.filter",
+    "provides classes for encoding, decoding, manipulating, and counting data streams in the context of email filters."
+  ],
+  [
+    "com.fsck.k9.mail.helper",
+    "provides a helper class for encoding and decoding URLs."
+  ],
+  [
+    "com.fsck.k9.mail.internet",
+    "provides classes for handling and manipulating email messages and their content in the MIME format."
+  ],
+  [
+    "com.fsck.k9.mail.message",
+    "contains classes for parsing and handling the headers of email messages in the K-9 mail app."
+  ],
+  [
+    "com.fsck.k9.mail.oauth",
+    "provides classes and interfaces for OAuth2 authentication in email communication in Java."
+  ],
+  [
+    "com.fsck.k9.mail.power",
+    "contains classes for managing power-related functionalities in email applications, including a tracing power manager."
+  ],
+  [
+    "com.fsck.k9.mail.ssl",
+    "provides SSL/TLS functionality and related security management for the K9 mail client."
+  ],
+  [
+    "com.fsck.k9.mail.store.imap",
+    "provides classes and interfaces for interacting with and manipulating email messages and folders stored on an IMAP email server."
+  ],
+  [
+    "com.fsck.k9.mail.store.pop3",
+    "provides classes and functionalities for interacting with a POP3 email server in Java."
+  ],
+  [
+    "com.fsck.k9.mail.store.webdav",
+    "provides functionality for accessing and managing email messages in a WebDAV email store through various classes."
+  ],
+  [
+    "com.fsck.k9.mail.store",
+    "provides classes for managing and configuring remote mail stores."
+  ]
+]
