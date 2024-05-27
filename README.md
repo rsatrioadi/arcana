@@ -1,3 +1,3 @@
-# Take Me Higher
+# LLM4ARCH
 
-Ask a large language model to get a higher and higher abstraction level descriptions of Java methods → classes → packages.
+Various scripts operating on our graph representation of software implementation (see: javapers) to get more insights on the software system.
