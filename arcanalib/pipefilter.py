@@ -1,6 +1,7 @@
 from typing import Any, Dict, List
 
-from arcanalib import Graph
+from arcanalib.graph import Graph
+
 
 class Filter:
 	def __init__(self, config: Dict[str, Dict[str, Any]]) -> None:
@@ -10,7 +11,7 @@ class Filter:
 		:param config: Configuration for the filter.
 		"""
 		self.config = config
-		
+
 	def process(self, data: Graph) -> Any:
 		"""
 		Process the data. This method should be implemented by subclasses.
@@ -20,11 +21,13 @@ class Filter:
 		"""
 		raise NotImplementedError("Subclasses must implement this method")
 
+
 class EndFilter(Filter):
 	"""
 	A special type of filter that marks the end of the pipeline processing.
 	"""
 	pass
+
 
 class Pipeline:
 	def __init__(self, *args: Filter) -> None:

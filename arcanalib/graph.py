@@ -277,13 +277,15 @@ class Graph:
 			dict: A dictionary representation of the graph with specified elements.
 		"""
 		included_edge_labels = list(args) if args else list(self.edges.keys())
+
 		if node_labels == 'all':
 			included_node_labels = self.get_all_node_labels()
 		else:
 			included_node_labels: Set[str] = {
 				node_label
 				for edge_label in included_edge_labels
-				for node_label in self.get_source_and_target_labels(edge_label)
+				for node_label_pair in self.get_source_and_target_labels(edge_label)
+				for node_label in node_label_pair
 			}
 			if isinstance(node_labels, str):
 				included_node_labels.add(node_labels)
@@ -291,11 +293,13 @@ class Graph:
 				included_node_labels.update(node_labels)
 
 		included_nodes: Dict[str, dict] = self.filter_nodes_by_labels(included_node_labels)
+
 		included_edges: Dict[str, List[dict]] = {
 			label: edge_list
 			for label, edge_list in self.edges.items()
 			if label in included_edge_labels
 		}
+
 		return {
 			"elements": {
 				"nodes": [{"data": node} for node in list(included_nodes.values())],
