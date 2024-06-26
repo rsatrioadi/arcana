@@ -2,6 +2,7 @@
 name=jhotdraw-7.6
 desc=a Java application
 input=D:\Research\javapers\sample_output\jhotdraw-7.6-detailed.json
+output=stdout
 
 [openai]
 apikey=apikey
