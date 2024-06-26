@@ -1,7 +1,7 @@
 [project]
 name=jhotdraw-7.6
 desc=a Java application
-ifile=D:\Research\javapers\sample_output\jhotdraw-7.6-detailed.json
+input=D:\Research\javapers\sample_output\jhotdraw-7.6-detailed.json
 
 [openai]
 apikey=apikey
