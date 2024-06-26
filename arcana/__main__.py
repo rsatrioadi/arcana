@@ -28,7 +28,7 @@ def main():
 
 	config.update(vars(args))
 
-	if 'input' not in config['project'] or config['project']['input'] == 'stdin':
+	if ('input' not in config['project']) or (config['project']['input'] == 'stdin'):
 		data = sys.stdin.read()
 	else:
 		with open(config['project']['input'], 'r', encoding="utf-8") as file:
@@ -38,7 +38,7 @@ def main():
 		'llm': cli.LLMFilter,
 		'metrics': cli.MetricsFilter,
 	}
- 
+
 	commands = args.command.split('-')
 	graph = Graph(data)
 
@@ -46,15 +46,15 @@ def main():
 	if commands:
 		pipeline = Pipeline(*[
 			filters[command](config)
-   			for command in commands 
+			for command in commands
 			if command in filters]
 		)
 		result = pipeline.process(graph)
-		if 'output' not in config['project'] or config['project']['output'] == 'stdout':
+		if ('output' not in config['project']) or (config['project']['output'] == 'stdout'):
 			print(str(result))
 		else:
-			# TODO write the graph to a file at config['project']['output']
-			pass
+			with open(config['project']['output'], 'w') as json_file:
+				json.dump(result, json_file, indent='\t')
 
 	else:
 		parser.print_help()

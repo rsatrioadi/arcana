@@ -69,13 +69,13 @@ def lift(edges1: List[Dict], edges2: List[Dict], new_label: Optional[str] = None
 	return compose(compose(edges1, edges2), invert(edges1), new_label)
 
 
-def triplets(edgeList1, edgeList2):
+def triplets(edge_list1, edge_list2):
 	source_mapping = {}
-	for edge in edgeList1:
+	for edge in edge_list1:
 		source_mapping[edge['target']] = edge['source']
 
 	paths = set()
-	for edge in edgeList2:
+	for edge in edge_list2:
 		if edge['source'] in source_mapping:
 			source1 = source_mapping[edge['source']]
 			triplet = (source1, edge['source'], edge['target'])
