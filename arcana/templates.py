@@ -7,7 +7,7 @@ script_analysis = '''This is method `{op_name}` of {struct_kind} `{struct_name}`
 Explain the above method on the following aspects:
 
 {{ description: "Describe the functionality of the method in one sentence.",
-  parameters: [ {{ name:..., type:..., description:... }}, ... ],
+  parameters: [ {{ name:..., type:..., description:... }}, ... ], // empty list if there is no parameter
   returns: {{ type:..., description: ... }}, // In case of a constructor, consider the constructed class as the return type.
   reason: "Explain, in one sentence, the reason why the method is provided or the design rationale of the method.",
   howToUse: "Describe the usage or the expected set-up of using the method in less than 3 sentences.",

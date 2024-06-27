@@ -54,7 +54,7 @@ def main():
 			print(str(result))
 		else:
 			with open(config['project']['output'], 'w') as json_file:
-				json.dump(result, json_file, indent='\t')
+				json.dump(result.to_dict(), json_file, indent='\t')
 
 	else:
 		parser.print_help()
