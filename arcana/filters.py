@@ -2,10 +2,14 @@ import re
 import time
 import os
 import json
+import subprocess
+import sys
 from collections import Counter
+from typing import Dict, Any
+
 from tqdm.auto import tqdm
 from arcanalib.graph import Graph, triplets, invert, lift
-from arcanalib.pipefilter import Filter
+from arcanalib.pipefilter import Filter, Seeder
 from arcana import templates
 from openai import OpenAI
 
@@ -65,6 +69,32 @@ def prettify_json(obj: dict) -> str:
 	"""
 	return json.dumps(obj, indent='\t')
 
+class CLISeeder(Seeder):
+	
+	def __init__(self, command) -> None:
+		"""
+		Initialize the seeder with a command.
+
+		:param command: The command to be executed.
+		"""
+		self.command = command
+
+	def generate(self) -> Graph:
+		"""
+		Execute the command, parse the JSON output into a dict, and pass the dict to the Graph constructor.
+
+		:return: The generated Graph object.
+		"""
+		# Execute the command
+		sys.stderr.write("Executing javapers...\n")
+		process = subprocess.run(self.command, capture_output=True, shell=True, check=True)
+
+		# Parse the JSON output into a dict
+		sys.stderr.write("Parsing javapers output...\n")
+		output_dict = json.loads(process.stdout)
+
+		# Pass the dict to the Graph constructor and return the Graph object
+		return Graph(output_dict)
 
 class MetricsFilter(Filter):
 	def process(self, data: Graph) -> Graph:
@@ -128,6 +158,12 @@ def build_hierarchy(data: Graph) -> dict:
 
 
 class LLMFilter(Filter):
+	def __init__(self, config: Dict[str, Dict[str, Any]]):
+		super().__init__(config)
+		self.project_name = None
+		self.project_desc = None
+		self.openai_client_args = None
+
 	def process(self, data: Graph) -> Graph:
 		"""
 		Process the data using a language model to generate descriptions.
@@ -138,7 +174,7 @@ class LLMFilter(Filter):
 		Returns:
 			Graph: The processed data with generated descriptions.
 		"""
-		project_name, project_desc, openai_client_args, model, client = self.setup()
+		self.project_name, self.project_desc, self.openai_client_args, model, client = self.setup()
 
 		hierarchy = build_hierarchy(data)
 		timestr = time.strftime("%Y%m%d-%H%M%S")
@@ -212,7 +248,9 @@ class LLMFilter(Filter):
 				op_name=method_name,
 				struct_kind=class_kind,
 				struct_name=class_name,
-				op_src=method_src
+				op_src=method_src,
+				project_name=self.project_name,
+				project_desc=self.project_desc
 			)
 
 			description = self.generate_description(client, model, prompt)
@@ -238,7 +276,9 @@ class LLMFilter(Filter):
 			struct_name=class_name,
 			ancestors="\n".join([f"- `{ancestor}`" for ancestor in ancestors]) if ancestors else "(none)",
 			fields="\n".join([f"- `{field}`" for field in fields]) if fields else "(none)",
-			methods="\n".join(methods_descriptions) if methods_descriptions else "(none)"
+			methods="\n".join(methods_descriptions) if methods_descriptions else "(none)",
+			project_name=self.project_name,
+			project_desc=self.project_desc
 		)
 
 		description = self.generate_description(client, model, prompt)
@@ -260,7 +300,9 @@ class LLMFilter(Filter):
 
 		prompt = templates.component_analysis.format(
 			pkg_name=package['properties']['qualifiedName'],
-			classes="\n".join(classes_descriptions)
+			classes="\n".join(classes_descriptions),
+			project_name=self.project_name,
+			project_desc=self.project_desc
 		)
 
 		description = self.generate_description(client, model, prompt)

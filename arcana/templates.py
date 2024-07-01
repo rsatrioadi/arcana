@@ -1,4 +1,4 @@
-script_analysis = '''This is method `{op_name}` of {struct_kind} `{struct_name}`:
+script_analysis = '''Consider a project {project_name}, {project_desc}. This is method `{op_name}` of {struct_kind} `{struct_name}`:
 
 ```java
 {op_src}
@@ -31,7 +31,7 @@ In `layerReason`, explain why this method fits your layer of choice but not the 
 
 Respond with a well-formatted JSON object. Do not use any quote marks ("'`) within the JSON values.'''
 
-structure_analysis = '''A Java {struct_type} `{struct_name}` specializes the following class(es) or interface(s):
+structure_analysis = '''Consider a project {project_name}, {project_desc}. A {struct_type} `{struct_name}` specializes the following class(es) or interface(s):
 
 {ancestors}
 
@@ -87,7 +87,7 @@ In `layerReason`, explain why this {struct_type} fits your layer of choice but n
 
 Respond with a well-formatted JSON object. Do not use any quote marks ("'`) within the JSON values. In the `description`, do not mention the name of the role stereotype or layer.'''
 
-component_analysis = '''Given a Java package `{pkg_name}` containing the following classes:
+component_analysis = '''Consider a project {project_name}, {project_desc}. Given a package `{pkg_name}` containing the following classes:
 
 {classes}
 

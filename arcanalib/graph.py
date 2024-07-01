@@ -39,17 +39,23 @@ def compose(edges1: List[Dict], edges2: List[Dict], new_label: Optional[str] = N
 	"""
 	mapping: Dict[str, Dict[str, str]] = {
 		edge['source']: {
-			'target': edge['target'],
-			'label': edge['label']
-		} for edge in edges2
+			'target': edge['target'], 
+			'label': edge.get('label','edge1'), 
+			'weight': edge.get('properties', {}).get('weight', 1)
+		} 
+		for edge in edges2
 	}
 	composed_edges: List[Dict] = []
 	for edge in edges1:
+		label = edge.get('label', 'edge2')
+		properties = edge.get('properties', {})
 		if edge['target'] in mapping:
+			new_weight = mapping[edge['target']]['weight'] * properties.get('weight', 1)
 			composed_edges.append({
 				'source': edge['source'],
 				'target': mapping[edge['target']]['target'],
-				'label': new_label if new_label else f"{edge['label']},{mapping[edge['target']]['label']}"
+				'label': new_label if new_label else f"{label},{mapping[edge['target']]['label']}",
+				'properties': {'weight': new_weight}
 			})
 	return composed_edges
 
