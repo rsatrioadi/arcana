@@ -23,6 +23,8 @@ To run Arcana, type in:
 python -m arcana [--config CONFIG] [--use-seeder] command
 ```
 
+(It is recommended to redirect stderr to a log file by adding `2> log.txt` at the end of the command line.)
+
 `CONFIG` specifies the path to the configuration file. The default path is `config.ini`.  See `config.ini.example` and read further for more information about the configuration.
 
 The `command` can be any of the following list, and they can be executed in a pipeline by specifying the command names in succession, separated by a dash (`-`), e.g., `python -m arcana metrics-llm` will first execute the `metrics` command on the input graph, and then the `llm` command on the graph produced by the `metrics` command.
@@ -50,7 +52,7 @@ input=<specify input here>
 
 #### Using a seeder
 
-If you don’t have a graph ready, i.e., you want to specify a source directory as an input, you can use a seeder by passing `--use-seeder` as a command line argument to Arcana. At this time, the only seeder supported is [javapers](https://github.com/rsatrioadi/javapers), the configuration for which can be seen in the `seeder` section of the configuration file:
+If you don’t have a graph ready, i.e., you want to specify a source directory as an input, you can use a seeder by passing `--use-seeder` as a command line argument to Arcana. At this time, the only seeder supported is [javapers](https://github.com/rsatrioadi/javapers), the configuration for which can be seen in the `seeder` section of the configuration file (make sure to specify the correct path to the java executable and javapers JAR file):
 
 ```ini
 [seeder]

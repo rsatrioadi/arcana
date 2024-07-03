@@ -2,6 +2,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 import time
 from collections import Counter
 from typing import Dict, Any
@@ -95,6 +96,8 @@ class CLISeeder(Seeder):
 			text=True,
    			encoding="utf-8"
 		)
+
+		sys.stderr.write(process.stderr)
 		
 		# Parse the JSON output into a dict
 		if process.returncode == 0:
