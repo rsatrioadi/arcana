@@ -1,5 +1,5 @@
-from collections.abc import Iterable
 import json
+from collections.abc import Iterable
 from typing import Optional, List, Dict, Union, Set, Tuple
 
 
@@ -39,10 +39,10 @@ def compose(edges1: List[Dict], edges2: List[Dict], new_label: Optional[str] = N
 	"""
 	mapping: Dict[str, Dict[str, str]] = {
 		edge['source']: {
-			'target': edge['target'], 
-			'label': edge.get('label','edge1'), 
+			'target': edge['target'],
+			'label': edge.get('label', 'edge1'),
 			'weight': edge.get('properties', {}).get('weight', 1)
-		} 
+		}
 		for edge in edges2
 	}
 	composed_edges: List[Dict] = []
@@ -217,7 +217,7 @@ class Graph:
 				edge
 				for edge in self.edges[edge_label]
 				if (node_label in self.nodes[edge['source']].get('labels', []))
-				and (node_label in self.nodes[edge['target']].get('labels', []))
+					and (node_label in self.nodes[edge['target']].get('labels', []))
 			]
 		return []
 
