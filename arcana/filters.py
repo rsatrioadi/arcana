@@ -1,17 +1,17 @@
-import re
-import time
-import os
 import json
+import os
+import re
 import subprocess
-import sys
+import time
 from collections import Counter
 from typing import Dict, Any
 
+from openai import OpenAI
 from tqdm.auto import tqdm
+
+from arcana import templates
 from arcanalib.graph import Graph, triplets, invert, lift
 from arcanalib.pipefilter import Filter, Seeder
-from arcana import templates
-from openai import OpenAI
 
 
 def remove_java_comments(java_source: str) -> str:
@@ -69,8 +69,9 @@ def prettify_json(obj: dict) -> str:
 	"""
 	return json.dumps(obj, indent='\t')
 
+
 class CLISeeder(Seeder):
-	
+
 	def __init__(self, command) -> None:
 		"""
 		Initialize the seeder with a command.
@@ -79,6 +80,8 @@ class CLISeeder(Seeder):
 		"""
 		self.command = command
 
+	# sys.stderr.write(f"Command: {self.command}\n")
+
 	def generate(self) -> Graph:
 		"""
 		Execute the command, parse the JSON output into a dict, and pass the dict to the Graph constructor.
@@ -86,15 +89,22 @@ class CLISeeder(Seeder):
 		:return: The generated Graph object.
 		"""
 		# Execute the command
-		sys.stderr.write("Executing javapers...\n")
-		process = subprocess.run(self.command, capture_output=True, shell=True, check=True)
-
+		process = subprocess.run(
+			self.command,
+			capture_output=True,
+			text=True,
+   			encoding="utf-8"
+		)
+		
 		# Parse the JSON output into a dict
-		sys.stderr.write("Parsing javapers output...\n")
-		output_dict = json.loads(process.stdout)
+		if process.returncode == 0:
+			output_dict = json.loads(process.stdout)
 
-		# Pass the dict to the Graph constructor and return the Graph object
-		return Graph(output_dict)
+			# Pass the dict to the Graph constructor and return the Graph object
+			return Graph(output_dict)
+		else:
+			raise "Command execution failed."
+
 
 class MetricsFilter(Filter):
 	def process(self, data: Graph) -> Graph:
@@ -193,10 +203,10 @@ class LLMFilter(Filter):
 		project_desc = self.config['project']['desc']
 
 		openai_client_args = {
-			'api_key': self.config['openai'].get('apikey'),
-			'base_url': self.config['openai'].get('apibase')
+			'api_key': self.config['llm'].get('apikey'),
+			'base_url': self.config['llm'].get('apibase')
 		}
-		model = self.config['openai'].get('model', "gpt-3.5-turbo")
+		model = self.config['llm'].get('model', "gpt-3.5-turbo")
 
 		client = OpenAI(**openai_client_args)
 
@@ -236,7 +246,7 @@ class LLMFilter(Filter):
 				raise StopIteration
 
 	def process_method(self, data: Graph, client: OpenAI, model: str, file, met_id: str, class_name: str,
-					   class_kind: str):
+	                   class_kind: str):
 		"""Process a single method and generate its description."""
 		method = data.nodes[met_id]
 
@@ -266,7 +276,7 @@ class LLMFilter(Filter):
 			file.write('\n')
 
 	def process_class(self, data: Graph, client: OpenAI, model: str, file, cls_id: str, clasz: dict, class_name: str,
-					  class_kind: str, cls_data: list):
+	                  class_kind: str, cls_data: list):
 		"""Process a single class and generate its description."""
 		ancestors, fields = self.get_class_relations(data, cls_id)
 		methods_descriptions = self.get_methods_descriptions(data, cls_data)
@@ -294,7 +304,7 @@ class LLMFilter(Filter):
 		file.write('\n')
 
 	def process_package(self, data: Graph, client: OpenAI, model: str, file, pkg_id: str, package: dict,
-						pkg_data: dict):
+	                    pkg_data: dict):
 		"""Process a single package and generate its description."""
 		classes_descriptions = self.get_classes_descriptions(data, pkg_data)
 
@@ -392,3 +402,53 @@ class LLMFilter(Filter):
 			f"- {data.nodes[cls_id]['properties']['kind']} `{data.nodes[cls_id]['properties']['qualifiedName']}`: {self.describe(data.nodes[cls_id])}"
 			for cls_id, _ in pkg_data.items()
 		]
+
+
+def merge_properties(dict1, dict2, simplify_names=False):
+	for id2, obj2 in dict2.items():
+
+		matched_obj = None
+		if id2 in dict1 and set(dict1[id2]['labels']) & set(obj2['labels']):
+			matched_obj = dict1[id2]
+
+		elif simplify_names:
+
+			def simplify_name(name):
+				if '(' in name and name.endswith(')'):
+					prefix, params = name.split('(', 2)
+					params = [param.split('.')[-1].split('$')[-1] for param in params.split(')', 1)[0].split(',')]
+					return prefix + '(' + ','.join(params) + ')'
+				else:
+					return name
+
+			dict1_name_remap = {
+				simplify_name(key): key
+				for key in dict1
+				if {'Script', 'Operation', 'Constructor'} & set(dict1[key]['labels'])
+			}
+
+			if id2 in dict1_name_remap and set(dict1[dict1_name_remap[id2]]['labels']) & set(obj2['labels']):
+				matched_obj = dict1[dict1_name_remap[id2]]
+
+		if matched_obj:
+			# sys.stderr.write(f"{id2}->{matched_obj['id']}\n")
+			# Merge properties from obj2 into matched_obj
+			matched_obj['properties'].update(obj2['properties'])
+		else:
+			# sys.stderr.write(f"{id2}->None\n")
+			pass
+
+
+# Note: dict1 is updated in place, no need to return anything
+
+class MergeFilter(Filter):
+	def __init__(self, config: Dict[str, Dict[str, Any]]):
+		super().__init__(config)
+
+		with open(config['merge']['input'], 'r', encoding="utf-8") as file:
+			data = json.load(file)
+		self.node_dict_to_merge = data
+
+	def process(self, data: Graph) -> Any:
+		merge_properties(data.nodes, self.node_dict_to_merge, True)
+		return data

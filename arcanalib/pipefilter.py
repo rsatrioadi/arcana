@@ -1,5 +1,4 @@
-import sys
-from typing import Any, Dict, List, Callable, Union
+from typing import Any, Dict, List, Union
 
 from arcanalib.graph import Graph
 
@@ -34,6 +33,7 @@ class Seeder:
 	"""
 	A class that generates graph data.
 	"""
+
 	def generate(self) -> Graph:
 		"""
 		Generate graph data. This method should be implemented by subclasses.
@@ -60,7 +60,7 @@ class Pipeline:
 		if isinstance(data, Seeder):
 			data = data.generate()
 
-		sys.stderr.write(f"Graph stats: {len(data.nodes)} nodes, {len(data.edges)} edge types.")
+		# sys.stderr.write(f"Graph stats: {len(data.nodes)} nodes, {len(data.edges)} edge types.")
 		for filter in self.filters:
 			data = filter.process(data)
 			if isinstance(filter, EndFilter):

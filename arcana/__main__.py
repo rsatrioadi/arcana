@@ -3,7 +3,7 @@ import configparser
 import json
 import sys
 
-from arcana.filters import CLISeeder, MetricsFilter, LLMFilter
+from arcana.filters import CLISeeder, MetricsFilter, LLMFilter, MergeFilter
 from arcanalib.graph import Graph
 from arcanalib.pipefilter import Pipeline
 
@@ -12,12 +12,20 @@ def main():
 	parser = argparse.ArgumentParser(description="Perform architectural analyses on software knowledge graphs.")
 	parser.add_argument('--version', '-v', action='version', version='arcana 0.1')
 
-	parser.add_argument('command', type=str, help='Command to execute: metrics, llm, abstracter -- join with a dash to make a pipeline')
-	parser.add_argument('--config', '-c', type=str, default='config.ini',
-						help='Path to the configuration file (default: config.ini)')
-	parser.add_argument('--seeder', action='store_true', help='Get graph data from seeder instead of file or stdin')
-	parser.add_argument('--verbose', action='store_true', help='Enable verbose output')
-	parser.add_argument('--dry-run', action='store_true', help='Do not actually call the LLM API, only print prompts')
+	parser.add_argument(
+		'command', type=str,
+		help='Command to execute: metrics, llm, merge -- join with a dash to make a pipeline'
+	)
+	parser.add_argument(
+		'--config', '-c', type=str, default='config.ini',
+		help='Path to the configuration file (default: config.ini)'
+	)
+	parser.add_argument(
+		'--use-seeder', '-s', action='store_true',
+		help='Get graph data from seeder instead of file or stdin'
+	)
+	# parser.add_argument('--verbose', action='store_true', help='Enable verbose output')
+	# parser.add_argument('--dry-run', action='store_true', help='Do not actually call the LLM API, only print prompts')
 
 	args = parser.parse_args()
 
@@ -30,8 +38,8 @@ def main():
 
 	config['args'] = vars(args)
 
-	if args.seeder:
-		data = CLISeeder(config['seeder']['command'].format(**config['seeder']))
+	if args.use_seeder:
+		data = CLISeeder(config['seeder']['command'].format(**{**config['project'], **config['seeder']}))
 	elif ('input' not in config['project']) or (config['project']['input'] == 'stdin'):
 		data = Graph(json.loads(sys.stdin.read()))
 	else:
@@ -41,6 +49,7 @@ def main():
 	filters = {
 		'llm': LLMFilter,
 		'metrics': MetricsFilter,
+		'merge': MergeFilter
 	}
 
 	commands = args.command.split('-')
@@ -56,7 +65,7 @@ def main():
 			print(str(result))
 		else:
 			with open(config['project']['output'], 'w') as json_file:
-				json.dump(result.to_dict(), json_file, indent='\t')
+				json_file.write(str(result))
 	else:
 		parser.print_help()
 		sys.exit(1)

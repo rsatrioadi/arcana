@@ -1,10 +1,15 @@
 [project]
-name=jhotdraw-7.6
+name=zxing-3.5.3
 desc=a Java application
-input=D:\Research\javapers\sample_output\jhotdraw-7.6-detailed.json
-output=stdout
+input=D:/Code/zxing-zxing-3.5.3/core/src/main/java/
+output=zxing-3.5.3-output.json
 
-[openai]
-apikey=apikey
+[llm]
+apikey=example-apikey
 apibase=http://localhost:8000/v1
-model=gpt-3.5-turbo
+model=llama3
+
+[seeder]
+command={javaexe} -jar {jarfile} -i {input} -a -n {name} -f json
+javaexe=./javapers/jdk-17.0.11+9-jre/bin/java.exe
+jarfile=./javapers/javapers-1.1.2-jar-with-dependencies.jar
