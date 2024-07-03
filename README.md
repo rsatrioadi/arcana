@@ -54,9 +54,9 @@ If you don’t have a graph ready, i.e., you want to specify a source directory 
 
 ```ini
 [seeder]
-command={javabin}java -jar {jarfile} -i {input} -a -n {name} -f json
-javabin=javapers/jdk-17.0.11+9-jre/bin/
-jarfile=javapers/javapers-1.1.2-jar-with-dependencies.jar
+command={javaexe} -jar {jarfile} -i {input} -a -n {name} -f json
+javaexe=./javapers/jdk-17.0.11+9-jre/bin/java.exe
+jarfile=./javapers/javapers-1.1.2-jar-with-dependencies.jar
 ```
 
 In such case, the `input` field in the `project` section is a directory that contains the Java source files. You can specify several directories by separating each directory with a plus sign (`+`), e.g.:
