@@ -39,7 +39,7 @@ The `command` argument can be one of the following:
 
 	- `description`: A one-sentence summary of *packages*, *classes*, and *methods*/*constructors*.
 	- `roleStereotype`: A classification of *classes* into one of [Wirfs-Brock's role stereotypes](https://wirfs-brock.com/PDFs/Characterizing%20Classes.pdf).
-	- `layer`: A classification of *packages*, *classes*, and *methods*/*constructors* into one of the following architectural layers: `Presentation Layer`, `Service Layer`, `Domain Layer`, or `Data Source Layer`.
+	- `layer`: A classification of *packages*, *classes*, and *methods*/*constructors* into architectural layers.
   
   Currently, this command adds all the properties above, i.e., there is no way to select only one or two properties to add to the graph.
 
@@ -89,7 +89,8 @@ input=/path/to/src1/+/path/to/src2/
 
 ### Output
 
-Similar to the input, the output can be written to a file or to standard output (`stdout`), based on the `output` configuration in the `project` section.
+Similar to the input, the output can be written to a file or to standard output, based on the `output` configuration in the `project` section.
+The value of the `output` field can thus be either a path to a file or `stdout`.
 
 ```ini
 [project]

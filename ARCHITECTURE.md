@@ -13,9 +13,43 @@ When the input is a seeder, the pipeline will first use the seeder to generate t
 
 ### Seeder: `CLISeeder`
 
+This basically takes a command that one would execute from a command-line shell, runs it from within the application, and uses the output of that command as the graph data.
+
 ### Filter: `MetricsFilter`
 
 This filter computes metrics for the graph nodes and adds the computed metrics to the node's properties. 
 Currently, the only supported metric is the [*dependency profile*](https://doi.org/10.1109/ICSM.2011.6080827), which applies to classes.
 
 ### Filter: `LLMFilter`
+
+This command uses a large language model API (specified in the `llm` section of the configuration file) to analyze and add properties to the graph nodes.
+The additional properties added are described below.
+
+#### Descriptions
+
+These are summaries generated for methods, method parameters, classes, and packages.
+The method summaries are generated with consideration of [“intents”](https://doi.org/10.1145/3597503.3608134), i.e, they describe what the paper defines as the “what” (`description`), “why” (`reason`), “how-to-use” (`howToUse`), “how-it-is-done” (`howItWorks`), and “property” (`assertions`).
+Additionally, the filter also generates description of the method's return value in the property `returns`.
+
+The summaries for classes and packages are generated using the “summary of summaries” or [hierarchical summarization approach](https://doi.org/10.1109/ICoDSE59534.2023.10292037).
+
+#### Class Role Stereotypes
+
+This is a classification of *classes* into one of [Wirfs-Brock's role stereotypes](https://wirfs-brock.com/PDFs/Characterizing%20Classes.pdf).
+The role stereotypes were introduced as design-time concept, but [classifying implementation classes into stereotypes can help in making sense of the structure of the software system](https://doi.org/10.1016/j.jss.2022.111296).
+
+This information is stored in the `roleStereotype` property of class nodes, and has the following possible values:
+
+- `Information Holder`
+- `Service Provider`
+- `Structurer`
+- `Controller`
+- `Coordinator`
+- `User Interfacer`
+- `External Interfacer`
+- `Internal Interfacer`
+
+#### Architectural Layers
+
+The filter takes the descriptions of *packages*, *classes*, and *methods*/*constructors* and matches them with the purported functionalities of the following architectural layers: `Presentation Layer`, `Service Layer`, `Domain Layer`, or `Data Source Layer`.
+This information is stored in the `layer` property of the nodes in question.
