@@ -46,6 +46,8 @@ The `command` argument can be one of the following:
 Commands can be chained together in a pipeline by specifying them in succession, separated by a dash (`-`). 
 For example, `python -m arcana metrics-llm` will first execute the `metrics` command on the input graph, and then the `llm` command on the graph produced by the `metrics` command.
 
+For more information on the commands and how they work, refer to [Architecture](./ARCHITECTURE.md).
+
 ### Input
 
 Arcana typically takes as input a knowledge graph as described in [this paper](https://doi.org/10.1109/MSR59073.2023.00029), in a specific JSON format. 

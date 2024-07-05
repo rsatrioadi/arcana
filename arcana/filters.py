@@ -217,7 +217,7 @@ class LLMFilter(Filter):
 
 	def describe(self, node: dict) -> str:
 		"""Generate a description for a given node."""
-		keys = ['description', 'reason', 'howToUse', 'howItWorks', 'assertions', 'roleStereotype', 'layer']
+		keys = ['description', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'roleStereotype', 'layer']
 		return ' '.join(f"**{key}**: {str(node['properties'][key])}. " for key in keys if key in node['properties'])
 
 	def process_hierarchy(self, data: Graph, hierarchy: dict, client: OpenAI, model: str, file):
@@ -351,16 +351,31 @@ class LLMFilter(Filter):
 
 	def update_method_properties(self, data: Graph, description: dict, method: dict):
 		"""Update method properties with the generated description."""
-		for key in description:
+		param_nodes = [
+			data.nodes[edge['target']]
+			for edge in data.edges['hasParameter']
+			if edge['source'] == method['id']
+		]
+
+		for key, value in description.items():
 			if key.endswith('Reason'):
 				continue
-			elif lower1(key) == 'parameters':
-				for parameter in description[key]:
-					param_id = method['id'] + '.' + parameter['name']
-					if param_id in data.nodes:
-						data.nodes[param_id]['properties']['description'] = parameter.get('description')
+			key_lower = lower1(key)
+			if key_lower == 'parameters':
+				for param in value:
+					matching_params = [
+						node
+						for node in param_nodes
+						if node['properties']['simpleName'] == param['name']
+					]
+					if matching_params:
+						param_node_id = matching_params[0]['id']
+						if param_node_id in data.nodes:
+							data.nodes[param_node_id]['properties']['description'] = param.get('description')
+			elif key_lower == 'returns':
+				method['properties']['returns'] = value.get('description', None) if value else None
 			else:
-				method['properties'][lower1(key)] = description[key]
+				method['properties'][key_lower] = value
 
 	def update_class_properties(self, data: Graph, description: dict, clasz: dict):
 		"""Update class properties with the generated description."""
