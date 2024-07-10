@@ -5,7 +5,7 @@ Each command available in the command line is a _filter_, i.e., it extends from 
 Each filter takes graph data as an input (an instance of `arcanalib.graph.Graph`) and outputs the same type of data, except for filters that are subclasses of `arcanalib.pipefiler.EndFilter`.
 These filters are meant to be the end of the pipeline, i.e., if the pipeline encounters an `EndFilter`, it will ignore any subsequent filters. End filters are useful if you want to convert the final graph data into another format, e.g., one that is required by a particular visualization tool.
 
-A _pipeline_ (an instance of `arcanalib.pipefilter.Pipeline`) composes this filters, receives an input, and pass the input through the filters in succession.
+A _pipeline_ (an instance of `arcanalib.pipefilter.Pipeline`) composes these filters, receives an input, and pass the input through the filters in succession.
 The input for a pipeline can either be a `Graph` or a seeder (an instance of `arcanalib.pipefilter.Seeder`).
 When the input is a seeder, the pipeline will first use the seeder to generate the graph data that will then be passed through the filters.
 
@@ -19,6 +19,8 @@ This basically takes a command that one would execute from a command-line shell,
 
 This filter computes metrics for the graph nodes and adds the computed metrics to the node's properties. 
 Currently, the only supported metric is the [*dependency profile*](https://doi.org/10.1109/ICSM.2011.6080827), which applies to classes.
+Dependency profile describes whether a class depends on classes from another package, is being used by classes in another package, both, or none.
+This metrics is stored in the property `dependencyProfile` of class nodes.
 
 ### Filter: `LLMFilter`
 
@@ -52,4 +54,6 @@ This information is stored in the `roleStereotype` property of class nodes, and 
 #### Architectural Layers
 
 The filter takes the descriptions of *packages*, *classes*, and *methods*/*constructors* and matches them with the purported functionalities of the following architectural layers: `Presentation Layer`, `Service Layer`, `Domain Layer`, or `Data Source Layer`.
+The classification method is based on the [_deductive software architecture recovery_ approach](https://doi.org/10.1145/3639476.3639776).
+
 This information is stored in the `layer` property of the nodes in question.
