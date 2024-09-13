@@ -267,6 +267,26 @@ class Graph:
 			label: self.get_source_and_target_labels(label)
 			for label in self.edges
 		}
+  
+	def find_nodes(self, label = None, where = None):
+		return [node for _, node in self.nodes.items() if (not label or label in node['labels']) and (not where or where(node))]
+
+	def find_edges(self, label=None, source_label=None, target_label=None, where_edge=None, where_source=None, where_target=None):
+		if label:
+			edge_list = self.edges[label]
+		else:
+			edge_list = [edge for edges in self.edges.values() for edge in edges]
+		return [edge 
+				for edge in edge_list
+				if (not source_label or source_label in self.nodes[edge['source']]) 
+					and (not target_label or target_label in self.nodes[edge['target']])
+					and (not where_edge or where_edge(edge))
+					and (not where_source or where_source(self.nodes[edge['source']]))
+					and (not where_target or where_target(self.nodes[edge['target']]))]
+  
+	def clean_up(self):
+		for edge_type in self.edges:
+			self.edges[edge_type] = [edge for edge in self.edges[edge_type] if edge['source'] in self.nodes and edge['target'] in self.nodes]
 
 	def __str__(self):
 		return json.dumps(self.to_dict())
