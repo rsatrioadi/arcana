@@ -11,7 +11,7 @@ from openai import OpenAI
 from tqdm.auto import tqdm
 
 from arcana import templates
-from arcanalib.graph import Graph, triplets, invert, lift
+from arcanalib.graph import Graph, Node, triplets, invert, lift
 from arcanalib.pipefilter import Filter, Seeder
 
 
@@ -120,13 +120,13 @@ class MetricsFilter(Filter):
 		Returns:
 			Graph: The processed data with dependency profiles.
 		"""
-		parents = {e['source']: e['target'] for e in invert(data.edges['contains'])}
+		parents = {e.source: e.target for e in invert(data.edges['contains'])}
 		dependency_profiles = {}
 
 		calls = data.edges.get('calls', lift(data.edges['hasScript'], data.edges['invokes'], 'calls'))
 
 		for edge in calls:
-			source_id, target_id = edge['source'], edge['target']
+			source_id, target_id = edge.source, edge.target
 			dependency_profiles.setdefault(source_id, [])
 			dependency_profiles.setdefault(target_id, [])
 
@@ -146,7 +146,7 @@ class MetricsFilter(Filter):
 			return "hidden"
 
 		for id, profile in dependency_profiles.items():
-			data.nodes[id]['properties']['dependencyProfile'] = dependency_profile_category(
+			data.nodes[id].properties['dependencyProfile'] = dependency_profile_category(
 				profile['in'],
 				profile['out']
 			)
@@ -209,7 +209,7 @@ class LLMFilter(Filter):
 			'api_key': self.config['llm'].get('apikey'),
 			'base_url': self.config['llm'].get('apibase')
 		}
-		model = self.config['llm'].get('model', "gpt-3.5-turbo")
+		model = self.config['llm'].get('model', "gpt-4o-mini")
 
 		client = OpenAI(**openai_client_args)
 
@@ -218,7 +218,7 @@ class LLMFilter(Filter):
 	def describe(self, node: dict) -> str:
 		"""Generate a description for a given node."""
 		keys = ['description', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'roleStereotype', 'layer']
-		return ' '.join(f"**{key}**: {str(node['properties'][key])}. " for key in keys if key in node['properties'])
+		return ' '.join(f"**{key}**: {str(node.properties[key])}. " for key in keys if key in node.properties)
 
 	def process_hierarchy(self, data: Graph, hierarchy: dict, client: OpenAI, model: str, file):
 		"""Process each package, class, and method in the hierarchy."""
@@ -228,8 +228,8 @@ class LLMFilter(Filter):
 			for cls_id, cls_data in tqdm(pkg_data.items(), desc="Processing classes", position=1, leave=False):
 				clasz = data.nodes[cls_id]
 
-				class_name = clasz['properties']['qualifiedName']
-				class_kind = clasz['properties']['kind']
+				class_name = clasz.properties['qualifiedName']
+				class_kind = clasz.properties['kind']
 				class_kind = 'enum' if class_kind == 'enumeration' else 'abstract class' if class_kind == 'abstract' else class_kind
 
 				for met_id in tqdm(cls_data, desc='Processing methods', position=2, leave=False):
@@ -253,9 +253,9 @@ class LLMFilter(Filter):
 		"""Process a single method and generate its description."""
 		method = data.nodes[met_id]
 
-		if 'description' not in method['properties'] or not method['properties']['description']:
-			method_name = method['properties']['simpleName']
-			method_src = remove_java_comments(method['properties']['sourceText'])
+		if 'description' not in method.properties or not method.properties['description']:
+			method_name = method.properties['simpleName']
+			method_src = remove_java_comments(method.properties['sourceText'])
 
 			prompt = templates.script_analysis.format(
 				op_name=method_name,
@@ -271,8 +271,8 @@ class LLMFilter(Filter):
 
 			file.write(json.dumps({
 				'data': {
-					'id': method['id'],
-					'labels': method['labels'],
+					'id': method.id,
+					'labels': method.labels,
 					'properties': description
 				}
 			}))
@@ -299,8 +299,8 @@ class LLMFilter(Filter):
 
 		file.write(json.dumps({
 			'data': {
-				'id': clasz['id'],
-				'labels': clasz['labels'],
+				'id': clasz.id,
+				'labels': list(clasz.labels),
 				'properties': description
 			}
 		}))
@@ -312,7 +312,7 @@ class LLMFilter(Filter):
 		classes_descriptions = self.get_classes_descriptions(data, pkg_data)
 
 		prompt = templates.component_analysis.format(
-			pkg_name=package['properties']['qualifiedName'],
+			pkg_name=package.properties['qualifiedName'],
 			classes="\n".join(classes_descriptions),
 			project_name=self.project_name,
 			project_desc=self.project_desc
@@ -323,8 +323,8 @@ class LLMFilter(Filter):
 
 		file.write(json.dumps({
 			'data': {
-				'id': package['id'],
-				'labels': package['labels'],
+				'id': package.id,
+				'labels': list(package.labels),
 				'properties': description}}))
 		file.write('\n')
 
@@ -352,9 +352,9 @@ class LLMFilter(Filter):
 	def update_method_properties(self, data: Graph, description: dict, method: dict):
 		"""Update method properties with the generated description."""
 		param_nodes = [
-			data.nodes[edge['target']]
+			data.nodes[edge.target]
 			for edge in data.edges['hasParameter']
-			if edge['source'] == method['id']
+			if edge.source == method.id
 		]
 
 		for key, value in description.items():
@@ -366,43 +366,43 @@ class LLMFilter(Filter):
 					matching_params = [
 						node
 						for node in param_nodes
-						if node['properties']['simpleName'] == param['name']
+						if node.properties['simpleName'] == param['name']
 					]
 					if matching_params:
 						param_node_id = matching_params[0]['id']
 						if param_node_id in data.nodes:
-							data.nodes[param_node_id]['properties']['description'] = param.get('description')
+							data.nodes[param_node_id].properties['description'] = param.get('description')
 			elif key_lower == 'returns':
-				method['properties']['returns'] = value.get('description', None) if value else None
+				method.properties['returns'] = value.get('description', None) if value else None
 			else:
-				method['properties'][key_lower] = value
+				method.properties[key_lower] = value
 
 	def update_class_properties(self, data: Graph, description: dict, clasz: dict):
 		"""Update class properties with the generated description."""
 		for key in description:
 			if not key.endswith('Reason'):
-				clasz['properties'][lower1(key)] = description[key]
+				clasz.properties[lower1(key)] = description[key]
 
 	def update_package_properties(self, data: Graph, description: dict, package: dict):
 		"""Update package properties with the generated description."""
 		for key in description:
 			if not key.endswith('Reason'):
-				package['properties'][lower1(key)] = description[key]
+				package.properties[lower1(key)] = description[key]
 
 	def get_class_relations(self, data: Graph, cls_id: str) -> tuple:
 		"""Retrieve class ancestors and fields."""
 		ancestors = {
-			edge['target']
+			edge.target
 			for edge in data.edges['specializes']
-			if edge['source'] == cls_id
+			if edge.source == cls_id
 		}
 		fields = {
-			edge['target']
+			edge.target
 			for edge in data.edges['hasVariable']
-			if edge['source'] == cls_id
+			if edge.source == cls_id
 		}
 		fields = [
-			' '.join(remove_java_comments(data.nodes[field]['properties']['sourceText']).split())
+			' '.join(remove_java_comments(data.nodes[field].properties['sourceText']).split())
 			for field in fields
 		]
 		return ancestors, fields
@@ -410,23 +410,23 @@ class LLMFilter(Filter):
 	def get_methods_descriptions(self, data: Graph, cls_data: list) -> list:
 		"""Generate descriptions for methods."""
 		return [
-			f"- `{data.nodes[met_id]['properties']['simpleName']}`: {self.describe(data.nodes[met_id])}"
+			f"- `{data.nodes[met_id].properties['simpleName']}`: {self.describe(data.nodes[met_id])}"
 			for met_id in cls_data
 		]
 
 	def get_classes_descriptions(self, data: Graph, pkg_data: dict) -> list:
 		"""Generate descriptions for classes."""
 		return [
-			f"- {data.nodes[cls_id]['properties']['kind']} `{data.nodes[cls_id]['properties']['qualifiedName']}`: {self.describe(data.nodes[cls_id])}"
+			f"- {data.nodes[cls_id].properties['kind']} `{data.nodes[cls_id].properties['qualifiedName']}`: {self.describe(data.nodes[cls_id])}"
 			for cls_id, _ in pkg_data.items()
 		]
 
 
-def merge_properties(dict1, dict2, simplify_names=False):
+def merge_node_properties(dict1: Dict[str, Node], dict2: Dict[str, Node], simplify_names=False):
 	for id2, obj2 in dict2.items():
 
-		matched_obj = None
-		if id2 in dict1 and set(dict1[id2]['labels']) & set(obj2['labels']):
+		matched_obj: Node = None
+		if id2 in dict1 and set(dict1[id2].labels) & set(obj2.labels):
 			matched_obj = dict1[id2]
 
 		elif simplify_names:
@@ -442,16 +442,16 @@ def merge_properties(dict1, dict2, simplify_names=False):
 			dict1_name_remap = {
 				simplify_name(key): key
 				for key in dict1
-				if {'Script', 'Operation', 'Constructor'} & set(dict1[key]['labels'])
+				if {'Script', 'Operation', 'Constructor'} & set(dict1[key].labels)
 			}
 
-			if id2 in dict1_name_remap and set(dict1[dict1_name_remap[id2]]['labels']) & set(obj2['labels']):
+			if id2 in dict1_name_remap and set(dict1[dict1_name_remap[id2]].labels) & set(obj2.labels):
 				matched_obj = dict1[dict1_name_remap[id2]]
 
 		if matched_obj:
 			# sys.stderr.write(f"{id2}->{matched_obj['id']}\n")
 			# Merge properties from obj2 into matched_obj
-			matched_obj['properties'].update(obj2['properties'])
+			matched_obj.properties.update(obj2.properties)
 		else:
 			# sys.stderr.write(f"{id2}->None\n")
 			pass
@@ -468,5 +468,5 @@ class MergeFilter(Filter):
 		self.node_dict_to_merge = data
 
 	def process(self, data: Graph) -> Any:
-		merge_properties(data.nodes, self.node_dict_to_merge, True)
+		merge_node_properties(data.nodes, self.node_dict_to_merge, True)
 		return data

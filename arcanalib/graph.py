@@ -3,7 +3,47 @@ from collections.abc import Iterable
 from typing import Optional, List, Dict, Union, Set, Tuple
 
 
-def invert(edge_list: List[Dict], new_label: Optional[str] = None) -> List[Dict]:
+class Node:
+	def __init__(self, _id, *labels, **properties):
+		self.id = _id
+		self.labels = set(labels)
+		self.properties = properties
+		
+	def to_dict(self):
+		return {
+			'data': {
+				'id': self.id,
+				'labels': list(self.labels),
+				'properties': self.properties
+			}
+		}
+  
+	def __str__(self):
+		return json.dumps(self.to_dict())
+
+class Edge:
+	def __init__(self, source, target, label, **properties):
+		self.id = f'{source}-{label}-{target}'
+		self.source = source
+		self.target = target
+		self.label = label
+		self.properties = properties
+		
+	def to_dict(self):
+		return {
+			'data': {
+				'id': self.id,
+				'source': self.source,
+				'target': self.target,
+				'label': self.label,
+				'properties': self.properties
+			}
+		}
+
+	def __str__(self):
+		return json.dumps(self.to_dict())
+
+def invert(edge_list: List[Edge], new_label: Optional[str] = None) -> List[Edge]:
 	"""
 	Inverts the direction of edges in the given edge list.
 
@@ -15,17 +55,15 @@ def invert(edge_list: List[Dict], new_label: Optional[str] = None) -> List[Dict]
 		list: A list of inverted edges with updated labels.
 	"""
 	return [
-		{
-			**edge,
-			'source': edge['target'],
-			'target': edge['source'],
-			'label': new_label if new_label else f"inv_{edge.get('label', 'edge')}",
-		}
+		Edge(
+	  		source=edge.source, 
+			target=edge.target, 
+		 	label=new_label if new_label else f"inv_{edge.label}", 
+		  	**edge.properties)
 		for edge in edge_list
 	]
 
-
-def compose(edges1: List[Dict], edges2: List[Dict], new_label: Optional[str] = None) -> List[Dict]:
+def compose(edges1: List[Edge], edges2: List[Edge], new_label: Optional[str] = None) -> List[Edge]:
 	"""
 	Composes two lists of edges.
 
@@ -37,30 +75,29 @@ def compose(edges1: List[Dict], edges2: List[Dict], new_label: Optional[str] = N
 	Returns:
 		list: A list of composed edges.
 	"""
-	mapping: Dict[str, Dict[str, str]] = {
-		edge['source']: {
-			'target': edge['target'],
-			'label': edge.get('label', 'edge1'),
-			'weight': edge.get('properties', {}).get('weight', 1)
+	mapping = {
+		edge.source: {
+			'target': edge.target,
+			'label': edge.label,
+			'weight': edge.properties.get('weight', 1)
 		}
 		for edge in edges2
 	}
-	composed_edges: List[Dict] = []
+	composed_edges = []
 	for edge in edges1:
-		label = edge.get('label', 'edge2')
-		properties = edge.get('properties', {})
-		if edge['target'] in mapping:
-			new_weight = mapping[edge['target']]['weight'] * properties.get('weight', 1)
-			composed_edges.append({
-				'source': edge['source'],
-				'target': mapping[edge['target']]['target'],
-				'label': new_label if new_label else f"{label},{mapping[edge['target']]['label']}",
-				'properties': {'weight': new_weight}
-			})
+		if edge.target in mapping:
+			new_weight = mapping[edge.target]['weight'] * edge.properties.get('weight', 1)
+			composed_edge = Edge(
+				source=edge.source,
+				target=mapping[edge.target]['target'],
+				label=new_label if new_label else f"{edge.label},{mapping[edge.target]['label']}",
+				weight=new_weight
+			)
+			composed_edges.append(composed_edge)
 	return composed_edges
 
 
-def lift(edges1: List[Dict], edges2: List[Dict], new_label: Optional[str] = None) -> List[Dict]:
+def lift(edges1: List[Edge], edges2: List[Edge], new_label: Optional[str] = None) -> List[Edge]:
 	"""
 	Lifts relations by composing two lists of edges and their inverses.
 
@@ -75,16 +112,14 @@ def lift(edges1: List[Dict], edges2: List[Dict], new_label: Optional[str] = None
 	return compose(compose(edges1, edges2), invert(edges1), new_label)
 
 
-def triplets(edge_list1, edge_list2):
-	source_mapping = {}
-	for edge in edge_list1:
-		source_mapping[edge['target']] = edge['source']
+def triplets(edge_list1: List[Edge], edge_list2: List[Edge]) -> Set[Tuple[str, str, str]]:
+	source_mapping = {edge.target: edge.source for edge in edge_list1}
 
 	paths = set()
 	for edge in edge_list2:
-		if edge['source'] in source_mapping:
-			source1 = source_mapping[edge['source']]
-			triplet = (source1, edge['source'], edge['target'])
+		if edge.source in source_mapping:
+			source1 = source_mapping[edge.source]
+			triplet = (source1, edge.source, edge.target)
 			paths.add(triplet)
 
 	return paths
@@ -106,21 +141,17 @@ class Graph:
 		Args:
 			graph_data (dict): A dictionary containing graph data with nodes and edges.
 		"""
-		self.nodes: Dict[str, dict] = {
-			node['data']['id']: node['data']
+		self.nodes: Dict[str, Node] = {
+			node['data']['id']: Node(node['data']['id'], *node['data']['labels'], **node['data']['properties'])
 			for node in graph_data['elements']['nodes']
 		}
-		self.edges: Dict[str, List[dict]] = {}
+		self.edges: Dict[str, List[Edge]] = {}
 		for edge in graph_data['elements']['edges']:
-			if 'label' in edge['data']:
-				label = edge['data']['label']
-			else:
-				label = ','.join(edge['data']['labels'])
-				edge['data']['label'] = label
-
-			if label not in self.edges:
-				self.edges[label] = []
-			self.edges[label].append(edge['data'])
+			edge_data = edge['data']
+			edge_obj = Edge(edge_data['source'], edge_data['target'], edge_data['label'], **edge_data['properties'])
+			if edge_obj.label not in self.edges:
+				self.edges[edge_obj.label] = []
+			self.edges[edge_obj.label].append(edge_obj)
 
 	def invert_edges(self, edge_label: str, new_label: Optional[str] = None) -> None:
 		"""
@@ -163,7 +194,7 @@ class Graph:
 			new_label = new_label or f"lifted_{edge_label1}_{edge_label2}"
 			self.edges[new_label] = lifted
 
-	def filter_nodes_by_labels(self, labels: Union[List[str], Set[str]]) -> Dict[str, dict]:
+	def filter_nodes_by_labels(self, labels: Union[List[str], Set[str]]) -> Dict[str, Node]:
 		"""
 		Filters nodes by the specified labels.
 
@@ -176,7 +207,7 @@ class Graph:
 		return {
 			key: node
 			for key, node in self.nodes.items()
-			if any(label in labels for label in node.get('labels', []))
+			if any(label in labels for label in node.labels)
 		}
 
 	def get_all_node_labels(self) -> Set[str]:
@@ -188,8 +219,8 @@ class Graph:
 		"""
 		return {
 			label
-			for _, node in self.nodes.items()
-			for label in node.get('labels', [])
+			for node in self.nodes.values()
+			for label in node.labels
 		}
 
 	def get_all_edge_labels(self) -> Set[str]:
@@ -201,7 +232,7 @@ class Graph:
 		"""
 		return set(self.edges.keys())
 
-	def get_edges_with_node_labels(self, edge_label: str, node_label: str) -> List[Dict]:
+	def get_edges_with_node_labels(self, edge_label: str, node_label: str) -> List[Edge]:
 		"""
 		Retrieves edges whose source and target nodes have the specified labels.
 
@@ -216,23 +247,23 @@ class Graph:
 			return [
 				edge
 				for edge in self.edges[edge_label]
-				if (node_label in self.nodes[edge['source']].get('labels', []))
-					and (node_label in self.nodes[edge['target']].get('labels', []))
+				if (node_label in self.nodes[edge.source].labels)
+				and (node_label in self.nodes[edge.target].labels)
 			]
 		return []
 
-	def get_edge_node_labels(self, edge: dict) -> List[Tuple[str, str]]:
+	def get_edge_node_labels(self, edge: Edge) -> List[Tuple[str, str]]:
 		"""
 		Retrieves the labels of the source and target nodes for a given edge.
 
 		Args:
-			edge (dict): The edge to retrieve node labels for.
+			edge (Edge): The edge to retrieve node labels for.
 
 		Returns:
 			list: A list of tuples containing source and target node labels.
 		"""
-		source_labels = self.nodes.get(edge['source'], {}).get('labels', [])
-		target_labels = self.nodes.get(edge['target'], {}).get('labels', [])
+		source_labels = self.nodes.get(edge.source, Node(None)).labels
+		target_labels = self.nodes.get(edge.target, Node(None)).labels
 		return [
 			(source_label, target_label)
 			for source_label in source_labels
@@ -267,27 +298,32 @@ class Graph:
 			label: self.get_source_and_target_labels(label)
 			for label in self.edges
 		}
-  
-	def find_nodes(self, label = None, where = None):
-		return [node for _, node in self.nodes.items() if (not label or label in node['labels']) and (not where or where(node))]
+
+	def find_nodes(self, label=None, where=None) -> List[Node]:
+		return [node for node in self.nodes.values() if (not label or label in node.labels) and (not where or where(node))]
 
 	def find_edges(self, label=None, source_label=None, target_label=None, where_edge=None, where_source=None, where_target=None):
 		if label:
-			edge_list = self.edges[label]
+			edge_list = self.edges.get(label, [])
 		else:
 			edge_list = [edge for edges in self.edges.values() for edge in edges]
-		return [edge 
-				for edge in edge_list
-				if (not source_label or source_label in self.nodes[edge['source']]) 
-					and (not target_label or target_label in self.nodes[edge['target']])
-					and (not where_edge or where_edge(edge))
-					and (not where_source or where_source(self.nodes[edge['source']]))
-					and (not where_target or where_target(self.nodes[edge['target']]))]
-  
-	def clean_up(self):
-		for edge_type in self.edges:
-			self.edges[edge_type] = [edge for edge in self.edges[edge_type] if edge['source'] in self.nodes and edge['target'] in self.nodes]
+		
+		return [
+			edge for edge in edge_list
+			if (not source_label or source_label in self.nodes[edge.source].labels)
+			and (not target_label or target_label in self.nodes[edge.target].labels)
+			and (not where_edge or where_edge(edge))
+			and (not where_source or where_source(self.nodes[edge.source]))
+			and (not where_target or where_target(self.nodes[edge.target]))
+		]
 
+	def clean_up(self):
+		for edge_type in list(self.edges.keys()):
+			self.edges[edge_type] = [
+				edge for edge in self.edges[edge_type]
+				if edge.source in self.nodes and edge.target in self.nodes
+			]
+   
 	def __str__(self):
 		return json.dumps(self.to_dict())
 
@@ -318,9 +354,9 @@ class Graph:
 			elif isinstance(node_labels, Iterable):
 				included_node_labels.update(node_labels)
 
-		included_nodes: Dict[str, dict] = self.filter_nodes_by_labels(included_node_labels)
+		included_nodes: Dict[str, Node] = self.filter_nodes_by_labels(included_node_labels)
 
-		included_edges: Dict[str, List[dict]] = {
+		included_edges: Dict[str, List[Edge]] = {
 			label: edge_list
 			for label, edge_list in self.edges.items()
 			if label in included_edge_labels
@@ -328,7 +364,7 @@ class Graph:
 
 		return {
 			"elements": {
-				"nodes": [{"data": node} for node in list(included_nodes.values())],
-				"edges": [{"data": edge} for edge in sum(list(included_edges.values()), [])]
+				"nodes": [{"data": node.to_dict()['data']} for node in included_nodes.values()],
+				"edges": [{"data": edge.to_dict()['data']} for edge in sum(included_edges.values(), [])]
 			}
 		}
