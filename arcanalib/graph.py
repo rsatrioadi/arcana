@@ -56,8 +56,8 @@ def invert(edge_list: List[Edge], new_label: Optional[str] = None) -> List[Edge]
 	"""
 	return [
 		Edge(
-	  		source=edge.source, 
-			target=edge.target, 
+	  		source=edge.target, 
+			target=edge.source, 
 		 	label=new_label if new_label else f"inv_{edge.label}", 
 		  	**edge.properties)
 		for edge in edge_list
