@@ -16,6 +16,11 @@ from arcanalib.graph import Edge, Graph, Node, triplets, invert, lift
 from arcanalib.pipefilter import Filter, Seeder
 
 
+
+def remove_author(s):
+	return '\n'.join(t.strip() for t in s.split('\n') if not '@author' in t)
+
+
 def remove_java_comments(java_source: str) -> str:
 	"""
 	Remove single-line and multi-line comments from a given Java source code string.
@@ -40,7 +45,11 @@ def sentence(s: str) -> str:
 	Returns:
 		str: The formatted string.
 	"""
+	if not s:
+		return ""
 	t = s.strip()
+	if not t:
+		return ""
 	if t[-1] in '.?!…~–—':
 		return f'{t[0].upper()}{t[1:]}'
 	return f'{t[0].upper()}{t[1:]}.'
@@ -230,7 +239,12 @@ class LLMFilter(Filter):
 		sr, sn = '\r', '\n'
 		if not keys:
 			keys = ['description', 'docComment', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'roleStereotype', 'layer']
-		return ' '.join(f"**{key}**: {sentence(str(node.properties[key]).replace(sr,'').replace(sn,' '))} " for key in keys if key in node.properties)
+
+		lines = {key:f"**{key}**: {sentence(str(node.properties[key]).replace(sr,'').replace(sn,' '))} " for key in keys if key in node.properties and key != 'docComment' and node.properties[key]}
+		if 'docComment' in keys and 'docComment' in node.properties and node.properties['docComment']:
+			lines['docComment'] = f"**docComment**: {sentence(remove_author(str(node.properties['docComment'])).replace(sr,'').replace(sn,' '))} "
+		# print(lines)
+		return ' '.join(lines[key] for key in keys if key in lines)
 
 	def process_hierarchy(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file):
 		"""Process each package, class, and method in the hierarchy."""
@@ -275,8 +289,15 @@ class LLMFilter(Filter):
 
   
 		hierarchy = build_hierarchy(triplets)
+		# print(hierarchy)
+		# print('==========')
   
-		sorted_pkg_ids, pkg_deps = data.toposorted_nodes(data.edges['contains'])
+		sorted_pkg_ids, pkg_deps = data.toposorted_nodes(data.find_edges(label='contains',where_source=lambda node: 'Structure' not in node.labels,where_target=lambda node: 'Structure' not in node.labels))
+		# print(sorted_pkg_ids)
+		# print('==========')
+  
+		# print(pkg_deps)
+		# print('==========')
   
 		for pkg_id in tqdm(sorted_pkg_ids, desc="Processing packages", position=1):
 			pkg_data = hierarchy.get(pkg_id, dict())
@@ -301,6 +322,10 @@ class LLMFilter(Filter):
 					raise StopIteration
 
 			self.process_package(data, client, model, jsonl_file, log_file, pkg_id, package, pkg_data, pkg_deps)
+
+
+			log_file.flush()
+			jsonl_file.flush()
 
 			if os.path.exists('stop'):
 				raise StopIteration
@@ -379,7 +404,7 @@ class LLMFilter(Filter):
 		prompt = templates.component_analysis.format(
 			pkg_name=package.properties['qualifiedName'],
 			classes="(none)" if not classes_descriptions else "\n".join(classes_descriptions),
-			packages="(none)" if not package_descriptions else "\n".join(classes_descriptions),
+			packages="(none)" if not package_descriptions else "\n".join(package_descriptions),
 			project_name=self.project_name,
 			project_desc=self.project_desc
 		)
@@ -418,7 +443,7 @@ class LLMFilter(Filter):
 
 		return description
 
-	def update_method_properties(self, data: Graph, description: dict, method: dict):
+	def update_method_properties(self, data: Graph, description: dict, method: Node):
 		"""Update method properties with the generated description."""
 		param_nodes = [
 			data.nodes[edge.target]
@@ -446,13 +471,13 @@ class LLMFilter(Filter):
 			else:
 				method.properties[key_lower] = value
 
-	def update_class_properties(self, data: Graph, description: dict, clasz: dict):
+	def update_class_properties(self, data: Graph, description: dict, clasz: Node):
 		"""Update class properties with the generated description."""
 		for key in description:
 			if not key.endswith('Reason'):
 				clasz.properties[lower1(key)] = description[key]
 
-	def update_package_properties(self, data: Graph, description: dict, package: dict):
+	def update_package_properties(self, data: Graph, description: dict, package: Node):
 		"""Update package properties with the generated description."""
 		for key in description:
 			if not key.endswith('Reason'):

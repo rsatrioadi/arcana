@@ -49,6 +49,7 @@ Methods:
 Explain the above {struct_type} on the following aspects:
 
 {{ description: "Describe the responsibility of the {struct_type} in one sentence.", 
+  keywords: ["list", "of", "keywords", "relevant", "to", "the", "{struct_type}"],
   roleStereotype:..., 
   roleStereotypeReason:...,
   layer:...,
@@ -88,7 +89,9 @@ and the following subpackages:
 
 Explain the above package on the following aspects:
 
-{{ description: "Describe the purpose of the package in one sentence.", 
+{{ description: "Describe the purpose of the package in at most five sentences. Try to describe the package at a more abstract level of functionality rather than implementation detail.",
+  title: "A Noun Phrase that Describes the Package",
+  keywords: ["list", "of", "keywords", "relevant", "to", "the", "package"],
   layer:...,
   layerReason:... }}
 
