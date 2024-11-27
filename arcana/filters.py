@@ -1,3 +1,4 @@
+from io import TextIOWrapper
 import json
 import os
 import re
@@ -11,7 +12,7 @@ from openai import OpenAI
 from tqdm.auto import tqdm
 
 from arcana import templates
-from arcanalib.graph import Graph, Node, triplets, invert, lift
+from arcanalib.graph import Edge, Graph, Node, triplets, invert, lift
 from arcanalib.pipefilter import Filter, Seeder
 
 
@@ -153,22 +154,32 @@ class MetricsFilter(Filter):
 
 		return data
 
-
-def build_hierarchy(data: Graph) -> dict:
-	"""Build a hierarchical structure of packages, classes, and methods."""
-	methods = sorted(triplets(data.edges['contains'], data.edges['hasScript']))
-	classes = sorted({(pkg, clz) for pkg, clz, _ in methods})
+def build_triplets(edge_list1, edge_list2) -> dict:
+ 
+	methods = sorted(triplets(edge_list1, edge_list2))
+ 
+	return methods
+    
+def build_hierarchy(method_triplets) -> dict:
+	classes = sorted({(pkg, clz) for pkg, clz, _ in method_triplets})
 	packages = sorted({pkg for pkg, _ in classes})
 
 	hierarchy = {
 		pkg_id: {
-			cls_id: [met_id for _, c, met_id in methods if c == cls_id]
+			cls_id: [met_id for _, c, met_id in method_triplets if c == cls_id]
 			for p, cls_id in classes if p == pkg_id
 		} for pkg_id in packages
 	}
 
 	return hierarchy
 
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, set):
+            # Convert set to list
+            return list(obj)
+        # Call the default method for other types
+        return super().default(obj)
 
 class LLMFilter(Filter):
 	def __init__(self, config: Dict[str, Dict[str, Any]]):
@@ -188,15 +199,14 @@ class LLMFilter(Filter):
 			Graph: The processed data with generated descriptions.
 		"""
 		self.project_name, self.project_desc, self.openai_client_args, model, client = self.setup()
-
-		hierarchy = build_hierarchy(data)
 		timestr = time.strftime("%Y%m%d-%H%M%S")
 
-		with open(f'arcana-{timestr}.jsonl', 'a', encoding="utf-8") as file:
-			try:
-				self.process_hierarchy(data, hierarchy, client, model, file)
-			except StopIteration:
-				pass
+		with open(f'arcana-{timestr}.jsonl', 'a', encoding="utf-8") as jsonl_file:
+			with open(f'arcana-{timestr}.log', 'a', encoding="utf-8") as log_file:
+				try:
+					self.process_hierarchy(data, client, model, jsonl_file, log_file)
+				except StopIteration:
+					pass
 
 		return data
 
@@ -215,41 +225,88 @@ class LLMFilter(Filter):
 
 		return project_name, project_desc, openai_client_args, model, client
 
-	def describe(self, node: dict) -> str:
+	def describe(self, node: dict, *keys) -> str:
 		"""Generate a description for a given node."""
-		keys = ['description', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'roleStereotype', 'layer']
-		return ' '.join(f"**{key}**: {str(node.properties[key])}. " for key in keys if key in node.properties)
+		sr, sn = '\r', '\n'
+		if not keys:
+			keys = ['description', 'docComment', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'roleStereotype', 'layer']
+		return ' '.join(f"**{key}**: {sentence(str(node.properties[key]).replace(sr,'').replace(sn,' '))} " for key in keys if key in node.properties)
 
-	def process_hierarchy(self, data: Graph, hierarchy: dict, client: OpenAI, model: str, file):
+	def process_hierarchy(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file):
 		"""Process each package, class, and method in the hierarchy."""
-		for pkg_id, pkg_data in tqdm(hierarchy.items(), desc="Processing packages"):
+  
+		# all_method_ids = [ node.id 
+        #             for node 
+        #             in (data.find_nodes(label="Operation") + data.find_nodes(label="Constructor")) ]
+		# independent_method_ids = [ node_id 
+		# 			for node_id 
+     	# 			in all_method_ids 
+        #  			if node_id not in [edge.source for edge in data.find_edges(label="invokes")] ]
+		st_contains_st = data.find_edges(label='contains',source_label='Structure',target_label='Structure')
+		ct_contains_st = data.find_edges(label='contains',target_label='Structure', where_source=lambda node: 'Container' in node.labels and 'Structure' not in node.labels)
+		new_ct_sources = {edge.target:data.find_source(data.edges['contains'],data.nodes[edge.target],lambda node:'Structure' not in node.labels,data.nodes[edge.source]).id for edge in st_contains_st}
+		ct_contains_st.extend([Edge(source=source, target=target, label='contains') for target, source in new_ct_sources.items()])
+  
+		triplets = build_triplets(ct_contains_st, data.edges['hasScript'])
+		met_to_cls_pkg = {met_id: (cls_id, pkg_id) for pkg_id, cls_id, met_id in triplets}
+		# print(met_to_cls_pkg)
+		# print('######################################################################')
+		sorted_method_ids, method_deps = data.toposorted_nodes(data.edges['invokes'])
+		# print(sorted_method_ids)
+  
+		counter = 0
+  
+		for met_id in tqdm(sorted_method_ids, desc='Processing methods', position=0, leave=False):
+			cls_id, pkg_id = met_to_cls_pkg[met_id]
+			clasz = data.nodes[cls_id]
+
+			class_name = clasz.properties['qualifiedName']
+			class_kind = clasz.properties['kind']
+			class_kind = 'enum' if class_kind == 'enumeration' else 'abstract class' if class_kind == 'abstract' else class_kind
+			self.process_method(data, client, model, jsonl_file, log_file, met_id, class_name, class_kind, method_deps)
+
+			if os.path.exists('stop'):
+				raise StopIteration
+
+			counter = (counter+1)%5
+			if counter==4:
+				log_file.flush()
+				jsonl_file.flush()
+
+  
+		hierarchy = build_hierarchy(triplets)
+  
+		sorted_pkg_ids, pkg_deps = data.toposorted_nodes(data.edges['contains'])
+  
+		for pkg_id in tqdm(sorted_pkg_ids, desc="Processing packages", position=1):
+			pkg_data = hierarchy.get(pkg_id, dict())
 			package = data.nodes[pkg_id]
 
-			for cls_id, cls_data in tqdm(pkg_data.items(), desc="Processing classes", position=1, leave=False):
+			for cls_id, cls_data in tqdm(pkg_data.items(), desc="Processing classes", position=2, leave=False):
 				clasz = data.nodes[cls_id]
 
 				class_name = clasz.properties['qualifiedName']
 				class_kind = clasz.properties['kind']
 				class_kind = 'enum' if class_kind == 'enumeration' else 'abstract class' if class_kind == 'abstract' else class_kind
 
-				for met_id in tqdm(cls_data, desc='Processing methods', position=2, leave=False):
-					self.process_method(data, client, model, file, met_id, class_name, class_kind)
+				# for met_id in tqdm(cls_data, desc='Processing methods', position=2, leave=False):
+				# 	self.process_method(data, client, model, file, met_id, class_name, class_kind)
 
-					if os.path.exists('stop'):
-						raise StopIteration
+				# 	if os.path.exists('stop'):
+				# 		raise StopIteration
 
-				self.process_class(data, client, model, file, cls_id, clasz, class_name, class_kind, cls_data)
+				self.process_class(data, client, model, jsonl_file, log_file, cls_id, clasz, class_name, class_kind, cls_data)
 
 				if os.path.exists('stop'):
 					raise StopIteration
 
-			self.process_package(data, client, model, file, pkg_id, package, pkg_data)
+			self.process_package(data, client, model, jsonl_file, log_file, pkg_id, package, pkg_data, pkg_deps)
 
 			if os.path.exists('stop'):
 				raise StopIteration
 
-	def process_method(self, data: Graph, client: OpenAI, model: str, file, met_id: str, class_name: str,
-	                   class_kind: str):
+	def process_method(self, data: Graph, client: OpenAI, model: str, jsonl_file: TextIOWrapper, log_file: TextIOWrapper, met_id: str, class_name: str,
+	                   class_kind: str, node_deps: dict):
 		"""Process a single method and generate its description."""
 		method = data.nodes[met_id]
 
@@ -262,23 +319,27 @@ class LLMFilter(Filter):
 				struct_kind=class_kind,
 				struct_name=class_name,
 				op_src=method_src,
+				other_ops="(none)" if not node_deps[met_id] else "\n".join(f"- `{data.nodes[node_id].properties['simpleName']}`: {self.describe(data.nodes[node_id], 'description', 'returns', 'docComment')}" for node_id in node_deps[met_id]),
 				project_name=self.project_name,
 				project_desc=self.project_desc
 			)
+   
+			log_file.write(prompt)
+			log_file.write('\n\n======\n\n')
 
 			description = self.generate_description(client, model, prompt)
 			self.update_method_properties(data, description, method)
 
-			file.write(json.dumps({
+			jsonl_file.write(json.dumps({
 				'data': {
 					'id': method.id,
 					'labels': method.labels,
 					'properties': description
 				}
-			}))
-			file.write('\n')
-
-	def process_class(self, data: Graph, client: OpenAI, model: str, file, cls_id: str, clasz: dict, class_name: str,
+			}, cls=CustomJSONEncoder))
+			jsonl_file.write('\n')
+   
+	def process_class(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file, cls_id: str, clasz: dict, class_name: str,
 	                  class_kind: str, cls_data: list):
 		"""Process a single class and generate its description."""
 		ancestors, fields = self.get_class_relations(data, cls_id)
@@ -293,40 +354,48 @@ class LLMFilter(Filter):
 			project_name=self.project_name,
 			project_desc=self.project_desc
 		)
+  
+		log_file.write(prompt)
+		log_file.write('\n\n======\n\n')
 
 		description = self.generate_description(client, model, prompt)
 		self.update_class_properties(data, description, clasz)
 
-		file.write(json.dumps({
+		jsonl_file.write(json.dumps({
 			'data': {
 				'id': clasz.id,
 				'labels': list(clasz.labels),
 				'properties': description
 			}
 		}))
-		file.write('\n')
+		jsonl_file.write('\n')
 
-	def process_package(self, data: Graph, client: OpenAI, model: str, file, pkg_id: str, package: dict,
-	                    pkg_data: dict):
+	def process_package(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file, pkg_id: str, package: dict,
+	                    pkg_data: dict, pkg_deps: dict):
 		"""Process a single package and generate its description."""
 		classes_descriptions = self.get_classes_descriptions(data, pkg_data)
+		package_descriptions = self.get_packages_descriptions(data, pkg_deps[pkg_id])
 
 		prompt = templates.component_analysis.format(
 			pkg_name=package.properties['qualifiedName'],
-			classes="\n".join(classes_descriptions),
+			classes="(none)" if not classes_descriptions else "\n".join(classes_descriptions),
+			packages="(none)" if not package_descriptions else "\n".join(classes_descriptions),
 			project_name=self.project_name,
 			project_desc=self.project_desc
 		)
 
+		log_file.write(prompt)
+		log_file.write('\n\n======\n\n')
+
 		description = self.generate_description(client, model, prompt)
 		self.update_package_properties(data, description, package)
 
-		file.write(json.dumps({
+		jsonl_file.write(json.dumps({
 			'data': {
 				'id': package.id,
 				'labels': list(package.labels),
 				'properties': description}}))
-		file.write('\n')
+		jsonl_file.write('\n')
 
 	def generate_description(self, client: OpenAI, model: str, prompt: str) -> dict:
 		"""Generate a description using the OpenAI client."""
@@ -369,11 +438,11 @@ class LLMFilter(Filter):
 						if node.properties['simpleName'] == param['name']
 					]
 					if matching_params:
-						param_node_id = matching_params[0]['id']
+						param_node_id = matching_params[0].id
 						if param_node_id in data.nodes:
 							data.nodes[param_node_id].properties['description'] = param.get('description')
-			elif key_lower == 'returns':
-				method.properties['returns'] = value.get('description', None) if value else None
+			# elif key_lower == 'returns':
+			# 	method.properties['returns'] = value.get('description', None) if value and hasattr(value, 'get') else None
 			else:
 				method.properties[key_lower] = value
 
@@ -419,6 +488,13 @@ class LLMFilter(Filter):
 		return [
 			f"- {data.nodes[cls_id].properties['kind']} `{data.nodes[cls_id].properties['qualifiedName']}`: {self.describe(data.nodes[cls_id])}"
 			for cls_id, _ in pkg_data.items()
+		]
+
+	def get_packages_descriptions(self, data: Graph, package_ids: list) -> list:
+		"""Generate descriptions for packages."""
+		return [
+			f"- `{data.nodes[pkg_id].properties['qualifiedName']}`: {self.describe(data.nodes[pkg_id])}"
+			for pkg_id in package_ids
 		]
 
 

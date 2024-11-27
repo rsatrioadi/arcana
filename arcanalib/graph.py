@@ -1,6 +1,7 @@
 import json
 from collections.abc import Iterable
-from typing import Optional, List, Dict, Union, Set, Tuple
+from collections import defaultdict
+from typing import DefaultDict, Optional, List, Dict, Union, Set, Tuple
 
 
 class Node:
@@ -18,7 +19,7 @@ class Node:
 			}
 		}
   
-	def __str__(self):
+	def __repr__(self):
 		return json.dumps(self.to_dict())
 
 class Edge:
@@ -40,7 +41,7 @@ class Edge:
 			}
 		}
 
-	def __str__(self):
+	def __repr__(self):
 		return json.dumps(self.to_dict())
 
 def invert(edge_list: List[Edge], new_label: Optional[str] = None) -> List[Edge]:
@@ -113,14 +114,19 @@ def lift(edges1: List[Edge], edges2: List[Edge], new_label: Optional[str] = None
 
 
 def triplets(edge_list1: List[Edge], edge_list2: List[Edge]) -> Set[Tuple[str, str, str]]:
-	source_mapping = {edge.target: edge.source for edge in edge_list1}
+	source_mapping = DefaultDict(list)
+ 
+	for edge in edge_list1:
+		source_mapping[edge.target].append(edge.source)
+	# {edge.target: edge.source for edge in edge_list1}
 
 	paths = set()
 	for edge in edge_list2:
 		if edge.source in source_mapping:
-			source1 = source_mapping[edge.source]
-			triplet = (source1, edge.source, edge.target)
-			paths.add(triplet)
+			sources = source_mapping[edge.source]
+			for source1 in sources:
+				triplet = (source1, edge.source, edge.target)
+				paths.add(triplet)
 
 	return paths
 
@@ -134,24 +140,28 @@ class Graph:
 		edges (dict): A dictionary of edges categorized by labels.
 	"""
 
-	def __init__(self, graph_data: dict) -> None:
+	def __init__(self, graph_data: dict = None) -> None:
 		"""
 		Initializes the Graph with nodes and edges from the provided data.
 
 		Args:
 			graph_data (dict): A dictionary containing graph data with nodes and edges.
 		"""
-		self.nodes: Dict[str, Node] = {
-			node['data']['id']: Node(node['data']['id'], *node['data']['labels'], **node['data']['properties'])
-			for node in graph_data['elements']['nodes']
-		}
-		self.edges: Dict[str, List[Edge]] = {}
-		for edge in graph_data['elements']['edges']:
-			edge_data = edge['data']
-			edge_obj = Edge(edge_data['source'], edge_data['target'], edge_data['label'], **edge_data['properties'])
-			if edge_obj.label not in self.edges:
-				self.edges[edge_obj.label] = []
-			self.edges[edge_obj.label].append(edge_obj)
+		if not graph_data:
+			self.nodes = dict()
+			self.edges = dict()
+		else:
+			self.nodes: Dict[str, Node] = {
+				node['data']['id']: Node(node['data']['id'], *node['data']['labels'], **node['data']['properties'])
+				for node in graph_data['elements']['nodes']
+			}
+			self.edges: Dict[str, List[Edge]] = {}
+			for edge in graph_data['elements']['edges']:
+				edge_data = edge['data']
+				edge_obj = Edge(edge_data['source'], edge_data['target'], edge_data['label'], **edge_data['properties'])
+				if edge_obj.label not in self.edges:
+					self.edges[edge_obj.label] = []
+				self.edges[edge_obj.label].append(edge_obj)
 
 	def invert_edges(self, edge_label: str, new_label: Optional[str] = None) -> None:
 		"""
@@ -290,14 +300,18 @@ class Graph:
 	def generate_ontology(self) -> Dict[str, Set[str]]:
 		"""
 		Generates an ontology from the graph's edges and nodes.
-
-		Returns:
-			dict: A dictionary representing the ontology.
 		"""
-		return {
+		ontology = {
 			label: self.get_source_and_target_labels(label)
 			for label in self.edges
 		}
+		onto_graph = Graph()
+		onto_graph.edges = {label:[Edge(src,tgt,label) for src,tgt in ontology[label]] for label in ontology}
+		sources = {src for label in ontology for src,_ in ontology[label]}
+		targets = {tgt for label in ontology for _,tgt in ontology[label]}
+		node_ids = sources | targets
+		onto_graph.nodes = {id:Node(id,id) for id in node_ids}
+		return onto_graph
 
 	def find_nodes(self, label=None, where=None) -> List[Node]:
 		return [node for node in self.nodes.values() if (not label or label in node.labels) and (not where or where(node))]
@@ -317,6 +331,154 @@ class Graph:
 			and (not where_target or where_target(self.nodes[edge.target]))
 		]
 
+	def find_source(self, edge_list: List[Edge], start_node: Node, predicate, default: Node = None):
+		"""
+		Optimized version to find the first source node for a given node `start_node`
+		that satisfies a predicate.
+		
+		Parameters:
+		- edges: List of tuples (source, target) representing the graph.
+		- start_node: The target node to trace back from.
+		- predicate: A function that takes a node and returns True if the node satisfies the condition.
+		
+		Returns:
+		- The first source node that satisfies the predicate, or None if no such node exists.
+		"""
+		# Create an in-memory adjacency list for the graph
+		predecessors = defaultdict(list)
+		for edge in edge_list:
+			predecessors[edge.target].append(edge.source)
+		
+		# Perform DFS directly without building a reverse adjacency list
+		visited = set()
+		stack = [start_node.id]
+
+		while stack:
+			current = stack.pop()
+			if current in visited:
+				continue
+			visited.add(current)
+
+			# Check if the current node satisfies the predicate
+			if predicate(self.nodes[current]):
+				return self.nodes[current]
+
+			# Add predecessors directly to the stack
+			stack.extend(predecessors[current])
+
+		return default
+
+	def _adj_list(edge_list: List[Edge]):
+		"""
+		Build adjacency list and outdegree dictionary from a list of edges.
+		"""
+		adj_list = {}
+		outdegree = {}
+
+		for edge in edge_list:
+			source_id = edge.source
+			target_id = edge.target
+			if source_id not in adj_list:
+				adj_list[source_id] = []
+			if source_id not in outdegree:
+				outdegree[source_id] = 0
+			if target_id not in adj_list:
+				adj_list[target_id] = []
+			if target_id not in outdegree:
+				outdegree[target_id] = 0
+
+			adj_list[source_id].append(target_id)
+			outdegree[source_id] += 1
+
+		return adj_list, outdegree
+
+
+	def _outdeg_leaf_nodes(outdegree):
+		"""
+		Get nodes with an outdegree of 0.
+		"""
+		return [node for node, count in outdegree.items() if count == 0]
+
+
+	def process_nodes(self, edges, node_processor):
+		"""
+		Process nodes in a directed graph using a lazy approach to handle cyclic and self-dependencies.
+		
+		Parameters:
+		- edges: List of tuples (source, target) representing the graph.
+		- node_processor: A user-defined function that takes a node and its dependencies and returns a result.
+		
+		Returns:
+		- Dictionary with nodes as keys and results of the node_processor as values.
+		"""
+		# Build the adj list
+		adj_list, outdegree = Graph._adj_list(edges)
+		results = {}
+
+		# Start processing with leaf nodes
+		queue = Graph._outdeg_leaf_nodes(outdegree)
+
+		while queue:
+			next_queue = []
+			for node_id in queue:
+				# Apply the processing function to the current node
+				dependencies = adj_list.get(node_id, [])
+				resolved_dependencies = {dep: results[dep] for dep in dependencies if dep in results}
+				results[node_id] = node_processor(self.nodes[node_id], resolved_dependencies)
+
+				# Update outdegree for nodes that call this node
+				for caller, targets in adj_list.items():
+					if node_id in targets:
+						outdegree[caller] -= 1
+						if outdegree[caller] == 0:
+							next_queue.append(caller)
+
+			queue = next_queue
+
+		# Handle unresolved nodes (due to cycles or recursion)
+		for node_id, degree in outdegree.items():
+			if degree > 0:
+				dependencies = adj_list.get(node_id, [])
+				resolved_dependencies = {dep: results[dep] for dep in dependencies if dep in results}
+				results[node_id] = node_processor(self.nodes[node_id], resolved_dependencies)
+
+		return results
+
+	def toposorted_nodes(self, edges):
+		# Build the adj list
+		adj_list, outdegree = Graph._adj_list(edges)
+		sorted_nodes = []
+		node_deps = {}
+
+		# Start processing with leaf nodes
+		queue = Graph._outdeg_leaf_nodes(outdegree)
+
+		while queue:
+			next_queue = []
+			for node_id in queue:
+				dependencies = adj_list.get(node_id, [])
+				sorted_nodes.append(node_id)
+				node_deps[node_id] = dependencies
+
+				# Update outdegree for nodes that call this node
+				for caller, targets in adj_list.items():
+					if node_id in targets:
+						outdegree[caller] -= 1
+						if outdegree[caller] == 0:
+							next_queue.append(caller)
+
+			queue = next_queue
+
+		# Handle unresolved nodes (due to cycles or recursion)
+		for node_id, degree in outdegree.items():
+			if degree > 0:
+				dependencies = adj_list.get(node_id, [])
+				sorted_nodes.append(node_id)
+				node_deps[node_id] = dependencies
+
+		return (sorted_nodes, node_deps)
+
+
 	def clean_up(self):
 		for edge_type in list(self.edges.keys()):
 			self.edges[edge_type] = [
@@ -324,7 +486,7 @@ class Graph:
 				if edge.source in self.nodes and edge.target in self.nodes
 			]
    
-	def __str__(self):
+	def __repr__(self):
 		return json.dumps(self.to_dict())
 
 	def to_dict(self, *args: str, node_labels: Optional[Union[str, Iterable[str]]] = None) -> dict:
