@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from io import TextIOWrapper
 import json
 import os
@@ -282,10 +283,11 @@ class LLMFilter(Filter):
 			if os.path.exists('stop'):
 				raise StopIteration
 
-			counter = (counter+1)%5
-			if counter==4:
+			counter += 1
+			if counter==10:
 				log_file.flush()
 				jsonl_file.flush()
+				counter %= 10
 
   
 		hierarchy = build_hierarchy(triplets)
@@ -445,17 +447,18 @@ class LLMFilter(Filter):
 
 	def update_method_properties(self, data: Graph, description: dict, method: Node):
 		"""Update method properties with the generated description."""
-		param_nodes = [
-			data.nodes[edge.target]
-			for edge in data.edges['hasParameter']
-			if edge.source == method.id
-		]
+		
 
 		for key, value in description.items():
 			if key.endswith('Reason'):
 				continue
 			key_lower = lower1(key)
-			if key_lower == 'parameters':
+			if key_lower == 'parameters' and isinstance(value, Iterable):
+				param_nodes = [
+						data.nodes[edge.target]
+						for edge in data.edges['hasParameter']
+						if edge.source == method.id
+					]
 				for param in value:
 					matching_params = [
 						node
