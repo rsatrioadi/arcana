@@ -6,8 +6,9 @@ import re
 import subprocess
 import sys
 import time
-from collections import Counter
-from typing import Dict, Any
+from itertools import combinations
+from collections import Counter, defaultdict
+from typing import Dict, Any, Tuple, List
 
 from openai import OpenAI
 from tqdm.auto import tqdm
@@ -169,7 +170,7 @@ def build_triplets(edge_list1, edge_list2) -> dict:
 	methods = sorted(triplets(edge_list1, edge_list2))
  
 	return methods
-    
+	
 def build_hierarchy(method_triplets) -> dict:
 	classes = sorted({(pkg, clz) for pkg, clz, _ in method_triplets})
 	packages = sorted({pkg for pkg, _ in classes})
@@ -184,12 +185,31 @@ def build_hierarchy(method_triplets) -> dict:
 	return hierarchy
 
 class CustomJSONEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, set):
-            # Convert set to list
-            return list(obj)
-        # Call the default method for other types
-        return super().default(obj)
+	def default(self, obj):
+		if isinstance(obj, set):
+			# Convert set to list
+			return list(obj)
+		# Call the default method for other types
+		return super().default(obj)
+
+def group_paths_by_endpoints(paths: List[List[Edge]]) -> Dict[Tuple[str, str], List[List[Edge]]]:
+	"""
+	Groups paths by the tuple of (first edge's source, last edge's target).
+
+	Args:
+		paths (List[List[Edge]]): The list of paths to group.
+
+	Returns:
+		Dict[Tuple[str, str], List[List[Edge]]]: A dictionary where keys are 
+		tuples (first edge's source, last edge's target), and values are lists of paths.
+	"""
+	grouped_paths = defaultdict(list)
+	for path in paths:
+		if path:  # Ensure the path is not empty
+			start = path[0].source
+			end = path[-1].target
+			grouped_paths[(start, end)].append(path)
+	return grouped_paths
 
 class LLMFilter(Filter):
 	def __init__(self, config: Dict[str, Dict[str, Any]]):
@@ -239,7 +259,7 @@ class LLMFilter(Filter):
 		"""Generate a description for a given node."""
 		sr, sn = '\r', '\n'
 		if not keys:
-			keys = ['description', 'docComment', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'roleStereotype', 'layer']
+			keys = ['description', 'docComment', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'stereotype', 'roleStereotype', 'layer']
 
 		lines = {key:f"**{key}**: {sentence(str(node.properties[key]).replace(sr,'').replace(sn,' '))} " for key in keys if key in node.properties and key != 'docComment' and node.properties[key]}
 		if 'docComment' in keys and 'docComment' in node.properties and node.properties['docComment']:
@@ -251,12 +271,12 @@ class LLMFilter(Filter):
 		"""Process each package, class, and method in the hierarchy."""
   
 		# all_method_ids = [ node.id 
-        #             for node 
-        #             in (data.find_nodes(label="Operation") + data.find_nodes(label="Constructor")) ]
+		#			 for node 
+		#			 in (data.find_nodes(label="Operation") + data.find_nodes(label="Constructor")) ]
 		# independent_method_ids = [ node_id 
 		# 			for node_id 
-     	# 			in all_method_ids 
-        #  			if node_id not in [edge.source for edge in data.find_edges(label="invokes")] ]
+	 	# 			in all_method_ids 
+		#  			if node_id not in [edge.source for edge in data.find_edges(label="invokes")] ]
 		st_contains_st = data.find_edges(label='contains',source_label='Structure',target_label='Structure')
 		ct_contains_st = data.find_edges(label='contains',target_label='Structure', where_source=lambda node: 'Container' in node.labels and 'Structure' not in node.labels)
 		new_ct_sources = {edge.target:data.find_source(data.edges['contains'],data.nodes[edge.target],lambda node:'Structure' not in node.labels,data.nodes[edge.source]).id for edge in st_contains_st}
@@ -302,6 +322,7 @@ class LLMFilter(Filter):
 		# print('==========')
   
 		for pkg_id in tqdm(sorted_pkg_ids, desc="Processing packages", position=1):
+			break
 			pkg_data = hierarchy.get(pkg_id, dict())
 			package = data.nodes[pkg_id]
 
@@ -332,8 +353,72 @@ class LLMFilter(Filter):
 			if os.path.exists('stop'):
 				raise StopIteration
 
+		paths = data.find_paths("contains", "hasScript", "invokes", "-hasScript", "-contains")
+		path_groups = group_paths_by_endpoints(paths)
+  
+		# for k, v in path_groups.items():
+		# 	print(k)
+		# 	for i in v:
+		# 		print("*", [(edge.source, edge.target) for edge in i])
+		
+		pkg_pairs = list(combinations(sorted_pkg_ids,2))
+		for pkg2_id, pkg1_id in tqdm(pkg_pairs, desc='Processing package interactions', position=0, leave=False):
+			pkg1 = data.nodes[pkg1_id]
+			pkg2 = data.nodes[pkg2_id]
+			if ('Structure' not in pkg1.labels) and ('Structure' not in pkg2.labels):
+				if path_groups[(pkg1_id,pkg2_id)]:
+					self.process_interactions(data, client, model, pkg1, pkg2, path_groups[(pkg1_id,pkg2_id)], hierarchy, jsonl_file, log_file)
+				if path_groups[(pkg2_id,pkg1_id)]:
+					self.process_interactions(data, client, model, pkg2, pkg1, path_groups[(pkg2_id,pkg1_id)], hierarchy, jsonl_file, log_file)
+
+	def process_interactions(self, data: Graph, client: OpenAI, model: str, pkg1: Node, pkg2: Node, path_groups: List[Edge], hierarchy, jsonl_file: TextIOWrapper, log_file: TextIOWrapper):
+		pkg1_name = pkg1.properties["qualifiedName"]
+		pkg2_name = pkg2.properties["qualifiedName"]
+		pkg1_desc = pkg1.properties["description"]
+		pkg2_desc = pkg2.properties["description"]
+  
+		pkg1_data = hierarchy.get(pkg1.id, dict())
+		pkg2_data = hierarchy.get(pkg2.id, dict())
+  
+		cls1_info = "\n".join(f"        - `{data.nodes[c_id].properties['simpleName']}`: {data.nodes[c_id].properties['description']}" for c_id, _ in pkg1_data.items())
+		cls2_info = "\n".join(f"        - `{data.nodes[c_id].properties['simpleName']}`: {data.nodes[c_id].properties['description']}" for c_id, _ in pkg2_data.items())
+  
+		def describe_path(path):
+			src_cls = data.nodes[path[1].source]
+			src_mth = data.nodes[path[1].target]
+			tgt_mth = data.nodes[path[-2].source]
+			tgt_cls = data.nodes[path[-2].target]
+			return f"Method `{src_mth.properties['simpleName']}` ({src_mth.properties['description']}) of class `{src_cls.properties['qualifiedName']}` invokes method `{tgt_mth.properties['simpleName']}` ({tgt_mth.properties['description']}) of class `{tgt_cls.properties['qualifiedName']}`."
+  
+		dep_info = f"    - Dependencies from `{pkg1_name}` to `{pkg2_name}`:\n" + "\n".join(f"        - {describe_path(path)}" for path in path_groups) if path_groups else ""
+  
+		prompt = templates.interaction_analysis.format(
+			project_name=self.project_name,
+			project_desc=self.project_desc,
+			pkg1_name=pkg1_name,
+			pkg2_name=pkg2_name,
+			pkg1_desc=pkg1_desc,
+			pkg2_desc=pkg2_desc,
+			cls1_info=cls1_info,
+			cls2_info=cls2_info,
+			dep_info=dep_info
+		)
+
+		log_file.write(prompt)
+		log_file.write('\n\n======\n\n')
+
+		description = self.generate_text_description(client, model, prompt)
+		pkg1_edge = Edge(source=pkg1.id, target=pkg2.id, label="dependsOn", description=description) if dep_info else None
+
+		if pkg1_edge:
+			if "dependsOn" not in data.edges:
+				data.edges["dependsOn"] = []
+			data.edges["dependsOn"].append(pkg1_edge)
+			jsonl_file.write(json.dumps(pkg1_edge.to_dict(), cls=CustomJSONEncoder))
+			jsonl_file.write('\n')
+
 	def process_method(self, data: Graph, client: OpenAI, model: str, jsonl_file: TextIOWrapper, log_file: TextIOWrapper, met_id: str, class_name: str,
-	                   class_kind: str, node_deps: dict):
+						class_kind: str, node_deps: dict):
 		"""Process a single method and generate its description."""
 		method = data.nodes[met_id]
 
@@ -354,7 +439,7 @@ class LLMFilter(Filter):
 			log_file.write(prompt)
 			log_file.write('\n\n======\n\n')
 
-			description = self.generate_description(client, model, prompt)
+			description = self.generate_json_description(client, model, prompt)
 			self.update_method_properties(data, description, method)
 
 			jsonl_file.write(json.dumps({
@@ -367,7 +452,7 @@ class LLMFilter(Filter):
 			jsonl_file.write('\n')
    
 	def process_class(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file, cls_id: str, clasz: dict, class_name: str,
-	                  class_kind: str, cls_data: list):
+					  class_kind: str, cls_data: list):
 		"""Process a single class and generate its description."""
 		ancestors, fields = self.get_class_relations(data, cls_id)
 		methods_descriptions = self.get_methods_descriptions(data, cls_data)
@@ -385,7 +470,7 @@ class LLMFilter(Filter):
 		log_file.write(prompt)
 		log_file.write('\n\n======\n\n')
 
-		description = self.generate_description(client, model, prompt)
+		description = self.generate_json_description(client, model, prompt)
 		self.update_class_properties(data, description, clasz)
 
 		jsonl_file.write(json.dumps({
@@ -398,7 +483,7 @@ class LLMFilter(Filter):
 		jsonl_file.write('\n')
 
 	def process_package(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file, pkg_id: str, package: dict,
-	                    pkg_data: dict, pkg_deps: dict):
+						pkg_data: dict, pkg_deps: dict):
 		"""Process a single package and generate its description."""
 		classes_descriptions = self.get_classes_descriptions(data, pkg_data)
 		package_descriptions = self.get_packages_descriptions(data, pkg_deps[pkg_id])
@@ -414,7 +499,7 @@ class LLMFilter(Filter):
 		log_file.write(prompt)
 		log_file.write('\n\n======\n\n')
 
-		description = self.generate_description(client, model, prompt)
+		description = self.generate_json_description(client, model, prompt)
 		self.update_package_properties(data, description, package)
 
 		jsonl_file.write(json.dumps({
@@ -424,7 +509,7 @@ class LLMFilter(Filter):
 				'properties': description}}))
 		jsonl_file.write('\n')
 
-	def generate_description(self, client: OpenAI, model: str, prompt: str) -> dict:
+	def generate_json_description(self, client: OpenAI, model: str, prompt: str) -> dict:
 		"""Generate a description using the OpenAI client."""
 		try:
 			response = client.chat.completions.create(
@@ -442,6 +527,21 @@ class LLMFilter(Filter):
 			description = json.loads(description)
 		except:
 			description = dict()
+
+		return description
+
+	def generate_text_description(self, client: OpenAI, model: str, prompt: str) -> dict:
+		"""Generate a description using the OpenAI client."""
+		try:
+			response = client.chat.completions.create(
+				model=model,
+				messages=[{"role": "user", "content": prompt}],
+				max_tokens=4096,
+				temperature=0
+			)
+			description = response.choices[0].message.content
+		except:
+			description = ""
 
 		return description
 

@@ -1,2 +1,2 @@
-from .graph import Graph, invert, compose, lift, triplets
+from .graph import Graph, Node, Edge, invert, compose, lift, triplets
 from .pipefilter import Pipeline, Filter

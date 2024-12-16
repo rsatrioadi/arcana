@@ -17,6 +17,8 @@ Explain the above method on the following aspects:
   howToUse: "Describe the usage or the expected set-up of using the method, in less than 3 sentences.",
   howItWorks: "Describe the implementation details of the method, in less than 5 sentences.",
   assertions: {{ preConditions: ["pre-conditions of the method", ...], postConditions: ["pre-conditions of the method", ...] }},
+  stereotype: one of "Accessor", "Mutator", "Creational", "Collaborational", or "Other",
+  stereotypeReason: "Explain the rationale of the stereotype choice",
   layer:...,
   layerReason:...
 }}
@@ -48,12 +50,12 @@ Methods:
 
 Explain the above {struct_type} on the following aspects:
 
-{{ description: "Describe the responsibility of the {struct_type} in one sentence.", 
-  keywords: ["list", "of", "keywords", "relevant", "to", "the", "{struct_type}"],
+{{ description: "Describe the key responsibilities of the {struct_type} in up to three sentences.", 
+  keywords: ["list", "of", "keywords", "relevant", "to", "the", "{struct_type}"], // try to have nouns as well as verb keywords
   roleStereotype:..., 
-  roleStereotypeReason:...,
-  layer:...,
-  layerReason:... }}
+  roleStereotypeReason:... }}
+
+When describing the responsibilities, consider that a responsibility can be fulfilled by a group of methods within the {struct_type}. In other words, an intermediate step for describing the {struct_type} is to cluster its methods into a few method responsibility-type.
 
 For the `roleStereotype`, fill the value with one of the following role stereotypes which responsibility is exhibited by the {struct_type}:
 
@@ -68,15 +70,6 @@ For the `roleStereotype`, fill the value with one of the following role stereoty
 
 In `roleStereotypeReason`, explain why this {struct_type} fits your stereotype of choice but not the other stereotypes.
 
-For the `layer`, consider the functionalities of architectural layers below:
-
-- **Presentation Layer**: Manages the user interface, defines UI elements and behavior, displays information, responds to user input, and updates views. Typically (but not only) contains User Interfacers.
-- **Service Layer**: Controls the application flow, orchestrates domain operations, connects UI events with domain logic, and synchronizes domain changes with the UI. Typically (but not only) contains Coordinators and (Application) Controllers.
-- **Domain Layer**: Handles business logic, represents domain data and behavior, and performs necessary computations for domain operations. Typically (but not only) contains Information Holders, Service Providers, Structurers, Coordinators, and (Domain) Controllers.
-- **Data Source Layer**: Interacts with databases, filesystems, hardware, messaging systems, or other data sources, performs CRUD operations, handles data conversion, and ensures data integrity. Typically (but not only) contains External Interfacers.
-
-In `layerReason`, explain why this {struct_type} fits your layer of choice but not the other layers.
-
 Respond with a well-formatted JSON object. Do not use any quote marks ("'`) within the JSON values. In the `description`, do not mention the name of the role stereotype or layer.'''
 
 component_analysis = '''Consider a project {project_name}, {project_desc}. Given a package `{pkg_name}` containing the following classes:
@@ -89,9 +82,9 @@ and the following subpackages:
 
 Explain the above package on the following aspects:
 
-{{ description: "Describe the purpose of the package in at most five sentences. Try to describe the package at a more abstract level of functionality rather than implementation detail.",
+{{ description: "Describe the functionality of the package in up to five sentences.",
   title: "A Noun Phrase that Describes the Package",
-  keywords: ["list", "of", "keywords", "relevant", "to", "the", "package"],
+  keywords: ["list", "of", "keywords", "relevant", "to", "the", "package"], // try to have nouns as well as verb keywords
   layer:...,
   layerReason:... }}
 
@@ -105,3 +98,31 @@ For the `layer`, consider the functionalities of architectural layers below:
 In `layerReason`, explain why this package fits your layer of choice but not the other layers.
 
 Respond with a well-formatted JSON object. Do not use any quote marks ("'`) within the JSON values. In the `description`, do not mention the name of the layer.'''
+
+interaction_analysis = '''## Input:
+
+Consider a project {project_name}, {project_desc}.
+
+- Package Information:
+    - `{pkg1_name}`: {pkg1_desc}
+    - `{pkg2_name}`: {pkg2_desc}
+
+- Class Information:
+    - `{pkg1_name}`:
+{cls1_info}
+    - `{pkg2_name}`:
+{cls2_info}
+
+- Inter-Package Dependencies:
+{dep_info}
+
+## Task:
+
+Using the provided information, describe the interaction between the {pkg1_name} and {pkg2_name} packages, focusing on:
+
+- The purpose and nature of their dependency in terms of design.
+- An abstract, high-level description of the relationship without referencing specific classes or methods.
+    
+## Output:
+
+Provide a cohesive explanation of the interaction in one to two sentences. Keep the response plain text.'''

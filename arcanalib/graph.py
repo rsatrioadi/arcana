@@ -65,37 +65,40 @@ def invert(edge_list: List[Edge], new_label: Optional[str] = None) -> List[Edge]
 	]
 
 def compose(edges1: List[Edge], edges2: List[Edge], new_label: Optional[str] = None) -> List[Edge]:
-	"""
-	Composes two lists of edges.
+    """
+    Composes two lists of edges.
 
-	Args:
-		edges1 (list): The first list of edges.
-		edges2 (list): The second list of edges.
-		new_label (str, optional): A new label for the composed edges. Defaults to None.
+    Args:
+        edges1 (list): The first list of edges.
+        edges2 (list): The second list of edges.
+        new_label (str, optional): A new label for the composed edges. Defaults to None.
 
-	Returns:
-		list: A list of composed edges.
-	"""
-	mapping = {
-		edge.source: {
-			'target': edge.target,
-			'label': edge.label,
-			'weight': edge.properties.get('weight', 1)
-		}
-		for edge in edges2
-	}
-	composed_edges = []
-	for edge in edges1:
-		if edge.target in mapping:
-			new_weight = mapping[edge.target]['weight'] * edge.properties.get('weight', 1)
-			composed_edge = Edge(
-				source=edge.source,
-				target=mapping[edge.target]['target'],
-				label=new_label if new_label else f"{edge.label},{mapping[edge.target]['label']}",
-				weight=new_weight
-			)
-			composed_edges.append(composed_edge)
-	return composed_edges
+    Returns:
+        list: A list of composed edges.
+    """
+    # Create a mapping that allows multiple targets for each source
+    mapping = defaultdict(list)
+    for edge in edges2:
+        mapping[edge.source].append({
+            'target': edge.target,
+            'label': edge.label,
+            'weight': edge.properties.get('weight', 1)
+        })
+    
+    composed_edges = []
+    for edge in edges1:
+        if edge.target in mapping:
+            for target_mapping in mapping[edge.target]:
+                new_weight = target_mapping['weight'] * edge.properties.get('weight', 1)
+                composed_edge = Edge(
+                    source=edge.source,
+                    target=target_mapping['target'],
+                    label=new_label if new_label else f"{edge.label},{target_mapping['label']}",
+                    properties={"weight": new_weight}
+                )
+                composed_edges.append(composed_edge)
+    
+    return composed_edges
 
 
 def lift(edges1: List[Edge], edges2: List[Edge], new_label: Optional[str] = None) -> List[Edge]:
@@ -530,3 +533,41 @@ class Graph:
 				"edges": [{"data": edge.to_dict()['data']} for edge in sum(included_edges.values(), [])]
 			}
 		}
+
+	def find_paths(self, *edge_sequence: List[str]) -> List[List[Edge]]:
+		"""
+		Finds paths in the graph that match a given sequence of edge labels.
+
+		Args:
+			graph (Graph): The graph to search for paths.
+			edge_sequence (List[str]): The sequence of edge labels to match.
+
+		Returns:
+			List[List[Edge]]: A list of paths, where each path is a list of edges.
+		"""
+		def get_edges(label: str) -> List[Edge]:
+			"""Retrieve edges matching a label, considering `-` for inverse edges."""
+			if label.startswith("-"):
+				base_label = label[1:]
+				if base_label in self.edges:
+					return invert(self.edges[base_label])
+				return []
+			return self.edges.get(label, [])
+
+		def find_next(paths: List[List[Edge]], label: str) -> List[List[Edge]]:
+			"""Extend existing paths by one step based on the label."""
+			next_paths = []
+			for path in paths:
+				last_node = path[-1].target if path else None
+				next_edges = get_edges(label)
+				for edge in next_edges:
+					if not path or edge.source == last_node:
+						next_paths.append(path + [edge])
+			return next_paths
+
+		# Start generating paths
+		paths = [[]]  # Begin with an empty path
+		for label in edge_sequence:
+			paths = find_next(paths, label)
+
+		return paths
