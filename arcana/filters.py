@@ -322,7 +322,6 @@ class LLMFilter(Filter):
 		# print('==========')
   
 		for pkg_id in tqdm(sorted_pkg_ids, desc="Processing packages", position=1):
-			break
 			pkg_data = hierarchy.get(pkg_id, dict())
 			package = data.nodes[pkg_id]
 
