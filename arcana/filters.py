@@ -1,22 +1,20 @@
-from collections.abc import Iterable
-from io import TextIOWrapper
 import json
 import os
 import re
 import subprocess
 import sys
 import time
-from itertools import combinations
-from collections import Counter, defaultdict
-from typing import Dict, Any, Tuple, List
-
-from openai import OpenAI
-from tqdm.auto import tqdm
 
 from arcana import templates
 from arcanalib.graph import Edge, Graph, Node, triplets, invert, lift
 from arcanalib.pipefilter import Filter, Seeder
-
+from collections import Counter, defaultdict
+from collections.abc import Iterable
+from io import TextIOWrapper
+from itertools import combinations
+from openai import OpenAI
+from tqdm.auto import tqdm
+from typing import Dict, Any, Tuple, List
 
 
 def remove_author(s):
@@ -92,8 +90,6 @@ class CLISeeder(Seeder):
 		:param command: The command to be executed.
 		"""
 		self.command = command
-
-	# sys.stderr.write(f"Command: {self.command}\n")
 
 	def generate(self) -> Graph:
 		"""
@@ -264,19 +260,12 @@ class LLMFilter(Filter):
 		lines = {key:f"**{key}**: {sentence(str(node.properties[key]).replace(sr,'').replace(sn,' '))} " for key in keys if key in node.properties and key != 'docComment' and node.properties[key]}
 		if 'docComment' in keys and 'docComment' in node.properties and node.properties['docComment']:
 			lines['docComment'] = f"**docComment**: {sentence(remove_author(str(node.properties['docComment'])).replace(sr,'').replace(sn,' '))} "
-		# print(lines)
+
 		return ' '.join(lines[key] for key in keys if key in lines)
 
 	def process_hierarchy(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file):
 		"""Process each package, class, and method in the hierarchy."""
   
-		# all_method_ids = [ node.id 
-		#			 for node 
-		#			 in (data.find_nodes(label="Operation") + data.find_nodes(label="Constructor")) ]
-		# independent_method_ids = [ node_id 
-		# 			for node_id 
-	 	# 			in all_method_ids 
-		#  			if node_id not in [edge.source for edge in data.find_edges(label="invokes")] ]
 		st_contains_st = data.find_edges(label='contains',source_label='Structure',target_label='Structure')
 		ct_contains_st = data.find_edges(label='contains',target_label='Structure', where_source=lambda node: 'Container' in node.labels and 'Structure' not in node.labels)
 		new_ct_sources = {edge.target:data.find_source(data.edges['contains'],data.nodes[edge.target],lambda node:'Structure' not in node.labels,data.nodes[edge.source]).id for edge in st_contains_st}
@@ -332,12 +321,6 @@ class LLMFilter(Filter):
 				class_kind = clasz.properties['kind']
 				class_kind = 'enum' if class_kind == 'enumeration' else 'abstract class' if class_kind == 'abstract' else class_kind
 
-				# for met_id in tqdm(cls_data, desc='Processing methods', position=2, leave=False):
-				# 	self.process_method(data, client, model, file, met_id, class_name, class_kind)
-
-				# 	if os.path.exists('stop'):
-				# 		raise StopIteration
-
 				self.process_class(data, client, model, jsonl_file, log_file, cls_id, clasz, class_name, class_kind, cls_data)
 
 				if os.path.exists('stop'):
@@ -355,11 +338,6 @@ class LLMFilter(Filter):
 		paths = data.find_paths("contains", "hasScript", "invokes", "-hasScript", "-contains")
 		path_groups = group_paths_by_endpoints(paths)
   
-		# for k, v in path_groups.items():
-		# 	print(k)
-		# 	for i in v:
-		# 		print("*", [(edge.source, edge.target) for edge in i])
-		
 		pkg_pairs = list(combinations(sorted_pkg_ids,2))
 		for pkg2_id, pkg1_id in tqdm(pkg_pairs, desc='Processing package interactions', position=0, leave=False):
 			pkg1 = data.nodes[pkg1_id]
