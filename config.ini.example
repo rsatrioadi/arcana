@@ -13,3 +13,11 @@ model=llama3
 command={javaexe} -jar {jarfile} -i {input} -a -n {name} -f json
 javaexe=./javapers/jdk-17.0.11+9-jre/bin/java.exe
 jarfile=./javapers/javapers-1.1.2-jar-with-dependencies.jar
+
+[layers]
+layer1name=UI
+layer1desc=Handles user interface, such as instatiating, setting properties of, or laying out widget objects and capturing user interactions.
+layer2name=Logic
+layer2desc=Handles application and domain logic, i.e., neither UI nor data access.
+layer3name=Data
+layer3desc=Handles data access, e.g., managing database connections, querying databases, reading/writing files, and invoking web services.
