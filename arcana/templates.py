@@ -25,10 +25,7 @@ Explain the above method on the following aspects:
 
 For the `layer`, fill the value with one of the following architectural layer which functionality is exhibited by the method source code:
 
-- **Presentation Layer**: Manages the user interface, defines UI elements and behavior, displays information, responds to user input, and updates views.
-- **Service Layer**: Controls the application flow, orchestrates domain operations, connects UI events with domain logic, and synchronizes domain changes with the UI.
-- **Domain Layer**: Handles business logic, represents domain data and behavior, and performs necessary computations for domain operations.
-- **Data Source Layer**: Interacts with databases, filesystems, hardware, messaging systems, or other data sources, performs CRUD operations, handles data conversion, and ensures data integrity.
+{layers}
 
 In `layerReason`, explain why this method fits your layer of choice but not the other layers.
 
@@ -90,10 +87,7 @@ Explain the above package on the following aspects:
 
 For the `layer`, consider the functionalities of architectural layers below:
 
-- **Presentation Layer**: Manages the user interface, defines UI elements and behavior, displays information, responds to user input, and updates views. Typically (but not only) contains User Interfacers.
-- **Service Layer**: Controls the application flow, orchestrates domain operations, connects UI events with domain logic, and synchronizes domain changes with the UI. Typically (but not only) contains Coordinators and (Application) Controllers.
-- **Domain Layer**: Handles business logic, represents domain data and behavior, and performs necessary computations for domain operations. Typically (but not only) contains Information Holders, Service Providers, Structurers, Coordinators, and (Domain) Controllers.
-- **Data Source Layer**: Interacts with databases, filesystems, hardware, messaging systems, or other data sources, performs CRUD operations, handles data conversion, and ensures data integrity. Typically (but not only) contains External Interfacers.
+{layers}
 
 In `layerReason`, explain why this package fits your layer of choice but not the other layers.
 
