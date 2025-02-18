@@ -8,7 +8,7 @@ import time
 from arcana import templates
 from arcanalib.graph import Edge, Graph, Node, triplets, invert, lift
 from arcanalib.pipefilter import Filter, Seeder
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, OrderedDict
 from collections.abc import Iterable
 from io import TextIOWrapper
 from itertools import combinations
@@ -114,7 +114,8 @@ class CLISeeder(Seeder):
 			self.command,
 			capture_output=True,
 			text=True,
-   			encoding="utf-8"
+			shell=True,
+			encoding="utf-8"
 		)
 
 		sys.stderr.write(process.stderr)
@@ -275,7 +276,7 @@ class LLMFilter(Filter):
 	def setup(self):
 		"""Setup necessary configuration and client."""
 		project_name = self.config['project']['name']
-		project_desc = self.config['project']['desc']
+		project_desc = sentence(self.config['project']['desc'])
 
 		openai_client_args = {
 			'api_key': self.config['llm'].get('apikey'),
@@ -293,11 +294,11 @@ class LLMFilter(Filter):
 		if not keys:
 			keys = ['description', 'docComment', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'stereotype', 'roleStereotype', 'layer']
 
-		lines = {key:f"**{key}**: {sentence(str(node.properties[key]).replace(sr,'').replace(sn,' '))} " for key in keys if key in node.properties and key != 'docComment' and node.properties[key]}
+		lines = {key:f"**{key}**: {sentence(str(node.properties[key]).replace(sr,'').replace(sn,' '))}" for key in keys if key in node.properties and key != 'docComment' and node.properties[key]}
 		if 'docComment' in keys and 'docComment' in node.properties and node.properties['docComment']:
 			lines['docComment'] = f"**docComment**: {sentence(remove_author(str(node.properties['docComment'])).replace(sr,'').replace(sn,' '))} "
 
-		return ' '.join(lines[key] for key in keys if key in lines)
+		return ' '.join(lines[key] for key in keys if key in lines).strip()
 
 	def process_hierarchy(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file):
 		"""Process each package, class, and method in the hierarchy."""
@@ -313,17 +314,15 @@ class LLMFilter(Filter):
 		# print('######################################################################')
 		sorted_method_ids, method_deps = data.toposorted_nodes(data.edges['invokes'])
 		# print(sorted_method_ids)
-  
+		
 		counter = 0
   
 		for met_id in tqdm(sorted_method_ids, desc='Processing methods', position=0, leave=False):
 			cls_id, pkg_id = met_to_cls_pkg[met_id]
+			method = data.nodes[met_id]
 			clasz = data.nodes[cls_id]
 
-			class_name = clasz.properties['qualifiedName']
-			class_kind = clasz.properties['kind']
-			class_kind = 'enum' if class_kind == 'enumeration' else 'abstract class' if class_kind == 'abstract' else class_kind
-			self.process_method(data, client, model, jsonl_file, log_file, met_id, class_name, class_kind, method_deps)
+			self.process_script(data, client, model, jsonl_file, log_file, method, clasz, method_deps)
 
 			if os.path.exists('stop'):
 				raise StopIteration
@@ -334,18 +333,9 @@ class LLMFilter(Filter):
 				jsonl_file.flush()
 				counter %= 10
 
-  
 		hierarchy = build_hierarchy(triplets)
-		# print(hierarchy)
-		# print('==========')
-  
 		sorted_pkg_ids, pkg_deps = data.toposorted_nodes(data.find_edges(label='contains',where_source=lambda node: 'Structure' not in node.labels,where_target=lambda node: 'Structure' not in node.labels))
-		# print(sorted_pkg_ids)
-		# print('==========')
-  
-		# print(pkg_deps)
-		# print('==========')
-  
+		
 		for pkg_id in tqdm(sorted_pkg_ids, desc="Processing packages", position=1):
 			pkg_data = hierarchy.get(pkg_id, dict())
 			package = data.nodes[pkg_id]
@@ -353,17 +343,12 @@ class LLMFilter(Filter):
 			for cls_id, cls_data in tqdm(pkg_data.items(), desc="Processing classes", position=2, leave=False):
 				clasz = data.nodes[cls_id]
 
-				class_name = clasz.properties['qualifiedName']
-				class_kind = clasz.properties['kind']
-				class_kind = 'enum' if class_kind == 'enumeration' else 'abstract class' if class_kind == 'abstract' else class_kind
-
-				self.process_class(data, client, model, jsonl_file, log_file, cls_id, clasz, class_name, class_kind, cls_data)
+				self.process_structure(data, client, model, jsonl_file, log_file, clasz, cls_data)
 
 				if os.path.exists('stop'):
 					raise StopIteration
 
-			self.process_package(data, client, model, jsonl_file, log_file, pkg_id, package, pkg_data, pkg_deps)
-
+			self.process_component(data, client, model, jsonl_file, log_file, package, pkg_data, pkg_deps)
 
 			log_file.flush()
 			jsonl_file.flush()
@@ -376,6 +361,10 @@ class LLMFilter(Filter):
   
 		pkg_pairs = list(combinations(sorted_pkg_ids,2))
 		for pkg2_id, pkg1_id in tqdm(pkg_pairs, desc='Processing package interactions', position=0, leave=False):
+      
+			if os.path.exists('stop'):
+				raise StopIteration
+
 			pkg1 = data.nodes[pkg1_id]
 			pkg2 = data.nodes[pkg2_id]
 			if ('Structure' not in pkg1.labels) and ('Structure' not in pkg2.labels):
@@ -384,146 +373,183 @@ class LLMFilter(Filter):
 				if path_groups[(pkg2_id,pkg1_id)]:
 					self.process_interactions(data, client, model, pkg2, pkg1, path_groups[(pkg2_id,pkg1_id)], hierarchy, jsonl_file, log_file)
 
-	def process_method(self, data: Graph, client: OpenAI, model: str, jsonl_file: TextIOWrapper, log_file: TextIOWrapper, met_id: str, class_name: str,
-						class_kind: str, node_deps: dict):
+	def compose_prompt(self, p, function_parameters):
+		prompt = p
+		for k,v in function_parameters.items():
+			if isinstance(v, dict) and len(v):
+				prompt += f"## {k}\n\n"
+				for k1,v1 in v.items():
+					if v1:
+						prompt += f"* {k1}: {str(v1)}\n"
+				prompt += "\n\n"
+			elif isinstance(v, list) and len(v):
+				prompt += f"## {k}\n\n"
+				for v1 in v:
+					if v1:
+						prompt += f"* {str(v1)}\n"
+				prompt += "\n\n"
+			elif v:
+				prompt += f"## {k}\n\n{str(v)}\n\n"
+		return prompt.strip()
+    
+	def process_script(self, graph: Graph, client: OpenAI, model: str, jsonl_file: TextIOWrapper, log_file: TextIOWrapper, script: Node, structure: Node, node_deps: dict):
 		"""Process a single method and generate its description."""
-		method = data.nodes[met_id]
 
-		if 'description' not in method.properties or not method.properties['description']:
-			method_name = method.properties['simpleName']
-			method_src = remove_java_comments(method.properties['sourceText'])
+		if 'description' not in script.properties or not script.properties['description'] or script.properties['description'] == "(no description)":
+			script_name = script.properties['simpleName']
+			script_src = remove_java_comments(script.properties['sourceText'])
+			script_kind = script.properties.get('kind', 'function')
+   
+			structure_name = structure.properties['qualifiedName']
+			structure_kind = structure.properties['kind']
+			structure_kind = 'enum' if structure_kind == 'enumeration' else 'abstract class' if structure_kind == 'abstract' else structure_kind
 
-			prompt = templates.script_analysis.format(
-				op_name=method_name,
-				struct_kind=class_kind,
-				struct_name=class_name,
-				op_src=method_src,
-				other_ops="(none)" if not node_deps[met_id] else "\n".join(f"- `{data.nodes[node_id].properties['simpleName']}`: {self.describe(data.nodes[node_id], 'description', 'returns', 'docComment')}" for node_id in node_deps[met_id]),
-				project_name=self.project_name,
-				project_desc=self.project_desc,
-				layers=self.layers_text
-			)
+			prompt = f"Describe the following {script_kind} by using the AnalyzeScript tool.\n\n"
+			script_parameters = OrderedDict()
+			script_parameters["Project Name"] = self.project_name
+			script_parameters["Project Description"] = self.project_desc
+			script_parameters[f"{script_kind.title()} Declaration"] = f"The {script_kind} {script_name} is declared within the {structure_kind} {structure_name}."
+			script_parameters[f"{script_kind.title()} Source Code"] = script_src
+			script_parameters[f"Other Functions/Methods Used"] = {
+					graph.nodes[node_id].properties['qualifiedName']: f"{self.describe(graph.nodes[node_id], 'description', 'returns', 'howToUse', 'docComment')}" 
+					for node_id in node_deps[script.id]
+				}
+			script_parameters["Possible Architectural Layers"] = dict(self.layers)
+
+			prompt = self.compose_prompt(prompt, script_parameters)
    
 			log_file.write(prompt)
 			log_file.write('\n\n======\n\n')
 
-			description = self.generate_json_description(client, model, prompt)
-			self.update_method_properties(data, description, method)
+			description = self.generate_json_description(client, model, prompt, "AnalyzeScript")
+			self.update_method_properties(graph, description, script)
 
 			layer_id = None
-			if method.has_property("layer") and \
-   					method.property("layer") in [name for name, _ in self.layers]:
-				layer_id = f"layer:{method.property('layer')}"
-			layer_node = data.find_node(label="Grouping", where=lambda node: node.id == layer_id)
+			if script.has_property("layer") and \
+   					script.property("layer") in [name for name, _ in self.layers]:
+				layer_id = f"layer:{script.property('layer')}"
+			layer_node = graph.find_node(label="Grouping", where=lambda node: node.id == layer_id)
 			if layer_node:
-				data.add_edge(method.id, layer_node.id, "implements", weight=1)
+				graph.add_edge(script.id, layer_node.id, "implements", weight=1)
 
 			jsonl_file.write(json.dumps({
 				'data': {
-					'id': method.id,
-					'labels': method.labels,
+					'id': script.id,
+					'labels': script.labels,
 					'properties': description
 				}
 			}, cls=CustomJSONEncoder))
 			jsonl_file.write('\n')
    
-	def process_class(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file, cls_id: str, clasz: dict, class_name: str,
-					  class_kind: str, cls_data: list):
+	def process_structure(self, graph: Graph, client: OpenAI, model: str, jsonl_file, log_file, structure: Node, structure_scripts: list):
 		"""Process a single class and generate its description."""
-		ancestors, fields = self.get_class_relations(data, cls_id)
-		methods_descriptions = self.get_methods_descriptions(data, cls_data)
-
-		prompt = templates.structure_analysis.format(
-			struct_type=class_kind,
-			struct_name=class_name,
-			ancestors="\n".join([f"- `{ancestor}`" for ancestor in ancestors]) if ancestors else "(none)",
-			fields="\n".join([f"- `{field}`" for field in fields]) if fields else "(none)",
-			methods="\n".join(methods_descriptions) if methods_descriptions else "(none)",
-			project_name=self.project_name,
-			project_desc=self.project_desc
-		)
   
+		# if 'description' not in structure.properties or not structure.properties['description'] or structure.properties['description'] == "(no description)":
+		ancestors, variables = self.get_structure_relations(graph, structure.id)
+		script_descriptions = self.get_script_descriptions(graph, structure_scripts)
+
+		structure_name = structure.properties['qualifiedName']
+		structure_kind = structure.properties['kind']
+		structure_kind = 'enum' if structure_kind == 'enumeration' else 'abstract class' if structure_kind == 'abstract' else structure_kind
+
+		prompt = f"Describe the following {structure_kind} using the AnalyzeStructure tool.\n\n"
+		structure_parameters = OrderedDict()
+		structure_parameters["Project Name"] = self.project_name
+		structure_parameters["Project Description"] = self.project_desc
+		structure_parameters[f"{structure_kind.title()} Name"] = structure_name
+		structure_parameters[f"{structure_kind.title()} Inhertis From"] = ancestors
+		structure_parameters[f"Enclosed Variables/Fields"] = variables
+		structure_parameters[f"Enclosed Functions/Methods"] = script_descriptions
+
+		prompt = self.compose_prompt(prompt, structure_parameters)
+
 		log_file.write(prompt)
 		log_file.write('\n\n======\n\n')
 
-		description = self.generate_json_description(client, model, prompt)
-		self.update_class_properties(data, description, clasz)
+		description = self.generate_json_description(client, model, prompt, "AnalyzeStructure")
+		self.update_class_properties(graph, description, structure)
 
 		jsonl_file.write(json.dumps({
 			'data': {
-				'id': clasz.id,
-				'labels': list(clasz.labels),
+				'id': structure.id,
+				'labels': list(structure.labels),
 				'properties': description
 			}
 		}))
 		jsonl_file.write('\n')
 
-	def process_package(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file, pkg_id: str, package: dict,
-						pkg_data: dict, pkg_deps: dict):
+	def process_component(self, graph: Graph, client: OpenAI, model: str, jsonl_file, log_file, component: Node,
+						component_contents: dict, component_deps: dict):
 		"""Process a single package and generate its description."""
-		classes_descriptions = self.get_classes_descriptions(data, pkg_data)
-		package_descriptions = self.get_packages_descriptions(data, pkg_deps[pkg_id])
+  
+		# if 'description' not in component.properties or not component.properties['description'] or component.properties['description'] == "(no description)":
+		structure_descriptions = self.get_structure_descriptions(graph, component_contents)
+		subcomponent_descriptions = self.get_component_descriptions(graph, component_deps[component.id])
+		component_kind = component.properties.get('kind', "component")
 
-		prompt = templates.component_analysis.format(
-			pkg_name=package.properties['qualifiedName'],
-			classes="(none)" if not classes_descriptions else "\n".join(classes_descriptions),
-			packages="(none)" if not package_descriptions else "\n".join(package_descriptions),
-			project_name=self.project_name,
-			project_desc=self.project_desc,
-			layers=self.layers_text
-		)
+		prompt = f"Describe the following {component_kind} using the AnalyzeComponent tool.\n\n"
+		component_parameters = OrderedDict()
+		component_parameters["Project Name"] = self.project_name
+		component_parameters["Project Description"] = self.project_desc
+		component_parameters["Component Type"] = component_kind
+		component_parameters["Component Name"] = component.properties['qualifiedName']
+		component_parameters["Enclosed Sub-components"] = subcomponent_descriptions
+		component_parameters["Enclosed Classes"] = structure_descriptions
+		component_parameters["Possible Architectural Layers"] = dict(self.layers)
+
+		prompt = self.compose_prompt(prompt, component_parameters)
 
 		log_file.write(prompt)
 		log_file.write('\n\n======\n\n')
 
-		description = self.generate_json_description(client, model, prompt)
-		self.update_package_properties(data, description, package)
+		description = self.generate_json_description(client, model, prompt, "AnalyzeComponent")
+		self.update_package_properties(graph, description, component)
 
 		layer_id = None
-		if package.has_property("layer") and \
-				package.property("layer") in [name for name, _ in self.layers]:
-			layer_id = f"layer:{package.property('layer')}"
-		layer_node = data.find_node(label="Grouping", where=lambda node: node.id == layer_id)
+		if component.has_property("layer") and \
+				component.property("layer") in [name for name, _ in self.layers]:
+			layer_id = f"layer:{component.property('layer')}"
+		layer_node = graph.find_node(label="Grouping", where=lambda node: node.id == layer_id)
 		if layer_node:
-			data.add_edge(package.id, layer_node.id, "implements", weight=1)
+			graph.add_edge(component.id, layer_node.id, "implements", weight=1)
 
 		jsonl_file.write(json.dumps({
 			'data': {
-				'id': package.id,
-				'labels': list(package.labels),
+				'id': component.id,
+				'labels': list(component.labels),
 				'properties': description}}))
 		jsonl_file.write('\n')
 
-	def process_interactions(self, data: Graph, client: OpenAI, model: str, pkg1: Node, pkg2: Node, path_groups: List[Edge], hierarchy, jsonl_file: TextIOWrapper, log_file: TextIOWrapper):
-		pkg1_name = pkg1.properties["qualifiedName"]
-		pkg2_name = pkg2.properties["qualifiedName"]
-		pkg1_desc = pkg1.properties["description"]
-		pkg2_desc = pkg2.properties["description"]
+	def process_interactions(self, graph: Graph, client: OpenAI, model: str, c1: Node, c2: Node, path_groups: List[Edge], hierarchy, jsonl_file: TextIOWrapper, log_file: TextIOWrapper):
+		c1_name = c1.properties["qualifiedName"]
+		c2_name = c2.properties["qualifiedName"]
+		c1_desc = c1.properties["description"]
+		c2_desc = c2.properties["description"]
   
-		pkg1_data = hierarchy.get(pkg1.id, dict())
-		pkg2_data = hierarchy.get(pkg2.id, dict())
+		c1_contents = hierarchy.get(c1.id, dict())
+		c2_contents = hierarchy.get(c2.id, dict())
   
-		cls1_info = "\n".join(f"        - `{data.nodes[c_id].properties['simpleName']}`: {data.nodes[c_id].properties['description']}" for c_id, _ in pkg1_data.items())
-		cls2_info = "\n".join(f"        - `{data.nodes[c_id].properties['simpleName']}`: {data.nodes[c_id].properties['description']}" for c_id, _ in pkg2_data.items())
+		c1_structure_info = "\n".join(f"        - `{graph.nodes[c_id].properties['simpleName']}`: {graph.nodes[c_id].properties['description']}" for c_id, _ in c1_contents.items())
+		c2_structure_info = "\n".join(f"        - `{graph.nodes[c_id].properties['simpleName']}`: {graph.nodes[c_id].properties['description']}" for c_id, _ in c2_contents.items())
   
 		def describe_path(path):
-			src_cls = data.nodes[path[1].source]
-			src_mth = data.nodes[path[1].target]
-			tgt_mth = data.nodes[path[-2].source]
-			tgt_cls = data.nodes[path[-2].target]
-			return f"Method `{src_mth.properties['simpleName']}` ({src_mth.properties['description']}) of class `{src_cls.properties['qualifiedName']}` invokes method `{tgt_mth.properties['simpleName']}` ({tgt_mth.properties['description']}) of class `{tgt_cls.properties['qualifiedName']}`."
+			src_structure = graph.nodes[path[1].source]
+			src_method = graph.nodes[path[1].target]
+			tgt_method = graph.nodes[path[-2].source]
+			tgt_structure = graph.nodes[path[-2].target]
+			return f"{src_method.properties['kind'].capitalize()} `{src_method.properties['simpleName']}` ({src_method.properties['description']}) of {src_structure.properties['kind']} `{src_structure.properties['qualifiedName']}` invokes {tgt_method.properties['kind']} `{tgt_method.properties['simpleName']}` ({tgt_method.properties['description']}) of {tgt_structure.properties['kind']} `{tgt_structure.properties['qualifiedName']}`."
   
-		dep_info = f"    - Dependencies from `{pkg1_name}` to `{pkg2_name}`:\n" + "\n".join(f"        - {describe_path(path)}" for path in path_groups) if path_groups else ""
+		dep_info = f"    - Dependencies from `{c1_name}` to `{c2_name}`:\n" + "\n".join(f"        - {describe_path(path)}" for path in path_groups) if path_groups else ""
   
 		prompt = templates.interaction_analysis.format(
 			project_name=self.project_name,
 			project_desc=self.project_desc,
-			pkg1_name=pkg1_name,
-			pkg2_name=pkg2_name,
-			pkg1_desc=pkg1_desc,
-			pkg2_desc=pkg2_desc,
-			cls1_info=cls1_info,
-			cls2_info=cls2_info,
+			pkg1_name=c1_name,
+			pkg2_name=c2_name,
+			pkg1_desc=c1_desc,
+			pkg2_desc=c2_desc,
+			cls1_info=c1_structure_info,
+			cls2_info=c2_structure_info,
 			dep_info=dep_info
 		)
 
@@ -531,33 +557,62 @@ class LLMFilter(Filter):
 		log_file.write('\n\n======\n\n')
 
 		description = self.generate_text_description(client, model, prompt)
-		pkg1_edge = Edge(source=pkg1.id, target=pkg2.id, label="dependsOn", description=description) if dep_info else None
+		pkg1_edge = Edge(source=c1.id, target=c2.id, label="dependsOn", description=description) if dep_info else None
 
 		if pkg1_edge:
-			if "dependsOn" not in data.edges:
-				data.edges["dependsOn"] = []
-			data.edges["dependsOn"].append(pkg1_edge)
+			if "dependsOn" not in graph.edges:
+				graph.edges["dependsOn"] = []
+			graph.edges["dependsOn"].append(pkg1_edge)
 			jsonl_file.write(json.dumps(pkg1_edge.to_dict(), cls=CustomJSONEncoder))
 			jsonl_file.write('\n')
 
-	def generate_json_description(self, client: OpenAI, model: str, prompt: str) -> dict:
+	def generate_json_description(self, client: OpenAI, model: str, prompt: str = None, tool: str = None) -> dict:
 		"""Generate a description using the OpenAI client."""
 		try:
-			response = client.chat.completions.create(
-				model=model,
-				response_format={"type": "json_object"},
-				messages=[{"role": "user", "content": prompt}],
-				max_tokens=1024,
-				temperature=0
-			)
-			description = response.choices[0].message.content
-		except:
-			description = '{}'
+			if tool:
+				print(prompt)
+				response = client.chat.completions.create(
+					model=model,
+					messages=[
+						{"role": "system", "content": "You are a software architecture analysis tool."},
+						{"role": "user", "content": prompt}
+					],
+					tools=[templates.analyze_script_tool, templates.analyze_structure_tool, templates.analyze_component_tool],
+					tool_choice={"name": tool},
+					temperature=0,
+					seed=42,
+					timeout=float(self.config['llm'].get('timeout', 300))
+				)
+				print(response)
+    
+				tool_calls = response.choices[0].message.tool_calls
+    
+				if tool_calls:
+					args_str = tool_calls[0].function.arguments
+					description = json.loads(args_str)
+				else:
+					content = response.choices[0].message.content
+					json_content = find_first_valid_json(content)
+					if json_content:
+						description = json.loads(json_content)
+					else:
+						description = dict()
 
-		try:
-			description = json.loads(description)
+			else:
+				response = client.chat.completions.create(
+					model=model,
+					response_format={"type": "json_object"},
+					messages=[{"role": "user", "content": prompt}],
+					max_tokens=4096,
+					temperature=0,
+					seed=42,
+					timeout=float(self.config['llm'].get('timeout', 300))
+				)
+    
+				content = response.choices[0].message.content
+				description = json.loads(content)
 		except:
-			description = dict()
+			description = {}
 
 		if 'description' not in description:
 			description['description'] = "(no description)"
@@ -570,7 +625,9 @@ class LLMFilter(Filter):
 				model=model,
 				messages=[{"role": "user", "content": prompt}],
 				max_tokens=4096,
-				temperature=0
+				temperature=0,
+				seed=42,
+				timeout=float(self.config['llm'].get('timeout', 300))
 			)
 			description = response.choices[0].message.content
 		except:
@@ -581,7 +638,6 @@ class LLMFilter(Filter):
 	def update_method_properties(self, data: Graph, description: dict, method: Node):
 		"""Update method properties with the generated description."""
 		
-
 		for key, value in description.items():
 			if key.endswith('Reason'):
 				continue
@@ -593,15 +649,16 @@ class LLMFilter(Filter):
 						if edge.source == method.id
 					]
 				for param in value:
-					matching_params = [
-						node
-						for node in param_nodes
-						if node.properties['simpleName'] == param['name']
-					]
-					if matching_params:
-						param_node_id = matching_params[0].id
-						if param_node_id in data.nodes:
-							data.nodes[param_node_id].properties['description'] = param.get('description')
+					if isinstance(param, dict):
+						matching_params = [
+							node
+							for node in param_nodes
+							if node.properties['simpleName'] == param.get('name')
+						]
+						if matching_params:
+							param_node_id = matching_params[0].id
+							if param_node_id in data.nodes:
+								data.nodes[param_node_id].properties['description'] = param.get('description')
 			# elif key_lower == 'returns':
 			# 	method.properties['returns'] = value.get('description', None) if value and hasattr(value, 'get') else None
 			else:
@@ -619,45 +676,77 @@ class LLMFilter(Filter):
 			if not key.endswith('Reason'):
 				package.properties[lower1(key)] = description[key]
 
-	def get_class_relations(self, data: Graph, cls_id: str) -> tuple:
+	def get_structure_relations(self, data: Graph, cls_id: str) -> tuple:
 		"""Retrieve class ancestors and fields."""
-		ancestors = {
-			edge.target
+		ancestors = list({
+			data.nodes[edge.target].property("qualifiedName")
 			for edge in data.edges['specializes']
 			if edge.source == cls_id
-		}
+		})
 		fields = {
-			edge.target
+			data.nodes[edge.target]
 			for edge in data.edges['hasVariable']
 			if edge.source == cls_id
 		}
 		fields = [
-			' '.join(remove_java_comments(data.nodes[field].properties['sourceText']).split())
+			' '.join(remove_java_comments(field.properties['sourceText']).split())
 			for field in fields
 		]
 		return ancestors, fields
 
-	def get_methods_descriptions(self, data: Graph, cls_data: list) -> list:
+	def get_script_descriptions(self, data: Graph, cls_data: list) -> dict:
 		"""Generate descriptions for methods."""
-		return [
-			f"- `{data.nodes[met_id].properties['simpleName']}`: {self.describe(data.nodes[met_id])}"
+		return {
+			data.nodes[met_id].properties['simpleName']: self.describe(data.nodes[met_id])
 			for met_id in cls_data
-		]
+		}
 
-	def get_classes_descriptions(self, data: Graph, pkg_data: dict) -> list:
+	def get_structure_descriptions(self, data: Graph, pkg_data: dict) -> list:
 		"""Generate descriptions for classes."""
-		return [
-			f"- {data.nodes[cls_id].properties['kind']} `{data.nodes[cls_id].properties['qualifiedName']}`: {self.describe(data.nodes[cls_id])}"
+		return {
+			f"{data.nodes[cls_id].properties['kind']} {data.nodes[cls_id].properties['qualifiedName']}": self.describe(data.nodes[cls_id])
 			for cls_id, _ in pkg_data.items()
-		]
+		}
 
-	def get_packages_descriptions(self, data: Graph, package_ids: list) -> list:
+	def get_component_descriptions(self, data: Graph, package_ids: list) -> list:
 		"""Generate descriptions for packages."""
-		return [
-			f"- `{data.nodes[pkg_id].properties['qualifiedName']}`: {self.describe(data.nodes[pkg_id])}"
+		return {
+			data.nodes[pkg_id].properties['qualifiedName']: self.describe(data.nodes[pkg_id])
 			for pkg_id in package_ids
-		]
+		}
 
+def find_first_valid_json(text: str) -> str:
+    """
+    Finds the first valid JSON substring in the given text using a stack-based approach.
+    
+    It scans the text from left to right, and when it encounters a '{', it tracks the balanced
+    braces until a complete JSON object is formed. Once a candidate is found, it attempts to parse
+    it with json.loads(). If parsing succeeds, that candidate is returned immediately.
+    
+    Args:
+        text (str): The input string that may contain a JSON object.
+    
+    Returns:
+        str: The first valid JSON substring found, or an empty string if none is found.
+    """
+    n = len(text)
+    for i in range(n):
+        if text[i] == '{':
+            stack = 0
+            for j in range(i, n):
+                if text[j] == '{':
+                    stack += 1
+                elif text[j] == '}':
+                    stack -= 1
+                    if stack == 0:
+                        candidate = text[i:j+1]
+                        try:
+                            json.loads(candidate)
+                            return candidate
+                        except json.JSONDecodeError:
+                            # If this candidate isn't valid JSON, break and continue scanning.
+                            break
+    return ""
 
 def merge_node_properties(dict1: Dict[str, Node], dict2: Dict[str, Node], simplify_names=False):
 	for id2, obj2 in dict2.items():

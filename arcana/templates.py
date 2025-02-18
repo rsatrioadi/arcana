@@ -1,97 +1,205 @@
-script_analysis = '''Consider a project {project_name}, {project_desc}. This is method `{op_name}` of {struct_kind} `{struct_name}`:
+analyze_script_tool = {
+    "type": "function",
+    "function": {
+        "name": "AnalyzeScript",
+        "description": "Analyzes a program script given its source code and context. Returns an explanation covering functionality, parameters, return value, design rationale, usage, implementation details, assertions, stereotype, and architectural layer classification.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "One-sentence description of the script functionality."
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Parameter name."
+                            },
+                            "type": {
+                                "type": "string",
+                                "description": "Parameter type."
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "Brief description of the parameter."
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "description"
+                        ]
+                    },
+                    "description": "List of script parameters. Empty if none."
+                },
+                "returns": {
+                    "type": "string",
+                    "description": "One-sentence description of the returned object or value. For constructors, consider the newly created instance as the return."
+                },
+                "howToUse": {
+                    "type": "string",
+                    "description": "Usage instructions in less than three sentences."
+                },
+                "howItWorks": {
+                    "type": "string",
+                    "description": "Implementation details in less than five sentences."
+                },
+                "preConditions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of pre-conditions for the method."
+                },
+                "postConditions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of post-conditions for the method."
+                },
+                "stereotype": {
+                    "type": "string",
+                    "enum": [
+                        "Accessor",
+                        "Mutator",
+                        "Creational",
+                        "Collaborational",
+                        "Other"
+                    ],
+                    "description": "Design stereotype of the method."
+                },
+                "stereotypeReason": {
+                    "type": "string",
+                    "description": "One-sentence explanation for the chosen stereotype."
+                },
+                "layer": {
+                    "type": "string",
+                    "description": "Architectural layer classification selected from the provided options."
+                },
+                "layerReason": {
+                    "type": "string",
+                    "description": "Explanation why the method fits the chosen architectural layer but not others."
+                }
+            },
+            "required": [
+                "description",
+                "parameters",
+                "returns",
+                "howToUse",
+                "howItWorks",
+                "preConditions",
+                "postConditions",
+                "stereotype",
+                "stereotypeReason",
+                "layer",
+                "layerReason"
+            ]
+        }
+    }
+}
 
-```java
-{op_src}
-```
+analyze_structure_tool = {
+    "type": "function",
+    "function": {
+        "name": "AnalyzeStructure",
+        "description": "Analyzes a software structure based on its inheritance, fields, and methods. Returns an explanation covering the key responsibilities of the structure, relevant keywords, role stereotype, and rationale for the chosen stereotype.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Up to three sentences describing the key responsibilities of the structure."
+                },
+                "keywords": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of keywords relevant to the structure."
+                },
+                "roleStereotype": {
+                    "type": "string",
+                    "enum": [
+                        "Information Holder",
+                        "Service Provider",
+                        "Structurer",
+                        "Controller",
+                        "Coordinator",
+                        "User Interfacer",
+                        "External Interfacer",
+                        "Internal Interfacer"
+                    ],
+                    "description": "The role stereotype of the structure: \
+                      **Information Holder** is responsible for knowing facts and providing information to other objects. POJOs, Java Beans, and enumerations are usually information holders. \
+                      **Service Provider** is responsible for handling requests and performing specific services. It usually implements a specific interface with a small number of methods. Concrete strategies are service providers. \
+                      **Structurer** is responsible for managing relationships and constraints among related things. It is usually a collection or mapping of some sort, i.e., a subclass of a List, Set, Map, etc. \
+                      **Controller** is responsible for making decisions, directing the work of others, and handling important events. It directs the flow of the application or business process. \
+                      **Coordinator** is responsible for managing the actions of a group of workers and facilitating communication and work of other objects. It delegates requests to other objects. Very abstract classes and interfaces might be coordinators as they delegate the work to subclasses. \
+                      **User Interfacer** is responsible for transmitting user requests for action or display/render information that can be updated. It handles interactions with users. \
+                      **External Interfacer** is responsible for loading and storing information from/to external services, including database systems, web services, filesystems, hardware, etc. \
+                      **Internal Interfacer** is responsible for interfacing between two subsystems. It may bundle together information of requests from a group of objects to be sent to another object. Abstract adapters, bridges, facades, and proxies are internal interfacers."
+                },
+                "roleStereotypeReason": {
+                    "type": "string",
+                    "description": "One-sentence explanation for the chosen role stereotype."
+                }
+            },
+            "required": [
+                "description",
+                "keywords",
+                "roleStereotype",
+                "roleStereotypeReason"
+            ]
+        }
+    }
+}
 
-The method may use the following other methods:
-
-{other_ops}
-
-Explain the above method on the following aspects:
-
-{{ description: "Describe the functionality of the method in one sentence.",
-  parameters: [ {{ name:..., type:..., description:... }}, ... ], // empty list if there is no parameter
-  returns: "Describe the returned object/value in one sentence. (In case of a constructor, consider the newly created instance as the return value.)"
-  reason: "Explain the reason why the method is provided or the design rationale of the method, in one sentence.",
-  howToUse: "Describe the usage or the expected set-up of using the method, in less than 3 sentences.",
-  howItWorks: "Describe the implementation details of the method, in less than 5 sentences.",
-  assertions: {{ preConditions: ["pre-conditions of the method", ...], postConditions: ["pre-conditions of the method", ...] }},
-  stereotype: one of "Accessor", "Mutator", "Creational", "Collaborational", or "Other",
-  stereotypeReason: "Explain the rationale of the stereotype choice",
-  layer:...,
-  layerReason:...
-}}
-
-For the `layer`, fill the value with one of the following architectural layer which functionality is exhibited by the method source code:
-
-{layers}
-
-In `layerReason`, explain why this method fits your layer of choice but not the other layers.
-
-Respond with a well-formatted JSON object. Do not use any quote marks ("'`) within the JSON values.'''
-
-structure_analysis = '''Consider a project {project_name}, {project_desc}. A {struct_type} `{struct_name}` specializes the following class(es) or interface(s):
-
-{ancestors}
-
-This {struct_type} contains the following field(s) and method(s):
-
-Fields:
-
-{fields}
-
-Methods:
-
-{methods}
-
-Explain the above {struct_type} on the following aspects:
-
-{{ description: "Describe the key responsibilities of the {struct_type} in up to three sentences.", 
-  keywords: ["list", "of", "keywords", "relevant", "to", "the", "{struct_type}"], // try to have nouns as well as verb keywords
-  roleStereotype:..., 
-  roleStereotypeReason:... }}
-
-When describing the responsibilities, consider that a responsibility can be fulfilled by a group of methods within the {struct_type}. In other words, an intermediate step for describing the {struct_type} is to cluster its methods into a few method responsibility-type.
-
-For the `roleStereotype`, fill the value with one of the following role stereotypes which responsibility is exhibited by the {struct_type}:
-
-- **Information Holder** is responsible for knowing facts and providing information to other objects. POJOs and Java Beans are usually information holders.
-- **Service Provider** is responsible for handling requests and performing specific services. It usually implements a specific interface with a small number of methods. Concrete strategies are service providers.
-- **Structurer** is responsible for managing relationships and constraints among related things. It is usually a collection or mapping of some sort.
-- **Controller** is responsible for making decisions, directing the work of others, and handling important events. It directs the flow of the application or business process.
-- **Coordinator** is responsible for managing the actions of a group of workers and facilitating communication and work of other objects. It delegates requests to other objects. Very abstract classes and interfaces might be coordinators as they delegate the work to subclasses.
-- **User Interfacer** is responsible for transmitting user requests for action or display/render information that can be updated. It handles interactions with users.
-- **External Interfacer** is responsible for loading and storing information from/to external services, including database systems, web services, filesystems, hardware, etc.
-- **Internal Interfacer** is responsible for interfacing between two subsystems. It may bundle together information of requests from a group of objects to be sent to another object. Abstract adapters, bridges, facades, and proxies are internal interfacers.
-
-In `roleStereotypeReason`, explain why this {struct_type} fits your stereotype of choice but not the other stereotypes.
-
-Respond with a well-formatted JSON object. Do not use any quote marks ("'`) within the JSON values. In the `description`, do not mention the name of the role stereotype or layer.'''
-
-component_analysis = '''Consider a project {project_name}, {project_desc}. Given a package `{pkg_name}` containing the following classes:
-
-{classes}
-
-and the following subpackages:
-
-{packages}
-
-Explain the above package on the following aspects:
-
-{{ description: "Describe the functionality of the package in up to five sentences.",
-  title: "A Noun Phrase that Describes the Package",
-  keywords: ["list", "of", "keywords", "relevant", "to", "the", "package"], // try to have nouns as well as verb keywords
-  layer:...,
-  layerReason:... }}
-
-For the `layer`, consider the functionalities of architectural layers below:
-
-{layers}
-
-In `layerReason`, explain why this package fits your layer of choice but not the other layers.
-
-Respond with a well-formatted JSON object. Do not use any quote marks ("'`) within the JSON values. In the `description`, do not mention the name of the layer.'''
+analyze_component_tool = {
+    "type": "function",
+    "function": {
+        "name": "AnalyzeComponent",
+        "description": "Analyzes a software component by examining its contents. Returns an explanation including a description of component functionality, a descriptive title, a list of keywords, the selected architectural layer, and the rationale for that layer.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Describe the functionality of the package in up to five sentences (do not mention the layer name)."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "A noun phrase that describes the package."
+                },
+                "keywords": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of keywords relevant to the package."
+                },
+                "layer": {
+                    "type": "string",
+                    "description": "Architectural layer classification selected from the provided options."
+                },
+                "layerReason": {
+                    "type": "string",
+                    "description": "Explanation why the package fits the chosen layer but not others."
+                }
+            },
+            "required": [
+                "description",
+                "title",
+                "keywords",
+                "layer",
+                "layerReason"
+            ]
+        }
+    }
+}
 
 interaction_analysis = '''## Input:
 

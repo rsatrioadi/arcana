@@ -225,16 +225,18 @@ class Graph:
 			for edge in elist:
 				edge.set_graph(self)
 
-	def add_node(self, _id: str, labels=None, properties=None):
+	def add_node(self, _id: str, *labels, **properties):
 		if _id in self.nodes:
-			pass  # Overwrite or warn if needed
+			return
 		n = Node(_id, *(labels or []), **(properties or {}))
 		self.nodes[_id] = n
 		n.set_graph(self)
 
-	def add_edge(self, source_id: str, target_id: str, edge_label: str, properties=None):
+	def add_edge(self, source_id: str, target_id: str, edge_label: str, **properties):
 		if source_id not in self.nodes or target_id not in self.nodes:
-			raise ValueError("Source or target not in graph")
+			return
+		if self.find_edges(label=edge_label, where_source=lambda n: n.id == source_id, where_target=lambda n: n.id == target_id):
+			return
 
 		e = Edge(source_id, target_id, edge_label, **(properties or {}))
 		if edge_label not in self.edges:
@@ -326,6 +328,25 @@ class Graph:
 			if (not label or label in node.labels) and (not where or where(node))
 		]
 
+	def find_node(self, label=None, where=None) -> Node:
+		nodes = self.find_nodes(label, where)
+		if nodes:
+			return nodes[0]
+		return None
+     
+	def find_edge(self,
+		label=None,
+		source_label=None,
+		target_label=None,
+		where_edge=None,
+		where_source=None,
+		where_target=None
+	):
+		edges = self.find_edges(label,source_label,target_label,where_edge,where_source,where_target)
+		if edges:
+			return edges[0]
+		return None
+  
 	def find_edges(self,
 		label=None,
 		source_label=None,

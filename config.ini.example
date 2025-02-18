@@ -8,6 +8,8 @@ output=zxing-3.5.3-output.json
 apikey=example-apikey
 apibase=http://localhost:8000/v1
 model=llama3
+; LLM chat completion http request timeout, in seconds. If not specified, the default is 5 minutes.
+timeout=120.0
 
 [seeder]
 command={javaexe} -jar {jarfile} -i {input} -a -n {name} -f json
@@ -20,4 +22,4 @@ layer1desc=Handles user interface, such as instatiating, setting properties of, 
 layer2name=Logic
 layer2desc=Handles application and domain logic, i.e., neither UI nor data access.
 layer3name=Data
-layer3desc=Handles data access, e.g., managing database connections, querying databases, reading/writing files, and invoking web services.
+layer3desc=Handles loading and storing data from/to external services, including database systems, web services, filesystems, hardware, etc.
