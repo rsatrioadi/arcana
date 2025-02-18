@@ -52,14 +52,14 @@ analyze_script_tool = {
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of pre-conditions for the method."
+                    "description": "List of pre-conditions for the script."
                 },
                 "postConditions": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of post-conditions for the method."
+                    "description": "List of post-conditions for the script."
                 },
                 "stereotype": {
                     "type": "string",
@@ -70,7 +70,7 @@ analyze_script_tool = {
                         "Collaborational",
                         "Other"
                     ],
-                    "description": "Design stereotype of the method."
+                    "description": "Design stereotype of the script."
                 },
                 "stereotypeReason": {
                     "type": "string",
@@ -82,7 +82,7 @@ analyze_script_tool = {
                 },
                 "layerReason": {
                     "type": "string",
-                    "description": "Explanation why the method fits the chosen architectural layer but not others."
+                    "description": "Explanation why the script fits the chosen architectural layer but not others."
                 }
             },
             "required": [
@@ -119,7 +119,7 @@ analyze_structure_tool = {
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of keywords relevant to the structure."
+                    "description": "List of important keywords related to the key responsibilities of the structure."
                 },
                 "roleStereotype": {
                     "type": "string",
@@ -168,18 +168,18 @@ analyze_component_tool = {
             "properties": {
                 "description": {
                     "type": "string",
-                    "description": "Describe the functionality of the package in up to five sentences (do not mention the layer name)."
+                    "description": "Describe the functionality of the component in up to five sentences."
                 },
                 "title": {
                     "type": "string",
-                    "description": "A noun phrase that describes the package."
+                    "description": "A noun phrase that describes the component."
                 },
                 "keywords": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "List of keywords relevant to the package."
+                    "description": "List of important keywords related to the core functionalities of the component."
                 },
                 "layer": {
                     "type": "string",
@@ -187,7 +187,7 @@ analyze_component_tool = {
                 },
                 "layerReason": {
                     "type": "string",
-                    "description": "Explanation why the package fits the chosen layer but not others."
+                    "description": "Explanation why the component fits the chosen layer but not others."
                 }
             },
             "required": [
