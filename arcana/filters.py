@@ -141,10 +141,10 @@ class MetricsFilter(Filter):
 		Returns:
 			Graph: The processed data with dependency profiles.
 		"""
-		parents = {e.source: e.target for e in invert(data.edges['contains'])}
+		parents = {e.source: e.target for e in invert(data.find_edges(label='contains'))}
 		dependency_profiles = {}
 
-		calls = data.edges.get('calls', lift(data.edges['hasScript'], data.edges['invokes'], 'calls'))
+		calls = data.edges.get('calls', lift(data.find_edges(label='hasScript'), data.find_edges(label='invokes'), 'calls'))
 
 		for edge in calls:
 			source_id, target_id = edge.source, edge.target
@@ -305,14 +305,14 @@ class LLMFilter(Filter):
   
 		st_contains_st = data.find_edges(label='contains',source_label='Structure',target_label='Structure')
 		ct_contains_st = data.find_edges(label='contains',target_label='Structure', where_source=lambda node: 'Container' in node.labels and 'Structure' not in node.labels)
-		new_ct_sources = {edge.target:data.find_source(data.edges['contains'],data.nodes[edge.target],lambda node:'Structure' not in node.labels,data.nodes[edge.source]).id for edge in st_contains_st}
+		new_ct_sources = {edge.target:data.find_source(data.find_edges(label='contains'),data.nodes[edge.target],lambda node:'Structure' not in node.labels,data.nodes[edge.source]).id for edge in st_contains_st}
 		ct_contains_st.extend([Edge(source=source, target=target, label='contains') for target, source in new_ct_sources.items()])
   
-		triplets = build_triplets(ct_contains_st, data.edges['hasScript'])
+		triplets = build_triplets(ct_contains_st, data.find_edges(label='hasScript'))
 		met_to_cls_pkg = {met_id: (cls_id, pkg_id) for pkg_id, cls_id, met_id in triplets}
 		# print(met_to_cls_pkg)
 		# print('######################################################################')
-		sorted_method_ids, method_deps = data.toposorted_nodes(data.edges['invokes'])
+		sorted_method_ids, method_deps = data.toposorted_nodes(data.find_edges(label='invokes'))
 		# print(sorted_method_ids)
 		
 		counter = 0
@@ -645,7 +645,7 @@ class LLMFilter(Filter):
 			if key_lower == 'parameters' and isinstance(value, Iterable):
 				param_nodes = [
 						data.nodes[edge.target]
-						for edge in data.edges['hasParameter']
+						for edge in data.find_edges(label='hasParameter')
 						if edge.source == method.id
 					]
 				for param in value:
@@ -680,12 +680,12 @@ class LLMFilter(Filter):
 		"""Retrieve class ancestors and fields."""
 		ancestors = list({
 			data.nodes[edge.target].property("qualifiedName")
-			for edge in data.edges['specializes']
+			for edge in data.find_edges(label='specializes')
 			if edge.source == cls_id
 		})
 		fields = {
 			data.nodes[edge.target]
-			for edge in data.edges['hasVariable']
+			for edge in data.find_edges(label='hasVariable')
 			if edge.source == cls_id
 		}
 		fields = [

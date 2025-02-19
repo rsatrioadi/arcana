@@ -250,7 +250,7 @@ class Graph:
 
 	def invert_edges(self, edge_label: str, new_label: Optional[str] = None) -> None:
 		if edge_label in self.edges:
-			inverted = invert(self.edges[edge_label], new_label)
+			inverted = invert(self.edges.get(edge_label,[]), new_label)
 			nlabel = new_label or f"inv_{edge_label}"
 			self.edges[nlabel] = inverted
 		self._set_graph_refs()
@@ -258,13 +258,13 @@ class Graph:
 	def compose_edges(self, edge_label1: str, edge_label2: str, new_label: Optional[str] = None) -> None:
 		if (edge_label1 in self.edges) and (edge_label2 in self.edges):
 			nlabel = new_label or f"{edge_label1}_{edge_label2}"
-			composed_list = compose(self.edges[edge_label1], self.edges[edge_label2], nlabel)
+			composed_list = compose(self.edges.get(edge_label1, []), self.edges.get(edge_label2,[]), nlabel)
 			self.edges[nlabel] = composed_list
 		self._set_graph_refs()
 
 	def lift_edges(self, edge_label1: str, edge_label2: str, new_label: Optional[str] = None) -> None:
 		if (edge_label1 in self.edges) and (edge_label2 in self.edges):
-			lifted_list = lift(self.edges[edge_label1], self.edges[edge_label2], new_label)
+			lifted_list = lift(self.edges.get(edge_label1,[]), self.edges.get(edge_label2,[]), new_label)
 			nlabel = new_label or f"lifted_{edge_label1}_{edge_label2}"
 			self.edges[nlabel] = lifted_list
 		self._set_graph_refs()
@@ -285,9 +285,9 @@ class Graph:
 	def get_edges_with_node_labels(self, edge_label: str, node_label: str) -> List[Edge]:
 		if edge_label in self.edges:
 			return [
-				edge for edge in self.edges[edge_label]
-				if node_label in self.nodes[edge.source].labels
-				and node_label in self.nodes[edge.target].labels
+				edge for edge in self.edges.get(edge_label,[])
+				if node_label in self.self.nodes.get(edge.source, Node(None)).labels
+				and node_label in self.nodes.get(edge.target, Node(None)).labels
 			]
 		return []
 
@@ -301,7 +301,7 @@ class Graph:
 			return set()
 		return {
 			(sl, tl)
-			for e in self.edges[edge_label]
+			for e in self.edges.get(edge_label,[])
 			for (sl, tl) in self.get_edge_node_labels(e)
 		}
 
@@ -460,7 +460,7 @@ class Graph:
 	def clean_up(self):
 		for edge_type in list(self.edges.keys()):
 			self.edges[edge_type] = [
-				e for e in self.edges[edge_type]
+				e for e in self.edges.get(edge_type,[])
 				if e.source in self.nodes and e.target in self.nodes
 			]
 
@@ -469,7 +469,7 @@ class Graph:
 			if label.startswith('-'):
 				base_label = label[1:]
 				if base_label in self.edges:
-					return invert(self.edges[base_label])
+					return invert(self.edges.get(base_label,[]))
 				return []
 			return self.edges.get(label, [])
 
