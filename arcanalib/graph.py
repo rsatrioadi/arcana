@@ -225,18 +225,19 @@ class Graph:
 			for edge in elist:
 				edge.set_graph(self)
 
-	def add_node(self, _id: str, *labels, **properties):
+	def add_node(self, _id: str, *labels, **properties) -> Node:
 		if _id in self.nodes:
-			return
+			return None
 		n = Node(_id, *(labels or []), **(properties or {}))
 		self.nodes[_id] = n
 		n.set_graph(self)
+		return n
 
-	def add_edge(self, source_id: str, target_id: str, edge_label: str, **properties):
+	def add_edge(self, source_id: str, target_id: str, edge_label: str, **properties) -> Edge:
 		if source_id not in self.nodes or target_id not in self.nodes:
-			return
+			return None
 		if self.find_edges(label=edge_label, where_source=lambda n: n.id == source_id, where_target=lambda n: n.id == target_id):
-			return
+			return None
 
 		e = Edge(source_id, target_id, edge_label, **(properties or {}))
 		if edge_label not in self.edges:
@@ -247,6 +248,8 @@ class Graph:
 		# Invalidate caching for the involved nodes
 		self.nodes[source_id]._invalidate_cache()
 		self.nodes[target_id]._invalidate_cache()
+
+		return e
 
 	def invert_edges(self, edge_label: str, new_label: Optional[str] = None) -> None:
 		if edge_label in self.edges:

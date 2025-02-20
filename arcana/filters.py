@@ -240,8 +240,6 @@ class LLMFilter(Filter):
 			]
 		self.layers = layers
 		self.layers_text = format_layers(layers)
-  
-		
 
 	def process(self, data: Graph) -> Graph:
 		"""
@@ -255,16 +253,22 @@ class LLMFilter(Filter):
 		"""
 		self.project_name, self.project_desc, self.openai_client_args, model, client = self.setup()
 		timestr = time.strftime("%Y%m%d-%H%M%S")
-  
-		for i,(name,desc) in enumerate(self.layers):
-			data.add_node(f"layer:{name}", "Grouping", kind="architectural layer", simpleName=name, qualifiedName=name, description=desc, layerOrder=i)
-   
-		for i in range(len(self.layers)-1):
-			src = self.layers[i][0]
-			tgt = self.layers[i+1][0]
-			data.add_edge(f"layer:{src}", f"layer:{tgt}", "allowedDependency", weight=1)
 
 		with open(f'arcana-{timestr}.jsonl', 'a', encoding="utf-8") as jsonl_file:
+		
+			for i,(name,desc) in enumerate(self.layers):
+				n = data.add_node(f"layer:{name}", "Grouping", kind="architectural layer", simpleName=name, qualifiedName=name, description=desc, layerOrder=i)
+				jsonl_file.write(json.dumps(n.to_dict(), cls=CustomJSONEncoder))
+				jsonl_file.write('\n')
+		
+
+			for i in range(len(self.layers)-1):
+				src = self.layers[i][0]
+				tgt = self.layers[i+1][0]
+				e = data.add_edge(f"layer:{src}", f"layer:{tgt}", "allowedDependency", weight=1)
+				jsonl_file.write(json.dumps(e.to_dict(), cls=CustomJSONEncoder))
+				jsonl_file.write('\n')
+
 			with open(f'arcana-{timestr}.log', 'a', encoding="utf-8") as log_file:
 				try:
 					self.process_hierarchy(data, client, model, jsonl_file, log_file)
@@ -430,7 +434,9 @@ class LLMFilter(Filter):
 				layer_id = f"layer:{script.property('layer')}"
 			layer_node = graph.find_node(label="Grouping", where=lambda node: node.id == layer_id)
 			if layer_node:
-				graph.add_edge(script.id, layer_node.id, "implements", weight=1)
+				e = graph.add_edge(script.id, layer_node.id, "implements", weight=1)
+				jsonl_file.write(str(e), cls=CustomJSONEncoder)
+				jsonl_file.write('\n')
 
 			jsonl_file.write(json.dumps({
 				'data': {
