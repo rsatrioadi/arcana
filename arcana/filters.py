@@ -435,7 +435,7 @@ class LLMFilter(Filter):
 			layer_node = graph.find_node(label="Grouping", where=lambda node: node.id == layer_id)
 			if layer_node:
 				e = graph.add_edge(script.id, layer_node.id, "implements", weight=1)
-				jsonl_file.write(str(e), cls=CustomJSONEncoder)
+				jsonl_file.write(json.dumps(e.to_dict(), cls=CustomJSONEncoder))
 				jsonl_file.write('\n')
 
 			jsonl_file.write(json.dumps({
