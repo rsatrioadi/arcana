@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 
 from arcanalib.graph import Graph
 
@@ -49,7 +49,7 @@ class Pipeline:
 	def add_filter(self, filt: Filter) -> None:
 		self.filters.append(filt)
 
-	def process(self, data: Graph | Seeder) -> Any:
+	def process(self, data: Union[Graph,Seeder]) -> Any:
 		"""
 		Process the data through the sequence of filters in the pipeline.
 		If a seeder is provided instead of graph data, use the seeder to generate the graph data.
