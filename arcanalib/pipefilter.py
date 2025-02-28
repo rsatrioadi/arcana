@@ -1,9 +1,10 @@
-from typing import Any, Dict, List, Union
+from abc import ABC, abstractmethod
+from typing import Any, Dict, List
 
 from arcanalib.graph import Graph
 
 
-class Filter:
+class Filter(ABC):
 	def __init__(self, config: Dict[str, Dict[str, Any]]) -> None:
 		"""
 		Initialize the filter with a configuration.
@@ -12,6 +13,7 @@ class Filter:
 		"""
 		self.config = config
 
+	@abstractmethod
 	def process(self, data: Graph) -> Any:
 		"""
 		Process the data. This method should be implemented by subclasses.
@@ -19,36 +21,35 @@ class Filter:
 		:param data: The input data to be processed.
 		:return: The processed data.
 		"""
-		raise NotImplementedError("Subclasses must implement this method")
+		raise NotImplementedError
 
 
 class EndFilter(Filter):
-	"""
-	A special type of filter that marks the end of the pipeline processing.
-	"""
+	"""A special filter that marks the end of pipeline processing."""
 	pass
 
 
-class Seeder:
+class Seeder(ABC):
 	"""
 	A class that generates graph data.
 	"""
 
+	@abstractmethod
 	def generate(self) -> Graph:
 		"""
 		Generate graph data. This method should be implemented by subclasses.
 		"""
-		raise NotImplementedError("Subclasses must implement this method")
+		raise NotImplementedError
 
 
 class Pipeline:
-	def __init__(self, *args: Filter) -> None:
-		self.filters: List[Filter] = list(args)
+	def __init__(self, *filters: Filter) -> None:
+		self.filters: List[Filter] = list(filters)
 
-	def add_filter(self, filter: Filter) -> None:
-		self.filters.append(filter)
+	def add_filter(self, filt: Filter) -> None:
+		self.filters.append(filt)
 
-	def process(self, data: Union[Graph, Seeder]) -> Any:
+	def process(self, data: Graph | Seeder) -> Any:
 		"""
 		Process the data through the sequence of filters in the pipeline.
 		If a seeder is provided instead of graph data, use the seeder to generate the graph data.
@@ -56,13 +57,10 @@ class Pipeline:
 		:param data: The input data to be processed or a seeder to generate the data.
 		:return: The processed data.
 		"""
-		# If a seeder is provided, use it to generate the graph data
-		if isinstance(data, Seeder):
-			data = data.generate()
+		d = data.generate() if isinstance(data, Seeder) else data
 
-		# sys.stderr.write(f"Graph stats: {len(data.nodes)} nodes, {len(data.edges)} edge types.")
-		for filter in self.filters:
-			data = filter.process(data)
-			if isinstance(filter, EndFilter):
+		for filt in self.filters:
+			d = filt.process(d)
+			if isinstance(filt, EndFilter):
 				break
-		return data
+		return d

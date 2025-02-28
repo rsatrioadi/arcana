@@ -4,36 +4,26 @@ import re
 import subprocess
 import sys
 import time
-
-from arcana import templates
-from arcanalib.graph import Edge, Graph, Node, triplets, invert, lift
-from arcanalib.pipefilter import Filter, Seeder
-from collections import Counter, defaultdict, OrderedDict
+from collections import Counter, OrderedDict, defaultdict
 from collections.abc import Iterable
 from io import TextIOWrapper
 from itertools import combinations
+from typing import Any, Dict, List, Tuple
+
 from openai import OpenAI
 from tqdm.auto import tqdm
-from typing import Dict, Any, Tuple, List
 
+from arcana import templates
+from arcanalib.graph import Edge, Graph, Node, invert, lift, triplets
+from arcanalib.pipefilter import Filter, Seeder
 
-def remove_author(s):
-	return '\n'.join(t.strip() for t in s.split('\n') if not '@author' in t)
+def remove_author(s: str) -> str:
+	return "\n".join(line.strip() for line in s.splitlines() if '@author' not in line)
 
+_JAVA_COMMENT_RE = re.compile(r"(//.*?$)|(/\*.*?\*/)", flags=re.MULTILINE | re.DOTALL)
 
 def remove_java_comments(java_source: str) -> str:
-	"""
-	Remove single-line and multi-line comments from a given Java source code string.
-
-	Args:
-		java_source (str): The Java source code as a string.
-
-	Returns:
-		str: The Java source code without comments.
-	"""
-	pattern = r"(//.*?$)|(/\*.*?\*/)"
-	return re.sub(pattern, "", java_source, flags=re.MULTILINE | re.DOTALL).strip()
-
+	return _JAVA_COMMENT_RE.sub("", java_source).strip()
 
 def sentence(s: str) -> str:
 	"""
@@ -55,7 +45,7 @@ def sentence(s: str) -> str:
 	return f'{t[0].upper()}{t[1:]}.'
 
 
-def lower1(s: str) -> str:
+def lower_first(s: str) -> str:
 	"""
 	Lowercase the first character of a string.
 
@@ -78,20 +68,30 @@ def prettify_json(obj: dict) -> str:
 	Returns:
 		str: The pretty-printed JSON string.
 	"""
-	return json.dumps(obj, indent='\t')
+	return json.dumps(obj, indent=4)
 
 
-def layers_to_list(d):
-    result = []
-    i = 1
-    while True:
-        name_key, desc_key = f"layer{i}name", f"layer{i}desc"
-        if name_key not in d or desc_key not in d:
-            break
-        result.append((d[name_key], d[desc_key]))
-        i += 1
-    return result
+def layers_to_list(d: Dict[str, Any]) -> List[Tuple[str, str]]:
+	result = []
+	i = 1
+	while True:
+		name_key, desc_key = f"layer{i}name", f"layer{i}desc"
+		if name_key not in d or desc_key not in d:
+			break
+		result.append((d[name_key], d[desc_key]))
+		i += 1
+	return result
 
+def write_jsonl(file: TextIOWrapper, obj: Any) -> None:
+	file.write(json.dumps(obj, cls=CustomJSONEncoder) + '\n')
+
+class StopProcessing(Exception):
+    """Raised when a stop signal is detected."""
+    pass
+
+def check_stop() -> None:
+    if os.path.exists('stop'):
+        raise StopProcessing("Stop file detected, halting processing.")
 
 class CLISeeder(Seeder):
 
@@ -109,26 +109,28 @@ class CLISeeder(Seeder):
 
 		:return: The generated Graph object.
 		"""
-		# Execute the command
 		process = subprocess.run(
 			self.command,
 			capture_output=True,
 			text=True,
 			shell=True,
-			encoding="utf-8"
+			encoding="utf-8",
+			check=True
 		)
+		if process.stderr:
+			sys.stderr.write(process.stderr)
+		output_dict = json.loads(process.stdout)
+		return Graph(output_dict)
 
-		sys.stderr.write(process.stderr)
-		
-		# Parse the JSON output into a dict
-		if process.returncode == 0:
-			output_dict = json.loads(process.stdout)
 
-			# Pass the dict to the Graph constructor and return the Graph object
-			return Graph(output_dict)
-		else:
-			raise "Command execution failed."
-
+def dependency_profile_category(inn: int, out: int) -> str:
+	if inn == 0 and out > 0:
+		return "outbound"
+	elif inn > 0 and out == 0:
+		return "inbound"
+	elif inn > 0 and out > 0:
+		return "transit"
+	return "hidden"
 
 class MetricsFilter(Filter):
 	def process(self, data: Graph) -> Graph:
@@ -142,29 +144,21 @@ class MetricsFilter(Filter):
 			Graph: The processed data with dependency profiles.
 		"""
 		parents = {e.source: e.target for e in invert(data.find_edges(label='contains'))}
-		dependency_profiles = {}
+		dependency_profiles = defaultdict(list)
 
-		calls = data.edges.get('calls', lift(data.find_edges(label='hasScript'), data.find_edges(label='invokes'), 'calls'))
+		calls = data.edges.get('calls', lift(
+			data.find_edges(label='hasScript'),
+			data.find_edges(label='invokes'),
+			'calls'
+		))
 
 		for edge in calls:
 			source_id, target_id = edge.source, edge.target
-			dependency_profiles.setdefault(source_id, [])
-			dependency_profiles.setdefault(target_id, [])
-
-			if parents[source_id] != parents[target_id]:
+			if parents.get(source_id) != parents.get(target_id):
 				dependency_profiles[source_id].append('out')
 				dependency_profiles[target_id].append('in')
 
-		dependency_profiles = {id: Counter(profile) for id, profile in dependency_profiles.items()}
-
-		def dependency_profile_category(inn: int, out: int) -> str:
-			if inn == 0 and out > 0:
-				return "outbound"
-			elif inn > 0 and out == 0:
-				return "inbound"
-			elif inn > 0 and out > 0:
-				return "transit"
-			return "hidden"
+		dependency_profiles = {node_id: Counter(prof) for node_id, prof in dependency_profiles.items()}
 
 		for id, profile in dependency_profiles.items():
 			data.nodes[id].properties['dependencyProfile'] = dependency_profile_category(
@@ -221,25 +215,20 @@ def group_paths_by_endpoints(paths: List[List[Edge]]) -> Dict[Tuple[str, str], L
 	return grouped_paths
 
 def format_layers(layers):
-    return "\n".join(f"- **{name}**: {desc}" for name, desc in layers)
+	return "\n".join(f"- **{name}**: {desc}" for name, desc in layers)
 
 class LLMFilter(Filter):
 	def __init__(self, config: Dict[str, Dict[str, Any]]):
 		super().__init__(config)
-		self.project_name = None
-		self.project_desc = None
-		self.openai_client_args = None
 		
-		layers = layers_to_list(config["layers"]) if "layers" in config else None
-		if not layers:
-			layers = [
-				("Presentation Layer", "Manages the user interface, defines UI elements and behavior, displays information, responds to user input, and updates views."),
-				("Service Layer", "Controls the application flow, orchestrates domain operations, connects UI events with domain logic, and synchronizes domain changes with the UI."),
-				("Domain Layer", "Handles business logic, represents domain data and behavior, and performs necessary computations for domain operations."),
-				("Data Source Layer", "Interacts with databases, filesystems, hardware, messaging systems, or other data sources, performs CRUD operations, handles data conversion, and ensures data integrity."),
-			]
-		self.layers = layers
-		self.layers_text = format_layers(layers)
+		default_layers = [
+			("Presentation Layer", "Manages the user interface, defines UI elements and behavior, displays information, responds to user input, and updates views."),
+			("Service Layer", "Controls the application flow, orchestrates domain operations, connects UI events with domain logic, and synchronizes domain changes with the UI."),
+			("Domain Layer", "Handles business logic, represents domain data and behavior, and performs necessary computations for domain operations."),
+			("Data Source Layer", "Interacts with databases, filesystems, hardware, messaging systems, or other data sources, performs CRUD operations, handles data conversion, and ensures data integrity."),
+		]
+		self.layers = layers_to_list(config.get("layers", {})) or default_layers
+		self.layers_text = format_layers(self.layers)
 
 	def process(self, data: Graph) -> Graph:
 		"""
@@ -258,16 +247,14 @@ class LLMFilter(Filter):
 		
 			for i,(name,desc) in enumerate(self.layers):
 				n = data.add_node(f"layer:{name}", "Grouping", kind="architectural layer", simpleName=name, qualifiedName=name, description=desc, layerOrder=i)
-				jsonl_file.write(json.dumps(n.to_dict(), cls=CustomJSONEncoder))
-				jsonl_file.write('\n')
+				write_jsonl(jsonl_file, n.to_dict())
 		
 
 			for i in range(len(self.layers)-1):
 				src = self.layers[i][0]
 				tgt = self.layers[i+1][0]
 				e = data.add_edge(f"layer:{src}", f"layer:{tgt}", "allowedDependency", weight=1)
-				jsonl_file.write(json.dumps(e.to_dict(), cls=CustomJSONEncoder))
-				jsonl_file.write('\n')
+				write_jsonl(jsonl_file, e.to_dict())
 
 			with open(f'arcana-{timestr}.log', 'a', encoding="utf-8") as log_file:
 				try:
@@ -296,7 +283,7 @@ class LLMFilter(Filter):
 		"""Generate a description for a given node."""
 		sr, sn = '\r', '\n'
 		if not keys:
-			keys = ['description', 'docComment', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'stereotype', 'roleStereotype', 'layer']
+			keys = ['description', 'docComment', 'returns', 'reason', 'howToUse', 'howItWorks', 'assertions', 'roleStereotype', 'layer']
 
 		lines = {key:f"**{key}**: {sentence(str(node.properties[key]).replace(sr,'').replace(sn,' '))}" for key in keys if key in node.properties and key != 'docComment' and node.properties[key]}
 		if 'docComment' in keys and 'docComment' in node.properties and node.properties['docComment']:
@@ -304,32 +291,31 @@ class LLMFilter(Filter):
 
 		return ' '.join(lines[key] for key in keys if key in lines).strip()
 
-	def process_hierarchy(self, data: Graph, client: OpenAI, model: str, jsonl_file, log_file):
+	def process_hierarchy(self, graph: Graph, client: OpenAI, model: str, jsonl_file, log_file):
 		"""Process each package, class, and method in the hierarchy."""
   
-		st_contains_st = data.find_edges(label='contains',source_label='Structure',target_label='Structure')
-		ct_contains_st = data.find_edges(label='contains',target_label='Structure', where_source=lambda node: 'Container' in node.labels and 'Structure' not in node.labels)
-		new_ct_sources = {edge.target:data.find_source(data.find_edges(label='contains'),data.nodes[edge.target],lambda node:'Structure' not in node.labels,data.nodes[edge.source]).id for edge in st_contains_st}
+		st_contains_st = graph.find_edges(label='contains',source_label='Structure',target_label='Structure')
+		ct_contains_st = graph.find_edges(label='contains',target_label='Structure', where_source=lambda node: 'Container' in node.labels and 'Structure' not in node.labels)
+		new_ct_sources = {edge.target:graph.find_source(graph.find_edges(label='contains'),graph.nodes[edge.target],lambda node:'Structure' not in node.labels,graph.nodes[edge.source]).id for edge in st_contains_st}
 		ct_contains_st.extend([Edge(source=source, target=target, label='contains') for target, source in new_ct_sources.items()])
   
-		triplets = build_triplets(ct_contains_st, data.find_edges(label='hasScript'))
+		triplets = build_triplets(ct_contains_st, graph.find_edges(label='hasScript'))
 		met_to_cls_pkg = {met_id: (cls_id, pkg_id) for pkg_id, cls_id, met_id in triplets}
 		# print(met_to_cls_pkg)
 		# print('######################################################################')
-		sorted_method_ids, method_deps = data.toposorted_nodes(data.find_edges(label='invokes'))
+		sorted_method_ids, method_deps = graph.toposorted_nodes(graph.find_edges(label='invokes'))
 		# print(sorted_method_ids)
 		
 		counter = 0
   
 		for met_id in tqdm(sorted_method_ids, desc='Processing methods', position=0, leave=False):
 			cls_id, pkg_id = met_to_cls_pkg[met_id]
-			method = data.nodes[met_id]
-			clasz = data.nodes[cls_id]
+			method = graph.nodes[met_id]
+			clasz = graph.nodes[cls_id]
 
-			self.process_script(data, client, model, jsonl_file, log_file, method, clasz, method_deps)
+			self.process_script(graph, client, model, jsonl_file, log_file, method, clasz, method_deps)
 
-			if os.path.exists('stop'):
-				raise StopIteration
+			check_stop()
 
 			counter += 1
 			if counter==10:
@@ -338,44 +324,41 @@ class LLMFilter(Filter):
 				counter %= 10
 
 		hierarchy = build_hierarchy(triplets)
-		sorted_pkg_ids, pkg_deps = data.toposorted_nodes(data.find_edges(label='contains',where_source=lambda node: 'Structure' not in node.labels,where_target=lambda node: 'Structure' not in node.labels))
+		sorted_pkg_ids, pkg_deps = graph.toposorted_nodes(graph.find_edges(label='contains',where_source=lambda node: 'Structure' not in node.labels,where_target=lambda node: 'Structure' not in node.labels))
 		
 		for pkg_id in tqdm(sorted_pkg_ids, desc="Processing packages", position=1):
 			pkg_data = hierarchy.get(pkg_id, dict())
-			package = data.nodes[pkg_id]
+			package = graph.nodes[pkg_id]
 
 			for cls_id, cls_data in tqdm(pkg_data.items(), desc="Processing classes", position=2, leave=False):
-				clasz = data.nodes[cls_id]
+				clasz = graph.nodes[cls_id]
 
-				self.process_structure(data, client, model, jsonl_file, log_file, clasz, cls_data)
+				self.process_structure(graph, client, model, jsonl_file, log_file, clasz, cls_data)
 
-				if os.path.exists('stop'):
-					raise StopIteration
+				check_stop()
 
-			self.process_component(data, client, model, jsonl_file, log_file, package, pkg_data, pkg_deps)
+			self.process_component(graph, client, model, jsonl_file, log_file, package, pkg_data, pkg_deps)
 
 			log_file.flush()
 			jsonl_file.flush()
 
-			if os.path.exists('stop'):
-				raise StopIteration
+			check_stop()
 
-		paths = data.find_paths("contains", "hasScript", "invokes", "-hasScript", "-contains")
+		paths = graph.find_paths("contains", "hasScript", "invokes", "-hasScript", "-contains")
 		path_groups = group_paths_by_endpoints(paths)
   
 		pkg_pairs = list(combinations(sorted_pkg_ids,2))
 		for pkg2_id, pkg1_id in tqdm(pkg_pairs, desc='Processing package interactions', position=0, leave=False):
-      
-			if os.path.exists('stop'):
-				raise StopIteration
+	  
+			check_stop()
 
-			pkg1 = data.nodes[pkg1_id]
-			pkg2 = data.nodes[pkg2_id]
+			pkg1 = graph.nodes[pkg1_id]
+			pkg2 = graph.nodes[pkg2_id]
 			if ('Structure' not in pkg1.labels) and ('Structure' not in pkg2.labels):
 				if path_groups[(pkg1_id,pkg2_id)]:
-					self.process_interactions(data, client, model, pkg1, pkg2, path_groups[(pkg1_id,pkg2_id)], hierarchy, jsonl_file, log_file)
+					self.process_interactions(graph, client, model, pkg1, pkg2, path_groups[(pkg1_id,pkg2_id)], hierarchy, jsonl_file, log_file)
 				if path_groups[(pkg2_id,pkg1_id)]:
-					self.process_interactions(data, client, model, pkg2, pkg1, path_groups[(pkg2_id,pkg1_id)], hierarchy, jsonl_file, log_file)
+					self.process_interactions(graph, client, model, pkg2, pkg1, path_groups[(pkg2_id,pkg1_id)], hierarchy, jsonl_file, log_file)
 
 	def compose_prompt(self, p, function_parameters):
 		prompt = p
@@ -395,7 +378,7 @@ class LLMFilter(Filter):
 			elif v:
 				prompt += f"## {k}\n\n{str(v)}\n\n"
 		return prompt.strip()
-    
+	
 	def process_script(self, graph: Graph, client: OpenAI, model: str, jsonl_file: TextIOWrapper, log_file: TextIOWrapper, script: Node, structure: Node, node_deps: dict):
 		"""Process a single method and generate its description."""
 
@@ -435,17 +418,15 @@ class LLMFilter(Filter):
 			layer_node = graph.find_node(label="Grouping", where=lambda node: node.id == layer_id)
 			if layer_node:
 				e = graph.add_edge(script.id, layer_node.id, "implements", weight=1)
-				jsonl_file.write(json.dumps(e.to_dict(), cls=CustomJSONEncoder))
-				jsonl_file.write('\n')
+				write_jsonl(jsonl_file, e.to_dict())
 
-			jsonl_file.write(json.dumps({
+			write_jsonl(jsonl_file, {
 				'data': {
 					'id': script.id,
 					'labels': script.labels,
 					'properties': description
 				}
-			}, cls=CustomJSONEncoder))
-			jsonl_file.write('\n')
+			})
    
 	def process_structure(self, graph: Graph, client: OpenAI, model: str, jsonl_file, log_file, structure: Node, structure_scripts: list):
 		"""Process a single class and generate its description."""
@@ -475,14 +456,13 @@ class LLMFilter(Filter):
 		description = self.generate_json_description(client, model, prompt, "AnalyzeStructure")
 		self.update_class_properties(graph, description, structure)
 
-		jsonl_file.write(json.dumps({
+		write_jsonl(jsonl_file, {
 			'data': {
 				'id': structure.id,
 				'labels': list(structure.labels),
 				'properties': description
 			}
-		}))
-		jsonl_file.write('\n')
+		})
 
 	def process_component(self, graph: Graph, client: OpenAI, model: str, jsonl_file, log_file, component: Node,
 						component_contents: dict, component_deps: dict):
@@ -519,12 +499,13 @@ class LLMFilter(Filter):
 		if layer_node:
 			graph.add_edge(component.id, layer_node.id, "implements", weight=1)
 
-		jsonl_file.write(json.dumps({
+		write_jsonl(jsonl_file, {
 			'data': {
 				'id': component.id,
 				'labels': list(component.labels),
-				'properties': description}}))
-		jsonl_file.write('\n')
+				'properties': description
+    		}
+   		})
 
 	def process_interactions(self, graph: Graph, client: OpenAI, model: str, c1: Node, c2: Node, path_groups: List[Edge], hierarchy, jsonl_file: TextIOWrapper, log_file: TextIOWrapper):
 		c1_name = c1.properties["qualifiedName"]
@@ -569,8 +550,8 @@ class LLMFilter(Filter):
 			if "dependsOn" not in graph.edges:
 				graph.edges["dependsOn"] = []
 			graph.edges["dependsOn"].append(pkg1_edge)
-			jsonl_file.write(json.dumps(pkg1_edge.to_dict(), cls=CustomJSONEncoder))
-			jsonl_file.write('\n')
+			
+			write_jsonl(jsonl_file, pkg1_edge.to_dict())
 
 	def generate_json_description(self, client: OpenAI, model: str, prompt: str = None, tool: str = None) -> dict:
 		"""Generate a description using the OpenAI client."""
@@ -590,9 +571,9 @@ class LLMFilter(Filter):
 					timeout=float(self.config['llm'].get('timeout', 300))
 				)
 				print(response)
-    
+	
 				tool_calls = response.choices[0].message.tool_calls
-    
+	
 				if tool_calls:
 					args_str = tool_calls[0].function.arguments
 					description = json.loads(args_str)
@@ -614,10 +595,11 @@ class LLMFilter(Filter):
 					seed=42,
 					timeout=float(self.config['llm'].get('timeout', 300))
 				)
-    
+	
 				content = response.choices[0].message.content
 				description = json.loads(content)
-		except:
+		except Exception as e:
+			sys.stderr.write("Generate JSON description error: %s", e)
 			description = {}
 
 		if 'description' not in description:
@@ -636,7 +618,8 @@ class LLMFilter(Filter):
 				timeout=float(self.config['llm'].get('timeout', 300))
 			)
 			description = response.choices[0].message.content
-		except:
+		except Exception as e:
+			sys.stderr.write("Generate text description error: %s", e)
 			description = "(no description)"
 
 		return description
@@ -647,7 +630,7 @@ class LLMFilter(Filter):
 		for key, value in description.items():
 			if key.endswith('Reason'):
 				continue
-			key_lower = lower1(key)
+			key_lower = lower_first(key)
 			if key_lower == 'parameters' and isinstance(value, Iterable):
 				param_nodes = [
 						data.nodes[edge.target]
@@ -668,19 +651,19 @@ class LLMFilter(Filter):
 			# elif key_lower == 'returns':
 			# 	method.properties['returns'] = value.get('description', None) if value and hasattr(value, 'get') else None
 			else:
-				method.properties[key_lower] = value
+				data.nodes[method.id].properties[key_lower] = value
 
 	def update_class_properties(self, data: Graph, description: dict, clasz: Node):
 		"""Update class properties with the generated description."""
 		for key in description:
 			if not key.endswith('Reason'):
-				clasz.properties[lower1(key)] = description[key]
+				data.nodes[clasz.id].properties[lower_first(key)] = description[key]
 
 	def update_package_properties(self, data: Graph, description: dict, package: Node):
 		"""Update package properties with the generated description."""
 		for key in description:
 			if not key.endswith('Reason'):
-				package.properties[lower1(key)] = description[key]
+				data.nodes[package.id].properties[lower_first(key)] = description[key]
 
 	def get_structure_relations(self, data: Graph, cls_id: str) -> tuple:
 		"""Retrieve class ancestors and fields."""
@@ -722,37 +705,45 @@ class LLMFilter(Filter):
 		}
 
 def find_first_valid_json(text: str) -> str:
-    """
-    Finds the first valid JSON substring in the given text using a stack-based approach.
-    
-    It scans the text from left to right, and when it encounters a '{', it tracks the balanced
-    braces until a complete JSON object is formed. Once a candidate is found, it attempts to parse
-    it with json.loads(). If parsing succeeds, that candidate is returned immediately.
-    
-    Args:
-        text (str): The input string that may contain a JSON object.
-    
-    Returns:
-        str: The first valid JSON substring found, or an empty string if none is found.
-    """
-    n = len(text)
-    for i in range(n):
-        if text[i] == '{':
-            stack = 0
-            for j in range(i, n):
-                if text[j] == '{':
-                    stack += 1
-                elif text[j] == '}':
-                    stack -= 1
-                    if stack == 0:
-                        candidate = text[i:j+1]
-                        try:
-                            json.loads(candidate)
-                            return candidate
-                        except json.JSONDecodeError:
-                            # If this candidate isn't valid JSON, break and continue scanning.
-                            break
-    return ""
+	"""
+	Finds the first valid JSON substring in the given text using a stack-based approach.
+	
+	It scans the text from left to right, and when it encounters a '{', it tracks the balanced
+	braces until a complete JSON object is formed. Once a candidate is found, it attempts to parse
+	it with json.loads(). If parsing succeeds, that candidate is returned immediately.
+	
+	Args:
+		text (str): The input string that may contain a JSON object.
+	
+	Returns:
+		str: The first valid JSON substring found, or an empty string if none is found.
+	"""
+	n = len(text)
+	for i in range(n):
+		if text[i] == '{':
+			stack = 0
+			for j in range(i, n):
+				if text[j] == '{':
+					stack += 1
+				elif text[j] == '}':
+					stack -= 1
+					if stack == 0:
+						candidate = text[i:j+1]
+						try:
+							json.loads(candidate)
+							return candidate
+						except json.JSONDecodeError:
+							# If this candidate isn't valid JSON, break and continue scanning.
+							break
+	return ""
+
+def simplify_name(name):
+	if '(' in name and name.endswith(')'):
+		prefix, params = name.split('(', 2)
+		params = [param.split('.')[-1].split('$')[-1] for param in params.split(')', 1)[0].split(',')]
+		return prefix + '(' + ','.join(params) + ')'
+	else:
+		return name
 
 def merge_node_properties(dict1: Dict[str, Node], dict2: Dict[str, Node], simplify_names=False):
 	for id2, obj2 in dict2.items():
@@ -762,14 +753,6 @@ def merge_node_properties(dict1: Dict[str, Node], dict2: Dict[str, Node], simpli
 			matched_obj = dict1[id2]
 
 		elif simplify_names:
-
-			def simplify_name(name):
-				if '(' in name and name.endswith(')'):
-					prefix, params = name.split('(', 2)
-					params = [param.split('.')[-1].split('$')[-1] for param in params.split(')', 1)[0].split(',')]
-					return prefix + '(' + ','.join(params) + ')'
-				else:
-					return name
 
 			dict1_name_remap = {
 				simplify_name(key): key
