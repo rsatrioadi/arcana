@@ -408,7 +408,8 @@ class Graph:
 				dependencies = adj_list.get(n_id, [])
 				sorted_nodes.append(n_id)
 				node_deps[n_id] = dependencies
-    
+
+		nodes = nodes or list()
 		for node in nodes:
 			if node.id not in sorted_nodes:
 				sorted_nodes.insert(0, node.id)

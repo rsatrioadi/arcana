@@ -31,7 +31,7 @@ class ScriptProcessor(Processor):
 		logger.debug(sorted_method_ids)
 		logger.debug(method_deps)
 
-		for met_id in tqdm(sorted_method_ids, desc='Processing methods', position=0, leave=False):
+		for met_id in tqdm(sorted_method_ids, desc='Processing methods'):
 			method: Node = graph.nodes[met_id]
 			clasz: Node = [n for n in method.sources('encapsulates') if n.has_label('Type')][0]
 			self.process_one(graph, method, clasz, method_deps)
@@ -43,30 +43,30 @@ class ScriptProcessor(Processor):
 				writer().flush()
 				counter %= 10
 
-	def process_one(self, graph: Graph, method: Node, clasz: Node, method_deps):
-		if 'description' not in method.properties or not method.properties['description'] or method.properties[
+	def process_one(self, graph: Graph, operation: Node, type: Node, operation_deps):
+		if 'description' not in operation.properties or not operation.properties['description'] or operation.properties[
 			'description'] == "(no description)":
-			script_name = method.properties['simpleName']
-			script_src = remove_java_comments(method.properties['sourceText'])
-			script_kind = method.properties.get('kind', 'function')
+			op_name = operation.properties['simpleName']
+			op_src = remove_java_comments(operation.properties['sourceText'])
+			op_kind = operation.properties.get('kind', 'function')
 
-			structure_name = clasz.properties['qualifiedName']
-			structure_kind = clasz.properties['kind']
-			structure_kind = 'enum' if structure_kind == 'enumeration' else 'abstract class' if structure_kind == 'abstract' else structure_kind
+			typ_name = type.properties['qualifiedName']
+			typ_kind = type.properties['kind']
+			typ_kind = 'enum' if typ_kind == 'enumeration' else 'abstract class' if typ_kind == 'abstract' else typ_kind
 
-			prompt = f"Describe the following {script_kind} by using the AnalyzeScript tool.\n\n"
-			script_parameters = OrderedDict()
-			script_parameters["Project Name"] = self.prompt.project_name
-			script_parameters["Project Description"] = self.prompt.project_desc
-			script_parameters[f"{script_kind.title()} Declaration"] = f"The {script_kind} {script_name} is declared within the {structure_kind} {structure_name}."
-			script_parameters[f"{script_kind.title()} Source Code"] = script_src
-			script_parameters["Outgoing Dependencies (Invokes)"] = {graph.nodes[node_id].properties[
+			prompt = f"Describe the following {op_kind} by using the AnalyzeScript tool.\n\n"
+			op_parameters = OrderedDict()
+			op_parameters["Project Name"] = self.prompt.project_name
+			op_parameters["Project Description"] = self.prompt.project_desc
+			op_parameters[f"{op_kind.title()} Declaration"] = f"The {op_kind} {op_name} is declared within the {typ_kind} {typ_name}."
+			op_parameters[f"{op_kind.title()} Source Code"] = op_src
+			op_parameters["Outgoing Dependencies (Invokes)"] = {graph.nodes[node_id].properties[
 																	  'qualifiedName']: f"{describe(graph.nodes[node_id], 'description', 'returns', 'howToUse', 'docComment')}"
-																  for node_id in method_deps[method.id]}
-			script_parameters["Incoming Dependencies (Invoked By)"] = [m.properties['qualifiedName'] for m in method.sources('invokes')]
-			script_parameters["Possible Architectural Layers"] = dict(self.prompt.layers)
+																  for node_id in operation_deps[operation.id]}
+			op_parameters["Incoming Dependencies (Invoked By)"] = [m.properties['qualifiedName'] for m in operation.sources('invokes')]
+			op_parameters["Possible Architectural Layers"] = dict(self.prompt.layers)
 
-			prompt = self.prompt.compose(prompt, **script_parameters)
+			prompt = self.prompt.compose(prompt, **op_parameters)
 
 			logger.debug(prompt)
 
@@ -77,12 +77,12 @@ class ScriptProcessor(Processor):
 				node_id = f"layer:{layer}"
 				target = graph.find_node(label="Category", where=lambda n: n.id == node_id)
 				if target:
-					impl_edge = graph.add_edge(clasz.id, target.id, "implements", weight=1, reason=description.get('layerReason'))
+					impl_edge = graph.add_edge(operation.id, target.id, "implements", weight=1, reason=description.get('layerReason'))
 					writer().write(impl_edge.to_dict())
 
-			self.update_method_properties(graph, description, method)
+			self.update_method_properties(graph, description, operation)
 
-			writer().write({'data': {'id': method.id, 'labels': method.labels, 'properties': description}})
+			writer().write({'data': {'id': operation.id, 'labels': operation.labels, 'properties': description}})
 
 	@staticmethod
 	def update_method_properties(data: Graph, description: dict, method: Node):
@@ -115,7 +115,7 @@ class StructureProcessor(Processor):
 		sorted_class_ids, class_deps = Graph.toposorted_nodes(graph.find_edges(label='specializes'), graph.find_nodes('Type'))
 		counter = 0
 
-		for cls_id in tqdm(sorted_class_ids, desc='Processing classes', position=1, leave=False):
+		for cls_id in tqdm(sorted_class_ids, desc='Processing classes'):
 			clasz: Node = graph.nodes[cls_id]
 			package: Node = [n for n in clasz.sources('encloses') if n.has_label('Scope')][0]
 			self.process_one(graph, clasz, package, class_deps)
@@ -127,48 +127,52 @@ class StructureProcessor(Processor):
 				writer().flush()
 				counter %= 10
     
-	def process_one(self, graph: Graph, clasz: Node, package: Node, class_deps):
-		_, variables = StructureProcessor.get_structure_relations(graph, clasz.id)
-		script_descriptions = { method.properties['qualifiedName']: describe(method) for method in clasz.targets('encapsulates') if method.has_label('Operation') }
+	def process_one(self, graph: Graph, type: Node, scope: Node, type_deps):
+		_, variables = StructureProcessor.get_type_relations(graph, type.id)
+		op_descriptions = { method.properties['qualifiedName']: describe(method) for method in type.targets('encapsulates') if method.has_label('Operation') }
 
-		structure_name = clasz.properties['qualifiedName']
-		structure_kind = clasz.properties['kind']
-		structure_kind = 'enum' if structure_kind == 'enumeration' else 'abstract class' if structure_kind == 'abstract' else structure_kind
+		typ_name = type.properties['qualifiedName']
+		typ_kind = type.properties.get('kind', "type")
+		typ_kind = 'enum' if typ_kind == 'enumeration' else 'abstract class' if typ_kind == 'abstract' else typ_kind
+  
+		scope_name = scope.properties['qualifiedName']
+		scope_kind = scope.properties.get('kind', "scope")
 
-		prompt = f"Describe the following {structure_kind} using the AnalyzeStructure tool.\n\n"
-		structure_parameters = OrderedDict()
-		structure_parameters["Project Name"] = self.prompt.project_name
-		structure_parameters["Project Description"] = self.prompt.project_desc
-		structure_parameters[f"{structure_kind.title()} Name"] = structure_name
-		structure_parameters[f"{structure_kind.title()} Inhertis From"] = {graph.nodes[node_id].properties[
+		prompt = f"Describe the following {typ_kind} using the AnalyzeStructure tool.\n\n"
+		typ_parameters = OrderedDict()
+		typ_parameters["Project Name"] = self.prompt.project_name
+		typ_parameters["Project Description"] = self.prompt.project_desc
+		typ_parameters[f"{typ_kind.title()} Name"] = typ_name
+		typ_parameters[f"{typ_kind.title()} Declaration"] = f"The {typ_kind} {typ_name} is declared within the {scope_kind} {scope_name}."
+		typ_parameters[f"{typ_kind.title()} Inhertis From"] = {graph.nodes[node_id].properties[
 																	  'qualifiedName']: f"{describe(graph.nodes[node_id], 'description', 'docComment')}"
-																  for node_id in class_deps[clasz.id]}
-		structure_parameters[f"Enclosed Variables/Fields"] = variables
-		structure_parameters[f"Enclosed Functions/Methods"] = script_descriptions
-		structure_parameters['Possible Role Stereotypes'] = dict(self.prompt.role_stereotypes)
+																  for node_id in type_deps[type.id]}
+		typ_parameters[f"Enclosed Variables/Fields"] = variables
+		typ_parameters[f"Enclosed Functions/Methods"] = op_descriptions
+		typ_parameters['Possible Role Stereotypes'] = dict(self.prompt.role_stereotypes)
 
-		prompt = self.prompt.compose(prompt, **structure_parameters)
+		prompt = self.prompt.compose(prompt, **typ_parameters)
 
 		logger.debug(prompt)
 
 		description = self.client.generate_json(prompt, "AnalyzeStructure")
   
-		st = description.pop('roleStereotype', None)
-		if st:
-			node_id = f"rs:{st}"
+		rs = description.pop('roleStereotype', None)
+		if rs:
+			node_id = f"rs:{rs}"
 			target = graph.find_node(label="Category", where=lambda n: n.id == node_id)
 			if target:
-				impl_edge = graph.add_edge(clasz.id, target.id, "implements", weight=1, reason=description.get('roleStereotypeReason'))
+				impl_edge = graph.add_edge(type.id, target.id, "implements", weight=1, reason=description.get('roleStereotypeReason'))
 				writer().write(impl_edge.to_dict())
      
 		for k, v in description.items():
 			if not k.endswith('Reason'):
-				graph.nodes[clasz.id].properties[lower_first(k)] = v
+				graph.nodes[type.id].properties[lower_first(k)] = v
 
-		writer().write({'data': {'id': clasz.id, 'labels': list(clasz.labels), 'properties': description}})
+		writer().write({'data': {'id': type.id, 'labels': list(type.labels), 'properties': description}})
 
 	@staticmethod
-	def get_structure_relations(data: Graph, cls_id: str) -> tuple:
+	def get_type_relations(data: Graph, cls_id: str) -> tuple:
 		"""Retrieve class ancestors and fields."""
 		ancestors = list(
 			{data.nodes[edge.target] for edge in data.find_edges(label='specializes') if
@@ -180,9 +184,56 @@ class StructureProcessor(Processor):
 
 class ComponentProcessor(Processor):
 
-	def process_all(self, graph):
-		# iterate and describe each package
-		pass
+	def process_all(self, graph: Graph):
+		sorted_pkg_ids, pkg_deps = graph.toposorted_nodes(
+			graph.find_edges(label='encloses', where_source=lambda node: node.has_label('Scope') and not node.has_label('Type'),
+							 where_target=lambda node: node.has_label('Scope') and not node.has_label('Type')), graph.find_nodes('Scope', where=lambda node: not node.has_label('Type')))
+		counter = 0
+
+		for pkg_id in tqdm(sorted_pkg_ids, desc='Processing packages'):
+			package: Node = graph.nodes[pkg_id]
+			self.process_one(graph, package, pkg_deps)
+
+			check_stop()
+
+			counter += 1
+			if counter == 10:
+				writer().flush()
+				counter %= 10
+    
+	def process_one(self, graph: Graph, scope: Node, scope_deps):
+		typ_descriptions = { f"{type.properties['kind']} {type.properties['qualifiedName']}": describe(type) for type in scope.targets('encloses') if type.has_label('Type') }
+		subscp_descriptions = {graph.nodes[node_id].properties['qualifiedName']: f"{describe(graph.nodes[node_id], 'description', 'returns', 'howToUse', 'docComment')}"
+																  for node_id in scope_deps[scope.id]}
+		scp_kind = scope.properties.get('kind', "component")
+
+		prompt = f"Describe the following {scp_kind} using the AnalyzeComponent tool.\n\n"
+		scp_parameters = OrderedDict()
+		scp_parameters["Project Name"] = self.prompt.project_name
+		scp_parameters["Project Description"] = self.prompt.project_desc
+		scp_parameters[f"{scp_kind.title()} Kind"] = scp_kind
+		scp_parameters[f"{scp_kind.title()} Name"] = scope.properties['qualifiedName']
+		scp_parameters[f"Enclosed Sub-{scp_kind}s"] = subscp_descriptions
+		scp_parameters["Enclosed Classes"] = typ_descriptions
+		scp_parameters["Possible Architectural Layers"] = dict(self.prompt.layers)
+
+		prompt = self.prompt.compose(prompt, **scp_parameters)
+
+		logger.debug(prompt)
+
+		description = self.client.generate_json(prompt, "AnalyzeComponent")
+
+		layer = description.pop('layer', None)
+		if layer:
+			node_id = f"layer:{layer}"
+			target = graph.find_node(label="Category", where=lambda n: n.id == node_id)
+			if target:
+				impl_edge = graph.add_edge(scope.id, target.id, "implements", weight=1, reason=description.get('layerReason'))
+				writer().write(impl_edge.to_dict())
+
+		self.update_package_properties(graph, description, scope)
+
+		writer().write({'data': {'id': scope.id, 'labels': list(scope.labels), 'properties': description}})
 
 class InteractionProcessor(Processor):
 
