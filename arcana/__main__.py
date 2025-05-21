@@ -1,9 +1,15 @@
 import argparse
 import configparser
+import time
 import json
+import logging
 import sys
 
-from arcana.filters import CLISeeder, MetricsFilter, LLMFilter, MergeFilter
+from arcana.checkpoint import writer
+from arcana.llm_filter.filter import LLMFilter
+from arcana.merge_filter import MergeFilter
+from arcana.metrics import MetricsFilter
+from arcana.seeder import CLISeeder
 from arcanalib.graph import Graph
 from arcanalib.pipefilter import Pipeline
 
@@ -55,6 +61,16 @@ def main():
 	commands = args.command.split('-')
 
 	if commands:
+		current_time_str = time.strftime("%Y%m%d-%H%M%S")
+		jsonl_file = f'arcana-{current_time_str}.jsonl'
+		w = writer(jsonl_file)
+		log_file = f'arcana-{current_time_str}.log'
+		logging.basicConfig(
+			level=logging.DEBUG,
+			format="%(asctime)s %(name)s %(levelname)s: %(message)s",
+			filename=log_file,
+			filemode="a",  # append
+		)
 		pipeline = Pipeline(*[
 			filters[command](config)
 			for command in commands

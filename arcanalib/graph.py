@@ -384,7 +384,7 @@ class Graph:
 		return results
 
 	@staticmethod
-	def toposorted_nodes(edges: List[Edge]):
+	def toposorted_nodes(edges: List[Edge], nodes: List[Node] = None):
 		adj_list, outdegree = Graph._adj_list(edges)
 		sorted_nodes = []
 		node_deps = {}
@@ -408,6 +408,12 @@ class Graph:
 				dependencies = adj_list.get(n_id, [])
 				sorted_nodes.append(n_id)
 				node_deps[n_id] = dependencies
+    
+		for node in nodes:
+			if node.id not in sorted_nodes:
+				sorted_nodes.insert(0, node.id)
+				node_deps[node.id] = []
+    
 		return sorted_nodes, node_deps
 
 	def clean_up(self):
