@@ -1,9 +1,12 @@
-from collections import Counter, OrderedDict, defaultdict
+from collections import Counter, OrderedDict
+import logging
 
 from arcana.graph_utils import dependency_profile_category
 from arcanalib.graph import Graph, invert, lift
 from arcanalib.pipefilter import Filter
 
+
+logger = logging.getLogger(__name__)
 
 class MetricsFilter(Filter):
 	def process(self, data: Graph) -> Graph:
@@ -44,7 +47,7 @@ class MetricsFilter(Filter):
 		
 		# 2. Compute raw in/out counts
 		parents = {e.source: e.target for e in invert(data.find_edges(label='encloses'))}
-		dependency_profiles = defaultdict(list)
+		dependency_profiles = {node.id:list() for node in data.find_nodes('Type')}
 
 		calls = data.edges.get('calls',
 							   lift(data.find_edges(label='encapsulates'), data.find_edges(label='invokes'), 'calls'))
@@ -56,6 +59,7 @@ class MetricsFilter(Filter):
 				dependency_profiles[target_id].append('in')
 
 		dependency_profiles = {node_id: Counter(prof) for node_id, prof in dependency_profiles.items()}
+		logger.debug(dependency_profiles)
 
 		# 3. Attach classification edges instead of setting a string property
 		for node_id, profile in dependency_profiles.items():

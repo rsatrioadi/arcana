@@ -130,13 +130,23 @@ structure_description = {
 		"roleStereotypeReason": {
 			"type": "string",
 			"description": "One-sentence explanation for the chosen role stereotype."
+		},
+		"layer": {
+			"type": "string",
+			"description": "Architectural layer classification selected from the provided options."
+		},
+		"layerReason": {
+			"type": "string",
+			"description": "Explanation why the script fits the chosen architectural layer but not others."
 		}
 	},
 	"required": [
 		"description",
 		"keywords",
 		"roleStereotype",
-		"roleStereotypeReason"
+		"roleStereotypeReason",
+		"layer",
+		"layerReason"
 	]
 }
 

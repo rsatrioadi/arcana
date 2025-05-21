@@ -128,7 +128,7 @@ class StructureProcessor(Processor):
 				counter %= 10
     
 	def process_one(self, graph: Graph, type: Node, scope: Node, type_deps):
-		_, variables = StructureProcessor.get_type_relations(graph, type.id)
+		vars = StructureProcessor.get_type_relations(graph, type.id)
 		op_descriptions = { method.properties['qualifiedName']: describe(method) for method in type.targets('encapsulates') if method.has_label('Operation') }
 
 		typ_name = type.properties['qualifiedName']
@@ -147,9 +147,10 @@ class StructureProcessor(Processor):
 		typ_parameters[f"{typ_kind.title()} Inhertis From"] = {graph.nodes[node_id].properties[
 																	  'qualifiedName']: f"{describe(graph.nodes[node_id], 'description', 'docComment')}"
 																  for node_id in type_deps[type.id]}
-		typ_parameters[f"Enclosed Variables/Fields"] = variables
+		typ_parameters[f"Enclosed Variables/Fields"] = vars
 		typ_parameters[f"Enclosed Functions/Methods"] = op_descriptions
 		typ_parameters['Possible Role Stereotypes'] = dict(self.prompt.role_stereotypes)
+		typ_parameters["Possible Architectural Layers"] = dict(self.prompt.layers)
 
 		prompt = self.prompt.compose(prompt, **typ_parameters)
 
@@ -165,6 +166,14 @@ class StructureProcessor(Processor):
 				impl_edge = graph.add_edge(type.id, target.id, "implements", weight=1, reason=description.get('roleStereotypeReason'))
 				writer().write(impl_edge.to_dict())
      
+		layer = description.pop('layer', None)
+		if layer:
+			node_id = f"layer:{layer}"
+			target = graph.find_node(label="Category", where=lambda n: n.id == node_id)
+			if target:
+				impl_edge = graph.add_edge(type.id, target.id, "implements", weight=1, reason=description.get('layerReason'))
+				writer().write(impl_edge.to_dict())
+
 		for k, v in description.items():
 			if not k.endswith('Reason'):
 				graph.nodes[type.id].properties[lower_first(k)] = v
@@ -173,13 +182,10 @@ class StructureProcessor(Processor):
 
 	@staticmethod
 	def get_type_relations(data: Graph, cls_id: str) -> tuple:
-		"""Retrieve class ancestors and fields."""
-		ancestors = list(
-			{data.nodes[edge.target] for edge in data.find_edges(label='specializes') if
-			 edge.source == cls_id})
+		"""Retrieve class fields."""
 		fields = {data.nodes[edge.target] for edge in data.find_edges(label='encapsulates') if edge.source == cls_id}
 		fields = [' '.join(remove_java_comments(field.properties['sourceText']).split()) for field in fields if field.has_label('Variable')]
-		return ancestors, fields
+		return fields
 
 
 class ComponentProcessor(Processor):
@@ -211,7 +217,6 @@ class ComponentProcessor(Processor):
 		scp_parameters = OrderedDict()
 		scp_parameters["Project Name"] = self.prompt.project_name
 		scp_parameters["Project Description"] = self.prompt.project_desc
-		scp_parameters[f"{scp_kind.title()} Kind"] = scp_kind
 		scp_parameters[f"{scp_kind.title()} Name"] = scope.properties['qualifiedName']
 		scp_parameters[f"Enclosed Sub-{scp_kind}s"] = subscp_descriptions
 		scp_parameters["Enclosed Classes"] = typ_descriptions
@@ -231,9 +236,16 @@ class ComponentProcessor(Processor):
 				impl_edge = graph.add_edge(scope.id, target.id, "implements", weight=1, reason=description.get('layerReason'))
 				writer().write(impl_edge.to_dict())
 
-		self.update_package_properties(graph, description, scope)
+		ComponentProcessor.update_package_properties(graph, description, scope)
 
 		writer().write({'data': {'id': scope.id, 'labels': list(scope.labels), 'properties': description}})
+
+	@staticmethod
+	def update_package_properties(data: Graph, description: dict, package: Node):
+		"""Update package properties with the generated description."""
+		for key in description:
+			if not key.endswith('Reason'):
+				data.nodes[package.id].properties[lower_first(key)] = description[key]
 
 class InteractionProcessor(Processor):
 
