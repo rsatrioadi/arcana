@@ -79,26 +79,6 @@ class LLMFilter(Filter):
 
 		return graph
 
-	def process_old(self, data: Graph) -> Graph:
-		"""
-		Process the data using a language model to generate descriptions.
-
-		Args:
-			data (Graph): The input data.
-
-		Returns:
-			Graph: The processed data with generated descriptions.
-		"""
-		current_time_str = time.strftime("%Y%m%d-%H%M%S")
-		with open(f'arcana-{current_time_str}.jsonl', 'a', encoding="utf-8") as jsonl_file:
-
-			with open(f'arcana-{current_time_str}.log', 'a', encoding="utf-8") as log_file:
-				try:
-					self.process_hierarchy(data, jsonl_file, log_file)
-				except Exception as e:
-					pass
-		return data
-
 	def process_hierarchy(self, graph: Graph, jsonl_file, log_file):
 		"""Process each package, class, and method in the hierarchy."""
 
@@ -112,51 +92,10 @@ class LLMFilter(Filter):
 			[Edge(source=source, target=target, label='contains') for target, source in new_ct_sources.items()])
 
 		trips = build_triplets(ct_contains_st, graph.find_edges(label='hasScript'))
-		met_to_cls_pkg = {met_id: (cls_id, pkg_id) for pkg_id, cls_id, met_id in trips}
-		# print(met_to_cls_pkg)
-		# print('######################################################################')
-		sorted_method_ids, method_deps = graph.toposorted_nodes(graph.find_edges(label='invokes'))
-		# print(sorted_method_ids)
-
-		counter = 0
-
-		for met_id in tqdm(sorted_method_ids, desc='Processing methods', position=0, leave=False):
-			cls_id, pkg_id = met_to_cls_pkg[met_id]
-			method = graph.nodes[met_id]
-			clasz = graph.nodes[cls_id]
-
-			self.process_script(graph, jsonl_file, log_file, method, clasz, method_deps)
-
-			check_stop()
-
-			counter += 1
-			if counter == 10:
-				log_file.flush()
-				jsonl_file.flush()
-				counter %= 10
-
 		hierarchy = build_hierarchy(trips)
 		sorted_pkg_ids, pkg_deps = graph.toposorted_nodes(
 			graph.find_edges(label='contains', where_source=lambda node: 'Structure' not in node.labels,
 							 where_target=lambda node: 'Structure' not in node.labels))
-
-		for pkg_id in tqdm(sorted_pkg_ids, desc="Processing packages", position=1):
-			pkg_data = hierarchy.get(pkg_id, dict())
-			package = graph.nodes[pkg_id]
-
-			for cls_id, cls_data in tqdm(pkg_data.items(), desc="Processing classes", position=2, leave=False):
-				clasz = graph.nodes[cls_id]
-
-				self.process_structure(graph, jsonl_file, log_file, clasz, cls_data)
-
-				check_stop()
-
-			self.process_component(graph, jsonl_file, log_file, package, pkg_data, pkg_deps)
-
-			log_file.flush()
-			jsonl_file.flush()
-
-			check_stop()
 
 		paths = graph.find_paths("contains", "hasScript", "invokes", "-hasScript", "-contains")
 		path_groups = group_paths_by_endpoints(paths)
@@ -175,43 +114,6 @@ class LLMFilter(Filter):
 				if path_groups[(pkg2_id, pkg1_id)]:
 					self.process_interactions(graph, pkg2, pkg1, path_groups[(pkg2_id, pkg1_id)], hierarchy, jsonl_file,
 											  log_file)
-
-	def process_component(self, graph: Graph, jsonl_file, log_file, component: Node, component_contents: dict,
-						  component_deps: dict):
-		"""Process a single package and generate its description."""
-
-		# if 'description' not in component.properties or not component.properties['description'] or component.properties['description'] == "(no description)":
-		structure_descriptions = self.get_structure_descriptions(graph, component_contents)
-		subcomponent_descriptions = self.get_component_descriptions(graph, component_deps[component.id])
-		component_kind = component.properties.get('kind', "component")
-
-		prompt = f"Describe the following {component_kind} using the AnalyzeComponent tool.\n\n"
-		component_parameters = OrderedDict()
-		component_parameters["Project Name"] = self.project_name
-		component_parameters["Project Description"] = self.project_desc
-		component_parameters["Component Type"] = component_kind
-		component_parameters["Component Name"] = component.properties['qualifiedName']
-		component_parameters["Enclosed Sub-components"] = subcomponent_descriptions
-		component_parameters["Enclosed Classes"] = structure_descriptions
-		component_parameters["Possible Architectural Layers"] = dict(self.layers)
-
-		prompt = self.compose_prompt(prompt, component_parameters)
-
-		log_file.write(prompt)
-		log_file.write('\n\n======\n\n')
-
-		description = generate_json(prompt, "AnalyzeComponent")
-		self.update_package_properties(graph, description, component)
-
-		layer_id = None
-		if component.has_property("layer") and component.property("layer") in [name for name, _ in self.layers]:
-			layer_id = f"layer:{component.property('layer')}"
-		layer_node = graph.find_node(label="Grouping", where=lambda node: node.id == layer_id)
-		if layer_node:
-			graph.add_edge(component.id, layer_node.id, "implements", weight=1)
-
-		write_jsonl(jsonl_file,
-					{'data': {'id': component.id, 'labels': list(component.labels), 'properties': description}})
 
 	def process_interactions(self, graph: Graph, c1: Node, c2: Node, path_groups: List[List[Edge]], hierarchy,
 							 jsonl_file: TextIO, log_file: TextIO):

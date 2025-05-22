@@ -58,7 +58,7 @@ class ScriptProcessor(Processor):
 			op_parameters = OrderedDict()
 			op_parameters["Project Name"] = self.prompt.project_name
 			op_parameters["Project Description"] = self.prompt.project_desc
-			op_parameters[f"{op_kind.title()} Declaration"] = f"The {op_kind} {op_name} is declared within the {typ_kind} {typ_name}."
+			op_parameters[f"{op_kind.title()} to Analyze"] = f"`{op_name}` from the {typ_kind} `{typ_name}`."
 			op_parameters[f"{op_kind.title()} Source Code"] = op_src
 			op_parameters["Outgoing Dependencies (Invokes)"] = {graph.nodes[node_id].properties[
 																	  'qualifiedName']: f"{describe(graph.nodes[node_id], 'description', 'returns', 'howToUse', 'docComment')}"
@@ -142,8 +142,7 @@ class StructureProcessor(Processor):
 		typ_parameters = OrderedDict()
 		typ_parameters["Project Name"] = self.prompt.project_name
 		typ_parameters["Project Description"] = self.prompt.project_desc
-		typ_parameters[f"{typ_kind.title()} Name"] = typ_name
-		typ_parameters[f"{typ_kind.title()} Declaration"] = f"The {typ_kind} {typ_name} is declared within the {scope_kind} {scope_name}."
+		typ_parameters[f"{typ_kind.title()} to Analyze"] = f"`{typ_kind} {typ_name}` from the {scope_kind} `{scope_name}`."
 		typ_parameters[f"{typ_kind.title()} Inhertis From"] = {graph.nodes[node_id].properties[
 																	  'qualifiedName']: f"{describe(graph.nodes[node_id], 'description', 'docComment')}"
 																  for node_id in type_deps[type.id]}
@@ -217,7 +216,7 @@ class ComponentProcessor(Processor):
 		scp_parameters = OrderedDict()
 		scp_parameters["Project Name"] = self.prompt.project_name
 		scp_parameters["Project Description"] = self.prompt.project_desc
-		scp_parameters[f"{scp_kind.title()} Name"] = scope.properties['qualifiedName']
+		scp_parameters[f"{scp_kind.title()} to Analyze"] = scope.properties['qualifiedName']
 		scp_parameters[f"Enclosed Sub-{scp_kind}s"] = subscp_descriptions
 		scp_parameters["Enclosed Classes"] = typ_descriptions
 		scp_parameters["Possible Architectural Layers"] = dict(self.prompt.layers)
