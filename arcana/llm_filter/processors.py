@@ -28,8 +28,8 @@ class ScriptProcessor(Processor):
 	def process_all(self, graph: Graph):
 		sorted_method_ids, method_deps = Graph.toposorted_nodes(graph.find_edges(label='invokes'), graph.find_nodes('Operation'))
 		counter = 0
-		logger.debug(sorted_method_ids)
-		logger.debug(method_deps)
+		# logger.debug(sorted_method_ids)
+		# logger.debug(method_deps)
 
 		for met_id in tqdm(sorted_method_ids, desc='Processing methods'):
 			method: Node = graph.nodes[met_id]
@@ -64,7 +64,7 @@ class ScriptProcessor(Processor):
 																	  'qualifiedName']: f"{describe(graph.nodes[node_id], 'description', 'returns', 'howToUse', 'docComment')}"
 																  for node_id in operation_deps[operation.id]}
 			op_parameters["Incoming Dependencies (Invoked By)"] = [m.properties['qualifiedName'] for m in operation.sources('invokes')]
-			op_parameters["Possible Architectural Layers"] = dict(self.prompt.layers)
+			op_parameters["Possible Architectural Layers"] = self.prompt.layers
 
 			prompt = self.prompt.compose(prompt, **op_parameters)
 
@@ -117,7 +117,8 @@ class StructureProcessor(Processor):
 
 		for cls_id in tqdm(sorted_class_ids, desc='Processing classes'):
 			clasz: Node = graph.nodes[cls_id]
-			package: Node = [n for n in clasz.sources('encloses') if n.has_label('Scope')][0]
+			enclosers = [n for n in clasz.sources('encloses') if n.has_label('Scope')]
+			package: Node = enclosers[0] if enclosers else None
 			self.process_one(graph, clasz, package, class_deps)
 
 			check_stop()
@@ -135,21 +136,26 @@ class StructureProcessor(Processor):
 		typ_kind = type.properties.get('kind', "type")
 		typ_kind = 'enum' if typ_kind == 'enumeration' else 'abstract class' if typ_kind == 'abstract' else typ_kind
   
-		scope_name = scope.properties['qualifiedName']
-		scope_kind = scope.properties.get('kind', "scope")
-
 		prompt = f"Describe the following {typ_kind} using the AnalyzeStructure tool.\n\n"
 		typ_parameters = OrderedDict()
 		typ_parameters["Project Name"] = self.prompt.project_name
 		typ_parameters["Project Description"] = self.prompt.project_desc
-		typ_parameters[f"{typ_kind.title()} to Analyze"] = f"`{typ_kind} {typ_name}` from the {scope_kind} `{scope_name}`."
+  
+		if scope:
+			scope_name = scope.properties['qualifiedName']
+			scope_kind = scope.properties.get('kind', "scope")
+			typ_parameters[f"{typ_kind.title()} to Analyze"] = f"`{typ_kind} {typ_name}` from the {scope_kind} `{scope_name}`."
+		else:
+			typ_parameters[f"{typ_kind.title()} to Analyze"] = f"`{typ_kind} {typ_name}`."
+   
 		typ_parameters[f"{typ_kind.title()} Inhertis From"] = {graph.nodes[node_id].properties[
 																	  'qualifiedName']: f"{describe(graph.nodes[node_id], 'description', 'docComment')}"
 																  for node_id in type_deps[type.id]}
+		typ_parameters["Inherited By"] = [f"{t.properties['kind']} {t.properties['qualifiedName']}" for t in type.sources('specializes')]
 		typ_parameters[f"Enclosed Variables/Fields"] = vars
 		typ_parameters[f"Enclosed Functions/Methods"] = op_descriptions
-		typ_parameters['Possible Role Stereotypes'] = dict(self.prompt.role_stereotypes)
-		typ_parameters["Possible Architectural Layers"] = dict(self.prompt.layers)
+		typ_parameters['Possible Role Stereotypes'] = self.prompt.role_stereotypes
+		typ_parameters["Possible Architectural Layers"] = self.prompt.layers
 
 		prompt = self.prompt.compose(prompt, **typ_parameters)
 
@@ -219,7 +225,7 @@ class ComponentProcessor(Processor):
 		scp_parameters[f"{scp_kind.title()} to Analyze"] = scope.properties['qualifiedName']
 		scp_parameters[f"Enclosed Sub-{scp_kind}s"] = subscp_descriptions
 		scp_parameters["Enclosed Classes"] = typ_descriptions
-		scp_parameters["Possible Architectural Layers"] = dict(self.prompt.layers)
+		scp_parameters["Possible Architectural Layers"] = self.prompt.layers
 
 		prompt = self.prompt.compose(prompt, **scp_parameters)
 

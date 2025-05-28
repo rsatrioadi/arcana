@@ -59,7 +59,7 @@ class MetricsFilter(Filter):
 				dependency_profiles[target_id].append('in')
 
 		dependency_profiles = {node_id: Counter(prof) for node_id, prof in dependency_profiles.items()}
-		logger.debug(dependency_profiles)
+		# logger.debug(dependency_profiles)
 
 		# 3. Attach classification edges instead of setting a string property
 		for node_id, profile in dependency_profiles.items():

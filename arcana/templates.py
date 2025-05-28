@@ -5,7 +5,7 @@ script_description = {
 	"properties": {
 		"description": {
 			"type": "string",
-			"description": "One-sentence description of the method/constructor/function functionality."
+			"description": "One-sentence description – suitable for a documentation comment – of the method/constructor/function functionality, in imperative mood."
 		},
 		"parameters": {
 			"type": "array",
@@ -114,7 +114,7 @@ structure_description = {
 	"properties": {
 		"description": {
 			"type": "string",
-			"description": "Up to three sentences describing the key responsibilities of the class/struct/type."
+			"description": "Up to three sentences, suitable for a documentation comment, describing the key responsibilities of the class/struct/type."
 		},
 		"keywords": {
 			"type": "array",

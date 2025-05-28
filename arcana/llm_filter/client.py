@@ -14,13 +14,16 @@ class LLMClient:
 		"""Generate a description using the OpenAI client."""
 		try:
 			if tool:
-				response = self.client.chat.completions.create(model=self.model, messages=[
-					{"role": "system", "content": "You are a software architecture analysis tool."},
-					{"role": "user", "content": prompt}], tools=[templates.analyze_script_tool,
-																 templates.analyze_structure_tool,
-																 templates.analyze_component_tool],
-															   tool_choice="required", temperature=0, seed=42,
-															   timeout=self.timeout)
+				response = self.client.chat.completions.create(
+					model=self.model, 
+     				messages=[
+						{"role": "system", "content": "You are a tool for analyzing software architecture of code implementations."},
+						{"role": "user", "content": prompt}], 
+					tools=[templates.analyze_script_tool,
+						templates.analyze_structure_tool,
+						templates.analyze_component_tool],
+					tool_choice="required", temperature=0, seed=42,
+					timeout=self.timeout)
 
 				tool_calls = response.choices[0].message.tool_calls
 
@@ -36,11 +39,14 @@ class LLMClient:
 						description = dict()
 
 			else:
-				response = self.client.chat.completions.create(model=self.model,
-															   response_format={"type": "json_object"},
-															   messages=[{"role": "user", "content": prompt}],
-															   max_tokens=4096, temperature=0, seed=42,
-															   timeout=self.timeout)
+				response = self.client.chat.completions.create(
+					model=self.model,
+					response_format={"type": "json_object"},
+					messages=[
+						{"role": "system", "content": "You are an expert in analyzing software architecture of code implementations."},
+						{"role": "user", "content": prompt}],
+					max_tokens=4096, temperature=0, seed=42,
+					timeout=self.timeout)
 
 				content = response.choices[0].message.content
 				description = json.loads(content)
