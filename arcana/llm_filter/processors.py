@@ -7,6 +7,7 @@ from tqdm.auto import tqdm
 
 from arcana.checkpoint import writer
 from arcana.filters import check_stop
+from arcana.llm_filter.classification import ClassificationScheme
 from arcana.llm_filter.client import LLMClient
 from arcana.llm_filter.prompt import PromptBuilder, describe
 from arcana.utils import lower_first, remove_java_comments
@@ -22,6 +23,31 @@ class Processor(ABC):
 	@abstractmethod
 	def process_all(self, graph):
 		raise NotImplementedError
+
+	def add_classification_options(self, parameters: OrderedDict, element_kind: str):
+		for scheme in self.prompt.classification_schemes(element_kind):
+			parameters[scheme.prompt_label] = scheme.options_with_undetermined()
+
+	def apply_classifications(self, graph: Graph, element: Node, description: dict, element_kind: str):
+		for scheme in self.prompt.classification_schemes(element_kind):
+			self._apply_classification(graph, element, description, scheme)
+
+	@staticmethod
+	def _apply_classification(graph: Graph, element: Node, description: dict, scheme: ClassificationScheme):
+		classification = description.pop(scheme.response_key, None)
+		if not classification:
+			return
+
+		target = graph.find_node(label="Category", where=lambda n: n.id == scheme.category_id(classification))
+		if target:
+			impl_edge = graph.add_edge(
+				element.id,
+				target.id,
+				"implements",
+				weight=1,
+				reason=description.get(scheme.response_reason_key),
+			)
+			writer().write(impl_edge.to_dict())
 
 class ScriptProcessor(Processor):
   
@@ -64,21 +90,15 @@ class ScriptProcessor(Processor):
 																	  'qualifiedName']: f"{describe(graph.nodes[node_id], 'description', 'returns', 'howToUse', 'docComment')}"
 																  for node_id in operation_deps[operation.id]}
 			op_parameters["Incoming Dependencies (Invoked By)"] = [m.properties['qualifiedName'] for m in operation.sources('invokes')]
-			op_parameters["Possible Architectural Layers"] = self.prompt.layers
+			self.add_classification_options(op_parameters, "script")
 
 			prompt = self.prompt.compose(prompt, **op_parameters)
 
 			logger.debug(prompt)
 
 			description = self.client.generate_json(prompt, "AnalyzeScript")
-	
-			layer = description.pop('layer', None)
-			if layer:
-				node_id = f"layer:{layer}"
-				target = graph.find_node(label="Category", where=lambda n: n.id == node_id)
-				if target:
-					impl_edge = graph.add_edge(operation.id, target.id, "implements", weight=1, reason=description.get('layerReason'))
-					writer().write(impl_edge.to_dict())
+
+			self.apply_classifications(graph, operation, description, "script")
 
 			self.update_method_properties(graph, description, operation)
 
@@ -154,30 +174,15 @@ class StructureProcessor(Processor):
 		typ_parameters["Inherited By"] = [f"{t.properties['kind']} {t.properties['qualifiedName']}" for t in type.sources('specializes')]
 		typ_parameters[f"Enclosed Variables/Fields"] = vars
 		typ_parameters[f"Enclosed Functions/Methods"] = op_descriptions
-		typ_parameters['Possible Role Stereotypes'] = self.prompt.role_stereotypes
-		typ_parameters["Possible Architectural Layers"] = self.prompt.layers
+		self.add_classification_options(typ_parameters, "structure")
 
 		prompt = self.prompt.compose(prompt, **typ_parameters)
 
 		logger.debug(prompt)
 
 		description = self.client.generate_json(prompt, "AnalyzeStructure")
-  
-		rs = description.pop('roleStereotype', None)
-		if rs:
-			node_id = f"rs:{rs}"
-			target = graph.find_node(label="Category", where=lambda n: n.id == node_id)
-			if target:
-				impl_edge = graph.add_edge(type.id, target.id, "implements", weight=1, reason=description.get('roleStereotypeReason'))
-				writer().write(impl_edge.to_dict())
-     
-		layer = description.pop('layer', None)
-		if layer:
-			node_id = f"layer:{layer}"
-			target = graph.find_node(label="Category", where=lambda n: n.id == node_id)
-			if target:
-				impl_edge = graph.add_edge(type.id, target.id, "implements", weight=1, reason=description.get('layerReason'))
-				writer().write(impl_edge.to_dict())
+
+		self.apply_classifications(graph, type, description, "structure")
 
 		for k, v in description.items():
 			if not k.endswith('Reason'):
@@ -225,7 +230,7 @@ class ComponentProcessor(Processor):
 		scp_parameters[f"{scp_kind.title()} to Analyze"] = scope.properties['qualifiedName']
 		scp_parameters[f"Enclosed Sub-{scp_kind}s"] = subscp_descriptions
 		scp_parameters["Enclosed Classes"] = typ_descriptions
-		scp_parameters["Possible Architectural Layers"] = self.prompt.layers
+		self.add_classification_options(scp_parameters, "component")
 
 		prompt = self.prompt.compose(prompt, **scp_parameters)
 
@@ -233,13 +238,7 @@ class ComponentProcessor(Processor):
 
 		description = self.client.generate_json(prompt, "AnalyzeComponent")
 
-		layer = description.pop('layer', None)
-		if layer:
-			node_id = f"layer:{layer}"
-			target = graph.find_node(label="Category", where=lambda n: n.id == node_id)
-			if target:
-				impl_edge = graph.add_edge(scope.id, target.id, "implements", weight=1, reason=description.get('layerReason'))
-				writer().write(impl_edge.to_dict())
+		self.apply_classifications(graph, scope, description, "component")
 
 		ComponentProcessor.update_package_properties(graph, description, scope)
 

@@ -1,4 +1,3 @@
-import time
 from collections import OrderedDict
 from itertools import combinations
 from typing import Any, Dict, List, TextIO
@@ -9,6 +8,7 @@ from arcana import templates
 from arcana.filters import check_stop, layers_to_ordereddict
 from arcana.graph_utils import (build_hierarchy, build_triplets, describe_path,
 								group_paths_by_endpoints)
+from arcana.llm_filter.classification import default_classification_schemes
 from arcana.llm_filter.client import LLMClient
 from arcana.llm_filter.processors import ComponentProcessor, InteractionProcessor, ScriptProcessor, StructureProcessor
 from arcana.llm_filter.prompt import PromptBuilder
@@ -16,46 +16,19 @@ from arcana.utils import (lower_first, remove_java_comments, write_jsonl)
 from arcanalib.graph import Edge, Graph, Node
 from arcanalib.pipefilter import Filter
 
-def default_layers():
-	return OrderedDict([
-		('Presentation Layer', "Manages the user interface, defines UI elements and behavior, displays information, responds to user input, and updates views."),
-		('Service Layer', "Controls the application flow, orchestrates domain operations, connects UI events with domain logic, and synchronizes domain changes with the UI."),
-		('Domain Layer', "Handles business logic, represents domain data and behavior, and performs necessary computations for domain operations."),
-		('Data Source Layer', "Interacts with databases, filesystems, hardware, messaging systems, or other data sources, performs CRUD operations, handles data conversion, and ensures data integrity."),
-	])
-
-def default_role_stereotypes():
-	# **Information Holder** is responsible for knowing facts and providing information to other objects. POJOs, Java Beans, and enumerations are usually information holders. \
-	# **Service Provider** is responsible for handling requests and performing specific services. It usually implements a specific interface with a small number of methods. Concrete strategies are service providers. \
-	# **Structurer** is responsible for managing relationships and constraints among related things. It is usually a collection or mapping of some sort, i.e., a subclass of a List, Set, Map, etc. \
-	# **Controller** is responsible for making decisions, directing the work of others, and handling important events. It directs the flow of the application or business process. \
-	# **Coordinator** is responsible for managing the actions of a group of workers and facilitating communication and work of other objects. It delegates requests to other objects. Very abstract classes and interfaces might be coordinators as they delegate the work to subclasses. \
-	# **User Interfacer** is responsible for transmitting user requests for action or display/render information that can be updated. It handles interactions with users. \
-	# **External Interfacer** is responsible for loading and storing information from/to external services, including database systems, web services, filesystems, hardware, etc. \
-	# **Internal Interfacer** is responsible for interfacing between two subsystems. It may bundle together information of requests from a group of objects to be sent to another object. Abstract adapters, bridges, facades, and proxies are internal interfacers."
-	return OrderedDict([
-        ("Information Holder",    "Knows facts and provides information (POJOs, beans, enums)."),
-        ("Service Provider",      "Handles requests, performs services; implements a specific interface with a small number of methods (strategies, handlers)."),
-        ("Structurer",            "Manages relationships among things (collections, maps)."),
-        ("Controller",            "Makes decisions, directs flow of the program."),
-        ("Coordinator",           "Delegates work across workers."),
-        ("User Interfacer",       "Handles user input/output."),
-        ("External Interfacer",   "Loads/stores from external services."),
-        ("Internal Interfacer",   "Bridges subsystems (adapters, bridges, facades, proxies)."),
-    ])
-  
 class LLMFilter(Filter):
 	def __init__(self, config: Dict[str, Dict[str, Any]]):
 		super().__init__(config)
 		self.client = LLMClient(config['llm'], config['project'])
 
 		layer_cfg = config.get('layers')
-		self.layers = layers_to_ordereddict(layer_cfg) if layer_cfg else default_layers()
+		self.layers = layers_to_ordereddict(layer_cfg) if layer_cfg else OrderedDict()
 
 		stereo_cfg = config.get('stereotypes')
-		self.role_stereotypes = OrderedDict(stereo_cfg) if stereo_cfg else default_role_stereotypes()
+		self.role_stereotypes = OrderedDict(stereo_cfg) if stereo_cfg else OrderedDict()
 
-		self.prompt_builder = PromptBuilder(config['project'], self.layers, self.role_stereotypes)
+		classifications = default_classification_schemes(self.layers, self.role_stereotypes)
+		self.prompt_builder = PromptBuilder(config['project'], classifications)
 		self.script_processor = ScriptProcessor(self.client, self.prompt_builder)
 		self.structure_processor = StructureProcessor(self.client, self.prompt_builder)
 		self.component_processor = ComponentProcessor(self.client, self.prompt_builder)
