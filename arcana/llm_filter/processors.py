@@ -113,8 +113,8 @@ class ScriptProcessor(Processor):
 				continue
 			key_lower = lower_first(key)
 			if key_lower == 'parameters' and isinstance(value, Iterable):
-				param_nodes = [data.nodes[edge.target] for edge in data.find_edges(label='hasParameter') if
-							   edge.source == method.id]
+				param_nodes = [data.nodes[edge.source] for edge in data.find_edges(label='parameterizes') if
+							   edge.traget == method.id]
 				for param in value:
 					if isinstance(param, dict):
 						matching_params = [node for node in param_nodes if
