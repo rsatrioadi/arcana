@@ -23,3 +23,12 @@ layer2name=Logic
 layer2desc=Handles application and domain logic, i.e., neither UI nor data access.
 layer3name=Data
 layer3desc=Handles loading and storing data from/to external services, including database systems, web services, filesystems, hardware, etc.
+
+[secdfd]
+enabled=false
+label_score_threshold=0.60
+process_min_out_invokes=2
+process_min_in_invokes=2
+external_entity_max_participation=2
+datastore_crud_hit_min=1
+asset_sensitive_term_hit_min=1

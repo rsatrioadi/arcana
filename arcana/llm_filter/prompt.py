@@ -1,79 +1,71 @@
 from collections import OrderedDict
 from arcana.checkpoint import writer
 from arcana.utils import remove_author, sentence
+from arcana.llm_filter.classification import ClassificationScheme
 from arcanalib.graph import Graph, Node
 
 
 class PromptBuilder:
-	def __init__(self, project_cfg, layers_cfg=None, stereotypes_cfg=None):
+	def __init__(self, project_cfg, classifications=None):
 		self.project_name = project_cfg['name']
 		self.project_desc = project_cfg['desc']
-		self.layers      = layers_cfg or OrderedDict()
-		self.layers.update({
-			'Undetermined': "Architectural layer cannot be determined for this element."
-		})
-		# self.layers.move_to_end('Undetermined', False)
-		self.role_stereotypes = stereotypes_cfg or OrderedDict()
-		self.role_stereotypes.update({
-			'Undetermined': "Role stereotype cannot be determined for this element."
-		})
-		# self.role_stereotypes.move_to_end('Undetermined', False)
-		# self.layers_str = format_layers(layers_cfg)
+		self.classifications = classifications or OrderedDict()
+		self.layers = self.classification_options('layer')
+		self.role_stereotypes = self.classification_options('roleStereotype')
+
+	def classification_options(self, classification_name: str) -> OrderedDict:
+		scheme: ClassificationScheme = self.classifications.get(classification_name)
+		if not scheme:
+			return OrderedDict()
+		return scheme.options_with_undetermined()
+
+	def classification_schemes(self, element_kind: str = None):
+		schemes = list(self.classifications.values())
+		if not element_kind:
+			return schemes
+		return [scheme for scheme in schemes if element_kind in scheme.applies_to]
+
+	def initialize_classifications(self, graph: Graph):
+		for scheme in self.classification_schemes():
+			dimension = graph.add_node(
+				scheme.dimension_id,
+				"Dimension",
+				kind=scheme.dimension_kind,
+				simpleName=scheme.dimension_name,
+				qualifiedName=scheme.dimension_name,
+			)
+			writer().write(dimension.to_dict())
+
+			categories = scheme.ordered_options()
+			category_names = list(categories.keys())
+			for i, (name, desc) in enumerate(categories.items()):
+				cat_kwargs = dict(
+					kind=scheme.category_kind,
+					simpleName=name,
+					qualifiedName=name,
+					description=desc,
+				)
+				if scheme.ordered:
+					cat_kwargs["order"] = i - 1
+				cat = graph.add_node(
+					scheme.category_id(name), "Category", **cat_kwargs
+				)
+				writer().write(cat.to_dict())
+				e = graph.add_edge(cat.id, dimension.id, "composes", weight=1)
+				writer().write(e.to_dict())
+
+			if scheme.ordered:
+				for i in range(1, len(category_names) - 1):
+					src = category_names[i]
+					tgt = category_names[i + 1]
+					e = graph.add_edge(
+						scheme.category_id(src), scheme.category_id(tgt), "succeeds", weight=1
+					)
+					writer().write(e.to_dict())
 
 	def initialize_layers(self, graph: Graph):
-		layer_dimension = graph.add_node(
-      		f"Architectural Layer", 
-        	"Dimension", 
-			kind="categorical-ordered", 
-			simpleName="Architectural Layer",
-			qualifiedName="Architectural Layer")
-		writer().write(layer_dimension.to_dict())
-
-		layers = self.layers.copy()
-		layers.move_to_end('Undetermined', False)
-		for i, (name, desc) in enumerate(layers.items()):
-			cat = graph.add_node(
-				f"layer:{name}", "Category",
-				kind="architectural layer",
-				simpleName=name,
-				qualifiedName=name,
-				description=desc,
-				order=i-1
-			)
-			writer().write(cat.to_dict())
-			e = graph.add_edge(cat.id, layer_dimension.id, "composes", weight=1)
-			writer().write(e.to_dict())
-
-		t_layers = list(layers.items())
-		for i in range(1, len(t_layers) - 1):
-			src = t_layers[i][0]
-			tgt = t_layers[i + 1][0]
-			e = graph.add_edge(f"layer:{src}", f"layer:{tgt}", "succeeds", weight=1)
-			writer().write(e.to_dict())
-   
-   
-		stereo_dimension = graph.add_node(
-			"Role Stereotype",
-			"Dimension",
-			kind="categorical-nominal",
-			simpleName="Role Stereotype",
-			qualifiedName="Role Stereotype"
-		)
-		writer().write(stereo_dimension.to_dict())
-
-		role_stereotypes = self.role_stereotypes.copy()
-		role_stereotypes.move_to_end('Undetermined', False)
-		for i, (name, desc) in enumerate(role_stereotypes.items()):
-			cat = graph.add_node(
-				f"rs:{name}", "Category",
-				kind="role stereotype",
-				simpleName=name,
-				qualifiedName=name,
-				description=desc
-			)
-			writer().write(cat.to_dict())
-			e = graph.add_edge(cat.id, stereo_dimension.id, "composes", weight=1)
-			writer().write(e.to_dict())
+		# Backward-compatible alias.
+		self.initialize_classifications(graph)
 
 	def compose(self, base_prompt, **parameters):
 		
