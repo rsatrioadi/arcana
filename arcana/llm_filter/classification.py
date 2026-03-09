@@ -40,6 +40,7 @@ class ClassificationScheme:
 	undetermined_description: str
 	ordered: bool = False
 	applies_to: tuple = ()
+	allow_multi_label: bool = False
 
 	def options_with_undetermined(self) -> OrderedDict:
 		result = OrderedDict(self.options or OrderedDict())
@@ -67,7 +68,17 @@ def ordered_dict_from_mapping(mapping) -> OrderedDict:
 	return OrderedDict()
 
 
-def default_classification_schemes(layers_cfg=None, role_stereotypes_cfg=None):
+def default_secdfd_types():
+	return OrderedDict([
+		("External Entity", "Represents an external actor or system that interacts with the software."),
+		("DataStore", "Represents persisted storage or a data access boundary."),
+		("Process", "Represents non-trivial computation or orchestration logic."),
+		("Asset", "Represents data objects with business or security value."),
+		("Flow", "Represents data transfer across operations or boundaries."),
+	])
+
+
+def default_classification_schemes(layers_cfg=None, role_stereotypes_cfg=None, secdfd_enabled=False):
 	layers = ordered_dict_from_mapping(layers_cfg) or default_layers()
 	role_stereotypes = ordered_dict_from_mapping(role_stereotypes_cfg) or default_role_stereotypes()
 
@@ -84,7 +95,7 @@ def default_classification_schemes(layers_cfg=None, role_stereotypes_cfg=None):
 		options=layers,
 		undetermined_description="Architectural layer cannot be determined for this element.",
 		ordered=True,
-		applies_to=("script", "structure", "component")
+		applies_to=("operation", "type", "scope")
 	)
 
 	role_scheme = ClassificationScheme(
@@ -100,10 +111,30 @@ def default_classification_schemes(layers_cfg=None, role_stereotypes_cfg=None):
 		options=role_stereotypes,
 		undetermined_description="Role stereotype cannot be determined for this element.",
 		ordered=False,
-		applies_to=("structure",)
+		applies_to=("type",)
 	)
-
-	return OrderedDict([
+	schemes = OrderedDict([
 		(layer_scheme.name, layer_scheme),
 		(role_scheme.name, role_scheme),
 	])
+
+	if secdfd_enabled:
+		secdfd_scheme = ClassificationScheme(
+			name="secdfd",
+			dimension_id="SecDFD Type",
+			dimension_name="SecDFD Type",
+			dimension_kind="categorical-nominal",
+			category_prefix="secdfd",
+			category_kind="secdfd type",
+			prompt_label="Possible SecDFD Types",
+			response_key="secdfdTypes",
+			response_reason_key="secdfdEvidence",
+			options=default_secdfd_types(),
+			undetermined_description="SecDFD type cannot be determined for this element.",
+			ordered=False,
+			applies_to=("operation", "type", "variable"),
+			allow_multi_label=True,
+		)
+		schemes[secdfd_scheme.name] = secdfd_scheme
+
+	return schemes

@@ -80,6 +80,17 @@ script_description = {
 		"layerReason": {
 			"type": "string",
 			"description": "Explanation why the script fits the chosen architectural layer but not others."
+		},
+		"secdfdTypes": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"description": "One or more SecDFD classifications selected from the provided options."
+		},
+		"secdfdEvidence": {
+			"type": "string",
+			"description": "Short evidence summary supporting the selected SecDFD classifications."
 		}
 	},
 	"required": [
@@ -93,7 +104,8 @@ script_description = {
 		"preConditions",
 		"returns",
 		"stereotype",
-		"stereotypeReason"
+		"stereotypeReason",
+		"secdfdTypes"
 	],
 	"additionalProperties": False
 }
@@ -138,6 +150,17 @@ structure_description = {
 		"layerReason": {
 			"type": "string",
 			"description": "Explanation why the script fits the chosen architectural layer but not others."
+		},
+		"secdfdTypes": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"description": "One or more SecDFD classifications selected from the provided options."
+		},
+		"secdfdEvidence": {
+			"type": "string",
+			"description": "Short evidence summary supporting the selected SecDFD classifications."
 		}
 	},
 	"required": [
@@ -146,7 +169,8 @@ structure_description = {
 		"roleStereotype",
 		"roleStereotypeReason",
 		"layer",
-		"layerReason"
+		"layerReason",
+		"secdfdTypes"
 	]
 }
 

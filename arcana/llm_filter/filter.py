@@ -10,7 +10,7 @@ from arcana.graph_utils import (build_hierarchy, build_triplets, describe_path,
 								group_paths_by_endpoints)
 from arcana.llm_filter.classification import default_classification_schemes
 from arcana.llm_filter.client import LLMClient
-from arcana.llm_filter.processors import ComponentProcessor, InteractionProcessor, ScriptProcessor, StructureProcessor
+from arcana.llm_filter.processors import ComponentProcessor, InteractionProcessor, ScriptProcessor, StructureProcessor, VariableProcessor
 from arcana.llm_filter.prompt import PromptBuilder
 from arcana.utils import (lower_first, remove_java_comments, write_jsonl)
 from arcanalib.graph import Edge, Graph, Node
@@ -27,10 +27,18 @@ class LLMFilter(Filter):
 		stereo_cfg = config.get('stereotypes')
 		self.role_stereotypes = OrderedDict(stereo_cfg) if stereo_cfg else OrderedDict()
 
-		classifications = default_classification_schemes(self.layers, self.role_stereotypes)
+		self.secdfd_cfg = config.get('secdfd', {})
+		self.secdfd_enabled = str(self.secdfd_cfg.get("enabled", "false")).strip().lower() in {"1", "true", "yes", "on"}
+
+		classifications = default_classification_schemes(
+			self.layers,
+			self.role_stereotypes,
+			secdfd_enabled=self.secdfd_enabled,
+		)
 		self.prompt_builder = PromptBuilder(config['project'], classifications)
 		self.script_processor = ScriptProcessor(self.client, self.prompt_builder)
 		self.structure_processor = StructureProcessor(self.client, self.prompt_builder)
+		self.variable_processor = VariableProcessor(self.client, self.prompt_builder, self.secdfd_cfg)
 		self.component_processor = ComponentProcessor(self.client, self.prompt_builder)
 		self.interaction_processor = InteractionProcessor(self.client, self.prompt_builder)
 
@@ -44,10 +52,14 @@ class LLMFilter(Filter):
 		# 3. process classes
 		self.structure_processor.process_all(graph)
 
-		# 4. process packages
+		# 4. process variables for SecDFD (v2 variable semantics)
+		if self.secdfd_enabled:
+			self.variable_processor.process_all(graph)
+
+		# 5. process packages
 		self.component_processor.process_all(graph)
 
-		# 5. process interactions
+		# 6. process interactions
 		self.interaction_processor.process_all(graph)
 
 		return graph

@@ -40,6 +40,7 @@ The `command` argument can be one of the following:
 	- `description`: A one-sentence summary of *packages*, *classes*, and *methods*/*constructors*.
 	- `roleStereotype`: A classification of *classes* into one of [Wirfs-Brock's role stereotypes](https://wirfs-brock.com/PDFs/Characterizing%20Classes.pdf).
 	- `layer`: A classification of *packages*, *classes*, and *methods*/*constructors* into architectural layers.
+	- `secdfdTypes` (optional, enable via `[secdfd]` config): Multi-label SecDFD classification for v2 `Type`, `Operation`, and `Variable` nodes.
   
   Currently, this command adds all the properties above, i.e., there is no way to select only one or two properties to add to the graph.
 
