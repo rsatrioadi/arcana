@@ -45,10 +45,14 @@ class LLMFilter(Filter):
         self.secdfd_cfg = config.get('secdfd', {})
         self.secdfd_enabled = str(self.secdfd_cfg.get("enabled", "false")).strip().lower() in {"1", "true", "yes", "on"}
 
+        stereocode_cfg = config.get('stereocode', {})
+        self.stereocode_enabled = str(stereocode_cfg.get("enabled", "false")).strip().lower() in {"1", "true", "yes", "on"}
+
         classifications = default_classification_schemes(
             self.layers,
             self.role_stereotypes,
             secdfd_enabled=self.secdfd_enabled,
+            stereocode_enabled=self.stereocode_enabled,
         )
         self.prompt_builder = PromptBuilder(config['project'], classifications)
         self.script_processor = ScriptProcessor(self.client, self.prompt_builder, self.max_workers)

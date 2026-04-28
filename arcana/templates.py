@@ -26,6 +26,8 @@ class ScriptDescription(BaseModel):
     layerReason: str = Field(description="Explanation why this fits the chosen layer but not others.")
     secdfdTypes: list[str] = Field(default_factory=list, description="One or more SecDFD classifications from the provided options.")
     secdfdEvidence: str = Field(default="", description="Short evidence summary for the SecDFD classifications.")
+    stereocodeStereotype: list[str] = Field(default_factory=list, description="One or more Stereocode method stereotypes from the provided options. Methods may combine stereotypes, e.g. 'get collaborator'.")
+    stereocodeStereotypeReason: str = Field(default="", description="One-sentence explanation for the chosen Stereocode method stereotype(s).")
 
 
 class StructureDescription(BaseModel):
@@ -37,6 +39,8 @@ class StructureDescription(BaseModel):
     layerReason: str = Field(description="Explanation why this fits the chosen layer but not others.")
     secdfdTypes: list[str] = Field(default_factory=list, description="One or more SecDFD classifications from the provided options.")
     secdfdEvidence: str = Field(default="", description="Short evidence summary for the SecDFD classifications.")
+    stereocodeClassStereotype: str = Field(default="", description="Stereocode class stereotype selected from the provided options.")
+    stereocodeClassStereotypeReason: str = Field(default="", description="One-sentence explanation for the chosen Stereocode class stereotype.")
 
 
 class ComponentDescription(BaseModel):

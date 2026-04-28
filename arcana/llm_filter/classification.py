@@ -78,7 +78,53 @@ def default_secdfd_types():
 	])
 
 
-def default_classification_schemes(layers_cfg=None, role_stereotypes_cfg=None, secdfd_enabled=False):
+def stereocode_method_stereotypes():
+	return OrderedDict([
+		# Structural Accessors
+		("get",           "Returns a data member directly."),
+		("predicate",     "Returns a Boolean value that is not itself a data member."),
+		("property",      "Returns information derived from or about data members (non-Boolean)."),
+		("void-accessor", "Returns information about data members through method parameters (out/ref params) rather than the return value."),
+		# Structural Mutators
+		("set",              "Modifies a single data member."),
+		("command",          "Performs a complex change to the object's state (e.g., modifies multiple data members); returns void."),
+		("non-void-command", "Like command but also returns a value."),
+		# Creational
+		("constructor",      "Creates (or initialises) a new object instance."),
+		("copy-constructor", "Creates a new object by copying an existing one."),
+		("destructor",       "Destroys or cleans up an object."),
+		("factory",          "Creates and returns an instance of another class."),
+		# Collaborational
+		("collaborator", "Works primarily with objects belonging to classes other than itself (passed as parameter, stored as local/data member, or returned)."),
+		("controller",   "Changes only the state of an external object, not 'this'."),
+		("wrapper",      "Does not change the object's state but delegates to at least one free function call."),
+		# Degenerate
+		("incidental", "Does not read or change the object's state and makes no calls to other class methods or free functions."),
+		("stateless",  "Does not read or change the object's state but has at least one call to other class methods or free functions."),
+		("empty",      "Has no statements at all."),
+	])
+
+
+def stereocode_class_stereotypes():
+	return OrderedDict([
+		("entity",          "Encapsulates both data and behaviour; keeper of the data model and/or business logic."),
+		("minimal-entity",  "Special case of entity consisting only of get, set, and command methods."),
+		("data-provider",   "Encapsulates data and consists mainly of accessors (get/property/predicate)."),
+		("commander",       "Encapsulates behaviour and consists mainly of mutators (set/command)."),
+		("boundary",        "Communicator with a large percentage of collaborational methods and a low percentage of controller methods; few factory methods."),
+		("factory",         "Creator of objects; has mostly factory methods."),
+		("controller",      "Provides functionality to control external objects; consists mostly of controller and factory methods."),
+		("pure-controller", "Special case of controller consisting only of controller and factory methods."),
+		("large-class",     "Contains a large number of methods combining multiple roles such as data-provider, commander, controller, and factory."),
+		("lazy-class",      "Consists mostly of get, set, and degenerate methods; occurrence of other methods is low."),
+		("degenerate",      "Consists mostly of degenerate methods that do not read or write to the object's state."),
+		("data-class",      "Consists only of get and set methods."),
+		("small-class",     "Consists of only one or two methods."),
+		("empty",           "Has no methods."),
+	])
+
+
+def default_classification_schemes(layers_cfg=None, role_stereotypes_cfg=None, secdfd_enabled=False, stereocode_enabled=False):
 	layers = ordered_dict_from_mapping(layers_cfg) or default_layers()
 	role_stereotypes = ordered_dict_from_mapping(role_stereotypes_cfg) or default_role_stereotypes()
 
@@ -136,5 +182,41 @@ def default_classification_schemes(layers_cfg=None, role_stereotypes_cfg=None, s
 			allow_multi_label=True,
 		)
 		schemes[secdfd_scheme.name] = secdfd_scheme
+
+	if stereocode_enabled:
+		stereocode_method_scheme = ClassificationScheme(
+			name="stereocodeMethod",
+			dimension_id="Stereocode Method Stereotype",
+			dimension_name="Stereocode Method Stereotype",
+			dimension_kind="categorical-nominal",
+			category_prefix="scm",
+			category_kind="stereocode method stereotype",
+			prompt_label="Possible Stereocode Method Stereotypes",
+			response_key="stereocodeStereotype",
+			response_reason_key="stereocodeStereotypeReason",
+			options=stereocode_method_stereotypes(),
+			undetermined_description="Stereocode method stereotype cannot be determined.",
+			ordered=False,
+			applies_to=("operation",),
+			allow_multi_label=True,
+		)
+		stereocode_class_scheme = ClassificationScheme(
+			name="stereocodeClass",
+			dimension_id="Stereocode Class Stereotype",
+			dimension_name="Stereocode Class Stereotype",
+			dimension_kind="categorical-nominal",
+			category_prefix="scc",
+			category_kind="stereocode class stereotype",
+			prompt_label="Possible Stereocode Class Stereotypes",
+			response_key="stereocodeClassStereotype",
+			response_reason_key="stereocodeClassStereotypeReason",
+			options=stereocode_class_stereotypes(),
+			undetermined_description="Stereocode class stereotype cannot be determined.",
+			ordered=False,
+			applies_to=("type",),
+			allow_multi_label=False,
+		)
+		schemes[stereocode_method_scheme.name] = stereocode_method_scheme
+		schemes[stereocode_class_scheme.name] = stereocode_class_scheme
 
 	return schemes
