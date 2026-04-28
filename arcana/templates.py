@@ -1,234 +1,100 @@
-script_description = {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "ScriptDescription",
-	"type": "object",
-	"properties": {
-		"description": {
-			"type": "string",
-			"description": "One-sentence description – suitable for a documentation comment – of the method/constructor/function functionality, in imperative mood."
-		},
-		"parameters": {
-			"type": "array",
-			"items": {
-				"type": "object",
-				"properties": {
-					"name": {
-						"type": "string",
-						"description": "Parameter name."
-					},
-					"type": {
-						"type": "string",
-						"description": "Parameter type."
-					},
-					"description": {
-						"type": "string",
-						"description": "Brief description of the parameter."
-					}
-				},
-				"required": [
-					"name",
-					"description"
-				]
-			},
-			"description": "List of script parameters. Empty if none."
-		},
-		"returns": {
-			"type": "string",
-			"description": "One-sentence description of the returned object or value. For constructors, consider the newly created instance as the return."
-		},
-		"howToUse": {
-			"type": "string",
-			"description": "Usage instructions in less than three sentences."
-		},
-		"howItWorks": {
-			"type": "string",
-			"description": "Implementation details in less than five sentences."
-		},
-		"preConditions": {
-			"type": "array",
-			"items": {
-				"type": "string"
-			},
-			"description": "List of pre-conditions for the script."
-		},
-		"postConditions": {
-			"type": "array",
-			"items": {
-				"type": "string"
-			},
-			"description": "List of post-conditions for the script."
-		},
-		"stereotype": {
-			"type": "string",
-			"enum": [
-				"Accessor",
-				"Mutator",
-				"Creational",
-				"Collaborational",
-				"Other"
-			],
-			"description": "Design stereotype of the script."
-		},
-		"stereotypeReason": {
-			"type": "string",
-			"description": "One-sentence explanation for the chosen stereotype."
-		},
-		"layer": {
-			"type": "string",
-			"description": "Architectural layer classification selected from the provided options."
-		},
-		"layerReason": {
-			"type": "string",
-			"description": "Explanation why the script fits the chosen architectural layer but not others."
-		},
-		"secdfdTypes": {
-			"type": "array",
-			"items": {
-				"type": "string"
-			},
-			"description": "One or more SecDFD classifications selected from the provided options."
-		},
-		"secdfdEvidence": {
-			"type": "string",
-			"description": "Short evidence summary supporting the selected SecDFD classifications."
-		}
-	},
-	"required": [
-		"description",
-		"howItWorks",
-		"howToUse",
-		"layer",
-		"layerReason",
-		"parameters",
-		"postConditions",
-		"preConditions",
-		"returns",
-		"stereotype",
-		"stereotypeReason",
-		"secdfdTypes"
-	],
-	"additionalProperties": False
+from typing import Literal
+from pydantic import BaseModel, Field
+
+
+# ---------------------------------------------------------------------------
+# Output models
+# ---------------------------------------------------------------------------
+
+class Parameter(BaseModel):
+    name: str
+    type: str = ""
+    description: str
+
+
+class ScriptDescription(BaseModel):
+    description: str = Field(description="One-sentence description of the method/constructor/function functionality, in imperative mood.")
+    parameters: list[Parameter] = Field(default_factory=list, description="List of parameters. Empty if none.")
+    returns: str = Field(description="One-sentence description of the returned value. For constructors, describe the created instance.")
+    howToUse: str = Field(description="Usage instructions in less than three sentences.")
+    howItWorks: str = Field(description="Implementation details in less than five sentences.")
+    preConditions: list[str] = Field(default_factory=list, description="Pre-conditions for the script.")
+    postConditions: list[str] = Field(default_factory=list, description="Post-conditions for the script.")
+    stereotype: Literal["Accessor", "Mutator", "Creational", "Collaborational", "Other"] = Field(description="Design stereotype.")
+    stereotypeReason: str = Field(description="One-sentence explanation for the chosen stereotype.")
+    layer: str = Field(description="Architectural layer selected from the provided options.")
+    layerReason: str = Field(description="Explanation why this fits the chosen layer but not others.")
+    secdfdTypes: list[str] = Field(default_factory=list, description="One or more SecDFD classifications from the provided options.")
+    secdfdEvidence: str = Field(default="", description="Short evidence summary for the SecDFD classifications.")
+
+
+class StructureDescription(BaseModel):
+    description: str = Field(description="Up to three sentences describing the key responsibilities of the class/struct/type.")
+    keywords: list[str] = Field(default_factory=list, description="Important keywords related to key responsibilities.")
+    roleStereotype: str = Field(description="Role stereotype; options are supplied at runtime.")
+    roleStereotypeReason: str = Field(description="One-sentence explanation for the chosen role stereotype.")
+    layer: str = Field(description="Architectural layer selected from the provided options.")
+    layerReason: str = Field(description="Explanation why this fits the chosen layer but not others.")
+    secdfdTypes: list[str] = Field(default_factory=list, description="One or more SecDFD classifications from the provided options.")
+    secdfdEvidence: str = Field(default="", description="Short evidence summary for the SecDFD classifications.")
+
+
+class ComponentDescription(BaseModel):
+    description: str = Field(description="Describe the functionality of the component/package in up to five sentences.")
+    title: str = Field(description="A noun phrase describing the component/package.")
+    keywords: list[str] = Field(default_factory=list, description="Important keywords related to the core functionalities.")
+    layer: str = Field(description="Architectural layer selected from the provided options.")
+    layerReason: str = Field(description="Explanation why this fits the chosen layer but not others.")
+
+
+# ---------------------------------------------------------------------------
+# Tool dicts (OpenAI function-calling format, derived from Pydantic schemas)
+# Used as fallback when use_structured_output = false.
+# ---------------------------------------------------------------------------
+
+def _tool(name: str, description: str, model: type[BaseModel]) -> dict:
+    schema = model.model_json_schema()
+    # Pydantic v2 may emit $defs for nested models; OpenAI function-calling
+    # accepts these inline definitions without issue.
+    return {
+        "type": "function",
+        "function": {
+            "name": name,
+            "description": description,
+            "parameters": schema,
+        },
+    }
+
+
+analyze_script_tool = _tool(
+    "AnalyzeScript",
+    "Analyzes a program method/constructor/function given its source code and context.",
+    ScriptDescription,
+)
+
+analyze_structure_tool = _tool(
+    "AnalyzeStructure",
+    "Analyzes a software class/struct/type based on its inheritance, fields, and methods.",
+    StructureDescription,
+)
+
+analyze_component_tool = _tool(
+    "AnalyzeComponent",
+    "Analyzes a software component/package by examining its contents.",
+    ComponentDescription,
+)
+
+# Map tool name → Pydantic model (used by the structured-output client path).
+TOOL_MODELS: dict[str, type[BaseModel]] = {
+    "AnalyzeScript": ScriptDescription,
+    "AnalyzeStructure": StructureDescription,
+    "AnalyzeComponent": ComponentDescription,
 }
 
-analyze_script_tool = {
-	"type": "function",
-	"function": {
-		"name": "AnalyzeScript",
-		"description": "Analyzes a program method/constructor/function given its source code and context. Returns an explanation covering functionality, parameters, return value, design rationale, usage, implementation details, assertions, stereotype, and architectural layer classification.",
-		"parameters": script_description
-	}
-}
 
-structure_description = {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "StructureDescription",
-	"type": "object",
-	"properties": {
-		"description": {
-			"type": "string",
-			"description": "Up to three sentences, suitable for a documentation comment, describing the key responsibilities of the class/struct/type."
-		},
-		"keywords": {
-			"type": "array",
-			"items": {
-				"type": "string"
-			},
-			"description": "List of important keywords related to the key responsibilities of the class/struct/type."
-		},
-		"roleStereotype": {
-			"type": "string",
-			"description": "Role stereotype of the class/struct/type; options are supplied at runtime."
-		},
-		"roleStereotypeReason": {
-			"type": "string",
-			"description": "One-sentence explanation for the chosen role stereotype."
-		},
-		"layer": {
-			"type": "string",
-			"description": "Architectural layer classification selected from the provided options."
-		},
-		"layerReason": {
-			"type": "string",
-			"description": "Explanation why the script fits the chosen architectural layer but not others."
-		},
-		"secdfdTypes": {
-			"type": "array",
-			"items": {
-				"type": "string"
-			},
-			"description": "One or more SecDFD classifications selected from the provided options."
-		},
-		"secdfdEvidence": {
-			"type": "string",
-			"description": "Short evidence summary supporting the selected SecDFD classifications."
-		}
-	},
-	"required": [
-		"description",
-		"keywords",
-		"roleStereotype",
-		"roleStereotypeReason",
-		"layer",
-		"layerReason",
-		"secdfdTypes"
-	]
-}
-
-analyze_structure_tool = {
-	"type": "function",
-	"function": {
-		"name": "AnalyzeStructure",
-		"description": "Analyzes a software class/struct/type based on its inheritance, fields, and methods. Returns an explanation covering the key responsibilities of the structure, relevant keywords, role stereotype, and rationale for the chosen stereotype.",
-		"parameters": structure_description
-	}
-}
-
-component_description = {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "ComponentDescription",
-	"type": "object",
-	"properties": {
-		"description": {
-			"type": "string",
-			"description": "Describe the functionality of the component/package in up to five sentences."
-		},
-		"title": {
-			"type": "string",
-			"description": "A noun phrase that describes the component/package."
-		},
-		"keywords": {
-			"type": "array",
-			"items": {
-				"type": "string"
-			},
-			"description": "List of important keywords related to the core functionalities of the component/package."
-		},
-		"layer": {
-			"type": "string",
-			"description": "Architectural layer classification selected from the provided options."
-		},
-		"layerReason": {
-			"type": "string",
-			"description": "Explanation why the component/package fits the chosen layer but not others."
-		}
-	},
-	"required": [
-		"description",
-		"title",
-		"keywords",
-		"layer",
-		"layerReason"
-	]
-}
-
-analyze_component_tool = {
-	"type": "function",
-	"function": {
-		"name": "AnalyzeComponent",
-		"description": "Analyzes a software component/package by examining its contents. Returns an explanation including a description of component/package responsibility, a descriptive title, a list of keywords, the selected architectural layer, and the rationale for that layer.",
-		"parameters": component_description
-	}
-}
+# ---------------------------------------------------------------------------
+# Interaction analysis prompt template (unchanged)
+# ---------------------------------------------------------------------------
 
 interaction_analysis = '''## Input:
 
@@ -253,7 +119,7 @@ Using the provided information, describe the interaction between the {pkg1_name}
 
 - The purpose and nature of their dependency in terms of design.
 - An abstract, high-level description of the relationship without referencing specific classes or methods.
-	
+
 ## Output:
 
 Provide a cohesive explanation of the interaction in one to two sentences. Keep the response plain text.'''
