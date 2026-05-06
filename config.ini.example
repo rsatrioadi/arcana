@@ -1,22 +1,41 @@
 [project]
 name=zxing-3.5.3
 desc=a Java application
+# The input directory to be parsed, or the path to an existing graph JSON file if using just the LLM filter.
+# If 'input' is missing or 'stdin', it reads from standard input.
 input=D:/Code/zxing-zxing-3.5.3/core/src/main/java/
+# The final JSON graph output path. If missing or 'stdout', prints to standard output.
 output=zxing-3.5.3-output.json
 
-[llm]
-apikey=example-apikey
-apibase=http://localhost:8000/v1
-model=llama3
-; LLM chat completion http request timeout, in seconds. If not specified, the default is 5 minutes.
-timeout=120.0
-
 [seeder]
+# Command string to invoke the extractor. Placeholders like {input}, {name}, and other keys will be formatted.
 command={javaexe} -jar {jarfile} -i {input} -a -n {name} -f json
 javaexe=./javapers/jdk-17.0.11+9-jre/bin/java.exe
 jarfile=./javapers/javapers-1.1.2-jar-with-dependencies.jar
 
+[merge]
+# Specifies the input graph for the merge_filter to process
+input=another-graph-to-merge-with.json
+
+[llm]
+apikey=example-apikey
+# Optional custom base URL for local LLMs (e.g. Ollama, LMStudio)
+apibase=http://localhost:8000/v1
+# Name of the model. Defaults to 'gpt-4o-mini' if not specified.
+model=llama3
+# HTTP request timeout in seconds. Defaults to 300 (5 minutes).
+timeout=120.0
+# Whether to use OpenAI structured outputs (requires a compatible model). Defaults to true.
+use_structured_output=true
+# Maximum number of parallel worker threads for LLM API calls. Defaults to 8.
+workers=8
+# Path to the file where checkpoints are saved. Defaults to 'checkpoints.jsonl'.
+checkpoint_file=checkpoints.jsonl
+# Set to true/1/yes/on to resume processing from the checkpoint_file. Defaults to false.
+resume=true
+
 [layers]
+# Defines architectural layers used during categorization
 layer1name=UI
 layer1desc=Handles user interface, such as instatiating, setting properties of, or laying out widget objects and capturing user interactions.
 layer2name=Logic
@@ -24,11 +43,25 @@ layer2desc=Handles application and domain logic, i.e., neither UI nor data acces
 layer3name=Data
 layer3desc=Handles loading and storing data from/to external services, including database systems, web services, filesystems, hardware, etc.
 
+[stereotypes]
+# Similar to [layers], defines architectural role stereotypes for components/types
+stereo1name=Controller
+stereo1desc=A component that orchestrates interactions and controls the flow of data.
+stereo2name=Repository
+stereo2desc=A component that abstracts data access from the underlying storage.
+
 [secdfd]
-enabled=false
+# Enables or disables the Security Data Flow Diagram processing step. Defaults to false.
+enabled=true
+# Float threshold for determining component categories based on semantic similarity/LLM label. Defaults to 0.60.
 label_score_threshold=0.60
+# Heuristic rules thresholds for DFD type classification
 process_min_out_invokes=2
 process_min_in_invokes=2
-external_entity_max_participation=2
-datastore_crud_hit_min=1
 asset_sensitive_term_hit_min=1
+datastore_crud_hit_min=1
+external_entity_max_participation=2
+
+[stereocode]
+# Enables or disables stereo-code generation behavior/classification. Defaults to false.
+enabled=true
